@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Users')
 
@@ -55,7 +55,7 @@
                                 <form action="{{ route('users.toggle-status', $user) }}" method="POST" class="inline">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-green-500' : 'bg-slate-300' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
+                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-green-500' : 'bg-gray-300' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
                                         <span class="inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform {{ $user->is_active ? 'translate-x-4.5' : 'translate-x-0.5' }}" style="transform: translateX({{ $user->is_active ? '18px' : '2px' }})"></span>
                                     </button>
                                 </form>

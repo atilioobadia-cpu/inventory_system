@@ -30,7 +30,7 @@
             @if($purchase->status === 'draft')
             <form method="POST" action="{{ route('purchases.receive', $purchase) }}" x-data onsubmit="return confirm('Are you sure you want to mark this purchase as received?')">
                 @csrf
-                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors">
+                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg text-sm font-medium transition-colors">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Receive
                 </button>

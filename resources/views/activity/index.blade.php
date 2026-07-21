@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Activity Log')
 
@@ -46,7 +46,7 @@
                 <input type="date" name="to" value="{{ request('to') }}" class="rounded-lg focus:ring-tz-green/20 focus:border-tz-green text-sm">
             </div>
             <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium">Reset</a>
+            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
@@ -57,7 +57,7 @@
                 <div class="relative flex gap-4 pb-8 last:pb-0">
                     <!-- Timeline line -->
                     @if(!$loop->last)
-                        <div class="absolute left-4 top-10 w-0.5 h-full bg-slate-200 -ml-0.5"></div>
+                        <div class="absolute left-4 top-10 w-0.5 h-full bg-gray-200 -ml-0.5"></div>
                     @endif
 
                     <!-- Avatar -->

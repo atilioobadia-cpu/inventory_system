@@ -106,7 +106,7 @@
                     <h3 class="text-lg font-semibold text-gray-900">Recurring Expense</h3>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" name="is_recurring" value="1" x-model="isRecurring" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-electric/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tz-green"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-tz-green/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tz-green"></div>
                     </label>
                 </div>
                 <div x-show="isRecurring" x-cloak x-transition class="grid grid-cols-2 gap-4">

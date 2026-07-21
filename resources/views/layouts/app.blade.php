@@ -49,11 +49,11 @@
             color: #ffffff;
         }
         .sidebar-link.active {
-            background: rgba(252,209,22,0.12);
-            color: #FCD116;
-            border-left-color: #FCD116;
+            background: rgba(0,166,81,0.12);
+            color: #00A651;
+            border-left-color: #00A651;
         }
-        .sidebar-link.active svg { color: #FCD116; }
+        .sidebar-link.active svg { color: #00A651; }
         .sidebar-collapse { width: 4rem; }
         .sidebar-collapse .sidebar-text { display: none; }
         .sidebar-collapse .sidebar-logo-text { display: none; }
@@ -92,7 +92,7 @@
         /* Loading Bar */
         .loading-bar {
             position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
-            background: linear-gradient(90deg, #00A651, #FCD116);
+            background: #00A651;
             transition: width 0.3s ease;
         }
 
@@ -244,6 +244,20 @@
         }
         .btn-secondary:hover { background: #f9fafb; border-color: #9ca3af; }
 
+        .btn-danger {
+            background: #DC2626;
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-danger:hover { background: #B91C1C; }
+        .btn-danger:active { transform: scale(0.97); }
+
         /* Card hover */
         .card-hover { transition: all 0.25s ease; }
         .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
@@ -339,7 +353,7 @@
     {{-- Sidebar --}}
     <aside class="fixed left-0 top-0 h-full z-50 transition-all duration-300 flex flex-col
          sidebar-expanded lg:sidebar-expanded"
-         style="background: linear-gradient(180deg, #003D23 0%, #002A18 100%);"
+         style="background: #003D23;"
          :class="mobileMenu ? 'open' : ''"
          x-bind:class="sidebarOpen ? 'lg:sidebar-expanded' : 'lg:sidebar-collapse'">
 

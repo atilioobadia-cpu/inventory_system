@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Import & Export')
 
@@ -131,7 +131,7 @@
     <!-- Import Modal -->
     <div x-show="importModal" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
-            <div class="fixed inset-0 bg-slate-500 bg-opacity-75" @click="importModal = false"></div>
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75" @click="importModal = false"></div>
             <div class="relative bg-white rounded-xl shadow-xl max-w-lg w-full p-6" @click.stop>
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-semibold text-gray-800 capitalize">Import <span x-text="importType"></span></h3>

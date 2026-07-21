@@ -42,17 +42,17 @@
                         <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search by item name..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                        <input type="text" name="search" x-model="search" placeholder="Search by item name..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green">
                     </div>
                 </div>
                 <div>
-                    <input type="date" name="date_from" x-model="dateFrom" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_from" x-model="dateFrom" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green">
                 </div>
                 <div>
-                    <input type="date" name="date_to" x-model="dateTo" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_to" x-model="dateTo" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green">
                 </div>
                 <div>
-                    <select name="type" x-model="type" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="type" x-model="type" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green bg-white">
                         <option value="">All Types</option>
                         <option value="purchase">Purchase</option>
                         <option value="sale">Sale</option>
@@ -67,7 +67,7 @@
             <div class="p-4 border-b border-gray-100 flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-gray-600">Direction:</label>
-                    <select name="direction" x-model="direction" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="direction" x-model="direction" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green bg-white">
                         <option value="">All</option>
                         <option value="in">In (Stock Received)</option>
                         <option value="out">Out (Stock Sent)</option>
@@ -189,7 +189,7 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Item *</label>
-                            <select name="item_id" x-model="adjustForm.item_id" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                            <select name="item_id" x-model="adjustForm.item_id" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green bg-white">
                                 <option value="">Select item...</option>
                                 @foreach($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->sku }})</option>
@@ -198,11 +198,11 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
-                            <input type="number" name="quantity" x-model.number="adjustForm.quantity" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric" placeholder="Positive = add, Negative = remove">
+                            <input type="number" name="quantity" x-model.number="adjustForm.quantity" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green" placeholder="Positive = add, Negative = remove">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Type *</label>
-                            <select name="type" x-model="adjustForm.type" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                            <select name="type" x-model="adjustForm.type" required class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green bg-white">
                                 <option value="adjustment">General Adjustment</option>
                                 <option value="damage">Damage</option>
                                 <option value="return">Return</option>
@@ -211,7 +211,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                            <textarea name="notes" x-model="adjustForm.notes" rows="2" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric" placeholder="Reason for adjustment..."></textarea>
+                            <textarea name="notes" x-model="adjustForm.notes" rows="2" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green" placeholder="Reason for adjustment..."></textarea>
                         </div>
                     </div>
                 </div>

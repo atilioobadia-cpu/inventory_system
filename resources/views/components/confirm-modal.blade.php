@@ -10,7 +10,7 @@
 
 @php
 $colorClasses = [
-    'danger' => 'bg-danger hover:bg-red-600',
+    'danger' => 'bg-red-600 hover:bg-red-600',
     'warning' => 'bg-warning hover:bg-amber-600',
     'success' => 'bg-success hover:bg-emerald-600',
     'electric' => 'bg-tz-green hover:bg-tz-green-dark',

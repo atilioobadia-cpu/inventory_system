@@ -56,7 +56,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Item <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <input type="text" x-model="search" @input="searchItems()" placeholder="Search items by name or SKU..."
-                                   class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric" required>
+                                   class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green" required>
                             <input type="hidden" name="item_id" :value="selectedItem?.id">
                             <div x-show="items.length > 0" @click.away="items = []" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                                 <template x-for="item in items" :key="item.id">
@@ -122,7 +122,7 @@
                     <div>
                         <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity <span class="text-red-500">*</span></label>
                         <input type="number" x-model="quantity" min="1" required
-                               class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                               class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green">
                         <input type="hidden" name="quantity" :value="adjustingType === 'damage' ? -Math.abs(parseInt(quantity) || 0) : Math.abs(parseInt(quantity) || 0)">
                         @error('quantity') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -148,7 +148,7 @@
                     <div>
                         <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
                         <textarea name="notes" x-model="notes" rows="3" placeholder="Reason for adjustment..."
-                                  class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric"></textarea>
+                                  class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/50 focus:border-tz-green"></textarea>
                     </div>
                 </div>
 

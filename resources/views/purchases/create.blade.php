@@ -165,7 +165,7 @@
 
                     <div class="mt-6 space-y-3">
                         <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
-                        <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
+                        <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
                     </div>
                 </div>
             </div>

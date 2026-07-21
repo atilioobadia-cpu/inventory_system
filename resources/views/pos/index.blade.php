@@ -194,7 +194,7 @@
             </div>
 
             {{-- Process Button --}}
-            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="w-full py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
+            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="w-full py-3 bg-tz-green hover:bg-tz-green-dark disabled:bg-gray-400 text-white font-bold rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
                 <template x-if="processing">
                     <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </template>

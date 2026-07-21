@@ -75,7 +75,7 @@
                             </svg>
                         </div>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                               class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green transition-colors"
                                placeholder="you@example.com">
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                             </svg>
                         </div>
                         <input id="password" type="password" name="password" required
-                               class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green transition-colors"
                                placeholder="Enter your password">
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
-                               class="w-4 h-4 text-tz-green border-gray-300 rounded focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 rounded focus:ring-tz-green">
                         <span class="text-sm text-gray-600">Remember me</span>
                     </label>
                     @if(Route::has('password.request'))
@@ -108,7 +108,7 @@
                 </div>
 
                 <button type="submit"
-                        class="w-full bg-tz-green text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors focus:outline-none focus:ring-2 focus:ring-electric/50 focus:ring-offset-2">
+                        class="w-full bg-tz-green text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:ring-offset-2">
                     Sign In
                 </button>
             </form>

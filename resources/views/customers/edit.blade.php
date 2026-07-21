@@ -72,17 +72,17 @@
                 <div class="flex gap-4">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="individual" {{ old('type', $customer->type ?? 'individual') == 'individual' ? 'checked' : '' }}
-                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-tz-green">
                         <span class="text-sm text-gray-700">Individual</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="business" {{ old('type', $customer->type) == 'business' ? 'checked' : '' }}
-                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-tz-green">
                         <span class="text-sm text-gray-700">Business</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="wholesale" {{ old('type', $customer->type) == 'wholesale' ? 'checked' : '' }}
-                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-tz-green">
                         <span class="text-sm text-gray-700">Wholesale</span>
                     </label>
                 </div>
@@ -102,7 +102,7 @@
                         <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', $customer->is_active) ? 'checked' : '' }}
                                class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-electric/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-tz-green/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
                         <span class="ml-2 text-sm text-gray-600">Active</span>
                     </label>
                 </div>
