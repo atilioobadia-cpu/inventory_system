@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Create Reconciliation - Mtokoma')
 
@@ -70,21 +70,21 @@
                     <div class="grid grid-cols-3 gap-4">
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="daily" x-model="type" class="peer sr-only">
-                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-border">
+                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-accent peer-checked:bg-accent-light transition-all hover:border-border">
                                 <svg class="w-6 h-6 text-accent mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
                                 <span class="text-sm font-medium text-body">Daily</span>
                             </div>
                         </label>
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="weekly" x-model="type" class="peer sr-only">
-                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-border">
+                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-accent peer-checked:bg-accent-light transition-all hover:border-border">
                                 <svg class="w-6 h-6 text-accent mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 9.75h4M10 14.25h4"/></svg>
                                 <span class="text-sm font-medium text-body">Weekly</span>
                             </div>
                         </label>
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="monthly" x-model="type" class="peer sr-only">
-                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-border">
+                            <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-accent peer-checked:bg-accent-light transition-all hover:border-border">
                                 <svg class="w-6 h-6 text-accent mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v5.25m0 0H9.75m2.25 0H15"/></svg>
                                 <span class="text-sm font-medium text-body">Monthly</span>
                             </div>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="flex items-center justify-between py-2">
                             <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                                <div class="w-8 h-8 rounded-full bg-danger-light flex items-center justify-center">
                                     <svg class="w-4 h-4 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 012.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/></svg>
                                 </div>
                                 <span class="text-sm font-medium text-body">Less Total Expenses</span>
@@ -156,7 +156,7 @@
                             @error('actual_cash') <p class="text-xs text-danger mt-1">{{ $message }}</p> @enderror
                         </div>
 
-                        <div class="rounded-lg p-4" :class="difference != 0 ? 'bg-danger-light border border-red-200' : 'bg-green-50 border border-green-200'">
+                        <div class="rounded-lg p-4" :class="difference != 0 ? 'bg-danger-light border border-danger' : 'bg-success-light border border-success'">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
                                     <template x-if="difference != 0">
@@ -169,7 +169,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
                                     </template>
-                                    <span class="text-sm font-medium" :class="difference != 0 ? 'text-red-800' : 'text-green-800'">Difference</span>
+                                    <span class="text-sm font-medium" :class="difference != 0 ? 'text-danger' : 'text-success'">Difference</span>
                                 </div>
                                 <span class="text-lg font-bold" :class="difference != 0 ? 'text-danger' : 'text-success'">
                                     <span x-text="(difference >= 0 ? '+' : '') + 'TZS ' + Number(difference).toLocaleString('en', {minimumFractionDigits: 2, maximumFractionDigits: 2})"></span>
@@ -190,7 +190,7 @@
                     <a href="{{ route('reconciliations.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors">
+                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
                         Submit Reconciliation
                     </button>
                 </div>

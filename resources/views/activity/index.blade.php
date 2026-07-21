@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Activity Log')
 
@@ -45,8 +45,8 @@
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
                 <input type="date" name="to" value="{{ request('to') }}" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm">
             </div>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Reset</a>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Filter</button>
+            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
@@ -57,7 +57,7 @@
                 <div class="relative flex gap-4 pb-8 last:pb-0">
                     <!-- Timeline line -->
                     @if(!$loop->last)
-                        <div class="absolute left-4 top-10 w-0.5 h-full bg-gray-200 -ml-0.5"></div>
+                        <div class="absolute left-4 top-10 w-0.5 h-full bg-control-bg -ml-0.5"></div>
                     @endif
 
                     <!-- Avatar -->
@@ -66,7 +66,7 @@
                             @if($activity->user && $activity->user->avatar)
                                 <img src="{{ asset('storage/' . $activity->user->avatar) }}" alt="" class="w-full h-full rounded-full object-cover">
                             @else
-                                <span class="text-xs font-medium text-gray-600">{{ substr($activity->user->name ?? '?', 0, 1) }}</span>
+                                <span class="text-xs font-medium text-body">{{ substr($activity->user->name ?? '?', 0, 1) }}</span>
                             @endif
                         </div>
                     </div>
@@ -80,8 +80,8 @@
                                     @php
                                         $actionColors = [
                                             'create' => 'bg-success-light text-success',
-                                            'update' => 'bg-primary-light text-accent',
-                                            'delete' => 'bg-red-100 text-red-700',
+                                            'update' => 'bg-accent-light text-accent',
+                                            'delete' => 'bg-danger-light text-danger',
                                             'login' => 'bg-control-bg text-body',
                                             'logout' => 'bg-control-bg text-body',
                                             'view' => 'bg-cyan-100 text-cyan-700',
@@ -93,7 +93,7 @@
                                         {{ ucfirst($activity->action) }}
                                     </span>
                                 </div>
-                                <p class="text-sm text-gray-600 mt-1">{{ $activity->description }}</p>
+                                <p class="text-sm text-body mt-1">{{ $activity->description }}</p>
                                 @if($activity->subject)
                                     <div class="mt-1">
                                         <span class="text-xs text-muted">{{ class_basename($activity->subject_type) }}</span>
@@ -114,7 +114,7 @@
                 </div>
             @empty
                 <div class="text-center py-12">
-                    <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <svg class="w-12 h-12 mx-auto text-muted mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <p class="text-muted">No activity found matching your filters.</p>
                 </div>
             @endforelse

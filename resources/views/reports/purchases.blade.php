@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Purchase Report')
 
@@ -10,11 +10,11 @@
             <p class="text-muted mt-1">Track purchases and supplier spending</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('reports.purchases') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <a href="{{ route('reports.purchases') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                 Export CSV
             </a>
-            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                 Print
             </button>
@@ -41,8 +41,8 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('reports.purchases') }}" class="px-4 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Reset</a>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Filter</button>
+            <a href="{{ route('reports.purchases') }}" class="px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
@@ -99,9 +99,9 @@
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-semibold text-heading">Purchase Trend</h2>
             <div class="flex items-center gap-2">
-                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-primary text-white' : 'bg-control-bg text-gray-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
-                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-primary text-white' : 'bg-control-bg text-gray-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
-                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-primary text-white' : 'bg-control-bg text-gray-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
+                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
+                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
+                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
             </div>
         </div>
         <div class="h-80">
@@ -131,12 +131,12 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($purchases ?? [] as $purchase)
                         <tr class="hover:bg-card-bg">
-                            <td class="px-6 py-4 text-gray-600">{{ $purchase->date->format('d M Y') }}</td>
+                            <td class="px-6 py-4 text-body">{{ $purchase->date->format('d M Y') }}</td>
                             <td class="px-6 py-4 font-medium text-accent">{{ $purchase->po_number }}</td>
                             <td class="px-6 py-4 text-heading">{{ $purchase->supplier->name ?? '-' }}</td>
-                            <td class="px-6 py-4 text-center text-gray-600">{{ $purchase->items_count }}</td>
-                            <td class="px-6 py-4 text-right text-gray-600">TZS {{ number_format($purchase->subtotal) }}</td>
-                            <td class="px-6 py-4 text-right text-gray-600">TZS {{ number_format($purchase->vat_amount) }}</td>
+                            <td class="px-6 py-4 text-center text-body">{{ $purchase->items_count }}</td>
+                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->subtotal) }}</td>
+                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->vat_amount) }}</td>
                             <td class="px-6 py-4 text-right font-semibold text-heading">TZS {{ number_format($purchase->total) }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($purchase->status === 'received')
@@ -144,14 +144,14 @@
                                 @elseif($purchase->status === 'pending')
                                     <span class="px-2 py-1 bg-warning-light text-warning rounded-full text-xs font-medium">Pending</span>
                                 @else
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">{{ ucfirst($purchase->status) }}</span>
+                                    <span class="px-2 py-1 bg-danger-light text-danger rounded-full text-xs font-medium">{{ ucfirst($purchase->status) }}</span>
                                 @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="8" class="px-6 py-12 text-center text-muted">
-                                <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                                <svg class="w-12 h-12 mx-auto text-muted mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                                 No purchases found for the selected period.
                             </td>
                         </tr>

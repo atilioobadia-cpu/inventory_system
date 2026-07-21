@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Users')
 
@@ -9,7 +9,7 @@
             <h1 class="text-2xl font-bold text-heading">Users</h1>
             <p class="text-muted mt-1">Manage system users and their roles</p>
         </div>
-        <a href="{{ route('users.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+        <a href="{{ route('users.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>
             Add User
         </a>
@@ -29,12 +29,12 @@
                         <th class="text-right px-6 py-3 font-medium text-muted">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @forelse($users ?? [] as $user)
                         <tr class="hover:bg-card-bg">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-primary-light rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
+                                    <div class="w-9 h-9 bg-accent-light rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                                         @else
@@ -46,16 +46,16 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-gray-600">{{ $user->email }}</td>
+                            <td class="px-6 py-4 text-body">{{ $user->email }}</td>
                             <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-primary-light text-accent rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
+                                <span class="px-2 py-1 bg-accent-light text-accent rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
                             </td>
-                            <td class="px-6 py-4 text-gray-600">{{ $user->phone ?? '-' }}</td>
+                            <td class="px-6 py-4 text-body">{{ $user->phone ?? '-' }}</td>
                             <td class="px-6 py-4 text-center">
                                 <form action="{{ route('users.toggle-status', $user) }}" method="POST" class="inline">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-green-500' : 'bg-gray-300' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
+                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-success-light0' : 'bg-control-bg' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
                                         <span class="inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform {{ $user->is_active ? 'translate-x-4.5' : 'translate-x-0.5' }}" style="transform: translateX({{ $user->is_active ? '18px' : '2px' }})"></span>
                                     </button>
                                 </form>
@@ -72,7 +72,7 @@
                     @empty
                         <tr>
                             <td colspan="7" class="px-6 py-12 text-center text-muted">
-                                <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                                <svg class="w-12 h-12 mx-auto text-muted mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                                 No users found. Create your first user.
                             </td>
                         </tr>

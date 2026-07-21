@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', $category->name . ' - Category')
 
@@ -19,7 +19,7 @@
             <p class="text-sm text-muted mt-1">{{ $category->description ?? 'No description' }}</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('categories.edit', $category) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">Edit</a>
+            <a href="{{ route('categories.edit', $category) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">Edit</a>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
 
     @if(isset($category->items) && $category->items->count())
     <div class="bg-white rounded-xl border border-border">
-        <div class="p-6 border-b border-gray-100">
+        <div class="p-6 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Items in this Category</h3>
         </div>
         <div class="overflow-x-auto">
@@ -52,7 +52,7 @@
                         <th class="text-right px-6 py-3 font-medium text-muted">Price</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @foreach($category->items as $item)
                     <tr class="hover:bg-card-bg">
                         <td class="px-6 py-3"><a href="{{ route('items.show', $item) }}" class="text-accent hover:underline">{{ $item->name }}</a></td>

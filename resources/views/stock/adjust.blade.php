@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Adjust Stock - Mtokoma')
 
@@ -43,7 +43,7 @@
 }">
     <div class="max-w-2xl mx-auto">
         <div class="bg-white rounded-xl border border-border">
-            <div class="px-6 py-4 border-b border-gray-100">
+            <div class="px-6 py-4 border-b border-border">
                 <h3 class="text-lg font-semibold text-heading">Stock Adjustment</h3>
                 <p class="text-sm text-muted mt-1">Add or remove stock for an item</p>
             </div>
@@ -60,7 +60,7 @@
                             <input type="hidden" name="item_id" :value="selectedItem?.id">
                             <div x-show="items.length > 0" @click.away="items = []" class="absolute z-10 w-full mt-1 bg-white border border-border rounded-lg max-h-60 overflow-y-auto">
                                 <template x-for="item in items" :key="item.id">
-                                    <button type="button" @click="selectItem(item)" class="w-full text-left px-4 py-3 hover:bg-card-bg border-b border-gray-50 last:border-0">
+                                    <button type="button" @click="selectItem(item)" class="w-full text-left px-4 py-3 hover:bg-card-bg border-b border-border last:border-0">
                                         <p class="text-sm font-medium text-heading" x-text="item.name"></p>
                                         <p class="text-xs text-muted">
                                             SKU: <span x-text="item.sku"></span> | Stock: <span x-text="item.current_stock ?? 0" class="font-bold"></span>
@@ -99,7 +99,7 @@
                         <div class="grid grid-cols-2 gap-3">
                             <label class="relative cursor-pointer">
                                 <input type="radio" name="type" value="adjustment" x-model="adjustingType" class="peer sr-only" required>
-                                <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-green-500 peer-checked:bg-green-50 transition-all hover:border-border">
+                                <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-success peer-checked:bg-success-light transition-all hover:border-border">
                                     <svg class="w-6 h-6 text-success mx-auto mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                                     </svg>
@@ -108,11 +108,11 @@
                             </label>
                             <label class="relative cursor-pointer">
                                 <input type="radio" name="type" value="damage" x-model="adjustingType" class="peer sr-only">
-                                <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-red-500 peer-checked:bg-danger-light transition-all hover:border-border">
+                                <div class="border-2 border-border rounded-lg p-4 text-center peer-checked:border-danger peer-checked:bg-danger-light transition-all hover:border-border">
                                     <svg class="w-6 h-6 text-danger mx-auto mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"/>
                                     </svg>
-                                    <span class="text-sm font-medium text-body peer-checked:text-red-700">Remove Stock</span>
+                                    <span class="text-sm font-medium text-body peer-checked:text-danger">Remove Stock</span>
                                 </div>
                             </label>
                         </div>
@@ -129,13 +129,13 @@
 
                     {{-- Projected Stock Preview --}}
                     <div x-show="selectedItem && quantity > 0" x-cloak class="rounded-lg p-4"
-                         :class="projectedStock < 0 ? 'bg-danger-light border border-red-200' : 'bg-blue-50 border border-blue-200'">
+                         :class="projectedStock < 0 ? 'bg-danger-light border border-danger' : 'bg-accent-light border border-accent'">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5" :class="projectedStock < 0 ? 'text-danger' : 'text-accent'" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
                             </svg>
                             <div>
-                                <p class="text-sm font-medium" :class="projectedStock < 0 ? 'text-red-800' : 'text-blue-800'">
+                                <p class="text-sm font-medium" :class="projectedStock < 0 ? 'text-danger' : 'text-accent'">
                                     Projected Stock After Adjustment:
                                     <span class="font-bold" x-text="projectedStock"></span>
                                 </p>
@@ -153,11 +153,11 @@
                 </div>
 
                 {{-- Actions --}}
-                <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
+                <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-border">
                     <a href="{{ route('stock.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors">
+                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
                         Submit Adjustment
                     </button>
                 </div>

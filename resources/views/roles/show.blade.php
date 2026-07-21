@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Role Details')
 
@@ -11,12 +11,12 @@
         </div>
         <div class="flex items-center gap-3">
             @if(!$role->is_system)
-                <a href="{{ route('roles.edit', $role) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+                <a href="{{ route('roles.edit', $role) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                     Edit
                 </a>
             @endif
-            <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+            <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
                 Back
             </a>
@@ -64,8 +64,8 @@
                         <div class="space-y-2">
                             @foreach($perms as $perm)
                                 <div class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                                    <span class="text-sm text-gray-600">{{ explode('.', $perm->name)[1] ?? '' }}</span>
+                                    <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                                    <span class="text-sm text-body">{{ explode('.', $perm->name)[1] ?? '' }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -98,18 +98,18 @@
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                                         @else
-                                            <span class="text-sm font-medium text-gray-600">{{ substr($user->name, 0, 1) }}</span>
+                                            <span class="text-sm font-medium text-body">{{ substr($user->name, 0, 1) }}</span>
                                         @endif
                                     </div>
                                     <span class="font-medium text-heading">{{ $user->name }}</span>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-gray-600">{{ $user->email }}</td>
+                            <td class="px-6 py-4 text-body">{{ $user->email }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($user->is_active)
                                     <span class="px-2 py-1 bg-success-light text-success rounded-full text-xs font-medium">Active</span>
                                 @else
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Inactive</span>
+                                    <span class="px-2 py-1 bg-danger-light text-danger rounded-full text-xs font-medium">Inactive</span>
                                 @endif
                             </td>
                         </tr>

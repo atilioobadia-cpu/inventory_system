@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Stock Movements - Mtokoma')
 
@@ -26,7 +26,7 @@
             <h2 class="text-2xl font-bold text-heading">Stock Movements</h2>
             <p class="text-sm text-muted mt-1">Track all inventory movements and adjustments</p>
         </div>
-        <button @click="showAdjustModal = true" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
+        <button @click="showAdjustModal = true" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -36,7 +36,7 @@
 
     <div class="bg-white rounded-xl border border-border">
         <form method="GET" action="{{ route('stock.movements') }}">
-            <div class="p-4 border-b border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
                     <div class="relative">
                         <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -64,9 +64,9 @@
                     </select>
                 </div>
             </div>
-            <div class="p-4 border-b border-gray-100 flex flex-wrap items-center gap-4">
+            <div class="p-4 border-b border-border flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-600">Direction:</label>
+                    <label class="text-sm font-medium text-body">Direction:</label>
                     <select name="direction" x-model="direction" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-white">
                         <option value="">All</option>
                         <option value="in">In (Stock Received)</option>
@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-3 ml-auto">
-                    <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">Filter</button>
+                    <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">Filter</button>
                     <a href="{{ route('stock.movements') }}" class="text-muted hover:text-body px-3 py-1.5 text-sm">Reset</a>
                 </div>
             </div>
@@ -97,15 +97,15 @@
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Notes</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @php
                         $typeStyles = [
-                            'purchase' => ['bg-accent-light text-blue-800', 'Purchase'],
-                            'sale' => ['bg-success-light text-green-800', 'Sale'],
+                            'purchase' => ['bg-accent-light text-accent', 'Purchase'],
+                            'sale' => ['bg-success-light text-success', 'Sale'],
                             'adjustment' => ['bg-warning-light text-amber-800', 'Adjustment'],
                             'opening_stock' => ['bg-control-bg text-heading', 'Opening'],
                             'return' => ['bg-purple-100 text-purple-800', 'Return'],
-                            'damage' => ['bg-red-100 text-red-800', 'Damage'],
+                            'damage' => ['bg-danger-light text-danger', 'Damage'],
                             'transfer' => ['bg-cyan-100 text-cyan-800', 'Transfer'],
                         ];
                     @endphp
@@ -152,7 +152,7 @@
                     @empty
                         <tr>
                             <td colspan="11" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <p class="text-muted font-medium">No stock movements found</p>
@@ -165,7 +165,7 @@
         </div>
 
         @if(isset($movements) && $movements->hasPages())
-        <div class="px-4 py-3 border-t border-gray-100">
+        <div class="px-4 py-3 border-t border-border">
             {{ $movements->links() }}
         </div>
         @endif
@@ -217,7 +217,7 @@
                 </div>
                 <div class="flex items-center justify-end gap-3 px-6 py-4 bg-card-bg rounded-b-xl">
                     <button type="button" @click="showAdjustModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
-                    <button type="submit" class="px-4 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">Save Adjustment</button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors">Save Adjustment</button>
                 </div>
             </form>
         </div>

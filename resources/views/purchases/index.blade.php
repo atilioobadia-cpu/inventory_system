@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Purchases')
 
@@ -15,7 +15,7 @@
             <h1 class="text-2xl font-bold text-heading">Purchases</h1>
         </div>
         @can('create_purchases')
-        <a href="{{ route('purchases.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium text-sm transition-colors">
+        <a href="{{ route('purchases.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
             Create Purchase
         </a>
@@ -26,10 +26,10 @@
     <div class="bg-white rounded-xl border p-4">
         <form method="GET" class="flex flex-col sm:flex-row gap-3">
             <div class="flex-1">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search invoice or supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search invoice or supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent focus:border-accent">
             </div>
             <div class="w-48">
-                <select name="supplier_id" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                <select name="supplier_id" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent">
                     <option value="">All Suppliers</option>
                     @foreach($suppliers ?? [] as $supplier)
                         <option value="{{ $supplier->id }}" {{ request('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="w-40">
-                <select name="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                <select name="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent">
                     <option value="">All Status</option>
                     <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
                     <option value="received" {{ request('status') == 'received' ? 'selected' : '' }}>Received</option>
@@ -45,14 +45,14 @@
                 </select>
             </div>
             <div class="w-40">
-                <input type="date" name="from_date" value="{{ request('from_date') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                <input type="date" name="from_date" value="{{ request('from_date') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent">
             </div>
             <div class="w-40">
-                <input type="date" name="to_date" value="{{ request('to_date') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                <input type="date" name="to_date" value="{{ request('to_date') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent">
             </div>
-            <button type="submit" class="px-4 py-2 bg-control-bg hover:bg-gray-200 text-body rounded-lg text-sm font-medium">Filter</button>
+            <button type="submit" class="px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium">Filter</button>
             @if(request()->hasAny(['search','supplier_id','status','from_date','to_date']))
-                <a href="{{ route('purchases.index') }}" class="px-4 py-2 text-danger hover:text-red-800 text-sm font-medium">Clear</a>
+                <a href="{{ route('purchases.index') }}" class="px-4 py-2 text-danger hover:text-danger text-sm font-medium">Clear</a>
             @endif
         </form>
     </div>
@@ -63,47 +63,47 @@
             <table class="w-full text-sm">
                 <thead class="bg-card-bg border-b">
                     <tr>
-                        <th class="px-4 py-3 text-left font-semibold text-gray-600">Invoice #</th>
-                        <th class="px-4 py-3 text-left font-semibold text-gray-600">Supplier</th>
-                        <th class="px-4 py-3 text-left font-semibold text-gray-600">Date</th>
-                        <th class="px-4 py-3 text-center font-semibold text-gray-600">Items</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Total</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Paid</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Due</th>
-                        <th class="px-4 py-3 text-center font-semibold text-gray-600">Status</th>
-                        <th class="px-4 py-3 text-center font-semibold text-gray-600">Actions</th>
+                        <th class="px-4 py-3 text-left font-semibold text-body">Invoice #</th>
+                        <th class="px-4 py-3 text-left font-semibold text-body">Supplier</th>
+                        <th class="px-4 py-3 text-left font-semibold text-body">Date</th>
+                        <th class="px-4 py-3 text-center font-semibold text-body">Items</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Total</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Paid</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Due</th>
+                        <th class="px-4 py-3 text-center font-semibold text-body">Status</th>
+                        <th class="px-4 py-3 text-center font-semibold text-body">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @forelse($purchases ?? [] as $purchase)
                     <tr class="hover:bg-card-bg">
                         <td class="px-4 py-3">
-                            <a href="{{ route('purchases.show', $purchase) }}" class="font-medium text-accent hover:text-blue-800">{{ $purchase->invoice_number }}</a>
+                            <a href="{{ route('purchases.show', $purchase) }}" class="font-medium text-accent hover:text-accent">{{ $purchase->invoice_number }}</a>
                         </td>
                         <td class="px-4 py-3 text-body">{{ $purchase->supplier->name ?? '-' }}</td>
                         <td class="px-4 py-3 text-body">{{ $purchase->purchase_date->format('d/m/Y') }}</td>
                         <td class="px-4 py-3 text-center text-body">{{ $purchase->items->count() }}</td>
                         <td class="px-4 py-3 text-right font-medium text-heading">TZS {{ number_format($purchase->total_amount) }}</td>
                         <td class="px-4 py-3 text-right text-success">TZS {{ number_format($purchase->paid_amount) }}</td>
-                        <td class="px-4 py-3 text-right {{ $purchase->due_amount > 0 ? 'text-danger font-medium' : 'text-gray-600' }}">TZS {{ number_format($purchase->due_amount) }}</td>
+                        <td class="px-4 py-3 text-right {{ $purchase->due_amount > 0 ? 'text-danger font-medium' : 'text-body' }}">TZS {{ number_format($purchase->due_amount) }}</td>
                         <td class="px-4 py-3 text-center">
                             @if($purchase->status === 'received')
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">Received</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Received</span>
                             @elseif($purchase->status === 'cancelled')
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Cancelled</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Cancelled</span>
                             @else
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-heading">Draft</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
-                                <a href="{{ route('purchases.show', $purchase) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-blue-50" title="View">
+                                <a href="{{ route('purchases.show', $purchase) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light" title="View">
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </a>
                                 @if($purchase->status === 'draft')
                                     <form method="POST" action="{{ route('purchases.receive', $purchase) }}" class="inline" x-data>
                                         @csrf
-                                        <button type="submit" class="p-1.5 text-muted hover:text-success rounded-lg hover:bg-green-50" title="Receive" onclick="return confirm('Mark this purchase as received?')">
+                                        <button type="submit" class="p-1.5 text-muted hover:text-success rounded-lg hover:bg-success-light" title="Receive" onclick="return confirm('Mark this purchase as received?')">
                                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                         </button>
                                     </form>
@@ -123,9 +123,9 @@
                     @empty
                     <tr>
                         <td colspan="9" class="px-4 py-12 text-center text-muted">
-                            <svg class="h-12 w-12 mx-auto text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                            <svg class="h-12 w-12 mx-auto text-muted mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                             <p class="font-medium">No purchases found</p>
-                            <a href="{{ route('purchases.create') }}" class="text-accent hover:text-blue-800 text-sm mt-1 inline-block">Create your first purchase</a>
+                            <a href="{{ route('purchases.create') }}" class="text-accent hover:text-accent text-sm mt-1 inline-block">Create your first purchase</a>
                         </td>
                     </tr>
                     @endforelse

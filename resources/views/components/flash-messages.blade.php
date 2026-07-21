@@ -1,11 +1,11 @@
-﻿@props(['type' => 'success', 'message' => '', 'title' => ''])
+@props(['type' => 'success', 'message' => '', 'title' => ''])
 
 @php
 $styles = [
-    'success' => ['bg' => 'bg-green-50', 'border' => 'border-green-200', 'text' => 'text-green-800', 'iconColor' => 'text-green-500'],
-    'error' => ['bg' => 'bg-danger-light', 'border' => 'border-red-200', 'text' => 'text-red-800', 'iconColor' => 'text-danger'],
+    'success' => ['bg' => 'bg-success-light', 'border' => 'border-success', 'text' => 'text-success', 'iconColor' => 'text-success'],
+    'error' => ['bg' => 'bg-danger-light', 'border' => 'border-danger', 'text' => 'text-danger', 'iconColor' => 'text-danger'],
     'warning' => ['bg' => 'bg-warning-light', 'border' => 'border-amber-200', 'text' => 'text-amber-800', 'iconColor' => 'text-amber-500'],
-    'info' => ['bg' => 'bg-blue-50', 'border' => 'border-blue-200', 'text' => 'text-blue-800', 'iconColor' => 'text-blue-500'],
+    'info' => ['bg' => 'bg-accent-light', 'border' => 'border-accent', 'text' => 'text-accent', 'iconColor' => 'text-accent'],
 ];
 $style = $styles[$type] ?? $styles['success'];
 
@@ -45,17 +45,17 @@ $messages = [
              x-transition:leave-end="opacity-0 -translate-y-2"
              class="mb-4 rounded-lg border px-4 py-3 flex items-start gap-3"
              :class="{
-                 'bg-green-50 border-green-200': alert.type === 'success',
-                 'bg-danger-light border-red-200': alert.type === 'error',
+                 'bg-success-light border-success': alert.type === 'success',
+                 'bg-danger-light border-danger': alert.type === 'error',
                  'bg-warning-light border-amber-200': alert.type === 'warning',
-                 'bg-blue-50 border-blue-200': alert.type === 'info'
+                 'bg-accent-light border-accent': alert.type === 'info'
              }">
 
             {{-- Icon --}}
             <div class="flex-shrink-0 mt-0.5">
                 {{-- Success --}}
                 <template x-if="alert.type === 'success'">
-                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                     </svg>
                 </template>
@@ -73,7 +73,7 @@ $messages = [
                 </template>
                 {{-- Info --}}
                 <template x-if="alert.type === 'info'">
-                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
                     </svg>
                 </template>
@@ -83,20 +83,20 @@ $messages = [
             <div class="flex-1">
                 <p class="text-sm font-medium" x-text="alert.message"
                    :class="{
-                       'text-green-800': alert.type === 'success',
-                       'text-red-800': alert.type === 'error',
+                       'text-success': alert.type === 'success',
+                       'text-danger': alert.type === 'error',
                        'text-amber-800': alert.type === 'warning',
-                       'text-blue-800': alert.type === 'info'
+                       'text-accent': alert.type === 'info'
                    }"></p>
             </div>
 
             {{-- Close Button --}}
             <button @click="dismiss(index)" class="flex-shrink-0"
                     :class="{
-                        'text-green-500 hover:text-success': alert.type === 'success',
-                        'text-danger hover:text-red-700': alert.type === 'error',
+                        'text-success hover:text-success': alert.type === 'success',
+                        'text-danger hover:text-danger': alert.type === 'error',
                         'text-amber-500 hover:text-warning': alert.type === 'warning',
-                        'text-blue-500 hover:text-blue-700': alert.type === 'info'
+                        'text-accent hover:text-accent': alert.type === 'info'
                     }">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>

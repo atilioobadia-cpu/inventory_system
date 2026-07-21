@@ -1,4 +1,4 @@
-﻿@props([
+@props([
     'name' => 'confirmModal',
     'title' => 'Confirm Action',
     'message' => 'Are you sure you want to proceed?',
@@ -12,8 +12,8 @@
 $colorClasses = [
     'danger' => 'bg-danger hover:bg-danger',
     'warning' => 'bg-warning hover:bg-amber-600',
-    'success' => 'bg-success hover:bg-emerald-600',
-    'electric' => 'bg-primary hover:bg-primary-dark',
+    'success' => 'bg-success hover:bg-success-hover',
+    'electric' => 'bg-primary hover:bg-primary-hover',
 ];
 $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
 @endphp
@@ -59,13 +59,13 @@ $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
                         </svg>
                     </div>
                     @elseif($color === 'success')
-                    <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full bg-success-light flex items-center justify-center flex-shrink-0">
                         <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                     </div>
                     @else
-                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full bg-accent-light flex items-center justify-center flex-shrink-0">
                         <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
                         </svg>
@@ -78,12 +78,12 @@ $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
                 </div>
 
                 {{-- Message --}}
-                <p class="text-sm text-gray-600 mb-6">{{ $message }} <span class="font-semibold" x-text="confirmName" x-show="confirmName"></span></p>
+                <p class="text-sm text-body mb-6">{{ $message }} <span class="font-semibold" x-text="confirmName" x-show="confirmName"></span></p>
 
                 {{-- Actions --}}
                 <div class="flex justify-end gap-3">
                     <button @click="{{ $name }} = false"
-                            class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200 transition-colors">
+                            class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                         Cancel
                     </button>
                     <form :action="confirmUrl" method="POST" class="inline">

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -348,7 +348,7 @@
                         <p class="text-sm font-semibold text-heading" x-text="toast.title"></p>
                         <p class="text-sm text-muted mt-0.5" x-text="toast.message" x-show="toast.message"></p>
                     </div>
-                    <button @click="remove(toast.id)" class="flex-shrink-0 text-muted hover:text-gray-600 transition-colors">
+                    <button @click="remove(toast.id)" class="flex-shrink-0 text-muted hover:text-body transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>

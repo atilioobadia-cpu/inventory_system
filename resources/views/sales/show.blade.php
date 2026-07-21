@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Sale Details - Mtokoma')
 
@@ -19,7 +19,7 @@
 <div x-data="{ showReceiptModal: false }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div class="flex items-center gap-4">
-            <a href="{{ route('sales.index') }}" class="p-2 rounded-lg text-muted hover:text-gray-600 hover:bg-control-bg transition-colors">
+            <a href="{{ route('sales.index') }}" class="p-2 rounded-lg text-muted hover:text-body hover:bg-control-bg transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
                 </svg>
@@ -28,7 +28,7 @@
                 <div class="flex items-center gap-3">
                     <h2 class="text-2xl font-bold text-heading">{{ $s->invoice_number }}</h2>
                     @if($s->is_voided)
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-gray-600">Voided</span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Voided</span>
                     @endif
                 </div>
                 <p class="text-sm text-muted mt-1">Created {{ $s->created_at->format('d M Y, h:i A') }}</p>
@@ -47,8 +47,8 @@
             <form action="{{ route('sales.void', $s) }}" method="POST" onsubmit="return confirm('Are you sure you want to void this sale?')">
                 @csrf
                 <input type="text" name="void_reason" placeholder="Reason for voiding" required minlength="3" maxlength="500"
-                       class="px-3 py-2 border border-red-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 mr-2">
-                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-danger bg-danger-light border border-red-200 rounded-lg hover:bg-red-100 transition-colors">
+                       class="px-3 py-2 border border-danger rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-danger/50 focus:border-danger mr-2">
+                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-danger bg-danger-light border border-danger rounded-lg hover:bg-danger-light transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>
                     Void
                 </button>
@@ -84,7 +84,7 @@
 
             {{-- Items Table --}}
             <div class="bg-white rounded-xl border border-border">
-                <div class="px-6 py-4 border-b border-gray-100">
+                <div class="px-6 py-4 border-b border-border">
                     <h3 class="text-lg font-semibold text-heading">Sale Items</h3>
                 </div>
                 <div class="overflow-x-auto">
@@ -102,7 +102,7 @@
                                 <th class="text-right px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Profit</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100">
+                        <tbody class="divide-y divide-border">
                             @foreach($s->items ?? [] as $item)
                                 <tr class="hover:bg-card-bg">
                                     <td class="px-6 py-3 text-sm font-medium text-heading">{{ $item->item->name ?? $item->name ?? '-' }}</td>
@@ -155,27 +155,27 @@
 
             {{-- Void Info --}}
             @if($s->is_voided && isset($s->void_reason))
-            <div class="bg-danger-light rounded-xl border border-red-200 p-6">
+            <div class="bg-danger-light rounded-xl border border-danger p-6">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-full bg-danger-light flex items-center justify-center">
                         <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold text-red-900">Void Information</h3>
+                    <h3 class="text-lg font-semibold text-danger">Void Information</h3>
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <p class="text-xs text-danger uppercase tracking-wider">Reason</p>
-                        <p class="text-sm font-medium text-red-900 mt-1">{{ $s->void_reason }}</p>
+                        <p class="text-sm font-medium text-danger mt-1">{{ $s->void_reason }}</p>
                     </div>
                     <div>
                         <p class="text-xs text-danger uppercase tracking-wider">Voided On</p>
-                        <p class="text-sm font-medium text-red-900 mt-1">{{ isset($s->voided_at) ? $s->voided_at->format('d M Y, h:i A') : '-' }}</p>
+                        <p class="text-sm font-medium text-danger mt-1">{{ isset($s->voided_at) ? $s->voided_at->format('d M Y, h:i A') : '-' }}</p>
                     </div>
                     <div>
                         <p class="text-xs text-danger uppercase tracking-wider">Voided By</p>
-                        <p class="text-sm font-medium text-red-900 mt-1">{{ $s->voidedBy->name ?? 'System' }}</p>
+                        <p class="text-sm font-medium text-danger mt-1">{{ $s->voidedBy->name ?? 'System' }}</p>
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
             @if($s->notes)
             <div class="bg-white rounded-xl border border-border p-6">
                 <h3 class="text-sm font-semibold text-heading mb-2">Notes</h3>
-                <p class="text-sm text-gray-600 whitespace-pre-line">{{ $s->notes }}</p>
+                <p class="text-sm text-body whitespace-pre-line">{{ $s->notes }}</p>
             </div>
             @endif
         </div>

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Create Purchase')
 
@@ -16,7 +16,7 @@
             </nav>
             <h1 class="text-2xl font-bold text-heading">Create Purchase</h1>
         </div>
-        <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-control-bg hover:bg-gray-200 text-body rounded-lg text-sm font-medium">Cancel</a>
+        <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium">Cancel</a>
     </div>
 
     <form method="POST" action="{{ route('purchases.store') }}" @submit.prevent="submitForm()">
@@ -35,7 +35,7 @@
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
                                 <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
-                                        <div class="px-3 py-2 hover:bg-blue-50 cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
+                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
                                     </template>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                 <div class="bg-white rounded-xl border p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-lg font-semibold text-heading">Items</h2>
-                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 hover:bg-accent-light text-blue-700 rounded-lg text-sm font-medium">
+                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-accent-light hover:bg-accent-light text-accent rounded-lg text-sm font-medium">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                             Add Item
                         </button>
@@ -79,15 +79,15 @@
                         <table class="w-full text-sm">
                             <thead class="bg-card-bg border-b">
                                 <tr>
-                                    <th class="px-3 py-2 text-left font-medium text-gray-600 w-2/5">Item</th>
-                                    <th class="px-3 py-2 text-center font-medium text-gray-600 w-20">Qty</th>
-                                    <th class="px-3 py-2 text-right font-medium text-gray-600 w-28">Unit Cost</th>
-                                    <th class="px-3 py-2 text-right font-medium text-gray-600 w-24">Discount</th>
-                                    <th class="px-3 py-2 text-right font-medium text-gray-600 w-28">Total</th>
+                                    <th class="px-3 py-2 text-left font-medium text-body w-2/5">Item</th>
+                                    <th class="px-3 py-2 text-center font-medium text-body w-20">Qty</th>
+                                    <th class="px-3 py-2 text-right font-medium text-body w-28">Unit Cost</th>
+                                    <th class="px-3 py-2 text-right font-medium text-body w-24">Discount</th>
+                                    <th class="px-3 py-2 text-right font-medium text-body w-28">Total</th>
                                     <th class="px-3 py-2 w-10"></th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100">
+                            <tbody class="divide-y divide-border">
                                 <template x-for="(row, index) in rows" :key="index">
                                     <tr>
                                         <td class="px-3 py-2">
@@ -96,7 +96,7 @@
                                                 <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
                                                 <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
                                                     <template x-for="item in row.itemResults" :key="item.id">
-                                                        <div class="px-3 py-2 hover:bg-blue-50 cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
+                                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
                                                     </template>
                                                 </div>
                                             </div>
@@ -130,15 +130,15 @@
                     <h2 class="text-lg font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Subtotal</span>
+                            <span class="text-body">Subtotal</span>
                             <span class="font-medium" x-text="formatCurrency(subtotal)"></span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Tax (18%)</span>
+                            <span class="text-body">Tax (18%)</span>
                             <span class="font-medium" x-text="formatCurrency(taxAmount)"></span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Discount</span>
+                            <span class="text-body">Discount</span>
                             <span class="font-medium text-danger" x-text="'- ' + formatCurrency(totalDiscount)"></span>
                         </div>
                         <div class="flex justify-between text-lg font-bold border-t pt-3">
@@ -153,7 +153,7 @@
                             <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01">
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Due</span>
+                            <span class="text-body">Due</span>
                             <span class="font-bold text-danger" x-text="formatCurrency(Math.max(0, total - paidAmount))"></span>
                         </div>
                     </div>
@@ -164,8 +164,8 @@
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
-                        <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
+                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
+                        <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
                     </div>
                 </div>
             </div>

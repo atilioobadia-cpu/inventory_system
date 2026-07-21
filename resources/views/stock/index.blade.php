@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Stock Levels - Mtokoma')
 
@@ -28,7 +28,7 @@
 
     <div class="bg-white rounded-xl border border-border">
         <form method="GET" action="{{ route('stock.index') }}">
-            <div class="p-4 border-b border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="lg:col-span-2">
                     <div class="relative">
                         <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -54,8 +54,8 @@
                     </select>
                 </div>
             </div>
-            <div class="p-4 border-b border-gray-100 flex items-center gap-3">
-                <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
+            <div class="p-4 border-b border-border flex items-center gap-3">
+                <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
                     Filter
                 </button>
                 <a href="{{ route('stock.index') }}" class="text-muted hover:text-body px-3 py-1.5 text-sm">Reset</a>
@@ -85,7 +85,7 @@
                         <th class="text-right px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Value</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @forelse($items ?? [] as $item)
                         @php
                             $qty = $item->current_stock ?? 0;
@@ -94,8 +94,8 @@
                             $max = $item->max_stock ?? PHP_INT_MAX;
                             if ($qty == 0) {
                                 $statusText = 'Out of Stock';
-                                $statusBg = 'bg-red-100';
-                                $statusText2 = 'text-red-800';
+                                $statusBg = 'bg-danger-light';
+                                $statusText2 = 'text-danger';
                             } elseif ($qty < $reorder) {
                                 $statusText = 'Low Stock';
                                 $statusBg = 'bg-warning-light';
@@ -103,11 +103,11 @@
                             } elseif ($qty > $max) {
                                 $statusText = 'Overstocked';
                                 $statusBg = 'bg-accent-light';
-                                $statusText2 = 'text-blue-800';
+                                $statusText2 = 'text-accent';
                             } else {
                                 $statusText = 'In Stock';
                                 $statusBg = 'bg-success-light';
-                                $statusText2 = 'text-green-800';
+                                $statusText2 = 'text-success';
                             }
                         @endphp
                         <tr class="hover:bg-card-bg transition-colors">
@@ -140,7 +140,7 @@
                     @empty
                         <tr>
                             <td colspan="11" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                                 </svg>
                                 <p class="text-muted font-medium">No items found</p>
@@ -169,7 +169,7 @@
         </div>
 
         @if(isset($items) && $items->hasPages())
-        <div class="px-4 py-3 border-t border-gray-100">
+        <div class="px-4 py-3 border-t border-border">
             {{ $items->links() }}
         </div>
         @endif

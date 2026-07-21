@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Suppliers')
 
@@ -18,7 +18,7 @@
         </div>
         @can('create_suppliers')
         <a href="{{ route('suppliers.create') }}"
-           class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">
+           class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -58,35 +58,35 @@
                         <th class="text-center px-4 py-3 font-medium text-muted">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @foreach($suppliers as $supplier)
                     <tr class="hover:bg-card-bg transition-colors">
                         <td class="px-4 py-3">
                             <a href="{{ route('suppliers.show', $supplier) }}" class="font-medium text-heading hover:text-accent">{{ $supplier->name }}</a>
                         </td>
-                        <td class="px-4 py-3 text-gray-600">{{ $supplier->contact_person ?? '-' }}</td>
-                        <td class="px-4 py-3 text-gray-600">{{ $supplier->phone ?? '-' }}</td>
-                        <td class="px-4 py-3 text-gray-600">{{ $supplier->email ?? '-' }}</td>
+                        <td class="px-4 py-3 text-body">{{ $supplier->contact_person ?? '-' }}</td>
+                        <td class="px-4 py-3 text-body">{{ $supplier->phone ?? '-' }}</td>
+                        <td class="px-4 py-3 text-body">{{ $supplier->email ?? '-' }}</td>
                         <td class="px-4 py-3 text-right font-medium {{ ($supplier->current_balance ?? 0) > 0 ? 'text-danger' : 'text-heading' }}">
                             TZS {{ number_format($supplier->current_balance ?? 0) }}
                         </td>
                         <td class="px-4 py-3 text-center">
                             @if($supplier->is_active)
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-success">Active</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                             @else
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-gray-600">Inactive</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
-                                <a href="{{ route('suppliers.show', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-primary-light transition-colors" title="View">
+                                <a href="{{ route('suppliers.show', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light transition-colors" title="View">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                     </svg>
                                 </a>
                                 @can('edit_suppliers')
-                                <a href="{{ route('suppliers.edit', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-primary-light transition-colors" title="Edit">
+                                <a href="{{ route('suppliers.edit', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light transition-colors" title="Edit">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                                     </svg>
@@ -109,19 +109,19 @@
         </div>
 
         @if($suppliers->hasPages())
-        <div class="px-4 py-3 border-t border-gray-100">
+        <div class="px-4 py-3 border-t border-border">
             {{ $suppliers->withQueryString()->links() }}
         </div>
         @endif
         @else
         <div class="py-16 text-center">
-            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H18.75m-7.5-2.25h7.5m-7.5 0H6.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125H9"/>
             </svg>
             <h3 class="text-lg font-medium text-muted mb-1">No suppliers found</h3>
             <p class="text-sm text-muted mb-4">Add your first supplier to get started.</p>
             @can('create_suppliers')
-            <a href="{{ route('suppliers.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">
+            <a href="{{ route('suppliers.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors">
                 Add Supplier
             </a>
             @endcan
@@ -139,9 +139,9 @@
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
             <div class="relative bg-white rounded-xl max-w-md w-full p-6">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Supplier</h3>
-                <p class="text-sm text-gray-600 mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This may affect purchase records.</p>
+                <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This may affect purchase records.</p>
                 <div class="flex justify-end gap-3">
-                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200">Cancel</button>
+                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg">Cancel</button>
                     <form :action="deleteUrl" method="POST">
                         @csrf
                         @method('DELETE')

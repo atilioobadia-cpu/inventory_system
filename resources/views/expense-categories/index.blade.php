@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Expense Categories - Mtokoma')
 
@@ -16,7 +16,7 @@
             <h2 class="text-2xl font-bold text-heading">Expense Categories</h2>
             <p class="text-sm text-muted mt-1">Manage expense categories</p>
         </div>
-        <a href="{{ route('expense-categories.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
+        <a href="{{ route('expense-categories.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -36,7 +36,7 @@
                         <th class="text-center px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @forelse($categories ?? [] as $cat)
                         <tr class="hover:bg-card-bg transition-colors">
                             <td class="px-6 py-4 text-sm font-medium text-heading">{{ $cat->name }}</td>
@@ -46,14 +46,14 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 @if($cat->is_active ?? true)
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">Active</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-gray-600">Inactive</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-1">
-                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-muted hover:text-accent hover:bg-primary-light transition-colors" title="Edit">
+                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-muted hover:text-accent hover:bg-accent-light transition-colors" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                                     </a>
                                     <button @click="deleteId = {{ $cat->id }}; showDeleteModal = true" class="p-2 rounded-lg text-muted hover:text-danger hover:bg-danger-light transition-colors" title="Delete">
@@ -65,7 +65,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-16 text-center">
-                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3Z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
                                 </svg>
@@ -91,7 +91,7 @@
         <div @click.away="showDeleteModal = false"
              class="bg-white rounded-xl w-full max-w-md p-6">
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                     </svg>
@@ -101,7 +101,7 @@
                     <p class="text-sm text-muted">This action cannot be undone.</p>
                 </div>
             </div>
-            <p class="text-sm text-gray-600 mb-4">Deleting this category may affect expenses assigned to it. Are you sure?</p>
+            <p class="text-sm text-body mb-4">Deleting this category may affect expenses assigned to it. Are you sure?</p>
             <div class="flex items-center justify-end gap-3">
                 <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
                 <form :action="'{{ url('/expense-categories') }}/' + deleteId" method="POST">

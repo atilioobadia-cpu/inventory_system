@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Point of Sale')
 
@@ -51,7 +51,7 @@
             </template>
             <template x-if="!loading && products.length === 0">
                 <div class="flex flex-col items-center justify-center h-40 text-muted">
-                    <svg class="h-12 w-12 mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                    <svg class="h-12 w-12 mb-3 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                     <p>No items found</p>
                 </div>
             </template>
@@ -63,12 +63,12 @@
                                 <img :src="'{{ asset('storage') }}/' + item.image" class="h-20 w-full object-cover rounded">
                             </template>
                             <template x-if="!item.image">
-                                <svg class="h-10 w-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                                <svg class="h-10 w-10 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                             </template>
                         </div>
                         <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
                         <p class="text-sm font-bold text-accent mt-1" x-text="formatCurrency(item.selling_price)"></p>
-                        <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-red-100 text-red-700'" x-text="'Stock: ' + item.current_stock"></span>
+                        <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
                 </template>
             </div>
@@ -83,7 +83,7 @@
                 <h2 class="text-lg font-bold text-heading">Current Order</h2>
                 <p class="text-xs text-muted" x-text="cartItems.length + ' item(s)'"></p>
             </div>
-            <button @click="clearCart()" class="text-sm text-danger hover:text-red-800 font-medium" x-show="cartItems.length > 0">Clear All</button>
+            <button @click="clearCart()" class="text-sm text-danger hover:text-danger font-medium" x-show="cartItems.length > 0">Clear All</button>
         </div>
 
         {{-- Cart Items --}}
@@ -96,7 +96,7 @@
                 </div>
             </template>
             <template x-for="(item, index) in cartItems" :key="item.id">
-                <div class="flex items-center gap-3 py-3 border-b border-gray-100">
+                <div class="flex items-center gap-3 py-3 border-b border-border">
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-heading truncate" x-text="item.name"></p>
                         <p class="text-xs text-muted" x-text="formatCurrency(item.selling_price) + ' each'"></p>
@@ -118,13 +118,13 @@
         <div class="cart-summary" x-show="cartItems.length > 0">
             {{-- Customer --}}
             <div class="mb-3">
-                <label class="text-xs font-medium text-gray-600 mb-1 block">Customer</label>
+                <label class="text-xs font-medium text-body mb-1 block">Customer</label>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false">
                     <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true" placeholder="Walk-In Customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
                     <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-40 overflow-y-auto">
                         <template x-for="c in customerResults" :key="c.id">
-                            <div class="px-3 py-2 hover:bg-primary-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = ''" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
+                            <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = ''" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
                         </template>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
             {{-- VAT & Sale Type --}}
             <div class="flex gap-3 mb-3">
                 <div class="flex-1">
-                    <label class="text-xs font-medium text-gray-600 mb-1 block">Sale Type</label>
+                    <label class="text-xs font-medium text-body mb-1 block">Sale Type</label>
                     <select x-model="saleType" class="w-full px-3 py-2 border rounded-lg text-sm">
                         <option value="cash">Cash</option>
                         <option value="credit">Credit</option>
@@ -150,15 +150,15 @@
             {{-- Totals --}}
             <div class="space-y-2 mb-3">
                 <div class="flex justify-between text-sm">
-                    <span class="text-gray-600">Subtotal</span>
+                    <span class="text-body">Subtotal</span>
                     <span class="font-medium" x-text="formatCurrency(subtotal)"></span>
                 </div>
                 <div class="flex justify-between text-sm" x-show="!isVatExempt">
-                    <span class="text-gray-600">VAT (18%)</span>
+                    <span class="text-body">VAT (18%)</span>
                     <span class="font-medium" x-text="formatCurrency(vat)"></span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-sm text-gray-600">Discount</span>
+                    <span class="text-sm text-body">Discount</span>
                     <input type="number" x-model.number="discount" min="0" class="w-24 px-2 py-1 border rounded text-sm text-right ml-auto">
                 </div>
                 <div class="flex justify-between text-lg font-bold border-t pt-2">
@@ -169,7 +169,7 @@
 
             {{-- Cash Received (for cash sales) --}}
             <div x-show="saleType === 'cash'" class="mb-3">
-                <label class="text-xs font-medium text-gray-600 mb-1 block">Cash Received</label>
+                <label class="text-xs font-medium text-body mb-1 block">Cash Received</label>
                 <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" placeholder="0">
                 <div class="flex gap-2 mt-2 flex-wrap">
                     <button @click="cashReceived = total" class="quick-cash">Exact</button>
@@ -180,7 +180,7 @@
                     <button @click="cashReceived = 100000" class="quick-cash">100,000</button>
                 </div>
                 <div class="flex justify-between text-sm mt-2" x-show="change > 0">
-                    <span class="text-gray-600">Change</span>
+                    <span class="text-body">Change</span>
                     <span class="font-bold text-success" x-text="formatCurrency(change)"></span>
                 </div>
                 <div class="text-sm mt-1" x-show="cashReceived > 0 && cashReceived < total">
@@ -194,7 +194,7 @@
             </div>
 
             {{-- Process Button --}}
-            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="w-full py-3 bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white font-bold rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
+            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="w-full py-3 bg-primary hover:bg-primary-hover disabled:bg-muted text-white font-bold rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
                 <template x-if="processing">
                     <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </template>
@@ -210,11 +210,11 @@
                 <svg class="h-8 w-8 text-success" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
             <h3 class="text-xl font-bold text-heading mb-2">Sale Completed!</h3>
-            <p class="text-gray-600 mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
-            <p class="text-gray-600 mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
+            <p class="text-body mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
+            <p class="text-body mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
             <div class="flex gap-3">
-                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium text-sm">View Receipt</a>
-                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-gray-200 hover:bg-gray-300 text-heading rounded-lg font-medium text-sm">New Sale</button>
+                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm">View Receipt</a>
+                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-control-bg hover:bg-control-bg text-heading rounded-lg font-medium text-sm">New Sale</button>
             </div>
         </div>
     </div>

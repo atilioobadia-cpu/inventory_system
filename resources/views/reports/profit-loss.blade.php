@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Profit & Loss Report')
 
@@ -10,11 +10,11 @@
             <p class="text-muted mt-1">Revenue, costs and profitability analysis</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('reports.profit-loss') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <a href="{{ route('reports.profit-loss') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                 Export CSV
             </a>
-            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                 Print
             </button>
@@ -32,7 +32,7 @@
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
                 <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
             </div>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Generate Report</button>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Generate Report</button>
         </form>
     </div>
 
@@ -49,11 +49,11 @@
                     <h3 class="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Revenue</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between py-2 text-sm">
-                            <span class="text-gray-600">Total Sales</span>
+                            <span class="text-body">Total Sales</span>
                             <span class="font-medium text-heading">TZS {{ number_format($totalSales ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
-                            <span class="text-gray-600">Less: Returns & Adjustments</span>
+                            <span class="text-body">Less: Returns & Adjustments</span>
                             <span class="font-medium text-danger">-TZS {{ number_format($returns ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-3 border-t border-border text-sm">
@@ -68,15 +68,15 @@
                     <h3 class="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Cost of Goods Sold</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between py-2 text-sm">
-                            <span class="text-gray-600">Opening Stock</span>
+                            <span class="text-body">Opening Stock</span>
                             <span class="font-medium text-heading">TZS {{ number_format($openingStock ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
-                            <span class="text-gray-600">Add: Purchases</span>
+                            <span class="text-body">Add: Purchases</span>
                             <span class="font-medium text-heading">TZS {{ number_format($purchases ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
-                            <span class="text-gray-600">Less: Closing Stock</span>
+                            <span class="text-body">Less: Closing Stock</span>
                             <span class="font-medium text-danger">-TZS {{ number_format($closingStock ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-3 border-t border-border text-sm">
@@ -87,9 +87,9 @@
                 </div>
 
                 <!-- Gross Profit -->
-                <div class="bg-green-50 rounded-lg p-4">
+                <div class="bg-success-light rounded-lg p-4">
                     <div class="flex justify-between">
-                        <span class="font-semibold text-green-800">Gross Profit</span>
+                        <span class="font-semibold text-success">Gross Profit</span>
                         <span class="font-bold text-lg {{ ($grossProfit ?? 0) >= 0 ? 'text-success' : 'text-danger' }}">TZS {{ number_format($grossProfit ?? 0) }}</span>
                     </div>
                     @if(($netRevenue ?? 0) > 0)
@@ -103,7 +103,7 @@
                     <div class="space-y-2">
                         @foreach($expenseBreakdown ?? [] as $expense)
                             <div class="flex justify-between py-2 text-sm">
-                                <span class="text-gray-600">{{ $expense['name'] }}</span>
+                                <span class="text-body">{{ $expense['name'] }}</span>
                                 <span class="font-medium text-heading">TZS {{ number_format($expense['amount']) }}</span>
                             </div>
                         @endforeach
@@ -115,13 +115,13 @@
                 </div>
 
                 <!-- Net Profit -->
-                <div class="bg-gray-800 rounded-lg p-4">
+                <div class="bg-primary rounded-lg p-4">
                     <div class="flex justify-between">
                         <span class="font-semibold text-white">Net Profit</span>
-                        <span class="font-bold text-xl {{ ($netProfit ?? 0) >= 0 ? 'text-green-400' : 'text-red-400' }}">TZS {{ number_format($netProfit ?? 0) }}</span>
+                        <span class="font-bold text-xl {{ ($netProfit ?? 0) >= 0 ? 'text-success' : 'text-danger' }}">TZS {{ number_format($netProfit ?? 0) }}</span>
                     </div>
                     @if(($netRevenue ?? 0) > 0)
-                        <p class="text-sm text-gray-300 mt-1">Net Margin: {{ number_format(($netProfit ?? 0) / ($netRevenue ?? 1) * 100, 1) }}%</p>
+                        <p class="text-sm text-muted mt-1">Net Margin: {{ number_format(($netProfit ?? 0) / ($netRevenue ?? 1) * 100, 1) }}%</p>
                     @endif
                 </div>
             </div>

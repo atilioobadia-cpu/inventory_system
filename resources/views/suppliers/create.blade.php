@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Create Supplier')
 
@@ -14,7 +14,7 @@
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-heading">Create Supplier</h1>
         <div class="flex gap-3">
-            <a href="{{ route('suppliers.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200 transition-colors">Cancel</a>
+            <a href="{{ route('suppliers.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">Cancel</a>
         </div>
     </div>
 
@@ -94,8 +94,8 @@
                         <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', 1) ? 'checked' : '' }}
                                class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
-                        <span class="ml-2 text-sm text-gray-600">Active</span>
+                        <div class="w-11 h-6 bg-control-bg peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+                        <span class="ml-2 text-sm text-body">Active</span>
                     </label>
                 </div>
             </div>
@@ -110,8 +110,8 @@
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
-            <a href="{{ route('suppliers.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200 transition-colors">Cancel</a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors">Save Supplier</button>
+            <a href="{{ route('suppliers.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">Cancel</a>
+            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">Save Supplier</button>
         </div>
     </form>
 </div>

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', $user->name . ' - User')
 
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('users.edit', $user) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">Edit</a>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $user->is_active ? 'bg-success-light text-green-800' : 'bg-red-100 text-red-800' }}">
+            <a href="{{ route('users.edit', $user) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">Edit</a>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $user->is_active ? 'bg-success-light text-success' : 'bg-danger-light text-danger' }}">
                 {{ $user->is_active ? 'Active' : 'Inactive' }}
             </span>
         </div>
@@ -52,7 +52,7 @@
 
     @if(isset($recentActivities) && $recentActivities->count())
     <div class="bg-white rounded-xl border border-border">
-        <div class="p-6 border-b border-gray-100">
+        <div class="p-6 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Recent Activity</h3>
         </div>
         <div class="overflow-x-auto">
@@ -64,7 +64,7 @@
                         <th class="text-left px-6 py-3 font-medium text-muted">Date</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @foreach($recentActivities as $activity)
                     <tr class="hover:bg-card-bg">
                         <td class="px-6 py-3">

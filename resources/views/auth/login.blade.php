@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -50,7 +50,7 @@
             <h2 class="text-lg font-semibold text-heading mb-6">Sign in to your account</h2>
 
             @if($errors->any())
-            <div class="bg-danger-light border border-red-200 rounded-lg px-4 py-3 mb-6">
+            <div class="bg-danger-light border border-danger rounded-lg px-4 py-3 mb-6">
                 <div class="flex items-start gap-2">
                     <svg class="w-5 h-5 text-danger mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/>
@@ -65,7 +65,7 @@
             @endif
 
             @if(session('status'))
-            <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-3 mb-6">
+            <div class="bg-success-light border border-success rounded-lg px-4 py-3 mb-6">
                 <p class="text-sm text-success">{{ session('status') }}</p>
             </div>
             @endif
@@ -105,7 +105,7 @@
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
                                class="w-4 h-4 text-accent border-border rounded focus:ring-accent">
-                        <span class="text-sm text-gray-600">Remember me</span>
+                        <span class="text-sm text-body">Remember me</span>
                     </label>
                     @if(Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="text-sm text-accent hover:underline">
@@ -115,7 +115,7 @@
                 </div>
 
                 <button type="submit"
-                        class="w-full bg-primary text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2">
+                        class="w-full bg-primary text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2">
                     Sign In
                 </button>
             </form>

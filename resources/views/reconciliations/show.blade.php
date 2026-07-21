@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Reconciliation Details - Mtokoma')
 
@@ -20,7 +20,7 @@
 
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
     <div class="flex items-center gap-4">
-        <a href="{{ route('reconciliations.index') }}" class="p-2 rounded-lg text-muted hover:text-gray-600 hover:bg-control-bg transition-colors">
+        <a href="{{ route('reconciliations.index') }}" class="p-2 rounded-lg text-muted hover:text-body hover:bg-control-bg transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
             </svg>
@@ -29,11 +29,11 @@
             <div class="flex items-center gap-3">
                 <h2 class="text-2xl font-bold text-heading">Reconciliation</h2>
                 @if($rec->status === 'completed')
-                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">Completed</span>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Completed</span>
                 @elseif($rec->status === 'discrepancy')
-                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Discrepancy</span>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Discrepancy</span>
                 @else
-                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-gray-600">Pending</span>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Pending</span>
                 @endif
             </div>
             <p class="text-sm text-muted mt-1">{{ ucfirst($rec->type) }} | {{ $rec->reconciliation_date ? $rec->reconciliation_date->format('d M Y') : $rec->created_at->format('d M Y') }}</p>
@@ -61,9 +61,9 @@
         </div>
         <p class="text-2xl font-bold text-heading">TZS {{ number_format($rec->actual_cash ?? 0, 2) }}</p>
     </div>
-    <div class="rounded-xl border p-6 {{ $diff != 0 ? 'bg-danger-light border-red-200' : 'bg-green-50 border-green-200' }}">
+    <div class="rounded-xl border p-6 {{ $diff != 0 ? 'bg-danger-light border-danger' : 'bg-success-light border-success' }}">
         <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-lg {{ $diff != 0 ? 'bg-red-100' : 'bg-success-light' }} flex items-center justify-center">
+            <div class="w-10 h-10 rounded-lg {{ $diff != 0 ? 'bg-danger-light' : 'bg-success-light' }} flex items-center justify-center">
                 @if($diff != 0)
                     <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
                 @else
@@ -77,11 +77,11 @@
 </div>
 
 @if($diff != 0)
-<div class="bg-danger-light border border-red-200 rounded-xl p-4 mb-6 flex items-center gap-3">
+<div class="bg-danger-light border border-danger rounded-xl p-4 mb-6 flex items-center gap-3">
     <svg class="w-5 h-5 text-danger flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
     </svg>
-    <p class="text-sm text-red-800">Discrepancy detected. Actual cash does not match expected amount by TZS {{ number_format(abs($diff), 2) }}.</p>
+    <p class="text-sm text-danger">Discrepancy detected. Actual cash does not match expected amount by TZS {{ number_format(abs($diff), 2) }}.</p>
 </div>
 @endif
 
@@ -104,7 +104,7 @@
 {{-- Detail Transactions --}}
 @if(isset($rec->transactions) && $rec->transactions->count())
 <div class="bg-white rounded-xl border border-border mb-6">
-    <div class="px-6 py-4 border-b border-gray-100">
+    <div class="px-6 py-4 border-b border-border">
         <h3 class="text-lg font-semibold text-heading">Period Transactions</h3>
     </div>
     <div class="overflow-x-auto">
@@ -117,7 +117,7 @@
                     <th class="text-right px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Amount</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
+            <tbody class="divide-y divide-border">
                 @foreach($rec->transactions as $tx)
                 <tr class="hover:bg-card-bg">
                     <td class="px-6 py-3 text-sm text-muted">{{ $tx->created_at->format('d M Y, H:i') }}</td>
@@ -140,7 +140,7 @@
 @if($rec->notes)
 <div class="bg-white rounded-xl border border-border p-6">
     <h3 class="text-lg font-semibold text-heading mb-2">Notes</h3>
-    <p class="text-sm text-gray-600 whitespace-pre-line">{{ $rec->notes }}</p>
+    <p class="text-sm text-body whitespace-pre-line">{{ $rec->notes }}</p>
 </div>
 @endif
 

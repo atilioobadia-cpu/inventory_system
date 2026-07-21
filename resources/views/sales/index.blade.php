@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Sales - Mtokoma')
 
@@ -28,7 +28,7 @@
             <h2 class="text-2xl font-bold text-heading">Sales</h2>
             <p class="text-sm text-muted mt-1">Manage all sales transactions</p>
         </div>
-        <a href="{{ route('pos.index') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
+        <a href="{{ route('pos.index') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -38,7 +38,7 @@
 
     <div class="bg-white rounded-xl border border-border">
         <form method="GET" action="{{ route('sales.index') }}">
-            <div class="p-4 border-b border-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
                     <div class="relative">
                         <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -62,9 +62,9 @@
                     </select>
                 </div>
             </div>
-            <div class="p-4 border-b border-gray-100 flex flex-wrap items-center gap-4">
+            <div class="p-4 border-b border-border flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-600">Payment Status:</label>
+                    <label class="text-sm font-medium text-body">Payment Status:</label>
                     <select name="status" x-model="status" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
@@ -73,7 +73,7 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2 ml-auto">
-                    <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
+                    <button type="submit" class="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
                         Filter
                     </button>
                     <a href="{{ route('sales.index') }}" class="text-muted hover:text-body px-3 py-1.5 text-sm">Reset</a>
@@ -97,7 +97,7 @@
                         <th class="text-center px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @forelse($sales ?? [] as $sale)
                         <tr class="{{ $sale->is_voided ? 'bg-card-bg opacity-60' : 'hover:bg-card-bg' }} transition-colors">
                             <td class="px-4 py-3">
@@ -111,7 +111,7 @@
                             <td class="px-4 py-3 text-sm font-semibold text-heading text-right">TZS {{ number_format($sale->total_amount, 2) }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if($sale->payment_status === 'paid')
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">
                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                                         Paid
                                     </span>
@@ -121,7 +121,7 @@
                                         Partial
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">
                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
                                         Unpaid
                                     </span>
@@ -129,18 +129,18 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if($sale->is_voided)
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-gray-600">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">
                                         Voided
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">
                                         Active
                                     </span>
                                 @endif
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-1" x-data="{ open: false }">
-                                    <button @click="open = !open" class="p-1.5 rounded-lg text-muted hover:text-gray-600 hover:bg-control-bg transition-colors">
+                                    <button @click="open = !open" class="p-1.5 rounded-lg text-muted hover:text-body hover:bg-control-bg transition-colors">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
                                         </svg>
@@ -160,7 +160,7 @@
                                             View Receipt
                                         </button>
                                         @if(!$sale->is_voided)
-                                        <hr class="my-1 border-gray-100">
+                                        <hr class="my-1 border-border">
                                         <button @click="voidSaleId = {{ $sale->id }}; voidReason = ''; showVoidModal = true; open = false"
                                                 class="flex items-center gap-2 w-full px-4 py-2 text-sm text-danger hover:bg-danger-light text-left">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>
@@ -174,7 +174,7 @@
                     @empty
                         <tr>
                             <td colspan="10" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12h4.5m-4.5 0a2 2 0 0 1-1.732-1M12 18h4.5m-4.5 0a2 2 0 0 0 1.732-1M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
                                 <p class="text-muted font-medium">No sales found</p>
@@ -187,7 +187,7 @@
         </div>
 
         @if(isset($sales) && $sales->hasPages())
-        <div class="px-4 py-3 border-t border-gray-100">
+        <div class="px-4 py-3 border-t border-border">
             {{ $sales->links() }}
         </div>
         @endif
@@ -209,7 +209,7 @@
              class="bg-white rounded-xl w-full max-w-md">
             <div class="p-6">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
                         <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                         </svg>
@@ -224,7 +224,7 @@
                     <div class="mb-4">
                         <label for="void_reason" class="block text-sm font-medium text-body mb-1">Reason for voiding <span class="text-danger">*</span></label>
                         <textarea name="void_reason" x-model="voidReason" rows="3" required placeholder="Enter the reason for voiding this sale..."
-                                  class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500"></textarea>
+                                  class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-danger/50 focus:border-danger"></textarea>
                     </div>
                 </form>
             </div>
@@ -232,7 +232,7 @@
                 <button @click="showVoidModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
                     Cancel
                 </button>
-                <button @click="$refs.voidForm.submit()" :disabled="!voidReason.trim()" x-bind:class="voidReason.trim() ? 'bg-danger hover:bg-danger text-white' : 'bg-gray-300 text-muted cursor-not-allowed'"
+                <button @click="$refs.voidForm.submit()" :disabled="!voidReason.trim()" x-bind:class="voidReason.trim() ? 'bg-danger hover:bg-danger text-white' : 'bg-control-bg text-muted cursor-not-allowed'"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors">
                     Void Sale
                 </button>

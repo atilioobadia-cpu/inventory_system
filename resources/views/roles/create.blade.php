@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Create Role')
 
@@ -9,7 +9,7 @@
             <h1 class="text-2xl font-bold text-heading">Create Role</h1>
             <p class="text-muted mt-1">Define a new role with specific permissions</p>
         </div>
-        <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+        <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Back
         </a>
@@ -80,7 +80,7 @@
                             @foreach($actions as $action)
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-border text-accent focus:ring-accent/20">
-                                    <span class="text-sm text-gray-600 capitalize">{{ $action }}</span>
+                                    <span class="text-sm text-body capitalize">{{ $action }}</span>
                                 </label>
                             @endforeach
                         </div>
@@ -90,8 +90,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-3">
-            <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
+            <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Cancel</a>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
                 Save Role
             </button>
         </div>

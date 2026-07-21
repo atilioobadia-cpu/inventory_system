@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Import & Export')
 
@@ -19,7 +19,7 @@
             <!-- Items -->
             <div class="bg-white rounded-xl border border-border p-5 hover:transition-shadow">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="p-2 bg-primary-light rounded-lg">
+                    <div class="p-2 bg-accent-light rounded-lg">
                         <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
                     </div>
                     <div>
@@ -27,13 +27,13 @@
                         <p class="text-xs text-muted">Products and parts</p>
                     </div>
                 </div>
-                <button @click="importType = 'items'; importModal = true; importResult = null" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Import</button>
+                <button @click="importType = 'items'; importModal = true; importResult = null" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Import</button>
             </div>
 
             <!-- Categories -->
             <div class="bg-white rounded-xl border border-border p-5 hover:transition-shadow">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="p-2 bg-primary-light rounded-lg">
+                    <div class="p-2 bg-accent-light rounded-lg">
                         <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>
                     </div>
                     <div>
@@ -41,7 +41,7 @@
                         <p class="text-xs text-muted">Product categories</p>
                     </div>
                 </div>
-                <button @click="importType = 'categories'; importModal = true; importResult = null" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Import</button>
+                <button @click="importType = 'categories'; importModal = true; importResult = null" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Import</button>
             </div>
 
             <!-- Customers -->
@@ -117,7 +117,7 @@
                         </div>
                         <h3 class="font-semibold text-heading">{{ $export['name'] }}</h3>
                     </div>
-                    <a href="{{ route($export['route'], ['type' => $export['type']]) }}" class="block w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium text-center">
+                    <a href="{{ route($export['route'], ['type' => $export['type']]) }}" class="block w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium text-center">
                         <span class="flex items-center justify-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                             Export CSV
@@ -135,31 +135,31 @@
             <div class="relative bg-white rounded-xl max-w-lg w-full p-6" @click.stop>
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-semibold text-heading capitalize">Import <span x-text="importType"></span></h3>
-                    <button @click="importModal = false" class="p-1 text-muted hover:text-gray-600 rounded-lg">
+                    <button @click="importModal = false" class="p-1 text-muted hover:text-body rounded-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
 
                 <!-- Success Results -->
-                <div x-show="importResult && importResult.success" class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div x-show="importResult && importResult.success" class="mb-4 p-4 bg-success-light border border-success rounded-lg">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span class="text-sm font-medium text-green-800" x-text="importResult.message"></span>
+                        <span class="text-sm font-medium text-success" x-text="importResult.message"></span>
                     </div>
                 </div>
 
                 <!-- Error Results -->
-                <div x-show="importResult && !importResult.success" class="mb-4 p-4 bg-danger-light border border-red-200 rounded-lg">
+                <div x-show="importResult && !importResult.success" class="mb-4 p-4 bg-danger-light border border-danger rounded-lg">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span class="text-sm font-medium text-red-800" x-text="importResult.message"></span>
+                        <span class="text-sm font-medium text-danger" x-text="importResult.message"></span>
                     </div>
                 </div>
 
                 <div class="space-y-4">
                     <!-- Download Template -->
                     <div class="p-4 bg-card-bg rounded-lg">
-                        <p class="text-sm text-gray-600 mb-2">1. Download the template CSV file:</p>
+                        <p class="text-sm text-body mb-2">1. Download the template CSV file:</p>
                         <span class="inline-flex items-center gap-2 text-sm text-muted font-medium">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                             Prepare a CSV with the required columns
@@ -170,9 +170,9 @@
                     <form :action="'{{ url('/import-export/import') }}/' + importType" method="POST" enctype="multipart/form-data" @submit.prevent="submitImport($el)">
                         @csrf
                         <input type="hidden" name="type" :value="importType">
-                        <p class="text-sm text-gray-600 mb-2">2. Select your completed CSV or Excel file:</p>
-                        <input type="file" name="file" accept=".csv,.txt" required class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-accent hover:file:bg-primary-light mb-4">
-                        <button type="submit" :disabled="importing" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-50">
+                        <p class="text-sm text-body mb-2">2. Select your completed CSV or Excel file:</p>
+                        <input type="file" name="file" accept=".csv,.txt" required class="w-full text-sm text-body file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-accent-light file:text-accent hover:file:bg-accent-light mb-4">
+                        <button type="submit" :disabled="importing" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-50">
                             <svg x-show="importing" class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
                             <span x-text="importing ? 'Importing...' : 'Import'"></span>
                         </button>

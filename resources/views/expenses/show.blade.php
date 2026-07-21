@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Expense Details - Mtokoma')
 
@@ -20,9 +20,9 @@
         </div>
         <div class="flex items-center gap-3">
             @if($expense->status !== 'approved')
-            <a href="{{ route('expenses.edit', $expense) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">Edit</a>
+            <a href="{{ route('expenses.edit', $expense) }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">Edit</a>
             @endif
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $expense->status === 'approved' ? 'bg-success-light text-green-800' : ($expense->status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800') }}">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $expense->status === 'approved' ? 'bg-success-light text-success' : ($expense->status === 'rejected' ? 'bg-danger-light text-danger' : 'bg-warning-light text-warning') }}">
                 {{ ucfirst($expense->status) }}
             </span>
         </div>

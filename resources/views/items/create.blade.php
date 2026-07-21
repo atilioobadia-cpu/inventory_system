@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Create Item')
 
@@ -17,10 +17,10 @@
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-heading">Create New Item</h1>
             <div class="flex gap-3">
-                <a href="{{ route('items.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200 transition-colors">
+                <a href="{{ route('items.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                     Cancel
                 </a>
-                <button type="submit" class="px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors">
+                <button type="submit" class="px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
                     Save Item
                 </button>
             </div>
@@ -156,9 +156,9 @@
                 {{-- Image Upload --}}
                 <div class="bg-white rounded-xl border border-border p-6">
                     <h2 class="text-lg font-semibold text-heading mb-4">Item Image</h2>
-                    <div class="border-2 border-dashed border-border rounded-xl p-6 text-center hover:border-electric/50 transition-colors">
+                    <div class="border-2 border-dashed border-border rounded-xl p-6 text-center hover:border-accent/50 transition-colors">
                         <div x-show="!imagePreview">
-                            <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                            <svg class="w-12 h-12 text-muted mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"/>
                             </svg>
                             <p class="text-sm text-muted mb-2">Click to upload or drag and drop</p>
@@ -201,8 +201,8 @@
                                 <input type="hidden" name="is_active" value="0">
                                 <input type="checkbox" name="is_active" value="1" {{ old('is_active', 1) ? 'checked' : '' }}
                                        class="sr-only peer" checked>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
-                                <span class="ml-2 text-sm text-gray-600">Active</span>
+                                <div class="w-11 h-6 bg-control-bg peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+                                <span class="ml-2 text-sm text-body">Active</span>
                             </label>
                         </div>
                     </div>
@@ -212,10 +212,10 @@
 
         {{-- Bottom Actions --}}
         <div class="flex justify-end gap-3 mt-6 pt-6 border-t border-border">
-            <a href="{{ route('items.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-gray-200 transition-colors">
+            <a href="{{ route('items.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                 Cancel
             </a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors">
+            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
                 Save Item
             </button>
         </div>

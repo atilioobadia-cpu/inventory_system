@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Purchase Details - ' . $purchase->invoice_number)
 
@@ -17,9 +17,9 @@
             <div class="flex items-center gap-3">
                 <h1 class="text-2xl font-bold text-heading">{{ $purchase->invoice_number }}</h1>
                 @if($purchase->status === 'received')
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">Received</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Received</span>
                 @elseif($purchase->status === 'cancelled')
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Cancelled</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Cancelled</span>
                 @else
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-heading">Draft</span>
                 @endif
@@ -30,7 +30,7 @@
             @if($purchase->status === 'draft')
             <form method="POST" action="{{ route('purchases.receive', $purchase) }}" x-data onsubmit="return confirm('Are you sure you want to mark this purchase as received?')">
                 @csrf
-                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm font-medium transition-colors">
+                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-medium transition-colors">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Receive
                 </button>
@@ -57,7 +57,7 @@
             </form>
             @endif
 
-            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg hover:bg-gray-200 text-body rounded-lg text-sm font-medium transition-colors">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium transition-colors">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                 Print
             </button>
@@ -81,7 +81,7 @@
                     <p class="text-xs text-muted uppercase tracking-wider">Supplier</p>
                     <p class="text-sm font-medium text-heading mt-1">
                         @if($purchase->supplier)
-                        <a href="{{ route('suppliers.show', $purchase->supplier) }}" class="text-accent hover:text-blue-800">{{ $purchase->supplier->name }}</a>
+                        <a href="{{ route('suppliers.show', $purchase->supplier) }}" class="text-accent hover:text-accent">{{ $purchase->supplier->name }}</a>
                         @else
                         -
                         @endif
@@ -105,9 +105,9 @@
                     <p class="text-xs text-muted uppercase tracking-wider">Status</p>
                     <div class="mt-1">
                         @if($purchase->status === 'received')
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-green-800">Received</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Received</span>
                         @elseif($purchase->status === 'cancelled')
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Cancelled</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Cancelled</span>
                         @else
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-heading">Draft</span>
                         @endif
@@ -135,40 +135,40 @@
 
     {{-- Items Table --}}
     <div class="bg-white rounded-xl border overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100">
+        <div class="px-6 py-4 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Purchase Items</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-card-bg border-b">
                     <tr>
-                        <th class="px-4 py-3 text-left font-semibold text-gray-600">Item Name</th>
-                        <th class="px-4 py-3 text-left font-semibold text-gray-600">SKU</th>
-                        <th class="px-4 py-3 text-center font-semibold text-gray-600">Qty</th>
-                        <th class="px-4 py-3 text-center font-semibold text-gray-600">Received Qty</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Unit Cost</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Discount</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Tax</th>
-                        <th class="px-4 py-3 text-right font-semibold text-gray-600">Total</th>
+                        <th class="px-4 py-3 text-left font-semibold text-body">Item Name</th>
+                        <th class="px-4 py-3 text-left font-semibold text-body">SKU</th>
+                        <th class="px-4 py-3 text-center font-semibold text-body">Qty</th>
+                        <th class="px-4 py-3 text-center font-semibold text-body">Received Qty</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Unit Cost</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Discount</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Tax</th>
+                        <th class="px-4 py-3 text-right font-semibold text-body">Total</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-border">
                     @foreach($purchase->items as $item)
                     @php
                         $lineTax = ($item->quantity * $item->unit_cost - ($item->discount ?? 0)) * 0.18;
                         $lineTotal = ($item->quantity * $item->unit_cost) - ($item->discount ?? 0) + $lineTax;
                     @endphp
-                    <tr class="hover:bg-card-bg {{ ($item->received_quantity ?? 0) > 0 && ($item->received_quantity ?? 0) < $item->quantity ? 'bg-yellow-50' : '' }}">
+                    <tr class="hover:bg-card-bg {{ ($item->received_quantity ?? 0) > 0 && ($item->received_quantity ?? 0) < $item->quantity ? 'bg-warning-light' : '' }}">
                         <td class="px-4 py-3 font-medium text-heading">{{ $item->item->name ?? '-' }}</td>
                         <td class="px-4 py-3 text-muted font-mono">{{ $item->item->sku ?? '-' }}</td>
                         <td class="px-4 py-3 text-center text-body">{{ $item->quantity }}</td>
                         <td class="px-4 py-3 text-center">
                             @php $recv = $item->received_quantity ?? 0; @endphp
-                            <span class="{{ $recv < $item->quantity ? 'text-yellow-600 font-medium' : 'text-success' }}">
+                            <span class="{{ $recv < $item->quantity ? 'text-warning font-medium' : 'text-success' }}">
                                 {{ $recv }}
                             </span>
                             @if($recv < $item->quantity && $purchase->status === 'received')
-                            <span class="text-xs text-yellow-600 ml-1">(partial)</span>
+                            <span class="text-xs text-warning ml-1">(partial)</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-right text-body">TZS {{ number_format($item->unit_cost) }}</td>
@@ -181,17 +181,17 @@
                 <tfoot class="bg-card-bg border-t">
                     <tr>
                         <td colspan="6"></td>
-                        <td class="px-4 py-2 text-right text-sm font-medium text-gray-600">Subtotal</td>
+                        <td class="px-4 py-2 text-right text-sm font-medium text-body">Subtotal</td>
                         <td class="px-4 py-2 text-right text-sm font-medium text-heading">TZS {{ number_format($purchase->subtotal ?? 0) }}</td>
                     </tr>
                     <tr>
                         <td colspan="6"></td>
-                        <td class="px-4 py-2 text-right text-sm text-gray-600">Tax (18%)</td>
+                        <td class="px-4 py-2 text-right text-sm text-body">Tax (18%)</td>
                         <td class="px-4 py-2 text-right text-sm text-heading">TZS {{ number_format($purchase->tax_amount ?? 0) }}</td>
                     </tr>
                     <tr>
                         <td colspan="6"></td>
-                        <td class="px-4 py-2 text-right text-sm text-gray-600">Discount</td>
+                        <td class="px-4 py-2 text-right text-sm text-body">Discount</td>
                         <td class="px-4 py-2 text-right text-sm text-danger">-TZS {{ number_format($purchase->discount_amount ?? 0) }}</td>
                     </tr>
                     <tr class="border-t-2 border-border">
@@ -209,16 +209,16 @@
         <h2 class="text-lg font-semibold text-heading mb-4">Financial Summary</h2>
         <div class="space-y-3">
             <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Subtotal</span>
+                <span class="text-body">Subtotal</span>
                 <span class="font-medium text-heading">TZS {{ number_format($purchase->subtotal ?? 0) }}</span>
             </div>
             <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Tax (18%)</span>
+                <span class="text-body">Tax (18%)</span>
                 <span class="font-medium text-heading">TZS {{ number_format($purchase->tax_amount ?? 0) }}</span>
             </div>
             @if(($purchase->discount_amount ?? 0) > 0)
             <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Discount</span>
+                <span class="text-body">Discount</span>
                 <span class="font-medium text-danger">-TZS {{ number_format($purchase->discount_amount) }}</span>
             </div>
             @endif
@@ -227,11 +227,11 @@
                 <span class="text-heading">TZS {{ number_format($purchase->total_amount ?? 0) }}</span>
             </div>
             <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Paid</span>
+                <span class="text-body">Paid</span>
                 <span class="font-medium text-success">TZS {{ number_format($purchase->paid_amount ?? 0) }}</span>
             </div>
             <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Due</span>
+                <span class="text-body">Due</span>
                 <span class="font-bold {{ ($purchase->due_amount ?? 0) > 0 ? 'text-danger' : 'text-success' }}">TZS {{ number_format($purchase->due_amount ?? 0) }}</span>
             </div>
         </div>

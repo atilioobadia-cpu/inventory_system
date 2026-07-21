@@ -1,4 +1,4 @@
-﻿@extends('layouts.print')
+@extends('layouts.print')
 
 @section('title', 'EFD Receipt - ' . $sale->invoice_number)
 
@@ -221,7 +221,7 @@
 
 {{-- Print Button (below receipt) --}}
 <div class="text-center mt-6 no-print">
-    <button onclick="window.print()" class="px-6 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium">Print Receipt</button>
-    <a href="{{ route('sales.show', $sale) }}" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-body rounded-lg font-medium ml-2">Back to Sale</a>
+    <button onclick="window.print()" class="px-6 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium">Print Receipt</button>
+    <a href="{{ route('sales.show', $sale) }}" class="px-6 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg font-medium ml-2">Back to Sale</a>
 </div>
 @endsection

@@ -13,7 +13,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- Total Items --}}
         <div class="bg-white rounded-xl border border-border p-5 flex items-center gap-4 card-hover">
-            <div class="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0">
+            <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
                     <path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                 </svg>
@@ -27,7 +27,7 @@
         {{-- Stock Value --}}
         <div class="bg-white rounded-xl border border-border p-5 flex items-center gap-4 card-hover">
             <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-accent-dark" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
                 </svg>
             </div>
@@ -39,8 +39,8 @@
 
         {{-- Today's Sales --}}
         <div class="bg-white rounded-xl border border-border p-5 flex items-center gap-4 card-hover">
-            <div class="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-success-light rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-success" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
                 </svg>
             </div>
@@ -119,13 +119,13 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="text-left text-muted border-b border-gray-100">
+                        <tr class="text-left text-muted border-b border-border">
                             <th class="pb-3 font-medium">Item</th>
                             <th class="pb-3 font-medium text-right">Qty Sold</th>
                             <th class="pb-3 font-medium text-right">Revenue</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-50">
+                    <tbody class="divide-y divide-border">
                         @forelse($topSellingItems ?? [] as $item)
                         <tr>
                             <td class="py-3">
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-3 text-right text-gray-600">{{ $item->total_sold }}</td>
+                            <td class="py-3 text-right text-body">{{ $item->total_sold }}</td>
                             <td class="py-3 text-right font-medium text-heading">TZS {{ number_format($item->total_revenue) }}</td>
                         </tr>
                         @empty
@@ -167,24 +167,24 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="text-left text-muted border-b border-gray-100">
+                        <tr class="text-left text-muted border-b border-border">
                             <th class="pb-3 font-medium">Item</th>
                             <th class="pb-3 font-medium text-right">Current Stock</th>
                             <th class="pb-3 font-medium text-right">Reorder Point</th>
                             <th class="pb-3 font-medium">Status</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-50">
+                    <tbody class="divide-y divide-border">
                         @forelse($lowStockItems ?? [] as $item)
                         <tr>
                             <td class="py-3">
                                 <a href="{{ route('items.show', $item) }}" class="font-medium text-heading hover:text-accent">{{ $item->name }}</a>
                             </td>
-                            <td class="py-3 text-right text-gray-600">{{ $item->current_stock }}</td>
-                            <td class="py-3 text-right text-gray-600">{{ $item->reorder_point }}</td>
+                            <td class="py-3 text-right text-body">{{ $item->current_stock }}</td>
+                            <td class="py-3 text-right text-body">{{ $item->reorder_point }}</td>
                             <td class="py-3">
                                 @if($item->current_stock == 0)
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-danger-light text-red-700">Out of Stock</span>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Out of Stock</span>
                                 @else
                                 <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-warning-light text-warning">Low Stock</span>
                                 @endif
