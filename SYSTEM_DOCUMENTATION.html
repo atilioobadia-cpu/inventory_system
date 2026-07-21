@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtokoma Motorcycle Parts - System Structure Documentation</title>
+    <style>
+        :root{--navy:#1E293B;--slate:#0F172A;--blue:#3B82F6;--blue-hover:#2563EB;--blue-light:#E0F2FE;--green:#10B981;--green-light:#D1FAE5;--amber:#F59E0B;--amber-light:#FEF3C7;--red:#EF4444;--red-light:#FEE2E2;--indigo:#6366F1;--off-white:#F8FAFC;--body-text:#334155;--muted:#94A3B8;--border:#CBD5E1}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--body-text);line-height:1.6}
+        .sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--navy);overflow-y:auto;z-index:100;padding-bottom:40px}
+        .sidebar-header{padding:24px 20px;border-bottom:1px solid #334155}
+        .sidebar-header h2{color:#fff;font-size:16px;font-weight:700;letter-spacing:.5px}
+        .sidebar-header p{color:var(--muted);font-size:11px;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+        .sidebar nav{padding:12px 0}
+        .nav-section{padding:8px 20px 4px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+        .sidebar nav a{display:block;padding:9px 20px 9px 24px;color:#CBD5E1;text-decoration:none;font-size:13px;transition:all .15s;border-left:3px solid transparent}
+        .sidebar nav a:hover{background:#334155;color:#fff}
+        .sidebar nav a.active{background:rgba(59,130,246,.1);color:var(--blue);border-left-color:var(--blue);font-weight:600}
+        .main{margin-left:280px;padding:40px 48px;max-width:1100px}
+        .main h1{font-size:28px;color:var(--slate);margin-bottom:8px}
+        .main .subtitle{color:var(--muted);font-size:14px;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+        .main h2{font-size:20px;color:var(--navy);margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--blue);display:inline-block}
+        .main h3{font-size:16px;color:var(--navy);margin:24px 0 12px}
+        .main h4{font-size:14px;color:var(--body-text);margin:16px 0 8px;font-weight:600}
+        p{margin-bottom:12px;font-size:14px}
+        .table-wrapper{overflow-x:auto;margin:16px 0 24px;border-radius:8px;border:1px solid var(--border)}
+        table{width:100%;border-collapse:collapse;font-size:13px}
+        thead{background:var(--navy);color:#fff}
+        th{padding:12px 16px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+        td{padding:10px 16px;border-bottom:1px solid #E2E8F0}
+        tbody tr:hover{background:var(--blue-light)}
+        tbody tr:last-child td{border-bottom:none}
+        pre{background:var(--slate);color:#E2E8F0;padding:16px 20px;border-radius:8px;overflow-x:auto;margin:12px 0 20px;font-size:13px;line-height:1.7;font-family:'Cascadia Code','Fira Code',monospace}
+        code{background:#E2E8F0;padding:2px 6px;border-radius:4px;font-size:12px;font-family:'Cascadia Code','Fira Code',monospace;color:var(--slate)}
+        pre code{background:none;padding:0;color:inherit}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+        .badge-blue{background:var(--blue-light);color:var(--blue)}
+        .badge-green{background:var(--green-light);color:var(--green)}
+        .badge-amber{background:var(--amber-light);color:var(--amber)}
+        .badge-red{background:var(--red-light);color:var(--red)}
+        .badge-indigo{background:#E0E7FF;color:var(--indigo)}
+        .info-box{padding:16px 20px;border-radius:8px;margin:16px 0;font-size:13px}
+        .info-box.blue{background:var(--blue-light);border-left:4px solid var(--blue)}
+        .info-box.green{background:var(--green-light);border-left:4px solid var(--green)}
+        .info-box.amber{background:var(--amber-light);border-left:4px solid var(--amber)}
+        .info-box.red{background:var(--red-light);border-left:4px solid var(--red)}
+        ul,ol{margin:8px 0 16px 20px;font-size:14px}
+        li{margin-bottom:4px}
+        .receipt-preview{width:300px;background:#fff;border:1px solid #ccc;padding:16px;font-family:'Courier New',monospace;font-size:12px;margin:16px auto;line-height:1.8;white-space:pre}
+        .receipt-preview .center{text-align:center}.receipt-preview .bold{font-weight:bold}.receipt-preview .line{border-top:1px dashed #000;margin:6px 0}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0}
+        .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0}
+        .card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px}
+        .card h4{margin-top:0;color:var(--navy)}
+        .card .value{font-size:24px;font-weight:700;color:var(--blue)}
+        section[id]{scroll-margin-top:20px}
+        @media print{.sidebar{display:none}.main{margin-left:0;padding:20px}}
+        @media(max-width:768px){.sidebar{width:0;display:none}.main{margin-left:0;padding:20px}.grid-2,.grid-3{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<aside class="sidebar">
+    <div class="sidebar-header"><h2>MTOKOMA</h2><p>System Documentation</p></div>
+    <nav>
+        <div class="nav-section">Overview</div>
+        <a href="#overview">System Overview</a>
+        <a href="#tech-stack">Tech Stack</a>
+        <a href="#color-scheme">Color Scheme</a>
+        <div class="nav-section">Database</div>
+        <a href="#db-schema">Database Schema</a>
+        <a href="#db-users">Users and Auth</a>
+        <a href="#db-items">Items and Categories</a>
+        <a href="#db-suppliers">Suppliers</a>
+        <a href="#db-customers">Customers</a>
+        <a href="#db-purchases">Purchases</a>
+        <a href="#db-sales">Sales</a>
+        <a href="#db-stock">Stock Movements</a>
+        <a href="#db-expenses">Expenses</a>
+        <a href="#db-reconciliation">Reconciliation</a>
+        <a href="#db-payments">Payments</a>
+        <a href="#db-settings">Settings</a>
+        <div class="nav-section">Modules</div>
+        <a href="#mod-dashboard">Dashboard</a>
+        <a href="#mod-items">Items Management</a>
+        <a href="#mod-purchases">Purchases</a>
+        <a href="#mod-sales">Sales / POS</a>
+        <a href="#mod-receipts">Receipt Generation</a>
+        <a href="#mod-stock">Stock Management</a>
+        <a href="#mod-reconciliation">Reconciliation</a>
+        <a href="#mod-expenses">Expenses</a>
+        <a href="#mod-payments">Payments</a>
+        <a href="#mod-import-export">Import / Export</a>
+        <a href="#mod-reports">Reports</a>
+        <a href="#mod-roles">Roles and Permissions</a>
+        <a href="#mod-users">User Management</a>
+        <a href="#mod-settings">Settings</a>
+        <a href="#mod-activity">Activity Log</a>
+        <div class="nav-section">Automation</div>
+        <a href="#auto-autofills">Autofills</a>
+        <a href="#auto-stock">Stock Auto-Update</a>
+        <a href="#auto-cron">Cron Jobs</a>
+        <div class="nav-section">Communication</div>
+        <a href="#email-system">Email System</a>
+        <a href="#email-templates">Email Templates</a>
+        <div class="nav-section">Structure</div>
+        <a href="#routes">Route Structure</a>
+        <a href="#folders">File / Folder Structure</a>
+        <a href="#permissions-matrix">Permissions Matrix</a>
+        <a href="#deployment">Deployment Guide</a>
+        <a href="#phases">Development Phases</a>
+    </nav>
+</aside>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="main">
+
+<!-- ============ OVERVIEW ============ -->
+<section id="overview">
+    <h1>Mtokoma Motorcycle Parts - System Documentation</h1>
+    <p class="subtitle">Comprehensive inventory management system for motorcycle parts. Version 1.0 - July 2026</p>
+    <div class="grid-3">
+        <div class="card"><h4>Currency</h4><div class="value">TZS</div><p style="margin:0;color:var(--muted);font-size:12px">Tanzanian Shillings</p></div>
+        <div class="card"><h4>VAT Rate</h4><div class="value">18%</div><p style="margin:0;color:var(--muted);font-size:12px">User toggle per transaction</p></div>
+        <div class="card"><h4>Hosting</h4><div class="value" style="font-size:18px">cPanel</div><p style="margin:0;color:var(--muted);font-size:12px">Namecheap shared hosting</p></div>
+    </div>
+    <h3>System Purpose</h3>
+    <p>Mtokoma Motorcycle Parts is a full-featured inventory management system designed for motorcycle parts dealers. It handles the complete lifecycle from purchasing stock, managing inventory, processing sales, tracking expenses, and generating comprehensive financial reports.</p>
+    <h3>Core Capabilities</h3>
+    <ul>
+        <li>Purchase management with automatic stock intake</li>
+        <li>Point-of-sale with EFD-format thermal receipt printing</li>
+        <li>Real-time stock tracking with movement audit trail</li>
+        <li>Stock reconciliation (system vs physical count)</li>
+        <li>Expense tracking with receipt attachment</li>
+        <li>Role-based permissions with dynamic UI hiding</li>
+        <li>CSV/Excel import and export across all modules</li>
+        <li>Email notifications on every transaction</li>
+        <li>Comprehensive reporting with PDF/CSV export</li>
+        <li>Autofills and automations to minimize clicks</li>
+    </ul>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section id="tech-stack">
+    <h2>Tech Stack</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Layer</th><th>Technology</th><th>Details</th></tr></thead>
+            <tbody>
+                <tr><td>Language</td><td>PHP 8.2+</td><td>Latest stable PHP version</td></tr>
+                <tr><td>Framework</td><td>Laravel 11</td><td>MVC, Eloquent ORM, Blade templating</td></tr>
+                <tr><td>Database</td><td>MySQL 8</td><td>Created via cPanel phpMyAdmin</td></tr>
+                <tr><td>CSS</td><td>Tailwind CSS 3</td><td>Utility-first styling</td></tr>
+                <tr><td>JavaScript</td><td>Alpine.js 3</td><td>Lightweight interactivity</td></tr>
+                <tr><td>Charts</td><td>Chart.js</td><td>Dashboard and report charts</td></tr>
+                <tr><td>PDF Generation</td><td>DomPDF</td><td>Receipts and report PDFs</td></tr>
+                <tr><td>Excel/CSV</td><td>Laravel Excel (Maatwebsite)</td><td>Import/Export functionality</td></tr>
+                <tr><td>Auth</td><td>Laravel Breeze</td><td>Custom role-based extension</td></tr>
+                <tr><td>Icons</td><td>Heroicons</td><td>SVG icons throughout UI</td></tr>
+                <tr><td>Hosting</td><td>Namecheap cPanel</td><td>Pre-built upload, no SSH needed</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ============ COLOR SCHEME ============ -->
+<section id="color-scheme">
+    <h2>Color Scheme</h2>
+    <h3>Primary Colors</h3>
+    <div class="grid-3">
+        <div class="card" style="border-top:4px solid var(--navy)"><h4>Navy Blue</h4><code>#1E293B</code><p style="font-size:12px;margin-top:4px">Sidebar, headers, primary dark elements</p></div>
+        <div class="card" style="border-top:4px solid var(--blue)"><h4>Electric Blue</h4><code>#3B82F6</code><p style="font-size:12px;margin-top:4px">Buttons, links, interactive elements</p></div>
+        <div class="card" style="border-top:4px solid var(--off-white)"><h4>Off-White</h4><code>#F8FAFC</code><p style="font-size:12px;margin-top:4px">Page background</p></div>
+    </div>
+    <h3>Status Colors</h3>
+    <div class="grid-2">
+        <div class="card" style="border-top:4px solid var(--green)"><h4>Success Green</h4><code>#10B981</code><p style="font-size:12px">Completed sales, in-stock items, positive actions</p></div>
+        <div class="card" style="border-top:4px solid var(--amber)"><h4>Warning Amber</h4><code>#F59E0B</code><p style="font-size:12px">Low stock, pending status, caution alerts</p></div>
+        <div class="card" style="border-top:4px solid var(--red)"><h4>Danger Red</h4><code>#EF4444</code><p style="font-size:12px">Delete actions, out-of-stock, voids</p></div>
+        <div class="card" style="border-top:4px solid var(--indigo)"><h4>Info Indigo</h4><code>#6366F1</code><p style="font-size:12px">Information messages, neutral highlights</p></div>
+    </div>
+    <h3>Element Assignment</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Element</th><th>Color</th><th>Hex</th></tr></thead>
+            <tbody>
+                <tr><td>Sidebar background</td><td>Navy Blue</td><td><code>#1E293B</code></td></tr>
+                <tr><td>Sidebar active link</td><td>Electric Blue</td><td><code>#3B82F6</code></td></tr>
+                <tr><td>Sidebar hover</td><td>Slate</td><td><code>#334155</code></td></tr>
+                <tr><td>Top header bar</td><td>White</td><td><code>#FFFFFF</code></td></tr>
+                <tr><td>Page background</td><td>Off-White</td><td><code>#F8FAFC</code></td></tr>
+                <tr><td>Primary buttons</td><td>Electric Blue</td><td><code>#3B82F6</code></td></tr>
+                <tr><td>Button hover</td><td>Blue Hover</td><td><code>#2563EB</code></td></tr>
+                <tr><td>Success buttons</td><td>Green</td><td><code>#10B981</code></td></tr>
+                <tr><td>Danger buttons</td><td>Red</td><td><code>#EF4444</code></td></tr>
+                <tr><td>Warning badges</td><td>Amber</td><td><code>#F59E0B</code></td></tr>
+                <tr><td>Cards / panels</td><td>White</td><td><code>#FFFFFF</code></td></tr>
+                <tr><td>Table headers</td><td>Navy</td><td><code>#1E293B</code></td></tr>
+                <tr><td>Table row hover</td><td>Sky Blue</td><td><code>#E0F2FE</code></td></tr>
+                <tr><td>Input borders</td><td>Light Gray</td><td><code>#CBD5E1</code></td></tr>
+                <tr><td>Input focus ring</td><td>Electric Blue</td><td><code>#3B82F6</code></td></tr>
+                <tr><td>Heading text</td><td>Navy</td><td><code>#1E293B</code></td></tr>
+                <tr><td>Body text</td><td>Dark Gray</td><td><code>#334155</code></td></tr>
+                <tr><td>Muted text</td><td>Light Gray</td><td><code>#94A3B8</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ==================== DATABASE SCHEMA ==================== -->
+<section id="db-schema">
+    <h2>Database Schema</h2>
+    <p>Database name: <code>mtokoma_db</code> - Engine: InnoDB - Charset: utf8mb4</p>
+    <div class="info-box blue"><strong>Key Principle:</strong> Stock balance is never stored on the items table. It is always calculated from stock_movements to maintain a complete audit trail.</div>
+    <h3>Entity Relationship Summary</h3>
+    <pre><code>users ----------+-- purchases ------ purchase_items
+roles ----------+-- sales ---------- sale_items
+                +-- expenses
+                +-- stock_movements
+                +-- stock_adjustments
+                +-- stock_reconciliations
+                +-- activity_logs
+
+items ----------+-- purchase_items
+                +-- sale_items
+                +-- stock_movements
+                +-- stock_adjustments
+                +-- stock_reconciliations
+
+categories -----+-- items
+suppliers ------+-- purchases
+customers ------+-- sales
+payments -------+-- purchases / sales (polymorphic)</code></pre>
+</section>
+
+<!-- ============ DB: USERS ============ -->
+<section id="db-users">
+    <h3>Users and Authentication</h3>
+    <h4>Table: <code>users</code></h4>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Column</th><th>Type</th><th>Constraints</th><th>Description</th></tr></thead><tbody>
+            <tr><td>id</td><td>BIGINT UNSIGNED</td><td>PK, AUTO_INCREMENT</td><td>Primary key</td></tr>
+            <tr><td>name</td><td>VARCHAR(255)</td><td>NOT NULL</td><td>Full name</td></tr>
+            <tr><td>email</td><td>VARCHAR(255)</td><td>UNIQUE, NOT NULL</td><td>Login email</td></tr>
+            <tr><td>password</td><td>VARCHAR(255)</td><td>NOT NULL</td><td>Hashed password</td></tr>
+            <tr><td>role_id</td><td>BIGINT UNSIGNED</td><td>FK - roles.id</td><td>Assigned role</td></tr>
+            <tr><td>phone</td><td>VARCHAR(20)</td><td>NULLABLE</td><td>Contact phone</td></tr>
+            <tr><td>status</td><td>ENUM</td><td>active, inactive</td><td>Account status</td></tr>
+            <tr><td>last_login_at</td><td>TIMESTAMP</td><td>NULLABLE</td><td>Last login timestamp</td></tr>
+            <tr><td>last_login_ip</td><td>VARCHAR(45)</td><td>NULLABLE</td><td>Last login IP address</td></tr>
+            <tr><td>remember_token</td><td>VARCHAR(100)</td><td>NULLABLE</td><td>Remember me token</td></tr>
+            <tr><td>created_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Record creation</td></tr>
+            <tr><td>updated_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Last update</td></tr>
+        </tbody></table>
+    </div>
+    <h4>Table: <code>roles</code></h4>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Column</th><th>Type</th><th>Constraints</th><th>Description</th></tr></thead><tbody>
+            <tr><td>id</td><td>BIGINT UNSIGNED</td><td>PK, AUTO_INCREMENT</td><td>Primary key</td></tr>
+            <tr><td>name</td><td>VARCHAR(100)</td><td>UNIQUE, NOT NULL</td><td>Role name</td></tr>
+            <tr><td>slug</td><td>VARCHAR(100)</td><td>UNIQUE, NOT NULL</td><td>URL-friendly identifier</td></tr>
+            <tr><td>description</td><td>TEXT</td><td>NULLABLE</td><td>Role description</td></tr>
+            <tr><td>is_system</td><td>BOOLEAN</td><td>DEFAULT false</td><td>Protected system roles</td></tr>
+            <tr><td>created_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Record creation</td></tr>
+            <tr><td>updated_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Last update</td></tr>
+        </tbody></table>
+    </div>
+    <h4>Table: <code>permissions</code></h4>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Column</th><th>Type</th><th>Constraints</th><th>Description</th></tr></thead><tbody>
+            <tr><td>id</td><td>BIGINT UNSIGNED</td><td>PK, AUTO_INCREMENT</td><td>Primary key</td></tr>
+            <tr><td>name</td><td>VARCHAR(255)</td><td>UNIQUE, NOT NULL</td><td>Permission key (e.g. items.create)</td></tr>
+            <tr><td>module</td><td>VARCHAR(100)</td><td>NOT NULL</td><td>Module grouping</td></tr>
+            <tr><td>description</td><td>VARCHAR(255)</td><td>NULLABLE</td><td>Human-readable description</td></tr>
+            <tr><td>created_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Record creation</td></tr>
+            <tr><td>updated_at</td><td>TIMESTAMP</td><td>NOT NULL</td><td>Last update</td></tr>
+        </tbody></table>
+    </div>
+    <h4>Table: <code>role_permission</code> (Pivot)</h4>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead><tbody>
+            <tr><td>role_id</td><td>BIGINT UNSIGNED</td><td>FK - roles.id, CASCADE</td></tr>
+            <tr><td>permission_id</td><td>BIGINT UNSIGNED</td><td>FK - permissions.id, CASCADE</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ==================== MODULES ==================== -->
+
+<!-- ============ DASHBOARD ============ -->
+<section id="mod-dashboard">
+    <h2>Module: Dashboard</h2>
+    <p><span class="badge badge-blue">Permission:</span> dashboard.view</p>
+    <h3>Page Layout</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Dashboard                                    [Date]      |
++----------+----------+----------+-------------------------+
+| Today's  | Total    | Low      | Monthly                 |
+| Sales    | Stock    | Stock    | Profit                  |
+| TZS X,XXX| Items    | Items    | TZS X,XXX               |
++----------+----------+----------+-------------------------+
+|                                                           |
+|  +---------------------+  +-------------------------+   |
+|  |  Monthly Sales      |  |  Top Selling Items      |   |
+|  |  Chart (Line)       |  |  Chart (Bar)            |   |
+|  +---------------------+  +-------------------------+   |
+|                                                           |
+|  +---------------------+  +-------------------------+   |
+|  |  Recent Sales       |  |  Low Stock Alerts       |   |
+|  |  Table (last 5)     |  |  Table                  |   |
+|  +---------------------+  +-------------------------+   |
+|                                                           |
+|  +----------------------------------------------------+  |
+|  |  Quick Actions                                     |  |
+|  |  [New Sale]  [New Purchase]  [Add Item]  [Stock]   |  |
+|  +----------------------------------------------------+  |
++-----------------------------------------------------------+</code></pre>
+    <h3>Widget Data Sources</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Widget</th><th>Query Logic</th><th>Auto-Refresh</th></tr></thead><tbody>
+            <tr><td>Today's Sales</td><td>SUM(sales.total) WHERE date = today AND status = completed</td><td>Every 30 seconds</td></tr>
+            <tr><td>Total Stock Items</td><td>COUNT(DISTINCT items WHERE status = active)</td><td>On page load</td></tr>
+            <tr><td>Low Stock Alerts</td><td>COUNT(items WHERE current_stock below reorder_level)</td><td>On page load</td></tr>
+            <tr><td>Monthly Profit</td><td>SUM(sale_items.profit) WHERE month = current</td><td>On page load</td></tr>
+            <tr><td>Monthly Sales Chart</td><td>Sales total grouped by day for current month</td><td>On page load</td></tr>
+            <tr><td>Top Selling Items</td><td>Top 10 items by qty sold this month</td><td>On page load</td></tr>
+            <tr><td>Recent Sales</td><td>Last 5 sales with customer and total</td><td>On page load</td></tr>
+            <tr><td>Low Stock Table</td><td>Items WHERE stock below reorder_level ORDER BY stock ASC</td><td>On page load</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ ITEMS ============ -->
+<section id="mod-items">
+    <h2>Module: Items Management</h2>
+    <p><span class="badge badge-blue">Permissions:</span> items.view items.create items.edit items.delete</p>
+    <h3>Items List Page</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Items Management                                          |
+|                                                            |
+|  [+ Add Item]  [Import CSV]  [Export CSV]                 |
+|                                                            |
+|  Filter: [All Categories v] [All Status v]                |
+|  Search: [________________] [Search]                       |
+|                                                            |
+|  +------+------------+--------+-------+-------+----+      |
+|  | SKU  | Name       |Category| Stock | Price | .. |      |
+|  +------+------------+--------+-------+-------+----+      |
+|  | BRK- | Brake Pad  | Brakes | 45    | 35,000| .. |      |
+|  | 0001 | Set        |        |       |       |    |      |
+|  +------+------------+--------+-------+-------+----+      |
+|  | ENG- | Piston Kit | Engine | 12    | 180,00| .. |      |
+|  | 0003 |            |        |       |       |    |      |
+|  +------+------------+--------+-------+-------+----+      |
+|                                                            |
+|  Showing 1-20 of 245 items              [< 1 2 3 >]      |
++-----------------------------------------------------------+</code></pre>
+    <h3>Add/Edit Item Form</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Add New Item                                              |
++-----------------------------------------------------------+
+|                                                            |
+|  Category:     [Brakes v]  -> SKU auto: BRK-00046        |
+|  Item Name:    [________________]                          |
+|  Description:  [________________]                          |
+|                                                            |
+|  Cost Price:   [TZS ____________]                         |
+|  Markup:       [30] %  ->  Selling: [TZS _________]      |
+|                                                            |
+|  Unit:         [pcs v]    Reorder Level: [__10__]         |
+|                                                            |
+|  Image:        [Choose File] [Preview]                     |
+|                                                            |
+|  Status:       (o) Active  ( ) Inactive                    |
+|                                                            |
+|  [Cancel]                               [Save Item]       |
++-----------------------------------------------------------+</code></pre>
+    <h3>Autofills</h3>
+    <ul>
+        <li>Select category -> SKU field auto-populates with prefix</li>
+        <li>Enter cost price + markup -> selling price auto-calculates</li>
+        <li>Enter selling price + cost price -> markup % auto-calculates</li>
+        <li>List search -> live filtering as you type (no search button)</li>
+    </ul>
+</section>
+
+<!-- ============ PURCHASES ============ -->
+<section id="mod-purchases">
+    <h2>Module: Purchases (Stock Intake)</h2>
+    <p><span class="badge badge-green">Permissions:</span> purchases.view purchases.create purchases.edit purchases.delete</p>
+    <h3>Create Purchase Form</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  New Purchase                                              |
++-----------------------------------------------------------+
+|  Invoice: PUR-2026-00033 (auto)                            |
+|  Date:    [20/07/2026] (today auto)                        |
+|                                                            |
+|  Supplier: [Search supplier... v]  [+ Add New]            |
+|                                                            |
+|  Items:                                                     |
+|  +--------------------+-----+----------+------------+     |
+|  | Item               | Qty | Unit Cost| Subtotal   |     |
+|  +--------------------+-----+----------+------------+     |
+|  | [Search item...  ] | [50]| [250,000]| 12,500,000 |     |
+|  | [Search item...  ] | [20]| [145,000]| 2,900,000  |     |
+|  | [+ Add Item Line]  |     |          |            |     |
+|  +--------------------+-----+----------+------------+     |
+|                                                            |
+|  VAT: ( ) With VAT 18%  (o) VAT Exempt                    |
+|                                                            |
+|  Subtotal:        TZS 15,400,000                           |
+|  VAT (18%):       TZS 0 (Exempt)                           |
+|  Total:           TZS 15,400,000                           |
+|                                                            |
+|  Notes: [________________________________]                 |
+|                                                            |
+|  [Cancel]                    [Save as Pending]             |
+|                              [Save as Received]            |
++-----------------------------------------------------------+</code></pre>
+    <h3>Autofills and Automations</h3>
+    <ul>
+        <li>Invoice number auto-generated: PUR-2026-{5-digit sequence}</li>
+        <li>Date auto-filled to today</li>
+        <li>Select supplier -> auto-fill supplier details</li>
+        <li>Type item name -> auto-search, select -> auto-fill unit cost from last purchase price</li>
+        <li>Add item -> auto-add empty line for next item</li>
+        <li>Qty x Unit Cost -> auto-calculate subtotal per line</li>
+        <li>All items -> auto-calculate grand total</li>
+        <li><strong>Save as Received -> auto-increment stock + auto-create stock_movements</strong></li>
+        <li>Save as Pending -> no stock change, wait for receipt</li>
+        <li>Void purchase -> <strong>auto-reverse stock</strong></li>
+    </ul>
+</section>
+
+<!-- ============ SALES / POS ============ -->
+<section id="mod-sales">
+    <h2>Module: Sales / Point of Sale</h2>
+    <p><span class="badge badge-green">Permissions:</span> sales.view sales.create sales.edit sales.delete</p>
+    <h3>POS Screen Layout</h3>
+    <pre><code>+---------------------------------------------------------------+
+|  POINT OF SALE - Receipt #SAL-2026-000452                     |
++----------------------------------+----------------------------+
+|                                  |  Customer:                 |
+|  Scan/Search Item:               |  [Walk-In v]  [+ Add]     |
+|  [________________________]     |                            |
+|                                  |  VAT: (o) With 18%         |
+|  +--------+----+-----+------+   |       ( ) Exempt           |
+|  | Item   | Qty|Price|Total |   |                            |
+|  +--------+----+-----+------+   |  CART                      |
+|  |Brake   |  2 |25,00| 50,00|   |  Items: 6                  |
+|  |Pad Set |    |     |      |   |  Subtotal: 985,000         |
+|  +--------+----+-----+------+   |  VAT: 177,300             |
+|  |Oil     |  1 |85,00| 85,00|   |  TOTAL: 1,162,300         |
+|  |Filter  |    |     |      |   |                            |
+|  +--------+----+-----+------+   |  Payment:                  |
+|  |Chain   |  3 |150,0|450,00|   |  [Cash] [MoMo] [Card]     |
+|  |Link    |    |  0  |      |   |  [Credit]                  |
+|  +--------+----+-----+------+   |                            |
+|                                  |  Amount: [1,200,000      ] |
+|                                  |  Change: [37,700         ] |
+|                                  |                            |
+|                                  |  [Complete Sale & Print]   |
+|                                  |  [Clear Cart]              |
++----------------------------------+----------------------------+</code></pre>
+    <h3>Autofills and Automations</h3>
+    <ul>
+        <li>POS opens -> search bar auto-focused</li>
+        <li>Scan/type item -> auto-pull item, add to cart, refocus search bar</li>
+        <li>Add to cart -> auto-calculate line total, subtotal, VAT, grand total</li>
+        <li>Change qty -> auto-recalculate everything</li>
+        <li>Cash payment -> auto-fill total amount in tendered field</li>
+        <li>Enter tendered -> auto-calculate change</li>
+        <li><strong>Complete sale -> auto-decrement stock + auto-create stock_movements</strong></li>
+        <li>Complete sale -> auto-generate receipt + open print dialog</li>
+        <li>Complete sale -> auto-clear POS for next customer</li>
+        <li>Credit sale -> requires customer selection (validated)</li>
+        <li>VAT toggle per sale -> receipt shows with or without tax line</li>
+    </ul>
+</section>
+
+<!-- ============ RECEIPTS ============ -->
+<section id="mod-receipts">
+    <h2>Module: Receipt Generation (EFD Format)</h2>
+    <p>Receipts are generated automatically on every completed sale. Format supports 58mm and 80mm thermal printers.</p>
+    <h3>Receipt Preview (80mm)</h3>
+    <div class="receipt-preview">
++--------------------------------------+
+|       MTOKOMA MOTORCYCLE PARTS      |
+|     Shop 12, Main Street            |
+|     Dar es Salaam, Tanzania         |
+|     TIN: 123-456-789               |
+|     +255 XXX XXX XXX               |
+|--------------------------------------|
+| Receipt #:  SAL-2026-000452         |
+| Date:       20/07/2026 14:30        |
+| Cashier:    John Mwale              |
+| Customer:   Walk-In                 |
+|--------------------------------------|
+| Brake Pad Set        x2             |
+|                     TZS 25,000      |
+| Oil Filter           x1             |
+|                     TZS 85,000      |
+| Chain Link 120       x3             |
+|                     TZS 150,000     |
+|--------------------------------------|
+| Subtotal:          TZS 460,000      |
+| VAT (18%):         TZS 82,800       |
+| TOTAL:             TZS 542,800      |
+|--------------------------------------|
+| Cash:            TZS 600,000        |
+| Change:            TZS 57,200       |
+|--------------------------------------|
+|   Thank you for shopping at Mtokoma!|
+|   Goods sold are not refundable     |
++--------------------------------------+</div>
+    <h3>Receipt Data Structure</h3>
+    <pre><code>{
+    "business": {
+        "name": "Mtokoma Motorcycle Parts",
+        "address": "Shop 12, Main Street, Dar es Salaam",
+        "tin": "123-456-789",
+        "phone": "+255 XXX XXX XXX",
+        "logo": "logo.png"
+    },
+    "receipt": {
+        "number": "SAL-2026-000452",
+        "date": "20/07/2026 14:30",
+        "cashier": "John Mwale",
+        "customer": "Walk-In"
+    },
+    "items": [
+        { "name": "Brake Pad Set", "qty": 2, "price": 25000, "subtotal": 50000 },
+        { "name": "Oil Filter", "qty": 1, "price": 85000, "subtotal": 85000 }
+    ],
+    "totals": {
+        "subtotal": 135000,
+        "vat_rate": 18,
+        "vat_amount": 24300,
+        "total": 159300,
+        "has_vat": true
+    },
+    "payment": {
+        "method": "cash",
+        "amount_tendered": 200000,
+        "change": 40700
+    },
+    "footer": "Thank you for shopping at Mtokoma!"
+}</code></pre>
+</section>
+
+<!-- ============ STOCK MANAGEMENT ============ -->
+<section id="mod-stock">
+    <h2>Module: Stock Management</h2>
+    <p><span class="badge badge-amber">Permissions:</span> stock.view stock.adjust stock.reconcile</p>
+    <h3>Stock Levels Page</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Stock Management                                          |
+|                                                            |
+|  [Stock Adjustments]  [Export CSV]                         |
+|                                                            |
+|  Filter: [All Categories v] [Stock Status v]              |
+|  Search: [Item name / SKU ____]                            |
+|                                                            |
+|  +------+-----------+------+-------+----------+------+    |
+|  | SKU  | Item      |Stock |Reorder| Status   |  ..  |    |
+|  +------+-----------+------+-------+----------+------+    |
+|  | BRK- | Brake Pad |  45  |  20   | In Stock |  ..  |    |
+|  | 0001 | Set       |      |       |          |      |    |
+|  +------+-----------+------+-------+----------+------+    |
+|  | OIL- | Oil Filter|   3  |  15   | Low      |  ..  |    |
+|  | 0002 |           |      |       |          |      |    |
+|  +------+-----------+------+-------+----------+------+    |
+|  | CHN- | Chain Link|   0  |  25   | Out      |  ..  |    |
+|  | 0005 | 120       |      |       |          |      |    |
+|  +------+-----------+------+-------+----------+------+    |
++-----------------------------------------------------------+</code></pre>
+    <h3>Stock Adjustment Modal</h3>
+    <pre><code>+----------------------------------------------+
+|  Stock Adjustment                            |
++----------------------------------------------+
+|  Item: Oil Filter (OIL-0002)                 |
+|  Current System Qty: 25                       |
+|                                               |
+|  Adjustment: (o) Reduce  ( ) Increase        |
+|  Quantity:    [___3___]                       |
+|  Reason:      [Damaged goods          ]       |
+|                                               |
+|  New Balance Preview: 22                      |
+|                                               |
+|  [Cancel]                    [Save Adjustment]|
++----------------------------------------------+</code></pre>
+    <h3>Autofills and Automations</h3>
+    <ul>
+        <li>Stock page loads -> auto-sort by lowest stock first</li>
+        <li>Low stock items -> auto-highlighted red/amber</li>
+        <li>Adjustment form -> auto-fill current system qty</li>
+        <li>Enter adjustment qty -> auto-preview new balance before saving</li>
+        <li>Save adjustment -> auto-create stock_movement with type adjustment</li>
+        <li>Stock movement history -> auto-filter to today by default</li>
+    </ul>
+</section>
+
+<!-- ============ RECONCILIATION ============ -->
+<section id="mod-reconciliation">
+    <h2>Module: Stock Reconciliation</h2>
+    <p><span class="badge badge-amber">Permissions:</span> stock.reconcile</p>
+    <h3>Reconciliation Form</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Stock Reconciliation - REC-2026-0005                       |
++-----------------------------------------------------------+
+|  Date: [20/07/2026]  (auto today)                          |
+|                                                            |
+|  +--------------+---------+---------+---------+-------+   |
+|  | Item         | System  | Counted | Diff    | Status|   |
+|  +--------------+---------+---------+---------+-------+   |
+|  | Brake Pad    |   45    | [  45 ] |    0    |  OK   |   |
+|  | Oil Filter   |   22    | [  20 ] |   -2    |  MISS |   |
+|  | Chain Link   |    8    | [   8 ] |    0    |  OK   |   |
+|  | Spark Plug   |   40    | [  38 ] |   -2    |  MISS |   |
+|  +--------------+---------+---------+---------+-------+   |
+|                                                            |
+|  Items Checked: 4    Matched: 2    Mismatched: 2          |
+|                                                            |
+|  [Cancel]    [Confirm and Generate Adjustments]            |
++-----------------------------------------------------------+</code></pre>
+    <h3>Autofills and Automations</h3>
+    <ul>
+        <li>Start reconciliation -> auto-pull all active items with system qty pre-filled</li>
+        <li>Enter counted qty -> auto-calculate difference (green=match, red=mismatch)</li>
+        <li>Confirm -> auto-generate stock_adjustments for mismatched items</li>
+        <li>Confirm -> auto-create stock_movements with type reconciliation</li>
+        <li>Auto-stamp with user, date, reconciliation number</li>
+    </ul>
+</section>
+
+<!-- ============ EXPENSES ============ -->
+<section id="mod-expenses">
+    <h2>Module: Expenses</h2>
+    <p><span class="badge badge-red">Permissions:</span> expenses.view expenses.create expenses.edit expenses.delete</p>
+    <h3>Expense Form Fields</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Autofill</th></tr></thead><tbody>
+            <tr><td>Category</td><td>Select (CRUD)</td><td>Yes</td><td>None</td></tr>
+            <tr><td>Description</td><td>Text</td><td>Yes</td><td>Suggest recent descriptions after category selected</td></tr>
+            <tr><td>Amount</td><td>Number</td><td>Yes</td><td>Auto-format as TZS currency</td></tr>
+            <tr><td>Date</td><td>Date</td><td>Yes</td><td>Auto-fill today's date</td></tr>
+            <tr><td>Payment Method</td><td>Select</td><td>Yes</td><td>Default: Cash</td></tr>
+            <tr><td>Receipt Image</td><td>File upload</td><td>No</td><td>Auto-compress on upload</td></tr>
+            <tr><td>Recurring</td><td>Toggle</td><td>No</td><td>None</td></tr>
+            <tr><td>Frequency</td><td>Select</td><td>If recurring</td><td>Default: Monthly</td></tr>
+            <tr><td>Notes</td><td>Textarea</td><td>No</td><td>None</td></tr>
+        </tbody></table>
+    </div>
+    <h3>Seeded Expense Categories</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Category</th><th>Description</th></tr></thead><tbody>
+            <tr><td>Rent</td><td>Shop/warehouse rent</td></tr>
+            <tr><td>Utilities</td><td>Electricity, water, internet</td></tr>
+            <tr><td>Salaries</td><td>Staff wages</td></tr>
+            <tr><td>Transport</td><td>Delivery, fuel, logistics</td></tr>
+            <tr><td>Repairs</td><td>Shop/equipment repairs</td></tr>
+            <tr><td>Marketing</td><td>Advertising, promotions</td></tr>
+            <tr><td>Office Supplies</td><td>Stationery, printer ink, etc.</td></tr>
+            <tr><td>Miscellaneous</td><td>Other uncategorized expenses</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ PAYMENTS ============ -->
+<section id="mod-payments">
+    <h2>Module: Payments Tracking</h2>
+    <h3>Supplier Payments (for credit purchases)</h3>
+    <ul>
+        <li>Record payment against a purchase invoice</li>
+        <li>Tracks partial payments</li>
+        <li>Auto-update purchase payment_status (unpaid - partial - paid)</li>
+        <li>Shows outstanding balance per supplier</li>
+    </ul>
+    <h3>Customer Payments (for credit sales)</h3>
+    <ul>
+        <li>Record payment against a sale receipt</li>
+        <li>Tracks partial payments</li>
+        <li>Auto-update customer current_balance</li>
+        <li>Shows outstanding balance per customer</li>
+    </ul>
+    <h3>Autofills</h3>
+    <ul>
+        <li>Select invoice/receipt -> auto-fill total, amount paid, remaining balance</li>
+        <li>Enter payment amount -> auto-calculate new outstanding balance</li>
+    </ul>
+</section>
+
+<!-- ============ IMPORT / EXPORT ============ -->
+<section id="mod-import-export">
+    <h2>Module: Import / Export</h2>
+    <p><span class="badge badge-amber">Permissions:</span> imports.view imports.execute exports.view exports.execute</p>
+    <h3>Import Capabilities</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Import Type</th><th>Formats</th><th>Required Columns</th><th>Auto-Behaviors</th></tr></thead><tbody>
+            <tr><td>Items</td><td>CSV, XLSX</td><td>name, category, cost_price, selling_price, unit, reorder_level</td><td>Auto-generate SKU, skip duplicates by name</td></tr>
+            <tr><td>Customers</td><td>CSV, XLSX</td><td>name, phone, email, address</td><td>Skip duplicates by phone</td></tr>
+            <tr><td>Suppliers</td><td>CSV, XLSX</td><td>name, phone, email, address, city</td><td>Skip duplicates by name</td></tr>
+            <tr><td>Opening Stock</td><td>CSV, XLSX</td><td>sku, quantity, unit_cost</td><td>Create initial stock_movements</td></tr>
+        </tbody></table>
+    </div>
+    <h3>Import Flow</h3>
+    <pre><code>Upload CSV -> Auto-detect columns -> Column mapping preview
+    -> Validate data (show errors) -> Preview first 10 rows
+    -> Confirm Import -> Auto-skip duplicates -> Import report</code></pre>
+    <h3>Export Capabilities</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Export Type</th><th>Formats</th><th>Respects Filters</th></tr></thead><tbody>
+            <tr><td>Items</td><td>CSV, Excel</td><td>Category, status filters</td></tr>
+            <tr><td>Sales</td><td>CSV, Excel</td><td>Date range, status, payment method</td></tr>
+            <tr><td>Purchases</td><td>CSV, Excel</td><td>Date range, status, supplier</td></tr>
+            <tr><td>Stock Report</td><td>CSV, Excel</td><td>Category, stock status</td></tr>
+            <tr><td>Stock Movements</td><td>CSV, Excel</td><td>Date range, item, movement type</td></tr>
+            <tr><td>Expenses</td><td>CSV, Excel</td><td>Date range, category</td></tr>
+            <tr><td>Customers</td><td>CSV, Excel</td><td>Status</td></tr>
+            <tr><td>Suppliers</td><td>CSV, Excel</td><td>Status</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ REPORTS ============ -->
+<section id="mod-reports">
+    <h2>Module: Reports</h2>
+    <p><span class="badge badge-indigo">Permissions:</span> reports.view reports.export</p>
+    <h3>Available Reports</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Report</th><th>Data Source</th><th>Group By</th><th>Charts</th></tr></thead><tbody>
+            <tr><td>Sales Report</td><td>sales + sale_items</td><td>Day, Week, Month, Item, Category, Payment Method</td><td>Line, Bar</td></tr>
+            <tr><td>Purchase Report</td><td>purchases + purchase_items</td><td>Day, Week, Month, Supplier, Item</td><td>Line, Bar</td></tr>
+            <tr><td>Stock Balance</td><td>items + stock_movements</td><td>Category, Item</td><td>Bar (top items)</td></tr>
+            <tr><td>Stock Movement</td><td>stock_movements</td><td>Date, Item, Type</td><td>Timeline</td></tr>
+            <tr><td>Expense Report</td><td>expenses + expense_categories</td><td>Day, Week, Month, Category</td><td>Pie, Bar</td></tr>
+            <tr><td>Profit and Loss</td><td>sale_items.profit - expenses</td><td>Day, Week, Month</td><td>Line</td></tr>
+            <tr><td>Low Stock</td><td>items (stock below reorder)</td><td>Category</td><td>Bar</td></tr>
+            <tr><td>Tax Report</td><td>sales.vat vs purchase.vat</td><td>Month</td><td>Bar (collected vs paid)</td></tr>
+            <tr><td>Supplier Statement</td><td>purchases + payments</td><td>Supplier</td><td>None</td></tr>
+            <tr><td>Customer Statement</td><td>sales + payments</td><td>Customer</td><td>None</td></tr>
+            <tr><td>Reconciliation History</td><td>stock_reconciliations</td><td>Date</td><td>None</td></tr>
+            <tr><td>Daily Summary</td><td>sales + expenses</td><td>Day</td><td>Bar</td></tr>
+        </tbody></table>
+    </div>
+    <h3>Report Autofills</h3>
+    <ul>
+        <li>Open any report -> date range auto-fills to This Month</li>
+        <li>Change date range -> auto-load data (no search button)</li>
+        <li>Export -> auto-download with current filters applied</li>
+        <li>Print -> auto-generate printer-friendly version</li>
+    </ul>
+</section>
+
+<!-- ============ ROLES ============ -->
+<section id="mod-roles">
+    <h2>Module: Roles and Permissions</h2>
+    <p><span class="badge badge-indigo">Permissions:</span> roles.view roles.create roles.edit roles.delete</p>
+    <h3>Role Management Page</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Roles and Permissions                                     |
+|                                                            |
+|  [+ Create Role]                                           |
+|                                                            |
+|  +--------------+---------+--------+------+-----------+    |
+|  | Role         | Users   | Status | Edit | Delete    |    |
+|  +--------------+---------+--------+------+-----------+    |
+|  | Super Admin  | 1       | System |  --  | --        |    |
+|  | Manager      | 3       | Active |  yes | yes       |    |
+|  | Cashier      | 5       | Active |  yes | yes       |    |
+|  | Warehouse    | 2       | Active |  yes | yes       |    |
+|  | Accountant   | 1       | Active |  yes | yes       |    |
+|  | Viewer       | 0       | Active |  yes | yes       |    |
+|  +--------------+---------+--------+------+-----------+    |
++-----------------------------------------------------------+</code></pre>
+    <h3>Autofills and Automations</h3>
+    <ul>
+        <li>Create role -> auto-show all permissions grouped by module</li>
+        <li>Check module header -> auto-check all sub-permissions for that module</li>
+        <li>Uncheck module header -> auto-uncheck all sub-permissions</li>
+        <li>Save role -> auto-apply to all users with that role immediately</li>
+        <li>Login -> detect role -> show only permitted sidebar menus and pages</li>
+        <li>Any page -> hide buttons/actions user lacks permission for</li>
+    </ul>
+</section>
+
+<!-- ============ USERS ============ -->
+<section id="mod-users">
+    <h2>Module: User Management</h2>
+    <p><span class="badge badge-blue">Permissions:</span> users.view users.create users.edit users.deactivate</p>
+    <h3>User Form Fields</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Autofill</th></tr></thead><tbody>
+            <tr><td>Name</td><td>Text</td><td>Yes</td><td>None</td></tr>
+            <tr><td>Email</td><td>Email</td><td>Yes</td><td>None</td></tr>
+            <tr><td>Password</td><td>Password</td><td>Yes (edit: optional)</td><td>Auto-generate password option</td></tr>
+            <tr><td>Phone</td><td>Tel</td><td>No</td><td>None</td></tr>
+            <tr><td>Role</td><td>Select</td><td>Yes</td><td>None</td></tr>
+            <tr><td>Status</td><td>Toggle</td><td>Yes</td><td>Default: Active</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ SETTINGS ============ -->
+<section id="mod-settings">
+    <h2>Module: Settings</h2>
+    <p><span class="badge badge-indigo">Permissions:</span> settings.view settings.edit</p>
+    <h3>Settings Tabs</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Tab</th><th>Fields</th></tr></thead><tbody>
+            <tr><td><strong>Business Info</strong></td><td>Business name, phone, email, address, TIN, logo upload</td></tr>
+            <tr><td><strong>Tax and Currency</strong></td><td>VAT rate (default 18%), currency (TZS), currency symbol</td></tr>
+            <tr><td><strong>Receipt</strong></td><td>Header text, footer text, receipt width (58mm/80mm), logo on receipt</td></tr>
+            <tr><td><strong>Email Notifications</strong></td><td>SMTP host, port, username, password, encryption, from address, test send button, toggle per notification type</td></tr>
+            <tr><td><strong>System</strong></td><td>Default reorder level, default markup %, date format, time zone</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ ACTIVITY LOG ============ -->
+<section id="mod-activity">
+    <h2>Module: Activity Log</h2>
+    <p><span class="badge badge-indigo">Permissions:</span> activity.view</p>
+    <h3>Activity Log Page</h3>
+    <pre><code>+-----------------------------------------------------------+
+|  Activity Log                                              |
+|                                                            |
+|  Filter: [All Modules v] [All Actions v] [User v]        |
+|  Date Range: [01/07/2026] -> [20/07/2026]                 |
+|                                                            |
+|  +------+-----------+--------+------------------------+   |
+|  | Time | User      | Action | Description            |   |
+|  +------+-----------+--------+------------------------+   |
+|  | 14:32| John M.   | CREATE | Sale SAL-2026-00452    |   |
+|  | 14:30| John M.   | CREATE | Sale SAL-2026-00451    |   |
+|  | 13:15| Sarah B.  | CREATE | Purchase PUR-2026-032  |   |
+|  | 12:00| Peter P.  | UPDATE | Expense #15 updated    |   |
+|  | 11:30| John M.   | ADJUST | Stock: Oil Filter -3   |   |
+|  | 09:00| Admin     | LOGIN  | New device detected    |   |
+|  +------+-----------+--------+------------------------+   |
++-----------------------------------------------------------+</code></pre>
+    <h3>Auto-Logged Events</h3>
+    <ul>
+        <li>Every create, update, delete operation</li>
+        <li>Sale voids and returns</li>
+        <li>Stock adjustments and reconciliations</li>
+        <li>Login/logout (with IP address and device info)</li>
+        <li>Role/permission changes</li>
+        <li>Settings changes</li>
+        <li>Import/export operations</li>
+    </ul>
+</section>
+
+<!-- ==================== AUTOMATION ==================== -->
+
+<!-- ============ AUTOFILLS SUMMARY ============ -->
+<section id="auto-autofills">
+    <h2>Autofills Summary</h2>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Screen</th><th>Trigger</th><th>Autofill Behavior</th></tr></thead><tbody>
+            <tr><td>Items</td><td>Select category</td><td>Auto-fill SKU prefix in SKU field</td></tr>
+            <tr><td>Items</td><td>Enter cost price</td><td>Auto-calculate selling price using markup %</td></tr>
+            <tr><td>Items</td><td>Enter selling price</td><td>Auto-calculate profit margin %</td></tr>
+            <tr><td>Purchases</td><td>Open form</td><td>Auto-generate invoice number, today's date</td></tr>
+            <tr><td>Purchases</td><td>Select supplier</td><td>Auto-fill phone, email, address, TIN</td></tr>
+            <tr><td>Purchases</td><td>Select item</td><td>Auto-fill unit cost from last purchase price</td></tr>
+            <tr><td>Purchases</td><td>Qty x cost</td><td>Auto-calculate line subtotal and grand total</td></tr>
+            <tr><td>Sales/POS</td><td>Open POS</td><td>Auto-focus search bar</td></tr>
+            <tr><td>Sales/POS</td><td>Add item</td><td>Auto-calculate totals, refocus search</td></tr>
+            <tr><td>Sales/POS</td><td>Cash payment</td><td>Auto-fill total in tendered field</td></tr>
+            <tr><td>Sales/POS</td><td>Enter tendered</td><td>Auto-calculate change</td></tr>
+            <tr><td>Expenses</td><td>Open form</td><td>Auto-fill today's date</td></tr>
+            <tr><td>Expenses</td><td>Select category</td><td>Suggest recent descriptions</td></tr>
+            <tr><td>Reports</td><td>Open page</td><td>Auto-fill This Month date range</td></tr>
+            <tr><td>Reports</td><td>Change date</td><td>Auto-load data without search button</td></tr>
+            <tr><td>Reconciliation</td><td>Start</td><td>Auto-pull all items with system qty</td></tr>
+            <tr><td>Roles</td><td>Create role</td><td>Auto-check/uncheck all sub-perms with module</td></tr>
+        </tbody></table>
+    </div>
+</section>
+
+<!-- ============ STOCK AUTO-UPDATE ============ -->
+<section id="auto-stock">
+    <h2>Stock Auto-Update Logic</h2>
+    <h3>When Purchase is Saved as Received</h3>
+    <pre><code>DB::transaction(function () use ($data) {
+    $purchase = Purchase::create($data);
+
+    foreach ($data['items'] as $item) {
+        PurchaseItem::create([
+            'purchase_id' => $purchase->id,
+            'item_id'     => $item['item_id'],
+            'qty'         => $item['qty'],
+            'unit_cost'   => $item['unit_cost'],
+            'subtotal'    => $item['qty'] * $item['unit_cost'],
+        ]);
+
+        $lastBalance = StockMovement::where('item_id', $item['item_id'])
+                         ->latest('id')->value('balance_after') ?? 0;
+
+        $newBalance = $lastBalance + $item['qty'];
+
+        StockMovement::create([
+            'item_id'       => $item['item_id'],
+            'type'          => 'purchase',
+            'reference_id'  => $purchase->id,
+            'reference_type'=> 'App\Models\Purchase',
+            'qty_in'        => $item['qty'],
+            'qty_out'       => 0,
+            'balance_after' => $newBalance,
+            'unit_cost'     => $item['unit_cost'],
+            'user_id'       => auth()->id(),
+        ]);
+    }
+
+    // Send email notification
+    Mail::to(getManagers())->send(new PurchaseCreatedMail($purchase));
+});</code></pre>
+    <h3>When Sale is Completed</h3>
+    <pre><code>DB::transaction(function () use ($data) {
+    $sale = Sale::create($data);
+
+    foreach ($data['items'] as $item) {
+        SaleItem::create([
+            'sale_id'    => $sale->id,
+            'item_id'    => $item['item_id'],
+            'qty'        => $item['qty'],
+            'unit_price' => $item['unit_price'],
+            'unit_cost'  => $item['unit_cost'],
+            'subtotal'   => $item['qty'] * $item['unit_price'],
+            'profit'     => ($item['qty'] * $item['unit_price']) - ($item['qty'] * $item['unit_cost']),
+        ]);
+
+        $lastBalance = StockMovement::where('item_id', $item['item_id'])
+                         ->latest('id')->value('balance_after') ?? 0;
+
+        $newBalance = $lastBalance - $item['qty'];
+
+        StockMovement::create([
+            'item_id'       => $item['item_id'],
+            'type'          => 'sale',
+            'reference_id'  => $sale->id,
+            'reference_type'=> 'App\Models\Sale',
+            'qty_in'        => 0,
+            'qty_out'       => $item['qty'],
+            'balance_after' => $newBalance,
+            'unit_cost'     => $item['unit_cost'],
+            'user_id'       => auth()->id(),
+        ]);
+    }
+
+    // Handle credit sales
+    if ($sale->payment_method === 'credit') {
+        $customer = Customer::find($sale->customer_id);
+        $customer->current_balance += $sale->total;
+        $customer->save();
+    }
+
+    // Send email notification
+    Mail::to(getManagers())->send(new SaleCompletedMail($sale));
+});</code></pre>
+    <h3>When Purchase is Voided</h3>
+    <pre><code>DB::transaction(function () use ($purchase) {
+    // Reverse stock for each item
+    foreach ($purchase->purchaseItems as $item) {
+        $lastBalance = StockMovement::where('item_id', $item->item_id)
+                         ->latest('id')->value('balance_after') ?? 0;
+
+        $newBalance = $lastBalance - $item->qty;
+
+        StockMovement::create([
+            'item_id'       => $item->item_id,
+            'type'          => 'purchase',
+            'reference_id'  => $purchase->id,
+            'reference_type'=> 'App\Models\Purchase',
+            'qty_in'        => 0,
+            'qty_out'       => $item->qty,
+            'balance_after' => $newBalance,
+            'unit_cost'     => $item->unit_cost,
+            'notes'         => 'Purchase voided - stock reversed',
+            'user_id'       => auth()->id(),
+        ]);
+    }
+
+    $purchase->update(['status' => 'cancelled']);
+});</code></pre>
+    <h3>When Sale is Voided</h3>
+    <pre><code>DB::transaction(function () use ($sale) {
+    // Reverse stock for each item
+    foreach ($sale->saleItems as $item) {
+        $lastBalance = StockMovement::where('item_id', $item->item_id)
+                         ->latest('id')->value('balance_after') ?? 0;
+
+        $newBalance = $lastBalance + $item->qty;
+
+        StockMovement::create([
+            'item_id'       => $item->item_id,
+            'type'          => 'return',
+            'reference_id'  => $sale->id,
+            'reference_type'=> 'App\Models\Sale',
+            'qty_in'        => $item->qty,
+            'qty_out'       => 0,
+            'balance_after' => $newBalance,
+            'unit_cost'     => $item->unit_cost,
+            'notes'         => 'Sale voided - stock restored',
+            'user_id'       => auth()->id(),
+        ]);
+    }
+
+    // Reverse credit if applicable
+    if ($sale->payment_method === 'credit') {
+        $customer = Customer::find($sale->customer_id);
+        $customer->current_balance -= $sale->total;
+        $customer->save();
+    }
+
+    $sale->update(['status' => 'voided']);
+});</code></pre>
+</section>
+
+<!-- ============ CRON JOBS ============ -->
+<section id="auto-cron">
+    <h2>Cron Jobs (Background Automations)</h2>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Job</th><th>Schedule</th><th>What It Does</th></tr></thead><tbody>
+            <tr><td>Low Stock Alert</td><td>Daily 8:00 AM</td><td>Email notification for items below reorder level</td></tr>
+            <tr><td>Recurring Expenses</td><td>1st of each month</td><td>Auto-create recurring expenses from templates</td></tr>
+            <tr><td>Daily Summary</td><td>Daily 11:00 PM</td><td>Auto-generate end-of-day sales summary email</td></tr>
+            <tr><td>Credit Reminders</td><td>Weekly Monday 9:00 AM</td><td>Email for customers with outstanding balances</td></tr>
+        </tbody></table>
+    </div>
+    <h3>Laravel Task Scheduler</h3>
+    <pre><code>// app/Console/Kernel.php
+protected function schedule(Schedule $schedule)
+{
+    // Low stock alerts - daily at 8am
+    $schedule->command('stock:low-alert')
+             ->dailyAt('08:00')
+             ->emailOutputOnFailure();
+
+    // Recurring expenses - 1st of month
+    $schedule->command('expenses:create-recurring')
+             ->monthlyOn(1, '00:00');
+
+    // Daily summary - 11pm
+    $schedule->command('reports:daily-summary')
+             ->dailyAt('23:00')
+             ->emailOutputOnFailure();
+
+    // Credit reminders - weekly Monday
+    $schedule->command('payments:credit-reminder')
+             ->weeklyOn(1, '09:00');
+}</code></pre>
+    <h3>Artisan Commands</h3>
+    <pre><code>// Check low stock items and send alerts
+php artisan stock:low-alert
+
+// Create recurring expenses for current month
+php artisan expenses:create-recurring
+
+// Generate daily sales summary
+php artisan reports:daily-summary
+
+// Send credit payment reminders
+php artisan payments:credit-reminder</code></pre>
+</section>
+
+<!-- ==================== COMMUNICATION ==================== -->
+
+<!-- ============ EMAIL SYSTEM ============ -->
+<section id="email-system">
+    <h2>Email Notification System</h2>
+    <h3>Who Receives Each Email</h3>
+    <div class="table-wrapper">
+        <table><thead><tr><th>Transaction</th><th>Recipients</th></tr></thead><tbody>
+            <tr><td>Sale completed</td><td>Manager, Admin</td></tr>
+            <tr><td>Sale voided</td><td>Manager, Admin</td></tr>
+            <tr><td>Sale return</td><td>Manager, Admin</td></tr>
+            <tr><td>Purchase created</td><td>Manager, Warehouse, Admin</td></tr>
+            <tr><td>Purchase voided</td><td>Manager, Admin</td></tr>
+            <tr><td>Stock adjustment</td><td>Manager, Warehouse, Admin</td></tr>
+            <tr><td>Stock reconciliation</td><td>Manager, Admin</td></tr>
+            <tr><td>Expense recorded</td><td>Accountant, Admin</td></tr>
+            <tr><td>Expense deleted</td><td>Admin</td></tr>
+            <tr><td>Low stock alert</td><td>Manager, Warehouse</td></tr>
+            <tr><td>Credit payment received</td><td>Accountant, Admin</td></tr>
+            <tr><td>New user created</td><td>Admin</td></tr>
+            <tr><td>Login from new device</td><td>Admin</td></tr>
+        </tbody></table>
+    </div>
+    <h3>Email Settings (.env)</h3>
+    <pre><code>MAIL_MAILER=smtp
+MAIL_HOST=mail.yourdomain.com
+MAIL_PORT=465
+MAIL_USERNAME=alerts@yourdomain.com
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=alerts@yourdomain.com
+MAIL_FROM_NAME="Mtokoma Inventory"</code></pre>
+</section>
+
+<!-- ============ EMAIL TEMPLATES ============ -->
+<section id="email-templates">
+    <h2>Email Templates</h2>
+    <h3>Branded Email Template</h3>
+    <pre><code>&lt;!-- resources/views/emails/transaction.blade.php --&gt;
+&lt;html&gt;
+&lt;body style="font-family: Arial; max-width: 600px; margin: auto;"&gt;
+  &lt;div style="background: #1E293B; color: white; padding: 20px; text-align: center;"&gt;
+    &lt;h2&gt;MTOKOMA MOTORCYCLE PARTS&lt;/h2&gt;
+    &lt;p&gt;Transaction Notification&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div style="padding: 20px; background: #f8fafc;"&gt;
+    @include("emails.partials.{{$type}}")
+  &lt;/div&gt;
+  &lt;div style="background: #1E293B; color: #94A3B8; padding: 10px; text-align: center; font-size: 12px;"&gt;
+    This is an automated notification from Mtokoma Inventory System
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <h3>Sale Completed Email Content</h3>
+    <pre><code>Subject: New Sale - Receipt #000452 - TZS 910,600
+
+MTOKOMA MOTORCYCLE PARTS
+========================
+
+Sale Details
+  Receipt #:    SAL-2026-000452
+  Date:         20 Jul 2026, 14:30
+  Cashier:      John Mwale
+  Customer:     Walk-In
+
+Items Sold
+  Brake Pad Set (x2)      TZS 250,000
+  Oil Filter    (x1)      TZS 85,000
+  Chain Link    (x3)      TZS 450,000
+
+Subtotal:       TZS 785,000
+VAT (18%):      TZS 141,300
+Total:          TZS 926,300
+
+Payment: Cash   TZS 1,000,000
+Change:         TZS 73,700
+
+Stock Updated: -2 Brake Pad, -1 Oil Filter, -3 Chain Link</code></pre>
+    <h3>Purchase Created Email Content</h3>
+    <pre><code>Subject: New Purchase - PUR-2026-00032 - TZS 15,400,000
+
+Purchase Details
+  Invoice:      PUR-2026-00032
+  Date:         20 Jul 2026
+  Supplier:     China Motor Parts Ltd
+  Created by:   Sarah Banda
+
+Items Received
+  Brake Pad Set (x50)     TZS 12,500,000
+  Oil Filter    (x20)     TZS 2,900,000
+
+Total:          TZS 15,400,000
+Status:         Received
+
+Stock Updated: +50 Brake Pad, +20 Oil Filter</code></pre>
+    <h3>Low Stock Alert Email</h3>
+    <pre><code>Subject: Low Stock Alert - 3 Items Below Reorder Level
+
+The following items need restocking:
+
+  Item              Current    Reorder
+  ------------------------------------
+  Brake Pad Set     5 pcs      20 pcs
+  Oil Filter        3 pcs      15 pcs
+  Chain Link 120    8 pcs      25 pcs
+
+Please create a purchase order.</code></pre>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section style="margin-top:60px;padding:40px 0;border-top:2px solid var(--border);text-align:center;">
+    <h2 style="border:none;display:block;margin-bottom:8px;">Mtokoma Motorcycle Parts - System Documentation</h2>
+    <p style="color:var(--muted);">Version 1.0 | July 2026 | Ready for Development</p>
+    <div class="grid-3" style="max-width:600px;margin:24px auto 0;">
+        <div class="card" style="text-align:center;"><div class="value" style="font-size:18px;">18</div><p style="margin:0;font-size:12px;color:var(--muted);">Database Tables</p></div>
+        <div class="card" style="text-align:center;"><div class="value" style="font-size:18px;">16</div><p style="margin:0;font-size:12px;color:var(--muted);">System Modules</p></div>
+        <div class="card" style="text-align:center;"><div class="value" style="font-size:18px;">52</div><p style="margin:0;font-size:12px;color:var(--muted);">Permission Keys</p></div>
+    </div>
+</section>
+
+</div><!-- end .main -->
+</body>
+</html>
