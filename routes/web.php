@@ -36,19 +36,49 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureUserIsActive::class])->gro
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Items
-    Route::resource('items', ItemController::class)->middleware('permission:create_items');
+    Route::get('items', [ItemController::class, 'index'])->name('items.index')->middleware('permission:view_items');
+    Route::get('items/create', [ItemController::class, 'create'])->name('items.create')->middleware('permission:create_items');
+    Route::post('items', [ItemController::class, 'store'])->name('items.store')->middleware('permission:create_items');
+    Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show')->middleware('permission:view_items');
+    Route::get('items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit')->middleware('permission:edit_items');
+    Route::put('items/{item}', [ItemController::class, 'update'])->name('items.update')->middleware('permission:edit_items');
+    Route::delete('items/{item}', [ItemController::class, 'destroy'])->name('items.destroy')->middleware('permission:delete_items');
 
     // Categories
-    Route::resource('categories', CategoryController::class)->middleware('permission:create_categories');
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('permission:view_categories');
+    Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware('permission:create_categories');
+    Route::post('categories', [CategoryController::class, 'store'])->name('categories.store')->middleware('permission:create_categories');
+    Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('permission:view_categories');
+    Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('permission:edit_categories');
+    Route::put('categories/{category}', [CategoryController::class, 'update'])->name('categories.update')->middleware('permission:edit_categories');
+    Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy')->middleware('permission:delete_categories');
 
     // Suppliers
-    Route::resource('suppliers', SupplierController::class)->middleware('permission:create_suppliers');
+    Route::get('suppliers', [SupplierController::class, 'index'])->name('suppliers.index')->middleware('permission:view_suppliers');
+    Route::get('suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create')->middleware('permission:create_suppliers');
+    Route::post('suppliers', [SupplierController::class, 'store'])->name('suppliers.store')->middleware('permission:create_suppliers');
+    Route::get('suppliers/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show')->middleware('permission:view_suppliers');
+    Route::get('suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit')->middleware('permission:edit_suppliers');
+    Route::put('suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update')->middleware('permission:edit_suppliers');
+    Route::delete('suppliers/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy')->middleware('permission:delete_suppliers');
 
     // Customers
-    Route::resource('customers', CustomerController::class)->middleware('permission:create_customers');
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index')->middleware('permission:view_customers');
+    Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create')->middleware('permission:create_customers');
+    Route::post('customers', [CustomerController::class, 'store'])->name('customers.store')->middleware('permission:create_customers');
+    Route::get('customers/{customer}', [CustomerController::class, 'show'])->name('customers.show')->middleware('permission:view_customers');
+    Route::get('customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit')->middleware('permission:edit_customers');
+    Route::put('customers/{customer}', [CustomerController::class, 'update'])->name('customers.update')->middleware('permission:edit_customers');
+    Route::delete('customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy')->middleware('permission:delete_customers');
 
     // Purchases
-    Route::resource('purchases', PurchaseController::class)->middleware('permission:create_purchases');
+    Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases.index')->middleware('permission:view_purchases');
+    Route::get('purchases/create', [PurchaseController::class, 'create'])->name('purchases.create')->middleware('permission:create_purchases');
+    Route::post('purchases', [PurchaseController::class, 'store'])->name('purchases.store')->middleware('permission:create_purchases');
+    Route::get('purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show')->middleware('permission:view_purchases');
+    Route::get('purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchases.edit')->middleware('permission:edit_purchases');
+    Route::put('purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update')->middleware('permission:edit_purchases');
+    Route::delete('purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.destroy')->middleware('permission:delete_purchases');
     Route::post('purchases/{purchase}/receive', [PurchaseController::class, 'receive'])->name('purchases.receive')->middleware('permission:receive_purchases');
     Route::post('purchases/{purchase}/cancel', [PurchaseController::class, 'cancel'])->name('purchases.cancel');
 
@@ -68,12 +98,29 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureUserIsActive::class])->gro
     Route::post('/stock/adjust', [StockAdjustmentController::class, 'adjust'])->name('stock.adjust')->middleware('permission:adjust_stock');
 
     // Reconciliations
-    Route::resource('reconciliations', ReconciliationController::class)->only(['index', 'create', 'store', 'show'])->middleware('permission:create_reconciliations');
+    Route::get('reconciliations', [ReconciliationController::class, 'index'])->name('reconciliations.index')->middleware('permission:view_reconciliations');
+    Route::get('reconciliations/create', [ReconciliationController::class, 'create'])->name('reconciliations.create')->middleware('permission:create_reconciliations');
+    Route::post('reconciliations', [ReconciliationController::class, 'store'])->name('reconciliations.store')->middleware('permission:create_reconciliations');
+    Route::get('reconciliations/{reconciliation}', [ReconciliationController::class, 'show'])->name('reconciliations.show')->middleware('permission:view_reconciliations');
     Route::get('/api/reconciliation/expected', [ReconciliationController::class, 'expected'])->name('api.reconciliation.expected');
 
     // Expenses
-    Route::resource('expenses', ExpenseController::class)->middleware('permission:create_expenses');
-    Route::resource('expense-categories', ExpenseCategoryController::class)->middleware('permission:create_expense_categories');
+    Route::get('expenses', [ExpenseController::class, 'index'])->name('expenses.index')->middleware('permission:view_expenses');
+    Route::get('expenses/create', [ExpenseController::class, 'create'])->name('expenses.create')->middleware('permission:create_expenses');
+    Route::post('expenses', [ExpenseController::class, 'store'])->name('expenses.store')->middleware('permission:create_expenses');
+    Route::get('expenses/{expense}', [ExpenseController::class, 'show'])->name('expenses.show')->middleware('permission:view_expenses');
+    Route::get('expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit')->middleware('permission:edit_expenses');
+    Route::put('expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update')->middleware('permission:edit_expenses');
+    Route::delete('expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy')->middleware('permission:delete_expenses');
+
+    // Expense Categories
+    Route::get('expense-categories', [ExpenseCategoryController::class, 'index'])->name('expense-categories.index')->middleware('permission:view_expense_categories');
+    Route::get('expense-categories/create', [ExpenseCategoryController::class, 'create'])->name('expense-categories.create')->middleware('permission:create_expense_categories');
+    Route::post('expense-categories', [ExpenseCategoryController::class, 'store'])->name('expense-categories.store')->middleware('permission:create_expense_categories');
+    Route::get('expense-categories/{expense_category}', [ExpenseCategoryController::class, 'show'])->name('expense-categories.show')->middleware('permission:view_expense_categories');
+    Route::get('expense-categories/{expense_category}/edit', [ExpenseCategoryController::class, 'edit'])->name('expense-categories.edit')->middleware('permission:edit_expense_categories');
+    Route::put('expense-categories/{expense_category}', [ExpenseCategoryController::class, 'update'])->name('expense-categories.update')->middleware('permission:edit_expense_categories');
+    Route::delete('expense-categories/{expense_category}', [ExpenseCategoryController::class, 'destroy'])->name('expense-categories.destroy')->middleware('permission:delete_expense_categories');
 
     // Payments
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
@@ -101,10 +148,22 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureUserIsActive::class])->gro
     });
 
     // Roles
-    Route::resource('roles', RoleController::class)->middleware('permission:create_roles');
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('permission:view_roles');
+    Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create')->middleware('permission:create_roles');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store')->middleware('permission:create_roles');
+    Route::get('roles/{role}', [RoleController::class, 'show'])->name('roles.show')->middleware('permission:view_roles');
+    Route::get('roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit')->middleware('permission:edit_roles');
+    Route::put('roles/{role}', [RoleController::class, 'update'])->name('roles.update')->middleware('permission:edit_roles');
+    Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy')->middleware('permission:delete_roles');
 
     // Users
-    Route::resource('users', UserController::class)->middleware('permission:create_users');
+    Route::get('users', [UserController::class, 'index'])->name('users.index')->middleware('permission:view_users');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create')->middleware('permission:create_users');
+    Route::post('users', [UserController::class, 'store'])->name('users.store')->middleware('permission:create_users');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('permission:view_users');
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('permission:edit_users');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('permission:edit_users');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('permission:delete_users');
     Route::patch('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status')->middleware('permission:create_users');
 
     // Activity Log

@@ -87,7 +87,7 @@
                 </tbody>
             </table>
         </div>
-        @if(isset($roles) && $roles->hasPages())
+        @if(isset($roles) && $roles instanceof \Illuminate\Pagination\LengthAwarePaginator && $roles->hasPages())
             <div class="px-6 py-4 border-t border-gray-200">
                 {{ $roles->links() }}
             </div>
