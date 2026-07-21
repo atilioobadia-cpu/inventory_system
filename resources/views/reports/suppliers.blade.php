@@ -6,11 +6,11 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Supplier Report</h1>
-            <p class="text-gray-500 mt-1">Supplier purchases and outstanding balances</p>
+            <h1 class="text-2xl font-bold text-heading">Supplier Report</h1>
+            <p class="text-muted mt-1">Supplier purchases and outstanding balances</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('reports.suppliers') }}?export=csv" class="inline-flex items-center gap-2 px-4 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">
+            <a href="{{ route('reports.suppliers') }}?export=csv" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                 Export CSV
             </a>
@@ -23,92 +23,92 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="bg-white rounded-xl border border-border p-6">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-amber-100 rounded-lg">
-                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+                <div class="p-2 bg-warning-light rounded-lg">
+                    <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">Total Suppliers</p>
-                    <p class="text-xl font-bold text-gray-800">{{ number_format($totalSuppliers ?? 0) }}</p>
+                    <p class="text-sm text-muted">Total Suppliers</p>
+                    <p class="text-xl font-bold text-heading">{{ number_format($totalSuppliers ?? 0) }}</p>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="bg-white rounded-xl border border-border p-6">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-green-100 rounded-lg">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="p-2 bg-success-light rounded-lg">
+                    <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">Active Suppliers</p>
-                    <p class="text-xl font-bold text-green-600">{{ number_format($activeSuppliers ?? 0) }}</p>
+                    <p class="text-sm text-muted">Active Suppliers</p>
+                    <p class="text-xl font-bold text-success">{{ number_format($activeSuppliers ?? 0) }}</p>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="bg-white rounded-xl border border-border p-6">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-indigo-100 rounded-lg">
                     <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">Total Purchases</p>
-                    <p class="text-xl font-bold text-gray-800">TZS {{ number_format($totalPurchases ?? 0) }}</p>
+                    <p class="text-sm text-muted">Total Purchases</p>
+                    <p class="text-xl font-bold text-heading">TZS {{ number_format($totalPurchases ?? 0) }}</p>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="bg-white rounded-xl border border-border p-6">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-red-100 rounded-lg">
-                    <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">Outstanding</p>
-                    <p class="text-xl font-bold text-red-600">TZS {{ number_format($outstanding ?? 0) }}</p>
+                    <p class="text-sm text-muted">Outstanding</p>
+                    <p class="text-xl font-bold text-danger">TZS {{ number_format($outstanding ?? 0) }}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Supplier Table -->
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div class="p-6 border-b border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-800">Supplier Details</h2>
+    <div class="bg-white rounded-xl border border-border overflow-hidden">
+        <div class="p-6 border-b border-border">
+            <h2 class="text-lg font-semibold text-heading">Supplier Details</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-gray-50">
+                <thead class="bg-card-bg">
                     <tr>
-                        <th class="text-left px-6 py-3 font-medium text-gray-500">Supplier</th>
-                        <th class="text-left px-6 py-3 font-medium text-gray-500">Phone</th>
-                        <th class="text-right px-6 py-3 font-medium text-gray-500">Total Purchases</th>
-                        <th class="text-right px-6 py-3 font-medium text-gray-500">Total Paid</th>
-                        <th class="text-right px-6 py-3 font-medium text-gray-500">Balance</th>
-                        <th class="text-left px-6 py-3 font-medium text-gray-500">Last Purchase</th>
+                        <th class="text-left px-6 py-3 font-medium text-muted">Supplier</th>
+                        <th class="text-left px-6 py-3 font-medium text-muted">Phone</th>
+                        <th class="text-right px-6 py-3 font-medium text-muted">Total Purchases</th>
+                        <th class="text-right px-6 py-3 font-medium text-muted">Total Paid</th>
+                        <th class="text-right px-6 py-3 font-medium text-muted">Balance</th>
+                        <th class="text-left px-6 py-3 font-medium text-muted">Last Purchase</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($suppliers ?? [] as $supplier)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-card-bg">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
-                                        <span class="text-sm font-medium text-amber-700">{{ substr($supplier->name, 0, 1) }}</span>
+                                    <div class="w-8 h-8 bg-warning-light rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-medium text-warning">{{ substr($supplier->name, 0, 1) }}</span>
                                     </div>
                                     <div>
-                                        <p class="font-medium text-gray-800">{{ $supplier->name }}</p>
-                                        <p class="text-xs text-gray-500">{{ $supplier->email ?? '-' }}</p>
+                                        <p class="font-medium text-heading">{{ $supplier->name }}</p>
+                                        <p class="text-xs text-muted">{{ $supplier->email ?? '-' }}</p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-gray-600">{{ $supplier->phone ?? '-' }}</td>
-                            <td class="px-6 py-4 text-right font-medium text-gray-800">TZS {{ number_format($supplier->total_purchases ?? 0) }}</td>
-                            <td class="px-6 py-4 text-right text-green-600">TZS {{ number_format($supplier->total_paid ?? 0) }}</td>
-                            <td class="px-6 py-4 text-right {{ ($supplier->balance ?? 0) > 0 ? 'text-red-600 font-semibold' : 'text-gray-600' }}">TZS {{ number_format($supplier->balance ?? 0) }}</td>
+                            <td class="px-6 py-4 text-right font-medium text-heading">TZS {{ number_format($supplier->total_purchases ?? 0) }}</td>
+                            <td class="px-6 py-4 text-right text-success">TZS {{ number_format($supplier->total_paid ?? 0) }}</td>
+                            <td class="px-6 py-4 text-right {{ ($supplier->balance ?? 0) > 0 ? 'text-danger font-semibold' : 'text-gray-600' }}">TZS {{ number_format($supplier->balance ?? 0) }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $supplier->last_purchase?->format('d M Y') ?? '-' }}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                            <td colspan="6" class="px-6 py-12 text-center text-muted">
                                 <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
                                 No suppliers found.
                             </td>
@@ -118,7 +118,7 @@
             </table>
         </div>
         @if(isset($suppliers) && $suppliers->hasPages())
-            <div class="px-6 py-4 border-t border-gray-200">
+            <div class="px-6 py-4 border-t border-border">
                 {{ $suppliers->withQueryString()->links() }}
             </div>
         @endif

@@ -6,11 +6,11 @@
 <div class="space-y-6" x-data="profitLossReport()">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Profit & Loss Report</h1>
-            <p class="text-gray-500 mt-1">Revenue, costs and profitability analysis</p>
+            <h1 class="text-2xl font-bold text-heading">Profit & Loss Report</h1>
+            <p class="text-muted mt-1">Revenue, costs and profitability analysis</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('reports.profit-loss') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">
+            <a href="{{ route('reports.profit-loss') }}?{{ http_build_query(array_merge(request()->query(), ['export' => 'csv'])) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                 Export CSV
             </a>
@@ -22,66 +22,66 @@
     </div>
 
     <!-- Date Range -->
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div class="bg-white rounded-xl border border-border p-6">
         <form action="{{ route('reports.profit-loss') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-gray-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
+                <label class="block text-sm font-medium text-body mb-1">From Date</label>
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-gray-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
+                <label class="block text-sm font-medium text-body mb-1">To Date</label>
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
             </div>
-            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Generate Report</button>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Generate Report</button>
         </form>
     </div>
 
     <!-- Profit & Loss Statement -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-800">Profit & Loss Statement</h2>
-                <p class="text-sm text-gray-500">{{ request('from_date', now()->startOfMonth()->format('d M Y')) }} - {{ request('to_date', now()->format('d M Y')) }}</p>
+        <div class="lg:col-span-2 bg-white rounded-xl border border-border overflow-hidden">
+            <div class="p-6 border-b border-border">
+                <h2 class="text-lg font-semibold text-heading">Profit & Loss Statement</h2>
+                <p class="text-sm text-muted">{{ request('from_date', now()->startOfMonth()->format('d M Y')) }} - {{ request('to_date', now()->format('d M Y')) }}</p>
             </div>
             <div class="p-6 space-y-6">
                 <!-- Revenue Section -->
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Revenue</h3>
+                    <h3 class="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Revenue</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between py-2 text-sm">
                             <span class="text-gray-600">Total Sales</span>
-                            <span class="font-medium text-gray-800">TZS {{ number_format($totalSales ?? 0) }}</span>
+                            <span class="font-medium text-heading">TZS {{ number_format($totalSales ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
                             <span class="text-gray-600">Less: Returns & Adjustments</span>
-                            <span class="font-medium text-red-600">-TZS {{ number_format($returns ?? 0) }}</span>
+                            <span class="font-medium text-danger">-TZS {{ number_format($returns ?? 0) }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-t border-gray-200 text-sm">
-                            <span class="font-semibold text-gray-800">Net Revenue</span>
-                            <span class="font-bold text-gray-800">TZS {{ number_format($netRevenue ?? 0) }}</span>
+                        <div class="flex justify-between py-3 border-t border-border text-sm">
+                            <span class="font-semibold text-heading">Net Revenue</span>
+                            <span class="font-bold text-heading">TZS {{ number_format($netRevenue ?? 0) }}</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- COGS Section -->
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Cost of Goods Sold</h3>
+                    <h3 class="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Cost of Goods Sold</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between py-2 text-sm">
                             <span class="text-gray-600">Opening Stock</span>
-                            <span class="font-medium text-gray-800">TZS {{ number_format($openingStock ?? 0) }}</span>
+                            <span class="font-medium text-heading">TZS {{ number_format($openingStock ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
                             <span class="text-gray-600">Add: Purchases</span>
-                            <span class="font-medium text-gray-800">TZS {{ number_format($purchases ?? 0) }}</span>
+                            <span class="font-medium text-heading">TZS {{ number_format($purchases ?? 0) }}</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm">
                             <span class="text-gray-600">Less: Closing Stock</span>
-                            <span class="font-medium text-red-600">-TZS {{ number_format($closingStock ?? 0) }}</span>
+                            <span class="font-medium text-danger">-TZS {{ number_format($closingStock ?? 0) }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-t border-gray-200 text-sm">
-                            <span class="font-semibold text-gray-800">Total COGS</span>
-                            <span class="font-bold text-gray-800">TZS {{ number_format($totalCogs ?? 0) }}</span>
+                        <div class="flex justify-between py-3 border-t border-border text-sm">
+                            <span class="font-semibold text-heading">Total COGS</span>
+                            <span class="font-bold text-heading">TZS {{ number_format($totalCogs ?? 0) }}</span>
                         </div>
                     </div>
                 </div>
@@ -90,26 +90,26 @@
                 <div class="bg-green-50 rounded-lg p-4">
                     <div class="flex justify-between">
                         <span class="font-semibold text-green-800">Gross Profit</span>
-                        <span class="font-bold text-lg {{ ($grossProfit ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">TZS {{ number_format($grossProfit ?? 0) }}</span>
+                        <span class="font-bold text-lg {{ ($grossProfit ?? 0) >= 0 ? 'text-success' : 'text-danger' }}">TZS {{ number_format($grossProfit ?? 0) }}</span>
                     </div>
                     @if(($netRevenue ?? 0) > 0)
-                        <p class="text-sm text-green-600 mt-1">Gross Margin: {{ number_format(($grossProfit ?? 0) / ($netRevenue ?? 1) * 100, 1) }}%</p>
+                        <p class="text-sm text-success mt-1">Gross Margin: {{ number_format(($grossProfit ?? 0) / ($netRevenue ?? 1) * 100, 1) }}%</p>
                     @endif
                 </div>
 
                 <!-- Expenses Section -->
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Expenses</h3>
+                    <h3 class="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Expenses</h3>
                     <div class="space-y-2">
                         @foreach($expenseBreakdown ?? [] as $expense)
                             <div class="flex justify-between py-2 text-sm">
                                 <span class="text-gray-600">{{ $expense['name'] }}</span>
-                                <span class="font-medium text-gray-800">TZS {{ number_format($expense['amount']) }}</span>
+                                <span class="font-medium text-heading">TZS {{ number_format($expense['amount']) }}</span>
                             </div>
                         @endforeach
-                        <div class="flex justify-between py-3 border-t border-gray-200 text-sm">
-                            <span class="font-semibold text-gray-800">Total Expenses</span>
-                            <span class="font-bold text-red-600">TZS {{ number_format($totalExpenses ?? 0) }}</span>
+                        <div class="flex justify-between py-3 border-t border-border text-sm">
+                            <span class="font-semibold text-heading">Total Expenses</span>
+                            <span class="font-bold text-danger">TZS {{ number_format($totalExpenses ?? 0) }}</span>
                         </div>
                     </div>
                 </div>
@@ -128,8 +128,8 @@
         </div>
 
         <!-- Monthly Comparison Chart -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Monthly Comparison</h2>
+        <div class="bg-white rounded-xl border border-border p-6">
+            <h2 class="text-lg font-semibold text-heading mb-4">Monthly Comparison</h2>
             <div class="h-96">
                 <canvas id="monthlyComparisonChart"></canvas>
             </div>

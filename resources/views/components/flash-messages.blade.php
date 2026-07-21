@@ -1,10 +1,10 @@
-@props(['type' => 'success', 'message' => '', 'title' => ''])
+﻿@props(['type' => 'success', 'message' => '', 'title' => ''])
 
 @php
 $styles = [
     'success' => ['bg' => 'bg-green-50', 'border' => 'border-green-200', 'text' => 'text-green-800', 'iconColor' => 'text-green-500'],
-    'error' => ['bg' => 'bg-red-50', 'border' => 'border-red-200', 'text' => 'text-red-800', 'iconColor' => 'text-red-500'],
-    'warning' => ['bg' => 'bg-amber-50', 'border' => 'border-amber-200', 'text' => 'text-amber-800', 'iconColor' => 'text-amber-500'],
+    'error' => ['bg' => 'bg-danger-light', 'border' => 'border-red-200', 'text' => 'text-red-800', 'iconColor' => 'text-danger'],
+    'warning' => ['bg' => 'bg-warning-light', 'border' => 'border-amber-200', 'text' => 'text-amber-800', 'iconColor' => 'text-amber-500'],
     'info' => ['bg' => 'bg-blue-50', 'border' => 'border-blue-200', 'text' => 'text-blue-800', 'iconColor' => 'text-blue-500'],
 ];
 $style = $styles[$type] ?? $styles['success'];
@@ -46,8 +46,8 @@ $messages = [
              class="mb-4 rounded-lg border px-4 py-3 flex items-start gap-3"
              :class="{
                  'bg-green-50 border-green-200': alert.type === 'success',
-                 'bg-red-50 border-red-200': alert.type === 'error',
-                 'bg-amber-50 border-amber-200': alert.type === 'warning',
+                 'bg-danger-light border-red-200': alert.type === 'error',
+                 'bg-warning-light border-amber-200': alert.type === 'warning',
                  'bg-blue-50 border-blue-200': alert.type === 'info'
              }">
 
@@ -61,7 +61,7 @@ $messages = [
                 </template>
                 {{-- Error --}}
                 <template x-if="alert.type === 'error'">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/>
                     </svg>
                 </template>
@@ -93,9 +93,9 @@ $messages = [
             {{-- Close Button --}}
             <button @click="dismiss(index)" class="flex-shrink-0"
                     :class="{
-                        'text-green-500 hover:text-green-700': alert.type === 'success',
-                        'text-red-500 hover:text-red-700': alert.type === 'error',
-                        'text-amber-500 hover:text-amber-700': alert.type === 'warning',
+                        'text-green-500 hover:text-success': alert.type === 'success',
+                        'text-danger hover:text-red-700': alert.type === 'error',
+                        'text-amber-500 hover:text-warning': alert.type === 'warning',
                         'text-blue-500 hover:text-blue-700': alert.type === 'info'
                     }">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">

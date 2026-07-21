@@ -6,10 +6,10 @@
 <div class="max-w-2xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Edit User: {{ $user->name }}</h1>
-            <p class="text-gray-500 mt-1">Update user information and role</p>
+            <h1 class="text-2xl font-bold text-heading">Edit User: {{ $user->name }}</h1>
+            <p class="text-muted mt-1">Update user information and role</p>
         </div>
-        <a href="{{ route('users.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+        <a href="{{ route('users.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Back
         </a>
@@ -18,20 +18,20 @@
     <form action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data" x-data="userForm()">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-6">
+        <div class="bg-white rounded-xl border border-border p-6 space-y-6">
             <!-- Avatar -->
             <div class="flex items-center gap-6">
-                <div class="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border-2 border-dashed border-gray-300">
+                <div class="w-20 h-20 rounded-full bg-control-bg flex items-center justify-center overflow-hidden border-2 border-dashed border-border">
                     <img x-show="preview || existingAvatar" :src="preview || existingAvatar" class="w-full h-full object-cover">
                     <svg x-show="!preview && !existingAvatar" class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                 </div>
                 <div>
                     <label class="form-label">Profile Photo</label>
-                    <input type="file" name="avatar" accept="image/*" @change="handlePreview($event)" class="text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
+                    <input type="file" name="avatar" accept="image/*" @change="handlePreview($event)" class="text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-accent hover:file:bg-accent-light">
                     @if($user->avatar)
                         <label class="flex items-center gap-2 mt-1 cursor-pointer">
-                            <input type="checkbox" name="remove_avatar" value="1" class="w-3.5 h-3.5 rounded border-gray-300 text-red-600 focus:ring-red-500">
-                            <span class="text-xs text-gray-500">Remove avatar</span>
+                            <input type="checkbox" name="remove_avatar" value="1" class="w-3.5 h-3.5 rounded border-border text-danger focus:ring-red-500">
+                            <span class="text-xs text-muted">Remove avatar</span>
                         </label>
                     @endif
                 </div>
@@ -39,21 +39,21 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="name" class="form-label">Full Name <span class="text-red-500">*</span></label>
+                    <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required>
-                    @error('name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    @error('name') <p class="mt-1 text-sm text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="email" class="form-label">Email <span class="text-red-500">*</span></label>
+                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required>
-                    @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    @error('email') <p class="mt-1 text-sm text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label for="phone" class="form-label">Phone</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}">
                 </div>
                 <div>
-                    <label for="role_id" class="form-label">Role <span class="text-red-500">*</span></label>
+                    <label for="role_id" class="form-label">Role <span class="text-danger">*</span></label>
                     <select name="role_id" id="role_id" required>
                         @foreach($roles ?? [] as $role)
                             <option value="{{ $role->id }}" {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
@@ -63,13 +63,13 @@
             </div>
 
             <!-- Password Section -->
-            <div class="border-t border-gray-200 pt-6">
-                <h3 class="text-sm font-semibold text-gray-700 mb-4">Change Password (leave blank to keep current)</h3>
+            <div class="border-t border-border pt-6">
+                <h3 class="text-sm font-semibold text-body mb-4">Change Password (leave blank to keep current)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="password" class="form-label">New Password</label>
                         <input type="password" name="password" id="password">
-                        @error('password') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                        @error('password') <p class="mt-1 text-sm text-danger">{{ $message }}</p> @enderror
                     </div>
                     <div>
                         <label for="password_confirmation" class="form-label">Confirm New Password</label>
@@ -79,10 +79,10 @@
             </div>
 
             <!-- Active Toggle -->
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center justify-between p-4 bg-card-bg rounded-lg">
                 <div>
-                    <p class="font-medium text-gray-800">Active Account</p>
-                    <p class="text-sm text-gray-500">User can log in when enabled</p>
+                    <p class="font-medium text-heading">Active Account</p>
+                    <p class="text-sm text-muted">User can log in when enabled</p>
                 </div>
                 <button type="button" @click="active = !active" class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors" :class="active ? 'bg-green-500' : 'bg-gray-300'">
                     <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform" :style="active ? 'transform: translateX(22px)' : 'transform: translateX(2px)'"></span>
@@ -92,8 +92,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-3">
-            <a href="{{ route('users.index') }}" class="px-6 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Update User</button>
+            <a href="{{ route('users.index') }}" class="px-6 py-2 bg-control-bg text-gray-600 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">Cancel</a>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">Update User</button>
         </div>
     </form>
 </div>
