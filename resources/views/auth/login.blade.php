@@ -27,8 +27,8 @@
     <div class="w-full max-w-md">
         {{-- Logo & Title --}}
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-navy rounded-2xl mb-4">
-                <svg class="w-9 h-9 text-electric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-tz-blue rounded-2xl mb-4">
+                <svg class="w-9 h-9 text-tz-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h2m10 1l2-1V8a1 1 0 00-1-1h-2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -97,18 +97,18 @@
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
-                               class="w-4 h-4 text-electric border-gray-300 rounded focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 rounded focus:ring-electric">
                         <span class="text-sm text-gray-600">Remember me</span>
                     </label>
                     @if(Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="text-sm text-electric hover:underline">
+                    <a href="{{ route('password.request') }}" class="text-sm text-tz-green hover:underline">
                         Forgot password?
                     </a>
                     @endif
                 </div>
 
                 <button type="submit"
-                        class="w-full bg-electric text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-electric/50 focus:ring-offset-2">
+                        class="w-full bg-tz-green text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors focus:outline-none focus:ring-2 focus:ring-electric/50 focus:ring-offset-2">
                     Sign In
                 </button>
             </form>

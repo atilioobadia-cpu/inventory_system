@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('expense-categories.index') }}" class="hover:text-electric transition-colors">Expense Categories</a>
+    <a href="{{ route('expense-categories.index') }}" class="hover:text-tz-green transition-colors">Expense Categories</a>
     <span class="mx-2 text-gray-400">/</span>
     <span class="text-gray-700 font-medium">Edit Category</span>
 @endsection
@@ -22,26 +22,23 @@
             <h3 class="text-lg font-semibold text-gray-900 mb-6">Category Details</h3>
             <div class="space-y-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="name" id="name" value="{{ old('name', $category->name) }}" required
-                           class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <label for="name" class="form-label">Name <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="name" value="{{ old('name', $category->name) }}" required>
                     @error('name') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                    <input type="text" name="slug" id="slug" value="{{ old('slug', $category->slug) }}"
-                           class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-gray-50">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" name="slug" id="slug" value="{{ old('slug', $category->slug) }}">
                     @error('slug') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                    <textarea name="description" id="description" rows="3"
-                              class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">{{ old('description', $category->description) }}</textarea>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" rows="3">{{ old('description', $category->description) }}</textarea>
                     @error('description') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', $category->is_active ?? true) ? 'checked' : '' }} class="w-5 h-5 text-electric rounded border-gray-300 focus:ring-electric/50">
+                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', $category->is_active ?? true) ? 'checked' : '' }} class="w-5 h-5 text-tz-green rounded border-gray-300 focus:ring-electric/50">
                         <span class="text-sm font-medium text-gray-700">Active</span>
                     </label>
                 </div>
@@ -52,7 +49,7 @@
             <a href="{{ route('expense-categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                 Cancel
             </a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-electric rounded-lg hover:bg-blue-600 transition-colors">
+            <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-tz-green rounded-lg hover:bg-tz-green-dark transition-colors">
                 Update Category
             </button>
         </div>

@@ -182,7 +182,38 @@ class ReportController extends Controller
             ->orderBy('month')
             ->get();
 
-        return view('reports.profit-loss', compact('totalSales', 'totalCost', 'totalExpenses', 'grossProfit', 'netProfit', 'monthlyData', 'from', 'to'));
+        $returns = 0;
+        $netRevenue = $totalSales;
+        $openingStock = 0;
+        $purchases = Purchase::where('status', '!=', 'cancelled')
+            ->whereDate('purchase_date', '>=', $from)
+            ->whereDate('purchase_date', '<=', $to)
+            ->sum('total_amount');
+        $closingStock = $stockService = app(StockService::class);
+        $items = Item::where('is_active', true)->get();
+        $closingStock = $items->sum(function ($item) use ($stockService) {
+            return $stockService->getCurrentStock($item) * $item->cost_price;
+        });
+        $totalCogs = $totalCost;
+        $expenseBreakdown = Expense::select('expense_categories.name', DB::raw('SUM(expenses.amount) as amount'))
+            ->join('expense_categories', 'expenses.expense_category_id', '=', 'expense_categories.id')
+            ->whereDate('expenses.expense_date', '>=', $from)
+            ->whereDate('expenses.expense_date', '<=', $to)
+            ->groupBy('expense_categories.name')
+            ->get()
+            ->toArray();
+
+        $monthlyLabels = $monthlyData->pluck('month')->toArray();
+        $monthlyRevenue = $monthlyData->pluck('sales')->toArray();
+        $monthlyCogs = [];
+        $monthlyExpenses = [];
+
+        return view('reports.profit-loss', compact(
+            'totalSales', 'totalCost', 'totalExpenses', 'grossProfit', 'netProfit',
+            'returns', 'netRevenue', 'openingStock', 'purchases', 'closingStock', 'totalCogs',
+            'expenseBreakdown', 'monthlyLabels', 'monthlyRevenue', 'monthlyCogs', 'monthlyExpenses',
+            'from', 'to'
+        ));
     }
 
     public function tax(Request $request)
@@ -202,7 +233,51 @@ class ReportController extends Controller
 
         $netTax = $salesTax - $purchaseTax;
 
-        return view('reports.tax', compact('salesTax', 'purchaseTax', 'netTax', 'from', 'to'));
+        $salesVat = $salesTax;
+        $purchaseVat = $purchaseTax;
+        $netVat = $netTax;
+
+        $monthlyVat = Sale::whereNull('voided_at')
+            ->whereDate('sale_date', '>=', $from)
+            ->whereDate('sale_date', '<=', $to)
+            ->select(
+                DB::raw("DATE_FORMAT(sale_date, '%Y-%m') as month"),
+                DB::raw('SUM(tax_amount) as sales_vat'),
+                DB::raw('0 as purchase_vat'),
+                DB::raw('SUM(tax_amount) as net')
+            )
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->toArray();
+
+        foreach (Purchase::where('status', '!=', 'cancelled')
+            ->whereDate('purchase_date', '>=', $from)
+            ->whereDate('purchase_date', '<=', $to)
+            ->select(
+                DB::raw("DATE_FORMAT(purchase_date, '%Y-%m') as month"),
+                DB::raw('SUM(tax_amount) as purchase_vat')
+            )
+            ->groupBy('month')
+            ->get() as $pMonth) {
+            foreach ($monthlyVat as &$m) {
+                if ($m['month'] === $pMonth->month) {
+                    $m['purchase_vat'] = $pMonth->purchase_vat;
+                    $m['net'] = $m['sales_vat'] - $m['purchase_vat'];
+                    break;
+                }
+            }
+            unset($m);
+        }
+
+        foreach ($monthlyVat as &$m) {
+            $m['label'] = \Carbon\Carbon::parse($m['month'] . '-01')->format('M Y');
+        }
+        unset($m);
+
+        $vatByRate = [];
+
+        return view('reports.tax', compact('salesTax', 'purchaseTax', 'netTax', 'salesVat', 'purchaseVat', 'netVat', 'monthlyVat', 'vatByRate', 'from', 'to'));
     }
 
     public function customers(Request $request)
@@ -216,7 +291,12 @@ class ReportController extends Controller
         ->orderByDesc('sales_sum_total_amount')
         ->paginate(25);
 
-        return view('reports.customers', compact('customers'));
+        $totalCustomers = Customer::count();
+        $activeCustomers = Customer::where('is_active', true)->count();
+        $totalSales = Sale::whereNull('voided_at')->sum('total_amount');
+        $outstandingBalances = Sale::whereNull('voided_at')->where('due_amount', '>', 0)->sum('due_amount');
+
+        return view('reports.customers', compact('customers', 'totalCustomers', 'activeCustomers', 'totalSales', 'outstandingBalances'));
     }
 
     public function suppliers(Request $request)
@@ -226,7 +306,12 @@ class ReportController extends Controller
             ->orderByDesc('purchases_sum_total_amount')
             ->paginate(25);
 
-        return view('reports.suppliers', compact('suppliers'));
+        $totalSuppliers = Supplier::count();
+        $activeSuppliers = Supplier::where('is_active', true)->count();
+        $totalPurchases = Purchase::where('status', '!=', 'cancelled')->sum('total_amount');
+        $outstanding = Purchase::where('status', '!=', 'cancelled')->where('due_amount', '>', 0)->sum('due_amount');
+
+        return view('reports.suppliers', compact('suppliers', 'totalSuppliers', 'activeSuppliers', 'totalPurchases', 'outstanding'));
     }
 
     public function export(Request $request)

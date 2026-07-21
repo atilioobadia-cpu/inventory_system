@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('sales.index') }}" class="hover:text-electric transition-colors">Sales</a>
+    <a href="{{ route('sales.index') }}" class="hover:text-tz-green transition-colors">Sales</a>
     <span class="mx-2 text-gray-400">/</span>
     <span class="text-gray-700 font-medium">{{ $sale->invoice_number ?? 'Sale' }}</span>
 @endsection

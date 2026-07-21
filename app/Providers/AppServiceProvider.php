@@ -7,6 +7,7 @@ use App\Services\InvoiceService;
 use App\Services\NotificationService;
 use App\Services\PermissionService;
 use App\Services\StockService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -42,6 +43,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        DB::statement('SET SESSION sql_mode = "NO_ENGINE_SUBSTITUTION"');
     }
 }

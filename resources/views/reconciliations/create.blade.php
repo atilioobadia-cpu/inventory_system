@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('reconciliations.index') }}" class="hover:text-electric transition-colors">Reconciliations</a>
+    <a href="{{ route('reconciliations.index') }}" class="hover:text-tz-green transition-colors">Reconciliations</a>
     <span class="mx-2 text-gray-400">/</span>
     <span class="text-gray-700 font-medium">Create</span>
 @endsection
@@ -71,21 +71,21 @@
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="daily" x-model="type" class="peer sr-only">
                             <div class="border-2 border-gray-200 rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                                <svg class="w-6 h-6 text-electric mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                                <svg class="w-6 h-6 text-tz-green mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
                                 <span class="text-sm font-medium text-gray-700">Daily</span>
                             </div>
                         </label>
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="weekly" x-model="type" class="peer sr-only">
                             <div class="border-2 border-gray-200 rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                                <svg class="w-6 h-6 text-electric mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 9.75h4M10 14.25h4"/></svg>
+                                <svg class="w-6 h-6 text-tz-green mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 9.75h4M10 14.25h4"/></svg>
                                 <span class="text-sm font-medium text-gray-700">Weekly</span>
                             </div>
                         </label>
                         <label class="relative cursor-pointer">
                             <input type="radio" name="type" value="monthly" x-model="type" class="peer sr-only">
                             <div class="border-2 border-gray-200 rounded-lg p-4 text-center peer-checked:border-electric peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                                <svg class="w-6 h-6 text-electric mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v5.25m0 0H9.75m2.25 0H15"/></svg>
+                                <svg class="w-6 h-6 text-tz-green mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v5.25m0 0H9.75m2.25 0H15"/></svg>
                                 <span class="text-sm font-medium text-gray-700">Monthly</span>
                             </div>
                         </label>
@@ -93,11 +93,11 @@
                     <div class="grid grid-cols-2 gap-4 mt-4">
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1">From</label>
-                            <input type="date" name="date_from_display" x-model="dateFrom" readonly class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 cursor-not-allowed">
+                            <input type="date" name="date_from_display" x-model="dateFrom" readonly class="cursor-not-allowed">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1">To</label>
-                            <input type="date" name="date_to_display" x-model="dateTo" readonly class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 cursor-not-allowed">
+                            <input type="date" name="date_to_display" x-model="dateTo" readonly class="cursor-not-allowed">
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                         <hr class="border-gray-200">
                         <div class="flex items-center justify-between py-2">
                             <span class="text-base font-bold text-gray-900">Expected Cash</span>
-                            <span class="text-base font-bold text-electric">TZS <span x-text="Number(expectedCash).toLocaleString('en', {minimumFractionDigits: 2, maximumFractionDigits: 2})"></span></span>
+                            <span class="text-base font-bold text-tz-green">TZS <span x-text="Number(expectedCash).toLocaleString('en', {minimumFractionDigits: 2, maximumFractionDigits: 2})"></span></span>
                         </div>
                     </div>
                 </div>
@@ -146,11 +146,11 @@
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Cash Count</h3>
                     <div class="space-y-4">
                         <div>
-                            <label for="actual_cash" class="block text-sm font-medium text-gray-700 mb-1">Actual Cash Count (TZS) <span class="text-red-500">*</span></label>
+                            <label for="actual_cash" class="form-label">Actual Cash Count (TZS) <span class="text-red-500">*</span></label>
                             <div class="relative">
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium">TZS</span>
                                 <input type="number" name="actual_cash" x-model.number="actualCash" step="0.01" min="0" required
-                                       class="w-full pl-14 pr-4 py-3 border border-gray-200 rounded-lg text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric"
+                                       class="pl-14 pr-4 text-lg font-semibold"
                                        placeholder="0.00">
                             </div>
                             @error('actual_cash') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
@@ -182,8 +182,7 @@
                 {{-- Notes --}}
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Notes</h3>
-                    <textarea name="notes" rows="3" placeholder="Optional notes about this reconciliation..."
-                              class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric"></textarea>
+                    <textarea name="notes" rows="3" placeholder="Optional notes about this reconciliation..."></textarea>
                 </div>
 
                 {{-- Actions --}}
@@ -191,7 +190,7 @@
                     <a href="{{ route('reconciliations.index') }}" class="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-electric rounded-lg hover:bg-blue-600 transition-colors">
+                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-tz-green rounded-lg hover:bg-tz-green-dark transition-colors">
                         Submit Reconciliation
                     </button>
                 </div>

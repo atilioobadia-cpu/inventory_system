@@ -25,30 +25,30 @@
                     <svg x-show="!preview" class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Profile Photo</label>
+                    <label class="form-label">Profile Photo</label>
                     <input type="file" name="avatar" accept="image/*" @change="handlePreview($event)" class="text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="name" class="form-label">Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" required>
                     @error('name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email <span class="text-red-500">*</span></label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="email" class="form-label">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" required>
                     @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                    <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" name="phone" id="phone" value="{{ old('phone') }}">
                     @error('phone') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="role_id" class="block text-sm font-medium text-slate-700 mb-1">Role <span class="text-red-500">*</span></label>
-                    <select name="role_id" id="role_id" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="role_id" class="form-label">Role <span class="text-red-500">*</span></label>
+                    <select name="role_id" id="role_id" required>
                         <option value="">Select Role</option>
                         @foreach($roles ?? [] as $role)
                             <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
@@ -57,13 +57,13 @@
                     @error('role_id') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password <span class="text-red-500">*</span></label>
-                    <input type="password" name="password" id="password" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="password" class="form-label">Password <span class="text-red-500">*</span></label>
+                    <input type="password" name="password" id="password" required>
                     @error('password') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-slate-700 mb-1">Confirm Password <span class="text-red-500">*</span></label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="password_confirmation" class="form-label">Confirm Password <span class="text-red-500">*</span></label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
 
         <div class="mt-6 flex items-center justify-end gap-3">
             <a href="{{ route('users.index') }}" class="px-6 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Create User</button>
+            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Create User</button>
         </div>
     </form>
 </div>

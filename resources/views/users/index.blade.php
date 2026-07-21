@@ -6,51 +6,51 @@
 <div class="space-y-6" x-data="{ showDeleteModal: false, deleteId: null }">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-slate-800">Users</h1>
-            <p class="text-slate-500 mt-1">Manage system users and their roles</p>
+            <h1 class="text-2xl font-bold text-gray-800">Users</h1>
+            <p class="text-gray-500 mt-1">Manage system users and their roles</p>
         </div>
-        <a href="{{ route('users.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+        <a href="{{ route('users.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>
             Add User
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-slate-50">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th class="text-left px-6 py-3 font-medium text-slate-500">User</th>
-                        <th class="text-left px-6 py-3 font-medium text-slate-500">Email</th>
-                        <th class="text-left px-6 py-3 font-medium text-slate-500">Role</th>
-                        <th class="text-left px-6 py-3 font-medium text-slate-500">Phone</th>
-                        <th class="text-center px-6 py-3 font-medium text-slate-500">Status</th>
-                        <th class="text-left px-6 py-3 font-medium text-slate-500">Last Login</th>
-                        <th class="text-right px-6 py-3 font-medium text-slate-500">Actions</th>
+                        <th class="text-left px-6 py-3 font-medium text-gray-500">User</th>
+                        <th class="text-left px-6 py-3 font-medium text-gray-500">Email</th>
+                        <th class="text-left px-6 py-3 font-medium text-gray-500">Role</th>
+                        <th class="text-left px-6 py-3 font-medium text-gray-500">Phone</th>
+                        <th class="text-center px-6 py-3 font-medium text-gray-500">Status</th>
+                        <th class="text-left px-6 py-3 font-medium text-gray-500">Last Login</th>
+                        <th class="text-right px-6 py-3 font-medium text-gray-500">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-gray-100">
                     @forelse($users ?? [] as $user)
-                        <tr class="hover:bg-slate-50">
+                        <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
+                                    <div class="w-9 h-9 bg-tz-green-light rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                                         @else
-                                            <span class="text-sm font-medium text-blue-700">{{ substr($user->name, 0, 1) }}</span>
+                                            <span class="text-sm font-medium text-tz-green">{{ substr($user->name, 0, 1) }}</span>
                                         @endif
                                     </div>
                                     <div>
-                                        <p class="font-medium text-slate-800">{{ $user->name }}</p>
+                                        <p class="font-medium text-gray-800">{{ $user->name }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-slate-600">{{ $user->email }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ $user->email }}</td>
                             <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
+                                <span class="px-2 py-1 bg-tz-green-light text-tz-green rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
                             </td>
-                            <td class="px-6 py-4 text-slate-600">{{ $user->phone ?? '-' }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ $user->phone ?? '-' }}</td>
                             <td class="px-6 py-4 text-center">
                                 <form action="{{ route('users.toggle-status', $user) }}" method="POST" class="inline">
                                     @csrf
@@ -60,10 +60,10 @@
                                     </button>
                                 </form>
                             </td>
-                            <td class="px-6 py-4 text-slate-500 text-xs">{{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}</td>
+                            <td class="px-6 py-4 text-gray-500 text-xs">{{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}</td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('users.edit', $user) }}" class="p-1.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
+                                    <a href="{{ route('users.edit', $user) }}" class="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                                     </a>
                                 </div>
@@ -71,8 +71,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-12 text-center text-slate-500">
-                                <svg class="w-12 h-12 mx-auto text-slate-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                            <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                                <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                                 No users found. Create your first user.
                             </td>
                         </tr>
@@ -81,7 +81,7 @@
             </table>
         </div>
         @if(isset($users) && $users->hasPages())
-            <div class="px-6 py-4 border-t border-slate-200">
+            <div class="px-6 py-4 border-t border-gray-200">
                 {{ $users->links() }}
             </div>
         @endif

@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('customers.index') }}" class="hover:text-electric transition-colors">Customers</a>
+<a href="{{ route('customers.index') }}" class="hover:text-tz-green transition-colors">Customers</a>
 <span class="mx-2">/</span>
 <span class="text-gray-800">{{ $customer->name ?? 'Details' }}</span>
 @endsection
@@ -30,7 +30,7 @@
             {{-- Customer Info Card --}}
             <div class="bg-white rounded-xl border border-gray-200 p-6">
                 <div class="text-center mb-4">
-                    <div class="w-16 h-16 bg-electric rounded-full flex items-center justify-center mx-auto mb-3">
+                    <div class="w-16 h-16 bg-tz-green rounded-full flex items-center justify-center mx-auto mb-3">
                         <span class="text-white text-xl font-bold">{{ substr($customer->name, 0, 1) }}</span>
                     </div>
                     <h2 class="text-lg font-bold text-gray-800">{{ $customer->name }}</h2>
@@ -91,7 +91,7 @@
                 <div class="space-y-3">
                     <div class="flex justify-between text-sm">
                         <span class="text-gray-500">Outstanding Balance</span>
-                        <span class="font-medium {{ ($customer->current_balance ?? 0) > 0 ? 'text-danger' : 'text-success' }}">TZS {{ number_format($customer->current_balance ?? 0) }}</span>
+                        <span class="font-medium {{ ($customer->current_balance ?? 0) > 0 ? 'text-red-600' : 'text-tz-green' }}">TZS {{ number_format($customer->current_balance ?? 0) }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
                         <span class="text-gray-500">Credit Limit</span>

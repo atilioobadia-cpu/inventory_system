@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('categories.index') }}" class="hover:text-electric transition-colors">Categories</a>
+<a href="{{ route('categories.index') }}" class="hover:text-tz-green transition-colors">Categories</a>
 <span class="mx-2">/</span>
 <span class="text-gray-800">All Categories</span>
 @endsection
@@ -18,7 +18,7 @@
         </div>
         @can('create_categories')
         <a href="{{ route('categories.create') }}"
-           class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">
+           class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -69,7 +69,7 @@
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
                                 @can('edit_categories')
-                                <a href="{{ route('categories.edit', $category) }}" class="p-1.5 text-gray-400 hover:text-electric rounded-lg hover:bg-blue-50 transition-colors" title="Edit">
+                                <a href="{{ route('categories.edit', $category) }}" class="p-1.5 text-gray-400 hover:text-tz-green rounded-lg hover:bg-tz-green-light transition-colors" title="Edit">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                                     </svg>
@@ -98,7 +98,7 @@
             <h3 class="text-lg font-medium text-gray-500 mb-1">No categories found</h3>
             <p class="text-sm text-gray-400 mb-4">Create your first category to organize items.</p>
             @can('create_categories')
-            <a href="{{ route('categories.create') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">
+            <a href="{{ route('categories.create') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors">
                 Add Category
             </a>
             @endcan

@@ -174,4 +174,19 @@ class UserController extends Controller
             return back()->with('error', 'Failed to delete user: ' . $e->getMessage());
         }
     }
+
+    public function toggleStatus(User $user)
+    {
+        $user->update(['is_active' => !$user->is_active]);
+
+        $activityService = app(ActivityService::class);
+        $activityService->log(
+            user: auth()->user(),
+            action: $user->is_active ? 'activate_user' : 'deactivate_user',
+            subject: $user,
+            description: ($user->is_active ? 'Activated' : 'Deactivated') . " user: {$user->name}"
+        );
+
+        return back()->with('success', "User {$user->name} has been " . ($user->is_active ? 'activated' : 'deactivated') . '.');
+    }
 }

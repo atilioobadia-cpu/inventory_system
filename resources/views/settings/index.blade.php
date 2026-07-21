@@ -47,39 +47,39 @@
             <h2 class="text-lg font-semibold text-slate-800">Business Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Company Name</label>
-                    <input type="text" name="settings[business][company_name]" value="{{ old('settings.business.company_name', $settings['company_name'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Company Name</label>
+                    <input type="text" name="settings[business][company_name]" value="{{ old('settings.business.company_name', $settings['company_name'] ?? '') }}">
                 </div>
                 <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Address</label>
-                    <textarea name="settings[business][address]" rows="2" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">{{ old('settings.business.address', $settings['address'] ?? '') }}</textarea>
+                    <label class="form-label">Address</label>
+                    <textarea name="settings[business][address]" rows="2">{{ old('settings.business.address', $settings['address'] ?? '') }}</textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                    <input type="text" name="settings[business][phone]" value="{{ old('settings.business.phone', $settings['phone'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Phone</label>
+                    <input type="text" name="settings[business][phone]" value="{{ old('settings.business.phone', $settings['phone'] ?? '') }}">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <input type="email" name="settings[business][email]" value="{{ old('settings.business.email', $settings['email'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="settings[business][email]" value="{{ old('settings.business.email', $settings['email'] ?? '') }}">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">TIN Number</label>
-                    <input type="text" name="settings[business][tin_number]" value="{{ old('settings.business.tin_number', $settings['tin_number'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">TIN Number</label>
+                    <input type="text" name="settings[business][tin_number]" value="{{ old('settings.business.tin_number', $settings['tin_number'] ?? '') }}">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">VAT Number</label>
-                    <input type="text" name="settings[business][vat_number]" value="{{ old('settings.business.vat_number', $settings['vat_number'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">VAT Number</label>
+                    <input type="text" name="settings[business][vat_number]" value="{{ old('settings.business.vat_number', $settings['vat_number'] ?? '') }}">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Currency</label>
-                    <select name="settings[business][currency]" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Currency</label>
+                    <select name="settings[business][currency]">
                         <option value="TZS" {{ ($settings['currency'] ?? 'TZS') === 'TZS' ? 'selected' : '' }}>TZS - Tanzanian Shilling</option>
                         <option value="USD" {{ ($settings['currency'] ?? '') === 'USD' ? 'selected' : '' }}>USD - US Dollar</option>
                     </select>
                 </div>
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Save Changes</button>
+                <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Save Changes</button>
             </div>
         </form>
     </div>
@@ -92,12 +92,12 @@
             <h2 class="text-lg font-semibold text-slate-800">Receipt Settings</h2>
             <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Header Text</label>
-                    <input type="text" name="settings[receipt][receipt_header]" value="{{ old('settings.receipt.receipt_header', $settings['receipt_header'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="Thank you for your purchase!">
+                    <label class="form-label">Header Text</label>
+                    <input type="text" name="settings[receipt][receipt_header]" value="{{ old('settings.receipt.receipt_header', $settings['receipt_header'] ?? '') }}" placeholder="Thank you for your purchase!">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Footer Text</label>
-                    <textarea name="settings[receipt][receipt_footer]" rows="2" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="Returns accepted within 7 days with receipt">{{ old('settings.receipt.receipt_footer', $settings['receipt_footer'] ?? '') }}</textarea>
+                    <label class="form-label">Footer Text</label>
+                    <textarea name="settings[receipt][receipt_footer]" rows="2" placeholder="Returns accepted within 7 days with receipt">{{ old('settings.receipt.receipt_footer', $settings['receipt_footer'] ?? '') }}</textarea>
                 </div>
                 <div x-data="{ showLogo: {{ ($settings['receipt_show_logo'] ?? true) ? 'true' : 'false' }} }">
                     <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
@@ -112,8 +112,8 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Paper Size</label>
-                    <select name="settings[receipt][receipt_paper_size]" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Paper Size</label>
+                    <select name="settings[receipt][receipt_paper_size]">
                         <option value="58mm" {{ ($settings['receipt_paper_size'] ?? '80mm') === '58mm' ? 'selected' : '' }}>58mm (Thermal)</option>
                         <option value="80mm" {{ ($settings['receipt_paper_size'] ?? '80mm') === '80mm' ? 'selected' : '' }}>80mm (Thermal)</option>
                         <option value="A4" {{ ($settings['receipt_paper_size'] ?? '') === 'A4' ? 'selected' : '' }}>A4</option>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Save Changes</button>
+                <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Save Changes</button>
             </div>
         </form>
     </div>
@@ -134,8 +134,8 @@
             <h2 class="text-lg font-semibold text-slate-800">System Settings</h2>
             <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Low Stock Threshold (default)</label>
-                    <input type="number" name="settings[system][low_stock_threshold]" value="{{ old('settings.system.low_stock_threshold', $settings['low_stock_threshold'] ?? 10) }}" min="0" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    <label class="form-label">Low Stock Threshold (default)</label>
+                    <input type="number" name="settings[system][low_stock_threshold]" value="{{ old('settings.system.low_stock_threshold', $settings['low_stock_threshold'] ?? 10) }}" min="0">
                     <p class="text-xs text-slate-500 mt-1">Items at or below this quantity will be flagged as low stock</p>
                 </div>
                 <div x-data="{ emailNotif: {{ ($settings['enable_email_notifications'] ?? true) ? 'true' : 'false' }} }">
@@ -164,7 +164,7 @@
                 </div>
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Save Changes</button>
+                <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Save Changes</button>
             </div>
         </form>
     </div>
@@ -178,32 +178,32 @@
             <p class="text-sm text-slate-500">Specify which email addresses receive each notification type (comma-separated for multiple)</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Low Stock Alerts</label>
-                    <input type="text" name="settings[email][email_low_stock]" value="{{ old('settings.email.email_low_stock', $settings['email_low_stock'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="admin@example.com">
+                    <label class="form-label">Low Stock Alerts</label>
+                    <input type="text" name="settings[email][email_low_stock]" value="{{ old('settings.email.email_low_stock', $settings['email_low_stock'] ?? '') }}" placeholder="admin@example.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Sale Notifications</label>
-                    <input type="text" name="settings[email][email_sale]" value="{{ old('settings.email.email_sale', $settings['email_sale'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="sales@example.com">
+                    <label class="form-label">Sale Notifications</label>
+                    <input type="text" name="settings[email][email_sale]" value="{{ old('settings.email.email_sale', $settings['email_sale'] ?? '') }}" placeholder="sales@example.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Purchase Notifications</label>
-                    <input type="text" name="settings[email][email_purchase]" value="{{ old('settings.email.email_purchase', $settings['email_purchase'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="purchasing@example.com">
+                    <label class="form-label">Purchase Notifications</label>
+                    <input type="text" name="settings[email][email_purchase]" value="{{ old('settings.email.email_purchase', $settings['email_purchase'] ?? '') }}" placeholder="purchasing@example.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Expense Notifications</label>
-                    <input type="text" name="settings[email][email_expense]" value="{{ old('settings.email.email_expense', $settings['email_expense'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="finance@example.com">
+                    <label class="form-label">Expense Notifications</label>
+                    <input type="text" name="settings[email][email_expense]" value="{{ old('settings.email.email_expense', $settings['email_expense'] ?? '') }}" placeholder="finance@example.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Void Transaction Alerts</label>
-                    <input type="text" name="settings[email][email_void]" value="{{ old('settings.email.email_void', $settings['email_void'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="admin@example.com">
+                    <label class="form-label">Void Transaction Alerts</label>
+                    <input type="text" name="settings[email][email_void]" value="{{ old('settings.email.email_void', $settings['email_void'] ?? '') }}" placeholder="admin@example.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Adjustment Alerts</label>
-                    <input type="text" name="settings[email][email_adjustment]" value="{{ old('settings.email.email_adjustment', $settings['email_adjustment'] ?? '') }}" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="admin@example.com">
+                    <label class="form-label">Adjustment Alerts</label>
+                    <input type="text" name="settings[email][email_adjustment]" value="{{ old('settings.email.email_adjustment', $settings['email_adjustment'] ?? '') }}" placeholder="admin@example.com">
                 </div>
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Save Changes</button>
+                <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Save Changes</button>
             </div>
         </form>
     </div>

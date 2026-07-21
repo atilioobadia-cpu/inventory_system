@@ -33,7 +33,6 @@ class ReconciliationController extends Controller
 
     public function create()
     {
-        $reconciliationService = app(ReconciliationService::class);
         $expectedSales = DB::table('sales')
             ->whereDate('sale_date', today())
             ->whereNull('voided_at')
@@ -50,7 +49,36 @@ class ReconciliationController extends Controller
 
         $expectedCash = $expectedSales - $expectedExpenses - $expectedPurchases;
 
-        return view('reconciliations.create', compact('expectedSales', 'expectedExpenses', 'expectedPurchases', 'expectedCash'));
+        return view('reconciliations.create', compact('expectedSales', 'expectedExpenses', 'expectedPurchases'));
+    }
+
+    public function expected(Request $request)
+    {
+        $dateFrom = $request->input('date_from', now()->toDateString());
+        $dateTo = $request->input('date_to', now()->toDateString());
+
+        $salesTotal = DB::table('sales')
+            ->whereDate('sale_date', '>=', $dateFrom)
+            ->whereDate('sale_date', '<=', $dateTo)
+            ->whereNull('voided_at')
+            ->sum('paid_amount');
+
+        $expensesTotal = DB::table('expenses')
+            ->whereDate('expense_date', '>=', $dateFrom)
+            ->whereDate('expense_date', '<=', $dateTo)
+            ->sum('amount');
+
+        $purchasesTotal = DB::table('purchases')
+            ->whereDate('purchase_date', '>=', $dateFrom)
+            ->whereDate('purchase_date', '<=', $dateTo)
+            ->where('status', '!=', 'cancelled')
+            ->sum('paid_amount');
+
+        return response()->json([
+            'sales_total' => $salesTotal,
+            'expenses_total' => $expensesTotal,
+            'purchases_total' => $purchasesTotal,
+        ]);
     }
 
     public function store(Request $request)
@@ -79,7 +107,7 @@ class ReconciliationController extends Controller
             );
 
             DB::commit();
-            return redirect()->route('reconciliations.show', $completedReconciliation->id)->with('success', 'Reconciliation completed successfully.');
+            return redirect()->route('reconciliations.show', $completedReconciliation)->with('success', 'Reconciliation completed successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withInput()->with('error', 'Failed to create reconciliation: ' . $e->getMessage());
@@ -88,6 +116,8 @@ class ReconciliationController extends Controller
 
     public function show(Reconciliation $reconciliation)
     {
+        $reconciliation->load('reconciledBy');
+
         return view('reconciliations.show', compact('reconciliation'));
     }
 }

@@ -34,11 +34,11 @@
                         <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search by name or SKU..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                        <input type="text" name="search" x-model="search" placeholder="Search by name or SKU..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                     </div>
                 </div>
                 <div>
-                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Categories</option>
                         @foreach($categories ?? [] as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -46,7 +46,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="all">All Status</option>
                         <option value="out">Out of Stock</option>
                         <option value="low">Low Stock</option>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="p-4 border-b border-gray-100 flex items-center gap-3">
-                <button type="submit" class="bg-electric text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+                <button type="submit" class="bg-tz-green text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
                     Filter
                 </button>
                 <a href="{{ route('stock.index') }}" class="text-gray-500 hover:text-gray-700 px-3 py-1.5 text-sm">Reset</a>

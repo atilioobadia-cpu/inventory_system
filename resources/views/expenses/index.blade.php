@@ -26,7 +26,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Expenses</h2>
             <p class="text-sm text-gray-500 mt-1">Track and manage all business expenses</p>
         </div>
-        <a href="{{ route('expenses.create') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+        <a href="{{ route('expenses.create') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -42,11 +42,11 @@
                         <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search expenses..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                        <input type="text" name="search" x-model="search" placeholder="Search expenses..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                     </div>
                 </div>
                 <div>
-                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Categories</option>
                         @foreach($categories ?? [] as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="payment_method" x-model="paymentMethod" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="payment_method" x-model="paymentMethod" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Methods</option>
                         <option value="cash">Cash</option>
                         <option value="bank_transfer">Bank Transfer</option>
@@ -64,7 +64,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="status" x-model="status" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="status" x-model="status" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Status</option>
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
@@ -74,12 +74,12 @@
             </div>
             <div class="p-4 border-b border-gray-100 flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <input type="date" name="from" x-model="dateFrom" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="from" x-model="dateFrom" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                     <span class="text-gray-400 text-sm">to</span>
-                    <input type="date" name="to" x-model="dateTo" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="to" x-model="dateTo" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div class="flex items-center gap-2 ml-auto">
-                    <button type="submit" class="bg-electric text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">Filter</button>
+                    <button type="submit" class="bg-tz-green text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">Filter</button>
                     <a href="{{ route('expenses.index') }}" class="text-gray-500 hover:text-gray-700 px-3 py-1.5 text-sm">Reset</a>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                             <td class="px-4 py-3 text-sm text-gray-500">{{ $exp->createdBy->name ?? '-' }}</td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-1" x-data="{ open: false }">
-                                    <a href="{{ route('expenses.edit', $exp) }}" class="p-1.5 rounded-lg text-gray-400 hover:text-electric hover:bg-blue-50 transition-colors" title="Edit">
+                                    <a href="{{ route('expenses.edit', $exp) }}" class="p-1.5 rounded-lg text-gray-400 hover:text-tz-green hover:bg-tz-green-light transition-colors" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                                     </a>
                                     <button @click="deleteId = {{ $exp->id }}; showDeleteModal = true" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">

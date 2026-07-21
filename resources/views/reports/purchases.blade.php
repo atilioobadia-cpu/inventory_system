@@ -26,22 +26,22 @@
         <form action="{{ route('reports.purchases') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Supplier</label>
-                <select name="supplier_id" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm min-w-[200px]">
+                <select name="supplier_id" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm min-w-[200px]">
                     <option value="">All Suppliers</option>
                     @foreach($suppliers ?? [] as $supplier)
                         <option value="{{ $supplier->id }}" {{ request('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Filter</button>
+            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Filter</button>
             <a href="{{ route('reports.purchases') }}" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
@@ -99,9 +99,9 @@
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-semibold text-slate-800">Purchase Trend</h2>
             <div class="flex items-center gap-2">
-                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
-                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
-                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
+                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-tz-green text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
+                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-tz-green text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
+                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-tz-green text-white' : 'bg-slate-100 text-slate-600'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
             </div>
         </div>
         <div class="h-80">

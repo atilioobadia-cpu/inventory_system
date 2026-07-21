@@ -6,9 +6,9 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('reconciliations.index') }}" class="hover:text-electric transition-colors">Reconciliations</a>
+    <a href="{{ route('reconciliations.index') }}" class="hover:text-tz-green transition-colors">Reconciliations</a>
     <span class="mx-2 text-gray-400">/</span>
-    <span class="text-gray-700 font-medium">{{ $reconciliation->date ? $reconciliation->date->format('d M Y') : 'Details' }}</span>
+    <span class="text-gray-700 font-medium">{{ $reconciliation->reconciliation_date ? $reconciliation->reconciliation_date->format('d M Y') : 'Details' }}</span>
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
                     <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Pending</span>
                 @endif
             </div>
-            <p class="text-sm text-gray-500 mt-1">{{ ucfirst($rec->type) }} | {{ $rec->date ? $rec->date->format('d M Y') : $rec->created_at->format('d M Y') }}</p>
+            <p class="text-sm text-gray-500 mt-1">{{ ucfirst($rec->type) }} | {{ $rec->reconciliation_date ? $rec->reconciliation_date->format('d M Y') : $rec->created_at->format('d M Y') }}</p>
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div class="flex items-center gap-3 mb-3">
             <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                <svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 012.828 0l1.414 1.42.879-.659M12 18V6m0 12h4.5m-4.5 0a2 2 0 01-1.732-1M12 18h4.5m-4.5 0a2 2 0 001.732-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-5 h-5 text-tz-green" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 012.828 0l1.414 1.42.879-.659M12 18V6m0 12h4.5m-4.5 0a2 2 0 01-1.732-1M12 18h4.5m-4.5 0a2 2 0 001.732-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <p class="text-sm text-gray-500">Expected Cash</p>
         </div>
@@ -89,15 +89,15 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Sales Total</h3>
-        <p class="text-xl font-bold text-green-600">TZS {{ number_format($rec->sales_total ?? 0, 2) }}</p>
+        <p class="text-xl font-bold text-green-600">TZS {{ number_format($rec->total_sales ?? 0, 2) }}</p>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Purchases Total</h3>
-        <p class="text-xl font-bold text-amber-600">TZS {{ number_format($rec->purchases_total ?? 0, 2) }}</p>
+        <p class="text-xl font-bold text-amber-600">TZS {{ number_format($rec->total_purchases ?? 0, 2) }}</p>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Expenses Total</h3>
-        <p class="text-xl font-bold text-red-600">TZS {{ number_format($rec->expenses_total ?? 0, 2) }}</p>
+        <p class="text-xl font-bold text-red-600">TZS {{ number_format($rec->total_expenses ?? 0, 2) }}</p>
     </div>
 </div>
 

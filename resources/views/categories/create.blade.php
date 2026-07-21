@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('categories.index') }}" class="hover:text-electric transition-colors">Categories</a>
+<a href="{{ route('categories.index') }}" class="hover:text-tz-green transition-colors">Categories</a>
 <span class="mx-2">/</span>
 <span class="text-gray-800">Create Category</span>
 @endsection
@@ -25,47 +25,47 @@
 
         <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Category Name <span class="text-danger">*</span></label>
+                <label for="name" class="form-label">Category Name <span class="text-red-600">*</span></label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                       class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric"
+                       class=""
                        placeholder="e.g. Brake Parts">
-                @error('name')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('name')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+                <label for="slug" class="form-label">Slug</label>
                 <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
-                       class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric font-mono"
+                       class="font-mono"
                        placeholder="auto-generated-from-name">
                 <p class="text-xs text-gray-400 mt-1">Leave blank to auto-generate from name</p>
-                @error('slug')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('slug')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label for="parent_id" class="block text-sm font-medium text-gray-700 mb-1">Parent Category</label>
-                <select name="parent_id" id="parent_id" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric text-gray-600">
+                <label for="parent_id" class="form-label">Parent Category</label>
+                <select name="parent_id" id="parent_id" class="">
                     <option value="">None (Top Level)</option>
                     @foreach($parentCategories ?? [] as $parent)
                     <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>{{ $parent->name }}</option>
                     @endforeach
                 </select>
-                @error('parent_id')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('parent_id')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label for="description" class="form-label">Description</label>
                 <textarea name="description" rows="3"
-                          class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric resize-none"
+                          class="resize-none"
                           placeholder="Optional description...">{{ old('description') }}</textarea>
-                @error('description')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('description')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="sort_order" class="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
+                    <label for="sort_order" class="form-label">Sort Order</label>
                     <input type="number" name="sort_order" id="sort_order" value="{{ old('sort_order', 0) }}" min="0"
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('sort_order')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('sort_order')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-3">Status</label>
@@ -84,7 +84,7 @@
             <a href="{{ route('categories.index') }}" class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
                 Cancel
             </a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-electric rounded-lg hover:bg-blue-600 transition-colors">
+            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-tz-green rounded-lg hover:bg-tz-green-dark transition-colors">
                 Save Category
             </button>
         </div>

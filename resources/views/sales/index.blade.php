@@ -28,7 +28,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Sales</h2>
             <p class="text-sm text-gray-500 mt-1">Manage all sales transactions</p>
         </div>
-        <a href="{{ route('pos.index') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+        <a href="{{ route('pos.index') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -44,17 +44,17 @@
                         <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search by invoice, customer..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                        <input type="text" name="search" x-model="search" placeholder="Search by invoice, customer..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                     </div>
                 </div>
                 <div>
-                    <input type="date" name="date_from" x-model="dateFrom" placeholder="From" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_from" x-model="dateFrom" placeholder="From" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div>
-                    <input type="date" name="date_to" x-model="dateTo" placeholder="To" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_to" x-model="dateTo" placeholder="To" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div>
-                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Customers</option>
                         @foreach($customers ?? [] as $cust)
                             <option value="{{ $cust->id }}">{{ $cust->name }}</option>
@@ -65,7 +65,7 @@
             <div class="p-4 border-b border-gray-100 flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-gray-600">Payment Status:</label>
-                    <select name="status" x-model="status" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="status" x-model="status" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="partial">Partial</option>
@@ -73,7 +73,7 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2 ml-auto">
-                    <button type="submit" class="bg-electric text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+                    <button type="submit" class="bg-tz-green text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
                         Filter
                     </button>
                     <a href="{{ route('sales.index') }}" class="text-gray-500 hover:text-gray-700 px-3 py-1.5 text-sm">Reset</a>
@@ -101,7 +101,7 @@
                     @forelse($sales ?? [] as $sale)
                         <tr class="{{ $sale->is_voided ? 'bg-gray-50 opacity-60' : 'hover:bg-gray-50' }} transition-colors">
                             <td class="px-4 py-3">
-                                <a href="{{ route('sales.show', $sale) }}" class="text-electric font-medium text-sm hover:underline">{{ $sale->invoice_number }}</a>
+                                <a href="{{ route('sales.show', $sale) }}" class="text-tz-green font-medium text-sm hover:underline">{{ $sale->invoice_number }}</a>
                             </td>
                             <td class="px-4 py-3 text-sm text-gray-700">{{ $sale->customer->name ?? 'Walk-in Customer' }}</td>
                             <td class="px-4 py-3 text-sm text-gray-500">{{ $sale->created_at->format('d M Y') }}</td>

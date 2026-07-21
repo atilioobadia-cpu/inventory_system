@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('customers.index') }}" class="hover:text-electric transition-colors">Customers</a>
+<a href="{{ route('customers.index') }}" class="hover:text-tz-green transition-colors">Customers</a>
 <span class="mx-2">/</span>
 <span class="text-gray-800">All Customers</span>
 @endsection
@@ -18,7 +18,7 @@
         </div>
         @can('create_customers')
         <a href="{{ route('customers.create') }}"
-           class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">
+           class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -36,16 +36,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                     </svg>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search customers..."
-                           class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                           class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div class="flex gap-2">
-                    <select name="customer_type" class="flex-1 border border-gray-200 rounded-lg text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric text-gray-600">
+                    <select name="customer_type" class="flex-1 border border-gray-200 rounded-lg text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green text-gray-600">
                         <option value="">All Types</option>
                         <option value="individual" {{ request('customer_type') == 'individual' ? 'selected' : '' }}>Individual</option>
                         <option value="business" {{ request('customer_type') == 'business' ? 'selected' : '' }}>Business</option>
                         <option value="wholesale" {{ request('customer_type') == 'wholesale' ? 'selected' : '' }}>Wholesale</option>
                     </select>
-                    <button type="submit" class="bg-navy text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-navy-light transition-colors">Filter</button>
+                    <button type="submit" class="bg-tz-blue text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-tz-blue-light transition-colors">Filter</button>
                 </div>
             </div>
         </form>
@@ -69,7 +69,7 @@
                     @foreach($customers as $customer)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-4 py-3">
-                            <a href="{{ route('customers.show', $customer) }}" class="font-medium text-gray-800 hover:text-electric">{{ $customer->name }}</a>
+                            <a href="{{ route('customers.show', $customer) }}" class="font-medium text-gray-800 hover:text-tz-green">{{ $customer->name }}</a>
                         </td>
                         <td class="px-4 py-3 text-gray-600">{{ $customer->phone ?? '-' }}</td>
                         <td class="px-4 py-3 text-gray-600">{{ $customer->email ?? '-' }}</td>
@@ -86,14 +86,14 @@
                         </td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
-                                <a href="{{ route('customers.show', $customer) }}" class="p-1.5 text-gray-400 hover:text-electric rounded-lg hover:bg-blue-50 transition-colors" title="View">
+                                <a href="{{ route('customers.show', $customer) }}" class="p-1.5 text-gray-400 hover:text-tz-green rounded-lg hover:bg-tz-green-light transition-colors" title="View">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                     </svg>
                                 </a>
                                 @can('edit_customers')
-                                <a href="{{ route('customers.edit', $customer) }}" class="p-1.5 text-gray-400 hover:text-electric rounded-lg hover:bg-blue-50 transition-colors" title="Edit">
+                                <a href="{{ route('customers.edit', $customer) }}" class="p-1.5 text-gray-400 hover:text-tz-green rounded-lg hover:bg-tz-green-light transition-colors" title="Edit">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                                     </svg>
@@ -125,7 +125,7 @@
             <h3 class="text-lg font-medium text-gray-500 mb-1">No customers found</h3>
             <p class="text-sm text-gray-400 mb-4">Add your first customer to get started.</p>
             @can('create_customers')
-            <a href="{{ route('customers.create') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">
+            <a href="{{ route('customers.create') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-tz-green-dark transition-colors">
                 Add Customer
             </a>
             @endcan

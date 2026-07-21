@@ -21,7 +21,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Reconciliations</h2>
             <p class="text-sm text-gray-500 mt-1">Track cash reconciliation records</p>
         </div>
-        <a href="{{ route('reconciliations.create') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+        <a href="{{ route('reconciliations.create') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -34,15 +34,15 @@
             <div class="p-4 border-b border-gray-100 flex flex-wrap items-end gap-4">
                 <div>
                     <label class="block text-xs font-medium text-gray-500 mb-1">Date From</label>
-                    <input type="date" name="date_from" x-model="dateFrom" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_from" x-model="dateFrom" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-500 mb-1">Date To</label>
-                    <input type="date" name="date_to" x-model="dateTo" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
+                    <input type="date" name="date_to" x-model="dateTo" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-500 mb-1">Type</label>
-                    <select name="type" x-model="type" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="type" x-model="type" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Types</option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-500 mb-1">Status</label>
-                    <select name="status" x-model="status" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric bg-white">
+                    <select name="status" x-model="status" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green bg-white">
                         <option value="">All Status</option>
                         <option value="pending">Pending</option>
                         <option value="completed">Completed</option>
@@ -59,7 +59,7 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="submit" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">Filter</button>
+                    <button type="submit" class="bg-tz-green text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">Filter</button>
                     <a href="{{ route('reconciliations.index') }}" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm">Reset</a>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                             $diff = ($rec->actual_cash ?? 0) - ($rec->expected_cash ?? 0);
                         @endphp
                         <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-4 py-3 text-sm text-gray-900">{{ $rec->date ? $rec->date->format('d M Y') : $rec->created_at->format('d M Y') }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-900">{{ $rec->reconciliation_date ? $rec->reconciliation_date->format('d M Y') : $rec->created_at->format('d M Y') }}</td>
                             <td class="px-4 py-3">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ ucfirst($rec->type) }}</span>
                             </td>
@@ -114,11 +114,11 @@
                             <td class="px-4 py-3 text-sm font-bold text-right {{ $diff != 0 ? 'text-red-600' : 'text-green-600' }}">
                                 {{ $diff >= 0 ? '+' : '' }}TZS {{ number_format($diff, 2) }}
                             </td>
-                            <td class="px-4 py-3 text-sm text-gray-700 text-right">TZS {{ number_format($rec->sales_total ?? 0, 2) }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 text-right">TZS {{ number_format($rec->expenses_total ?? 0, 2) }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-500">{{ $rec->user->name ?? '-' }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-700 text-right">TZS {{ number_format($rec->total_sales ?? 0, 2) }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-700 text-right">TZS {{ number_format($rec->total_expenses ?? 0, 2) }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-500">{{ $rec->reconciledBy->name ?? '-' }}</td>
                             <td class="px-4 py-3 text-center">
-                                <a href="{{ route('reconciliations.show', $rec) }}" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-electric hover:bg-blue-50 rounded-lg transition-colors">
+                                <a href="{{ route('reconciliations.show', $rec) }}" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-tz-green hover:bg-tz-green-light rounded-lg transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                     View
                                 </a>

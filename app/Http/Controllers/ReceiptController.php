@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\Setting;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReceiptController extends Controller
 {
@@ -13,9 +12,14 @@ class ReceiptController extends Controller
         $sale->load(['customer', 'items.item', 'createdBy', 'payments']);
         $settings = Setting::getGroup('business');
 
-        $qrCode = QrCode::size(150)->generate(
-            route('receipts.show', $sale)
-        );
+        $qrCode = null;
+        try {
+            $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(150)->generate(
+                route('receipts.show', $sale)
+            );
+        } catch (\Exception $e) {
+            $qrCode = null;
+        }
 
         return view('receipts.show', compact('sale', 'settings', 'qrCode'));
     }
@@ -25,9 +29,14 @@ class ReceiptController extends Controller
         $sale->load(['customer', 'items.item', 'createdBy', 'payments']);
         $settings = Setting::getGroup('business');
 
-        $qrCode = QrCode::size(150)->generate(
-            route('receipts.show', $sale)
-        );
+        $qrCode = null;
+        try {
+            $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(150)->generate(
+                route('receipts.show', $sale)
+            );
+        } catch (\Exception $e) {
+            $qrCode = null;
+        }
 
         return view('receipts.show', compact('sale', 'settings', 'qrCode'));
     }

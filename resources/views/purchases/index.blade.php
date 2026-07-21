@@ -15,7 +15,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Purchases</h1>
         </div>
         @can('create_purchases')
-        <a href="{{ route('purchases.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm transition-colors">
+        <a href="{{ route('purchases.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
             Create Purchase
         </a>

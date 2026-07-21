@@ -6,17 +6,20 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
         DB::transaction(function () {
+            $hashedPassword = Hash::make('password');
+
             $users = [
                 [
                     'name'       => 'Admin User',
                     'email'      => 'admin@mtokoma.co.tz',
-                    'password'   => 'password',
+                    'password'   => $hashedPassword,
                     'role_id'    => Role::where('slug', 'super-admin')->first()?->id,
                     'is_active'  => true,
                     'created_at' => now(),
@@ -25,7 +28,7 @@ class UserSeeder extends Seeder
                 [
                     'name'       => 'Manager User',
                     'email'      => 'manager@mtokoma.co.tz',
-                    'password'   => 'password',
+                    'password'   => $hashedPassword,
                     'role_id'    => Role::where('slug', 'manager')->first()?->id,
                     'is_active'  => true,
                     'created_at' => now(),
@@ -34,7 +37,7 @@ class UserSeeder extends Seeder
                 [
                     'name'       => 'Cashier User',
                     'email'      => 'cashier@mtokoma.co.tz',
-                    'password'   => 'password',
+                    'password'   => $hashedPassword,
                     'role_id'    => Role::where('slug', 'cashier')->first()?->id,
                     'is_active'  => true,
                     'created_at' => now(),

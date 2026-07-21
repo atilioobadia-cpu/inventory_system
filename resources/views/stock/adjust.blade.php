@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('stock.index') }}" class="hover:text-electric transition-colors">Stock</a>
+    <a href="{{ route('stock.index') }}" class="hover:text-tz-green transition-colors">Stock</a>
     <span class="mx-2 text-gray-400">/</span>
     <span class="text-gray-700 font-medium">Adjust Stock</span>
 @endsection
@@ -157,7 +157,7 @@
                     <a href="{{ route('stock.index') }}" class="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                         Cancel
                     </a>
-                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-electric rounded-lg hover:bg-blue-600 transition-colors">
+                    <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-tz-green rounded-lg hover:bg-tz-green-dark transition-colors">
                         Submit Adjustment
                     </button>
                 </div>

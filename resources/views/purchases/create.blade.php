@@ -29,9 +29,9 @@
                     <h2 class="text-lg font-semibold text-gray-800 mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Supplier *</label>
+                            <label class="form-label">Supplier *</label>
                             <div class="relative" x-data="{ open: false, query: '' }" @click.away="open = false">
-                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true" :value="supplier.name || ''" placeholder="Search supplier..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" required>
+                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true" :value="supplier.name || ''" placeholder="Search supplier..." required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
                                 <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 shadow-lg max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
@@ -42,12 +42,12 @@
                             @error('supplier_id')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Date *</label>
-                            <input type="date" name="purchase_date" value="{{ old('purchase_date', date('Y-m-d')) }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" required>
+                            <label class="form-label">Purchase Date *</label>
+                            <input type="date" name="purchase_date" value="{{ old('purchase_date', date('Y-m-d')) }}" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Payment Terms</label>
-                            <select name="payment_terms" x-model="paymentTerms" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                            <label class="form-label">Payment Terms</label>
+                            <select name="payment_terms" x-model="paymentTerms">
                                 <option value="cash">Cash</option>
                                 <option value="net_7">Net 7 Days</option>
                                 <option value="net_15">Net 15 Days</option>
@@ -55,12 +55,12 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
-                            <input type="date" name="due_date" x-model="dueDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                            <label class="form-label">Due Date</label>
+                            <input type="date" name="due_date" x-model="dueDate">
                         </div>
                         <div class="sm:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Reference (Optional)</label>
-                            <input type="text" name="reference" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" placeholder="Supplier reference number">
+                            <label class="form-label">Reference (Optional)</label>
+                            <input type="text" name="reference" placeholder="Supplier reference number">
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                     <tr>
                                         <td class="px-3 py-2">
                                             <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-1 focus:ring-blue-500">
+                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-tz-green/20">
                                                 <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
                                                 <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 shadow-lg max-h-40 overflow-y-auto">
                                                     <template x-for="item in row.itemResults" :key="item.id">
@@ -102,13 +102,13 @@
                                             </div>
                                         </td>
                                         <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm text-center">
+                                            <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-full px-2 py-1.5 text-sm text-center">
                                         </td>
                                         <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][unit_cost]'" x-model.number="row.unit_cost" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm text-right">
+                                            <input type="number" :name="'items[' + index + '][unit_cost]'" x-model.number="row.unit_cost" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
                                         </td>
                                         <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][discount]'" x-model.number="row.discount" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm text-right">
+                                            <input type="number" :name="'items[' + index + '][discount]'" x-model.number="row.discount" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
                                         </td>
                                         <td class="px-3 py-2 text-right font-medium text-gray-800" x-text="formatCurrency(row.total)"></td>
                                         <td class="px-3 py-2 text-center">
@@ -149,8 +149,8 @@
 
                     <div class="mt-6 space-y-3">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Paid Amount</label>
-                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                            <label class="form-label">Paid Amount</label>
+                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01">
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-600">Due</span>
@@ -159,12 +159,12 @@
                     </div>
 
                     <div class="mt-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" placeholder="Purchase notes..."></textarea>
+                        <label class="form-label">Notes</label>
+                        <textarea name="notes" rows="3" placeholder="Purchase notes..."></textarea>
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
+                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
                         <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
                     </div>
                 </div>

@@ -20,18 +20,18 @@
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Role Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}" x-model="name" @input="slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" required>
+                    <label for="name" class="form-label">Role Name <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" x-model="name" @input="slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')" required>
                     @error('name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label for="slug" class="block text-sm font-medium text-slate-700 mb-1">Slug</label>
-                    <input type="text" name="slug" id="slug" x-model="slug" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm bg-slate-50" readonly>
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" name="slug" id="slug" x-model="slug" readonly>
                 </div>
             </div>
             <div>
-                <label for="description" class="block text-sm font-medium text-slate-700 mb-1">Description</label>
-                <textarea name="description" id="description" rows="3" class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm" placeholder="Brief description of this role...">{{ old('description') }}</textarea>
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" rows="3" placeholder="Brief description of this role...">{{ old('description') }}</textarea>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
             <div class="p-6 border-b border-slate-200 flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-slate-800">Permissions</h2>
                 <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                    <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-tz-green/20">
                     <span class="text-sm font-medium text-slate-700">Select All</span>
                 </label>
             </div>
@@ -72,14 +72,14 @@
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="font-medium text-slate-700 capitalize">{{ str_replace('_', ' ', $module) }}</h3>
                             <label class="flex items-center gap-1 cursor-pointer">
-                                <input type="checkbox" @change="toggleModule('{{ $module }}', $event.target.checked)" :checked="isModuleSelected('{{ $module }}')" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                                <input type="checkbox" @change="toggleModule('{{ $module }}', $event.target.checked)" :checked="isModuleSelected('{{ $module }}')" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 focus:ring-tz-green/20">
                                 <span class="text-xs text-slate-500">All</span>
                             </label>
                         </div>
                         <div class="space-y-2">
                             @foreach($actions as $action)
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                                    <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 focus:ring-tz-green/20">
                                     <span class="text-sm text-slate-600 capitalize">{{ $action }}</span>
                                 </label>
                             @endforeach
@@ -91,7 +91,7 @@
 
         <div class="mt-6 flex items-center justify-end gap-3">
             <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">
                 Save Role
             </button>
         </div>

@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Sale;
+use App\Models\Reconciliation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ReconciliationService
 {
-    public function createDailyReconciliation(int $userId): object
+    public function createDailyReconciliation(int $userId): Reconciliation
     {
         $today = Carbon::today();
 
@@ -28,52 +28,48 @@ class ReconciliationService
 
         $expectedCash = $totalSales - $totalExpenses - $totalPurchases;
 
-        $reconciliationNumber = $this->generateReconciliationNumber();
-
-        $id = DB::table('reconciliations')->insertGetId([
-            'reconciliation_number' => $reconciliationNumber,
-            'date'                  => $today,
-            'expected_cash'         => round($expectedCash, 2),
-            'actual_cash'           => null,
-            'discrepancy'           => null,
-            'status'                => 'pending',
-            'notes'                 => null,
-            'user_id'               => $userId,
-            'completed_at'          => null,
-            'created_at'            => now(),
-            'updated_at'            => now(),
+        $reconciliation = Reconciliation::create([
+            'reconciliation_date' => $today,
+            'type' => 'daily',
+            'status' => 'pending',
+            'expected_cash' => round($expectedCash, 2),
+            'actual_cash' => 0,
+            'difference' => 0,
+            'total_sales' => round($totalSales, 2),
+            'total_purchases' => round($totalPurchases, 2),
+            'total_expenses' => round($totalExpenses, 2),
+            'notes' => null,
+            'reconciled_by' => $userId,
+            'completed_at' => null,
         ]);
 
-        return DB::table('reconciliations')->find($id);
+        return $reconciliation;
     }
 
     public function completeReconciliation(
-        object $reconciliation,
+        Reconciliation $reconciliation,
         float $actualCash,
         ?string $notes = null
-    ): object {
-        $discrepancy = round($actualCash - $reconciliation->expected_cash, 2);
+    ): Reconciliation {
+        $difference = round($actualCash - $reconciliation->expected_cash, 2);
 
-        $status = abs($discrepancy) < 0.01 ? 'completed' : 'discrepancy';
+        $status = abs($difference) < 0.01 ? 'completed' : 'discrepancy';
 
-        DB::table('reconciliations')
-            ->where('id', $reconciliation->id)
-            ->update([
-                'actual_cash'   => round($actualCash, 2),
-                'discrepancy'   => $discrepancy,
-                'status'        => $status,
-                'notes'         => $notes,
-                'completed_at'  => now(),
-                'updated_at'    => now(),
-            ]);
+        $reconciliation->update([
+            'actual_cash' => round($actualCash, 2),
+            'difference' => $difference,
+            'status' => $status,
+            'notes' => $notes,
+            'completed_at' => now(),
+        ]);
 
-        return DB::table('reconciliations')->find($reconciliation->id);
+        return $reconciliation->fresh();
     }
 
     public function getSummary(string $type, Carbon $startDate, Carbon $endDate): array
     {
-        $query = DB::table('reconciliations')
-            ->whereBetween('date', [$startDate, $endDate]);
+        $query = Reconciliation::query()
+            ->whereBetween('reconciliation_date', [$startDate, $endDate]);
 
         if ($type !== 'all') {
             $query->where('status', $type);
@@ -82,38 +78,18 @@ class ReconciliationService
         $reconciliations = $query->get();
 
         $totalExpected = $reconciliations->sum('expected_cash');
-        $totalActual   = $reconciliations->sum('actual_cash');
-        $totalDiscrepancy = $reconciliations->sum('discrepancy');
+        $totalActual = $reconciliations->sum('actual_cash');
+        $totalDifference = $reconciliations->sum('difference');
 
         return [
-            'count'             => $reconciliations->count(),
-            'total_expected'    => round($totalExpected, 2),
-            'total_actual'      => round($totalActual, 2),
-            'total_discrepancy' => round($totalDiscrepancy, 2),
-            'completed'         => $reconciliations->where('status', 'completed')->count(),
+            'count' => $reconciliations->count(),
+            'total_expected' => round($totalExpected, 2),
+            'total_actual' => round($totalActual, 2),
+            'total_difference' => round($totalDifference, 2),
+            'completed' => $reconciliations->where('status', 'completed')->count(),
             'discrepancy_count' => $reconciliations->where('status', 'discrepancy')->count(),
-            'pending'           => $reconciliations->where('status', 'pending')->count(),
-            'items'             => $reconciliations,
+            'pending' => $reconciliations->where('status', 'pending')->count(),
+            'items' => $reconciliations,
         ];
-    }
-
-    private function generateReconciliationNumber(): string
-    {
-        $year = date('Y');
-        $prefix = "REC-{$year}-";
-
-        $lastRecord = DB::table('reconciliations')
-            ->where('reconciliation_number', 'like', $prefix . '%')
-            ->orderByRaw("SUBSTRING(reconciliation_number, " . (strlen($prefix) + 1) . ") DESC")
-            ->first();
-
-        if ($lastRecord) {
-            $lastNumber = (int) substr($lastRecord->reconciliation_number, strlen($prefix));
-            $nextNumber = $lastNumber + 1;
-        } else {
-            $nextNumber = 1;
-        }
-
-        return $prefix . str_pad((string) $nextNumber, 5, '0', STR_PAD_LEFT);
     }
 }

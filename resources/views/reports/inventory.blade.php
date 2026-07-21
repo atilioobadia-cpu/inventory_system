@@ -26,7 +26,7 @@
         <form action="{{ route('reports.inventory') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
-                <select name="category_id" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm min-w-[200px]">
+                <select name="category_id" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm min-w-[200px]">
                     <option value="">All Categories</option>
                     @foreach($categories ?? [] as $category)
                         <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -35,14 +35,14 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
-                <select name="status" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                <select name="status" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
                     <option value="">All</option>
                     <option value="in_stock" {{ request('status') === 'in_stock' ? 'selected' : '' }}>In Stock</option>
                     <option value="low_stock" {{ request('status') === 'low_stock' ? 'selected' : '' }}>Low Stock</option>
                     <option value="out_of_stock" {{ request('status') === 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
                 </select>
             </div>
-            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Filter</button>
+            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Filter</button>
         </form>
     </div>
 

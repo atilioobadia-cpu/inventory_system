@@ -62,12 +62,14 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureUserIsActive::class])->gro
 
     // Stock
     Route::get('/stock', [StockController::class, 'index'])->name('stock.index')->middleware('permission:view_stock');
+    Route::get('/stock/export', [StockController::class, 'export'])->name('stock.export')->middleware('permission:view_stock');
     Route::get('/stock/movements', [StockController::class, 'movements'])->name('stock.movements')->middleware('permission:view_stock_movements');
     Route::get('/stock/adjust', [StockAdjustmentController::class, 'create'])->name('stock.adjust.form')->middleware('permission:adjust_stock');
     Route::post('/stock/adjust', [StockAdjustmentController::class, 'adjust'])->name('stock.adjust')->middleware('permission:adjust_stock');
 
     // Reconciliations
     Route::resource('reconciliations', ReconciliationController::class)->only(['index', 'create', 'store', 'show'])->middleware('permission:create_reconciliations');
+    Route::get('/api/reconciliation/expected', [ReconciliationController::class, 'expected'])->name('api.reconciliation.expected');
 
     // Expenses
     Route::resource('expenses', ExpenseController::class)->middleware('permission:create_expenses');
@@ -103,13 +105,15 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureUserIsActive::class])->gro
 
     // Users
     Route::resource('users', UserController::class)->middleware('permission:create_users');
+    Route::patch('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status')->middleware('permission:create_users');
+
+    // Activity Log
+    Route::get('/activity', [ActivityController::class, 'index'])->name('activity.index')->middleware('permission:view_activity');
+    Route::get('/activity-log', [ActivityController::class, 'index'])->name('activity-log.index')->middleware('permission:view_activity');
 
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index')->middleware('permission:view_settings');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update')->middleware('permission:edit_settings');
-
-    // Activity Log
-    Route::get('/activity', [ActivityController::class, 'index'])->name('activity.index')->middleware('permission:view_activity');
 
     // Receipts
     Route::get('/receipts/{sale}', [ReceiptController::class, 'show'])->name('receipts.show');

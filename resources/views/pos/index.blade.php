@@ -7,7 +7,7 @@
     .pos-grid { display: grid; grid-template-columns: 1fr 420px; height: calc(100vh - 64px); gap: 0; }
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px; overflow-y: auto; }
     .product-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; }
-    .product-card:hover { border-color: #3B82F6; box-shadow: 0 0 0 2px rgba(59,130,246,0.2); transform: translateY(-1px); }
+    .product-card:hover { border-color: #00A651; box-shadow: 0 0 0 2px rgba(0,166,81,0.15); transform: translateY(-1px); }
     .product-card.out-of-stock { opacity: 0.5; pointer-events: none; }
     .cart-panel { background: #fff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: calc(100vh - 64px); }
     .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
@@ -17,7 +17,7 @@
     .quick-cash { padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; cursor: pointer; }
     .quick-cash:hover { background: #f3f4f6; }
     .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 13px; cursor: pointer; white-space: nowrap; }
-    .category-pill.active { background: #3B82F6; color: white; border-color: #3B82F6; }
+    .category-pill.active { background: #00A651; color: white; border-color: #00A651; }
     .category-pill:hover:not(.active) { background: #f3f4f6; }
     @media print { .pos-hide { display: none !important; } }
 </style>
@@ -32,7 +32,7 @@
         <div class="p-4 bg-white border-b space-y-3">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tz-green/20 focus:border-tz-green text-sm">
             </div>
             <div class="flex gap-2 overflow-x-auto pb-1">
                 <button @click="selectedCategory = ''; searchItems()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
@@ -46,7 +46,7 @@
         <div class="flex-1 overflow-y-auto p-4">
             <template x-if="loading">
                 <div class="flex items-center justify-center h-40">
-                    <svg class="animate-spin h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                    <svg class="animate-spin h-8 w-8 text-tz-green" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </div>
             </template>
             <template x-if="!loading && products.length === 0">
@@ -67,7 +67,7 @@
                             </template>
                         </div>
                         <p class="text-xs font-medium text-gray-800 truncate" x-text="item.name"></p>
-                        <p class="text-sm font-bold text-blue-600 mt-1" x-text="formatCurrency(item.selling_price)"></p>
+                        <p class="text-sm font-bold text-tz-green mt-1" x-text="formatCurrency(item.selling_price)"></p>
                         <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
                 </template>
@@ -120,11 +120,11 @@
             <div class="mb-3">
                 <label class="text-xs font-medium text-gray-600 mb-1 block">Customer</label>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true" placeholder="Walk-In Customer" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true" placeholder="Walk-In Customer" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
                     <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 shadow-lg max-h-40 overflow-y-auto">
                         <template x-for="c in customerResults" :key="c.id">
-                            <div class="px-3 py-2 hover:bg-blue-50 cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = ''" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
+                            <div class="px-3 py-2 hover:bg-tz-green-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = ''" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
                         </template>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="flex items-end pb-1">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" x-model="isVatExempt" class="w-4 h-4 rounded text-blue-600">
+                        <input type="checkbox" x-model="isVatExempt" class="w-4 h-4 rounded text-tz-green">
                         <span class="text-sm font-medium">VAT Exempt</span>
                     </label>
                 </div>
@@ -163,14 +163,14 @@
                 </div>
                 <div class="flex justify-between text-lg font-bold border-t pt-2">
                     <span>Total</span>
-                    <span class="text-blue-600" x-text="formatCurrency(total)"></span>
+                    <span class="text-tz-green" x-text="formatCurrency(total)"></span>
                 </div>
             </div>
 
             {{-- Cash Received (for cash sales) --}}
             <div x-show="saleType === 'cash'" class="mb-3">
                 <label class="text-xs font-medium text-gray-600 mb-1 block">Cash Received</label>
-                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" placeholder="0">
+                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" placeholder="0">
                 <div class="flex gap-2 mt-2 flex-wrap">
                     <button @click="cashReceived = total" class="quick-cash">Exact</button>
                     <button @click="cashReceived = Math.ceil(total / 1000) * 1000" class="quick-cash">TZS {{ number_format(ceil(10000/1000)*1000) }}</button>
@@ -213,7 +213,7 @@
             <p class="text-gray-600 mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
             <p class="text-gray-600 mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
             <div class="flex gap-3">
-                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm">View Receipt</a>
+                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm">View Receipt</a>
                 <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-medium text-sm">New Sale</button>
             </div>
         </div>

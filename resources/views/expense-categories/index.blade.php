@@ -16,7 +16,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Expense Categories</h2>
             <p class="text-sm text-gray-500 mt-1">Manage expense categories</p>
         </div>
-        <a href="{{ route('expense-categories.create') }}" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+        <a href="{{ route('expense-categories.create') }}" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -53,7 +53,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-1">
-                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-gray-400 hover:text-electric hover:bg-blue-50 transition-colors" title="Edit">
+                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-gray-400 hover:text-tz-green hover:bg-tz-green-light transition-colors" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                                     </a>
                                     <button @click="deleteId = {{ $cat->id }}; showDeleteModal = true" class="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">

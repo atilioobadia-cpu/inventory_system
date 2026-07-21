@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('customers.index') }}" class="hover:text-electric transition-colors">Customers</a>
+<a href="{{ route('customers.index') }}" class="hover:text-tz-green transition-colors">Customers</a>
 <span class="mx-2">/</span>
 <span class="text-gray-800">Create Customer</span>
 @endsection
@@ -23,75 +23,75 @@
         <div class="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="sm:col-span-2">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Customer Name <span class="text-danger">*</span></label>
+                    <label for="name" class="form-label">Customer Name <span class="text-red-600">*</span></label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('name')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('name')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone <span class="text-danger">*</span></label>
+                    <label for="phone" class="form-label">Phone <span class="text-red-600">*</span></label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('phone')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('phone')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <label for="email" class="form-label">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}"
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('email')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('email')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
 
             <div>
-                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                <label for="address" class="form-label">Address</label>
                 <textarea name="address" rows="2"
-                          class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric resize-none">{{ old('address') }}</textarea>
-                @error('address')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                          class="resize-none">{{ old('address') }}</textarea>
+                @error('address')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                    <label for="city" class="form-label">City</label>
                     <input type="text" name="city" id="city" value="{{ old('city') }}"
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('city')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('city')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label for="tin_number" class="block text-sm font-medium text-gray-700 mb-1">TIN Number</label>
+                    <label for="tin_number" class="form-label">TIN Number</label>
                     <input type="text" name="tin_number" id="tin_number" value="{{ old('tin_number') }}"
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric font-mono">
-                    @error('tin_number')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="font-mono">
+                    @error('tin_number')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Customer Type <span class="text-danger">*</span></label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Customer Type <span class="text-red-600">*</span></label>
                 <div class="flex gap-4">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="customer_type" value="individual" {{ old('customer_type', 'individual') == 'individual' ? 'checked' : '' }}
-                               class="w-4 h-4 text-electric border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
                         <span class="text-sm text-gray-700">Individual</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="customer_type" value="business" {{ old('customer_type') == 'business' ? 'checked' : '' }}
-                               class="w-4 h-4 text-electric border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
                         <span class="text-sm text-gray-700">Business</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="customer_type" value="wholesale" {{ old('customer_type') == 'wholesale' ? 'checked' : '' }}
-                               class="w-4 h-4 text-electric border-gray-300 focus:ring-electric">
+                               class="w-4 h-4 text-tz-green border-gray-300 focus:ring-electric">
                         <span class="text-sm text-gray-700">Wholesale</span>
                     </label>
                 </div>
-                @error('customer_type')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('customer_type')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="credit_limit" class="block text-sm font-medium text-gray-700 mb-1">Credit Limit (TZS)</label>
+                    <label for="credit_limit" class="form-label">Credit Limit (TZS)</label>
                     <input type="number" name="credit_limit" id="credit_limit" value="{{ old('credit_limit', 0) }}" min="0" step="0.01"
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric">
-                    @error('credit_limit')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                           class="">
+                    @error('credit_limit')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-3">Status</label>
@@ -106,17 +106,17 @@
             </div>
 
             <div>
-                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                <label for="notes" class="form-label">Notes</label>
                 <textarea name="notes" rows="3"
-                          class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-electric/50 focus:border-electric resize-none"
+                          class="resize-none"
                           placeholder="Additional notes...">{{ old('notes') }}</textarea>
-                @error('notes')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
+                @error('notes')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             </div>
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
             <a href="{{ route('customers.index') }}" class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">Cancel</a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-electric rounded-lg hover:bg-blue-600 transition-colors">Save Customer</button>
+            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-tz-green rounded-lg hover:bg-tz-green-dark transition-colors">Save Customer</button>
         </div>
     </form>
 </div>

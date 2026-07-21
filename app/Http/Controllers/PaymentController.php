@@ -15,15 +15,19 @@ class PaymentController extends Controller
     {
         $query = Payment::with(['payable', 'createdBy']);
 
-        if ($type = $request->input('type')) {
+        if ($method = $request->input('payment_method')) {
+            $query->where('payment_method', $method);
+        }
+
+        if ($type = $request->input('payable_type')) {
             $query->where('payable_type', $type === 'purchase' ? Purchase::class : Sale::class);
         }
 
-        if ($from = $request->input('from')) {
+        if ($from = $request->input('from_date')) {
             $query->whereDate('payment_date', '>=', $from);
         }
 
-        if ($to = $request->input('to')) {
+        if ($to = $request->input('to_date')) {
             $query->whereDate('payment_date', '<=', $to);
         }
 

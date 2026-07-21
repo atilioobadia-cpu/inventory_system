@@ -95,4 +95,45 @@ class StockController extends Controller
             'is_low_stock' => $item->isLowStock(),
         ]);
     }
+
+    public function export(Request $request)
+    {
+        $stockService = app(StockService::class);
+        $items = Item::with(['category', 'supplier'])
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get()
+            ->map(function ($item) use ($stockService) {
+                $item->current_stock = $stockService->getCurrentStock($item);
+                return $item;
+            });
+
+        $filename = 'stock_levels_' . now()->format('Y-m-d_His') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($items) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, ['Name', 'SKU', 'Category', 'Supplier', 'Cost Price', 'Selling Price', 'Current Stock', 'Min Stock', 'Max Stock', 'Reorder Point']);
+            foreach ($items as $item) {
+                fputcsv($handle, [
+                    $item->name,
+                    $item->sku,
+                    $item->category->name ?? '',
+                    $item->supplier->name ?? '',
+                    $item->cost_price,
+                    $item->selling_price,
+                    $item->current_stock,
+                    $item->min_stock,
+                    $item->max_stock,
+                    $item->reorder_point,
+                ]);
+            }
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

@@ -41,7 +41,7 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Supplier *</label>
                             <div class="relative" x-data="{ open: false, query: '{{ addslashes($purchase->supplier->name ?? '') }}' }" @click.away="open = false">
-                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true" placeholder="Search supplier..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
+                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true" placeholder="Search supplier..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
                                 <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 shadow-lg max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
@@ -53,11 +53,11 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Date *</label>
-                            <input type="date" name="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date->format('Y-m-d')) }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
+                            <input type="date" name="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date->format('Y-m-d')) }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Payment Terms</label>
-                            <select name="payment_terms" x-model="paymentTerms" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <select name="payment_terms" x-model="paymentTerms" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                                 <option value="cash" {{ old('payment_terms', $purchase->payment_terms) === 'cash' ? 'selected' : '' }}>Cash</option>
                                 <option value="net_7" {{ old('payment_terms', $purchase->payment_terms) === 'net_7' ? 'selected' : '' }}>Net 7 Days</option>
                                 <option value="net_15" {{ old('payment_terms', $purchase->payment_terms) === 'net_15' ? 'selected' : '' }}>Net 15 Days</option>
@@ -66,11 +66,11 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
-                            <input type="date" name="due_date" x-model="dueDate" value="{{ old('due_date', isset($purchase->due_date) ? $purchase->due_date->format('Y-m-d') : '') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="date" name="due_date" x-model="dueDate" value="{{ old('due_date', isset($purchase->due_date) ? $purchase->due_date->format('Y-m-d') : '') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Reference (Optional)</label>
-                            <input type="text" name="reference" value="{{ old('reference', $purchase->reference ?? '') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" placeholder="Supplier reference number" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="text" name="reference" value="{{ old('reference', $purchase->reference ?? '') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" placeholder="Supplier reference number" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                     <tr>
                                         <td class="px-3 py-2">
                                             <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-1 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-1 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                                                 <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
                                                 <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 shadow-lg max-h-40 overflow-y-auto">
                                                     <template x-for="item in row.itemResults" :key="item.id">
@@ -164,7 +164,7 @@
                     <div class="mt-6 space-y-3">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Paid Amount</label>
-                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-600">Due</span>
@@ -174,12 +174,12 @@
 
                     <div class="mt-6">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" placeholder="Purchase notes..." {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>{{ old('notes', $purchase->notes ?? '') }}</textarea>
+                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-tz-green/20" placeholder="Purchase notes..." {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>{{ old('notes', $purchase->notes ?? '') }}</textarea>
                     </div>
 
                     @if($purchase->status === 'draft')
                     <div class="mt-6 space-y-3">
-                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm transition-colors">Update Purchase</button>
+                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-tz-green hover:bg-tz-green-dark text-white rounded-lg font-medium text-sm transition-colors">Update Purchase</button>
                         <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium text-sm transition-colors">Update & Receive</button>
                     </div>
                     @endif

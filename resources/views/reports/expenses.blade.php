@@ -26,22 +26,22 @@
         <form action="{{ route('reports.expenses') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
-                <select name="category_id" class="rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500 text-sm min-w-[200px]">
+                <select name="category_id" class="rounded-lg border-slate-300 focus:border-tz-green focus:ring-tz-green/20 text-sm min-w-[200px]">
                     <option value="">All Categories</option>
                     @foreach($expenseCategories ?? [] as $cat)
                         <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Filter</button>
+            <button type="submit" class="px-6 py-2 bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors text-sm font-medium">Filter</button>
         </form>
     </div>
 

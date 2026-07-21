@@ -13,7 +13,7 @@ $colorClasses = [
     'danger' => 'bg-danger hover:bg-red-600',
     'warning' => 'bg-warning hover:bg-amber-600',
     'success' => 'bg-success hover:bg-emerald-600',
-    'electric' => 'bg-electric hover:bg-blue-600',
+    'electric' => 'bg-tz-green hover:bg-tz-green-dark',
 ];
 $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
 @endphp
@@ -48,25 +48,25 @@ $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
                 <div class="flex items-center gap-4 mb-4">
                     @if($color === 'danger')
                     <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z"/>
                         </svg>
                     </div>
                     @elseif($color === 'warning')
                     <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z"/>
                         </svg>
                     </div>
                     @elseif($color === 'success')
                     <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-tz-green" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                     </div>
                     @else
                     <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-6 h-6 text-electric" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-tz-green" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
                         </svg>
                     </div>

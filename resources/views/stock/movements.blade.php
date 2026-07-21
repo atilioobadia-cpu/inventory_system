@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-gray-400">/</span>
-    <a href="{{ route('stock.index') }}" class="hover:text-electric transition-colors">Stock</a>
+    <a href="{{ route('stock.index') }}" class="hover:text-tz-green transition-colors">Stock</a>
     <span class="mx-2 text-gray-400">/</span>
     <span class="text-gray-700 font-medium">Movements</span>
 @endsection
@@ -26,7 +26,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Stock Movements</h2>
             <p class="text-sm text-gray-500 mt-1">Track all inventory movements and adjustments</p>
         </div>
-        <button @click="showAdjustModal = true" class="inline-flex items-center gap-2 bg-electric text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+        <button @click="showAdjustModal = true" class="inline-flex items-center gap-2 bg-tz-green text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-3 ml-auto">
-                    <button type="submit" class="bg-electric text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">Filter</button>
+                    <button type="submit" class="bg-tz-green text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-tz-green-dark transition-colors">Filter</button>
                     <a href="{{ route('stock.movements') }}" class="text-gray-500 hover:text-gray-700 px-3 py-1.5 text-sm">Reset</a>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                                     -
                                 @endif
                             </td>
-                            <td class="px-4 py-3 text-sm text-gray-500">{{ $m->user->name ?? '-' }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-500">{{ $m->user?->name ?? '-' }}</td>
                             <td class="px-4 py-3 text-sm text-gray-500 max-w-[150px] truncate" title="{{ $m->notes ?? '' }}">{{ $m->notes ?? '-' }}</td>
                         </tr>
                     @empty
@@ -217,7 +217,7 @@
                 </div>
                 <div class="flex items-center justify-end gap-3 px-6 py-4 bg-gray-50 rounded-b-xl">
                     <button type="button" @click="showAdjustModal = false" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
-                    <button type="submit" class="px-4 py-2 text-sm font-medium bg-electric text-white rounded-lg hover:bg-blue-600 transition-colors">Save Adjustment</button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium bg-tz-green text-white rounded-lg hover:bg-tz-green-dark transition-colors">Save Adjustment</button>
                 </div>
             </form>
         </div>
