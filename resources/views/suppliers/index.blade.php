@@ -33,7 +33,7 @@
     </div>
 
     {{-- Search --}}
-    <div class="bg-white rounded-lg border border-border p-4 mb-6">
+    <div class="bg-card-bg rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('suppliers.index') }}">
             <div class="flex gap-4">
                 <div class="relative flex-1">
@@ -48,7 +48,7 @@
         </form>
     </div>
 
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
         @if(($suppliers ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -145,7 +145,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-lg max-w-md w-full p-6">
+            <div class="relative bg-card-bg rounded-lg max-w-md w-full p-5">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Supplier</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This may affect purchase records.</p>
                 <div class="flex justify-end gap-3">

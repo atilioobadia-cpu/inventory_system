@@ -3,7 +3,7 @@
 @section('title', 'Create Role')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-5">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Create Role</h1>
@@ -17,7 +17,7 @@
 
     <form action="{{ route('roles.store') }}" method="POST" x-data="roleForm()">
         @csrf
-        <div class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="name" class="form-label">Role Name <span class="text-danger">*</span></label>
@@ -36,15 +36,15 @@
         </div>
 
         <!-- Permissions -->
-        <div class="mt-6 bg-white rounded-lg border border-border overflow-hidden">
-            <div class="p-6 border-b border-border flex items-center justify-between">
+        <div class="mt-6 bg-card-bg rounded-lg border border-border overflow-hidden">
+            <div class="p-5 border-b border-border flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-heading">Permissions</h2>
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-border text-accent focus:ring-accent/20">
                     <span class="text-sm font-medium text-body">Select All</span>
                 </label>
             </div>
-            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @php
                     $modules = [
                         'dashboard' => ['view'],

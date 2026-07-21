@@ -25,13 +25,13 @@
             </h2>
             <p class="text-sm text-muted mt-1">Monitor current inventory levels across all items</p>
         </div>
-        <a href="{{ route('stock.movements') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
+        <a href="{{ route('stock.movements') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             View Movements
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <form method="GET" action="{{ route('stock.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="lg:col-span-2">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div>
-                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Categories</option>
                         @foreach($categories ?? [] as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="all">All Status</option>
                         <option value="out">Out of Stock</option>
                         <option value="low">Low Stock</option>

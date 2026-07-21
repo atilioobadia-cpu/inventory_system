@@ -6,19 +6,19 @@
 <style>
     .pos-grid { display: grid; grid-template-columns: 1fr 420px; height: calc(100vh - 64px); gap: 0; }
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px; overflow-y: auto; }
-    .product-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; }
-    .product-card:hover { border-color: #2563EB; }
+    .product-card { border: 1px solid #2a2a2a; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; }
+    .product-card:hover { border-color: #D4A017; }
     .product-card.out-of-stock { opacity: 0.5; pointer-events: none; }
-    .cart-panel { background: #fff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: calc(100vh - 64px); }
+    .cart-panel { background: #111111; border-left: 1px solid #2a2a2a; display: flex; flex-direction: column; height: calc(100vh - 64px); }
     .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
-    .cart-summary { border-top: 2px solid #e2e8f0; padding: 16px; background: #f8fafc; }
-    .qty-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid #d1d5db; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; }
-    .qty-btn:hover { background: #f3f4f6; }
-    .quick-cash { padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; cursor: pointer; }
-    .quick-cash:hover { background: #f3f4f6; }
-    .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 13px; cursor: pointer; white-space: nowrap; }
-    .category-pill.active { background: #2563EB; color: white; border-color: #2563EB; }
-    .category-pill:hover:not(.active) { background: #f3f4f6; }
+    .cart-summary { border-top: 2px solid #2a2a2a; padding: 16px; background: #1a1a1a; }
+    .qty-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid #333333; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: #E0E0E0; }
+    .qty-btn:hover { background: #2a2a2a; }
+    .quick-cash { padding: 6px 12px; border: 1px solid #333333; border-radius: 6px; font-size: 13px; cursor: pointer; color: #E0E0E0; }
+    .quick-cash:hover { background: #2a2a2a; }
+    .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #333333; font-size: 13px; cursor: pointer; white-space: nowrap; color: #E0E0E0; }
+    .category-pill.active { background: #D4A017; color: #000000; border-color: #D4A017; }
+    .category-pill:hover:not(.active) { background: #2a2a2a; }
 
     .pos-mobile-only { display: none !important; }
     .pos-desktop-only {}
@@ -45,7 +45,7 @@
     {{-- LEFT: Product Grid --}}
     <div class="flex flex-col h-full bg-card-bg pos-hide pos-desktop-only">
         {{-- Search & Filters --}}
-        <div class="p-4 bg-white border-b space-y-3">
+        <div class="p-4 bg-card-bg border-b space-y-3">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
                 <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent text-sm">
@@ -94,7 +94,7 @@
     {{-- RIGHT: Cart Panel --}}
     <div class="cart-panel">
         {{-- Mobile Quick Search --}}
-        <div class="pos-mobile-only p-3 bg-white border-b">
+        <div class="pos-mobile-only p-3 bg-card-bg border-b">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
                 <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent text-sm">
@@ -140,7 +140,7 @@
         </div>
 
         {{-- Cart Header --}}
-        <div class="p-4 border-b bg-white flex items-center justify-between">
+        <div class="p-4 border-b bg-card-bg flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
                 <div>
@@ -163,7 +163,7 @@
                     <p class="text-sm mt-1">Click products to add</p>
                 </div>
             </template>
-            <template x-for="(item, index) in cartItems" :key="item.id">
+            <template x-for="(item, index) in cartItems" :key="item.id + '-' + index">
                 <div class="flex items-center gap-3 py-3 border-b border-border">
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-heading truncate" x-text="item.name"></p>
@@ -173,7 +173,7 @@
                         <button class="qty-btn" @click="updateQuantity(index, item.quantity - 1)">
                             <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"/></svg>
                         </button>
-                        <input type="number" :value="item.quantity" @change="updateQuantity(index, parseInt($event.target.value))" min="1" class="w-12 text-center border rounded text-sm py-1">
+                        <input type="number" :value="item.quantity" @change="updateQuantity(index, parseInt($event.target.value))" min="1" class="w-20 text-center border rounded text-sm py-1">
                         <button class="qty-btn" @click="updateQuantity(index, item.quantity + 1)">
                             <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                         </button>
@@ -195,7 +195,7 @@
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                     <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
-                    <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-40 overflow-y-auto">
+                    <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-card-bg border rounded-lg mt-1 max-h-40 overflow-y-auto">
                         <template x-for="c in customerResults.slice(0, 5)" :key="c.id">
                             <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = c.name" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
                         </template>
@@ -281,7 +281,7 @@
 
     {{-- Success Modal --}}
     <div x-show="showSuccess" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" x-transition>
-        <div class="bg-white rounded-lg p-8 max-w-sm w-full mx-4 text-center">
+        <div class="bg-card-bg rounded-lg p-8 max-w-sm w-full mx-4 text-center">
             <div class="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="h-8 w-8 text-success" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
@@ -403,7 +403,7 @@ function posApp() {
 
         addToCart(item) {
             if (item.current_stock <= 0) return;
-            const existing = this.cartItems.find(c => c.id === item.id);
+            const existing = this.cartItems.find(c => parseInt(c.id) === parseInt(item.id));
             if (existing) {
                 if (existing.quantity < item.current_stock) {
                     existing.quantity++;

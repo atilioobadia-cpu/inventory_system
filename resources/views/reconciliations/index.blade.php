@@ -34,7 +34,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <form method="GET" action="{{ route('reconciliations.index') }}">
             <div class="p-4 border-b border-border flex flex-wrap items-end gap-4">
                 <div>
@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Type</label>
-                    <select name="type" x-model="type" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="type" x-model="type" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Types</option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Status</label>
-                    <select name="status" x-model="status" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="status" x-model="status" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Status</option>
                         <option value="pending">Pending</option>
                         <option value="completed">Completed</option>

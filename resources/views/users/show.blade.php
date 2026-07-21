@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     <div class="flex items-center justify-between">
         <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
@@ -36,23 +36,23 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Role</p>
             <p class="text-lg font-bold text-heading">{{ $user->role->name ?? 'No Role' }}</p>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Phone</p>
             <p class="text-lg font-bold text-heading">{{ $user->phone ?? 'Not set' }}</p>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Last Login</p>
             <p class="text-lg font-bold text-heading">{{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}</p>
         </div>
     </div>
 
     @if(isset($recentActivities) && $recentActivities->count())
-    <div class="bg-white rounded-lg border border-border">
-        <div class="p-6 border-b border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
+        <div class="p-5 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Recent Activity</h3>
         </div>
         <div class="overflow-x-auto">

@@ -41,7 +41,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <form method="GET" action="{{ route('sales.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
@@ -59,7 +59,7 @@
                     <input type="date" name="date_to" x-model="dateTo" placeholder="To" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
                 </div>
                 <div>
-                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Customers</option>
                         @foreach($customers ?? [] as $cust)
                             <option value="{{ $cust->id }}">{{ $cust->name }}</option>
@@ -70,7 +70,7 @@
             <div class="p-4 border-b border-border flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-body">Payment Status:</label>
-                    <select name="status" x-model="status" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="status" x-model="status" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="partial">Partial</option>
@@ -154,7 +154,7 @@
                                          x-transition:enter="transition ease-out duration-100"
                                          x-transition:enter-start="opacity-0 scale-95"
                                          x-transition:enter-end="opacity-100 scale-100"
-                                         class="absolute right-0 mt-2 w-48 bg-white rounded-lg border border-border py-1 z-20">
+                                         class="absolute right-0 mt-2 w-48 bg-control-bg rounded-lg border border-border py-1 z-20">
                                         <a href="{{ route('sales.show', $sale) }}" class="flex items-center gap-2 px-4 py-2 text-sm text-body hover:bg-card-bg">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                             View Details
@@ -211,7 +211,7 @@
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 scale-95"
              x-transition:enter-end="opacity-100 scale-100"
-             class="bg-white rounded-xl w-full max-w-md">
+             class="bg-card-bg rounded-lg w-full max-w-md">
             <div class="p-6">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
@@ -233,8 +233,8 @@
                     </div>
                 </form>
             </div>
-            <div class="flex items-center justify-end gap-3 px-6 py-4 bg-card-bg rounded-b-xl">
-                <button @click="showVoidModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
+            <div class="flex items-center justify-end gap-3 px-6 py-4 bg-card-bg rounded-b-lg">
+                <button @click="showVoidModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
                     Cancel
                 </button>
                 <button @click="$refs.voidForm.submit()" :disabled="!voidReason.trim()" x-bind:class="voidReason.trim() ? 'bg-danger hover:bg-danger text-white' : 'bg-control-bg text-muted cursor-not-allowed'"

@@ -125,10 +125,10 @@
 <div class="receipt-wrapper">
     {{-- 1. Header --}}
     <div class="receipt-header-section">
-        <h1>{{ $settings['business']['name'] ?? 'Mtokoma Motorcycle Parts' }}</h1>
-        <p>{{ $settings['business']['address'] ?? '' }}</p>
-        <p>TIN: {{ $settings['business']['tin_number'] ?? '' }}</p>
-        <p>{{ $settings['business']['phone'] ?? '' }}</p>
+        <h1>{{ $settings['name'] ?? 'Mtokoma Motorcycle Parts' }}</h1>
+        <p>{{ $settings['address'] ?? '' }}</p>
+        <p>TIN: {{ $settings['tin_number'] ?? '' }}</p>
+        <p>{{ $settings['phone'] ?? '' }}</p>
     </div>
 
     {{-- 2. Divider --}}
@@ -206,7 +206,7 @@
             'receipt' => $sale->invoice_number,
             'date' => $sale->sale_date->format('Y-m-d'),
             'total' => $sale->total_amount,
-            'tin' => $settings['business']['tin_number'] ?? '123-456-789'
+            'tin' => $settings['tin_number'] ?? '123-456-789'
         ])) !!}
         <p>Scan to verify receipt</p>
     </div>

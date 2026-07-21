@@ -3,7 +3,7 @@
 @section('title', 'Role Details')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-5">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Role: {{ $role->name }}</h1>
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Role Info -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <p class="text-sm text-muted">Name</p>
@@ -49,11 +49,11 @@
     </div>
 
     <!-- Permissions by Module -->
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
-        <div class="p-6 border-b border-border">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+        <div class="p-5 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Permissions ({{ $role->permissions->count() }})</h2>
         </div>
-        <div class="p-6">
+        <div class="p-5">
             @php
                 $grouped = $role->permissions->groupBy(fn($p) => explode('.', $p->name)[0]);
             @endphp
@@ -76,8 +76,8 @@
     </div>
 
     <!-- Users with this Role -->
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
-        <div class="p-6 border-b border-border">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+        <div class="p-5 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Users with this Role ({{ $role->users->count() }})</h2>
         </div>
         <div class="overflow-x-auto">

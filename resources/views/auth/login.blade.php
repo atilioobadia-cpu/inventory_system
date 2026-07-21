@@ -11,16 +11,16 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#171717',
-                        'accent': '#2563EB',
-                        'accent-light': '#EBF2FF',
-                        'heading': '#171717',
-                        'body': '#383838',
-                        'muted': '#525252',
-                        'border': '#e2e2e2',
-                        'control-bg': '#f3f3f3',
+                        'primary': '#0a0a0a',
+                        'accent': '#D4A017',
+                        'accent-light': '#2a2206',
+                        'heading': '#FFFFFF',
+                        'body': '#E0E0E0',
+                        'muted': '#999999',
+                        'border': '#2a2a2a',
+                        'control-bg': '#1a1a1a',
                         'danger': '#e03636',
-                        'danger-light': '#fde8e8',
+                        'danger-light': '#2e1111',
                     },
                     fontFamily: {
                         sans: ['Nunito', 'sans-serif'],
@@ -30,12 +30,12 @@
         }
     </script>
 </head>
-<body class="bg-card-bg font-sans antialiased min-h-screen flex items-center justify-center px-4">
+<body class="bg-primary font-sans antialiased min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-md">
         {{-- Logo & Title --}}
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-2xl mb-4">
-                <svg class="w-9 h-9 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-9 h-9 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h2m10 1l2-1V8a1 1 0 00-1-1h-2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,7 +46,7 @@
         </div>
 
         {{-- Login Card --}}
-        <div class="bg-white rounded-lg border border-border p-8">
+        <div class="bg-card-bg rounded-lg border border-border p-8">
             <h2 class="text-lg font-semibold text-heading mb-6">Sign in to your account</h2>
 
             @if($errors->any())

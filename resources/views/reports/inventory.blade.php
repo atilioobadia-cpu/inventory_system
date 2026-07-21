@@ -3,7 +3,7 @@
 @section('title', 'Inventory Report')
 
 @section('content')
-<div class="space-y-6" x-data="inventoryReport()">
+<div class="space-y-4" x-data="inventoryReport()">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Inventory Report</h1>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <form action="{{ route('reports.inventory') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Category</label>
@@ -48,7 +48,7 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-        <div class="bg-white rounded-lg border border-border p-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="text-center">
                 <div class="p-2 bg-teal-100 rounded-lg inline-flex mb-2">
                     <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
@@ -57,7 +57,7 @@
                 <p class="text-xl font-bold text-heading">{{ number_format($totalItems ?? 0) }}</p>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="text-center">
                 <div class="p-2 bg-accent-light rounded-lg inline-flex mb-2">
                     <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
@@ -66,7 +66,7 @@
                 <p class="text-xl font-bold text-heading">TZS {{ number_format($totalStockValue ?? 0) }}</p>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="text-center">
                 <div class="p-2 bg-success-light rounded-lg inline-flex mb-2">
                     <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -75,7 +75,7 @@
                 <p class="text-xl font-bold text-heading">TZS {{ number_format($totalRetailValue ?? 0) }}</p>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="text-center">
                 <div class="p-2 bg-warning-light rounded-lg inline-flex mb-2">
                     <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
@@ -84,7 +84,7 @@
                 <p class="text-xl font-bold text-warning">{{ $lowStockItems ?? 0 }}</p>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="text-center">
                 <div class="p-2 bg-danger-light rounded-lg inline-flex mb-2">
                     <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
@@ -97,7 +97,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Inventory Table -->
-        <div class="lg:col-span-2 bg-white rounded-lg border border-border overflow-hidden">
+        <div class="lg:col-span-2 bg-card-bg rounded-lg border border-border overflow-hidden">
             <div class="p-6 border-b border-border">
                 <h2 class="text-lg font-semibold text-heading">Stock Details</h2>
             </div>
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Category Breakdown -->
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <h2 class="text-lg font-semibold text-heading mb-4">Category Breakdown</h2>
             <div class="h-72">
                 <canvas id="categoryChart"></canvas>

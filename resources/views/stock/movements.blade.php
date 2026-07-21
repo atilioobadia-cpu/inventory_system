@@ -34,7 +34,7 @@
         </button>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <form method="GET" action="{{ route('stock.movements') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
@@ -52,7 +52,7 @@
                     <input type="date" name="date_to" x-model="dateTo" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
                 </div>
                 <div>
-                    <select name="type" x-model="type" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-white">
+                    <select name="type" x-model="type" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-control-bg">
                         <option value="">All Types</option>
                         <option value="purchase">Purchase</option>
                         <option value="sale">Sale</option>
@@ -67,7 +67,7 @@
             <div class="p-4 border-b border-border flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-body">Direction:</label>
-                    <select name="direction" x-model="direction" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-white">
+                    <select name="direction" x-model="direction" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-control-bg">
                         <option value="">All</option>
                         <option value="in">In (Stock Received)</option>
                         <option value="out">Out (Stock Sent)</option>
@@ -181,7 +181,7 @@
          x-transition:leave-end="opacity-0"
          class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
         <div @click.away="showAdjustModal = false"
-             class="bg-white rounded-xl w-full max-w-md">
+             class="bg-card-bg rounded-lg w-full max-w-md">
             <form method="POST" action="{{ route('stock.adjust') }}">
                 @csrf
                 <div class="p-6">
@@ -189,7 +189,7 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Item *</label>
-                            <select name="item_id" x-model="adjustForm.item_id" required class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-white">
+                            <select name="item_id" x-model="adjustForm.item_id" required class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-control-bg">
                                 <option value="">Select item...</option>
                                 @foreach($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->sku }})</option>
@@ -202,7 +202,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Type *</label>
-                            <select name="type" x-model="adjustForm.type" required class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-white">
+                            <select name="type" x-model="adjustForm.type" required class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent bg-control-bg">
                                 <option value="adjustment">General Adjustment</option>
                                 <option value="damage">Damage</option>
                                 <option value="return">Return</option>
@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-end gap-3 px-6 py-4 bg-card-bg rounded-b-xl">
-                    <button type="button" @click="showAdjustModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
+                    <button type="button" @click="showAdjustModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
                     <button type="submit" class="px-4 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors">Save Adjustment</button>
                 </div>
             </form>

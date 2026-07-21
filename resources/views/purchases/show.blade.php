@@ -3,7 +3,7 @@
 @section('title', 'Purchase Details - ' . $purchase->invoice_number)
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     {{-- Breadcrumb --}}
     <div class="flex items-center justify-between">
         <div>
@@ -40,7 +40,7 @@
 
             @can('edit_purchases')
             @if($purchase->status === 'draft')
-            <a href="{{ route('purchases.edit', $purchase) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border hover:bg-card-bg text-body rounded-lg text-sm font-medium transition-colors">
+            <a href="{{ route('purchases.edit', $purchase) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg border border-border hover:bg-card-bg text-body rounded-lg text-sm font-medium transition-colors">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                 Edit
             </a>
@@ -62,7 +62,7 @@
                 Print
             </button>
 
-            <a href="{{ route('purchases.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border hover:bg-card-bg text-body rounded-lg text-sm font-medium transition-colors">
+            <a href="{{ route('purchases.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg border border-border hover:bg-card-bg text-body rounded-lg text-sm font-medium transition-colors">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
                 Back
             </a>
@@ -70,8 +70,8 @@
     </div>
 
     {{-- Info Card --}}
-    <div class="bg-white rounded-lg border p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-card-bg rounded-lg border p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div class="space-y-4">
                 <div>
                     <p class="text-xs text-muted uppercase tracking-wider">Invoice Number</p>
@@ -134,8 +134,8 @@
     </div>
 
     {{-- Items Table --}}
-    <div class="bg-white rounded-lg border overflow-hidden">
-        <div class="px-6 py-4 border-b border-border">
+    <div class="bg-card-bg rounded-lg border overflow-hidden">
+        <div class="px-5 py-4 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Purchase Items</h2>
         </div>
         <div class="overflow-x-auto">
@@ -205,7 +205,7 @@
     </div>
 
     {{-- Financial Summary Card --}}
-    <div class="bg-white rounded-lg border p-6 max-w-md">
+    <div class="bg-card-bg rounded-lg border p-5 max-w-md">
         <h2 class="text-lg font-semibold text-heading mb-4">Financial Summary</h2>
         <div class="space-y-3">
             <div class="flex justify-between text-sm">

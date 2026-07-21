@@ -35,7 +35,7 @@
             {{-- Left: Purchase Info --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-lg border p-5">
+                <div class="bg-card-bg rounded-lg border p-5">
                     <h2 class="text-xl font-semibold text-heading mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -43,7 +43,7 @@
                             <div class="relative" x-data="{ open: false, query: '{{ addslashes($purchase->supplier->name ?? '') }}' }" @click.away="open = false">
                                 <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; searchSupplier()" placeholder="Search supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
-                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-control-bg border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
                                         <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="supplier = s; open = false; query = s.name" x-text="s.name"></div>
                                     </template>
@@ -76,7 +76,7 @@
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-white rounded-lg border p-5">
+                <div class="bg-card-bg rounded-lg border p-5">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-semibold text-heading">Items</h2>
                         @if($purchase->status === 'draft')
@@ -106,7 +106,7 @@
                                             <div class="relative" x-data="{ open: false }" @click.away="open = false">
                                                 <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; searchItem(index)" placeholder="Search item..." class="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-1 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                                                 <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
-                                                <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
+                                                <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-control-bg border rounded mt-1 max-h-40 overflow-y-auto">
                                                     <template x-for="item in row.itemResults" :key="item.id">
                                                         <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
                                                     </template>
@@ -140,7 +140,7 @@
 
             {{-- Right: Summary --}}
             <div class="space-y-6">
-                <div class="bg-white rounded-lg border p-5 sticky top-20">
+                <div class="bg-card-bg rounded-lg border p-5 sticky top-20">
                     <h2 class="text-xl font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">

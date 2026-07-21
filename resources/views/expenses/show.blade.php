@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     <div class="flex items-center justify-between">
         <div>
             <h2 class="text-xl font-bold text-heading">{{ $expense->reference_number }}</h2>
@@ -29,25 +29,25 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Amount</p>
             <p class="text-xl font-bold text-heading">TZS {{ number_format($expense->amount, 2) }}</p>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Category</p>
             <p class="text-lg font-bold text-heading">{{ $expense->category->name ?? 'N/A' }}</p>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Payment Method</p>
             <p class="text-lg font-bold text-heading">{{ ucfirst(str_replace('_', ' ', $expense->payment_method)) }}</p>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Date</p>
             <p class="text-lg font-bold text-heading">{{ $expense->expense_date->format('d M Y') }}</p>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <h3 class="text-lg font-semibold text-heading mb-4">Details</h3>
         <dl class="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -66,7 +66,7 @@
     </div>
 
     @if($expense->receipt_path)
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <h3 class="text-lg font-semibold text-heading mb-4">Receipt</h3>
         <a href="{{ asset('storage/' . $expense->receipt_path) }}" target="_blank" class="text-accent hover:underline">View Receipt</a>
     </div>

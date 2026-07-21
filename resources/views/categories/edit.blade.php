@@ -24,7 +24,7 @@
         @csrf
         @method('PUT')
 
-        <div class="bg-white rounded-lg border border-border p-6 space-y-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
             <div>
                 <label for="name" class="form-label">Category Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" value="{{ old('name', $category->name) }}" required

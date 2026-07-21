@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Dashboard')
 
@@ -8,12 +8,12 @@
 @endsection
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-4">
     {{-- Stat Cards --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {{-- Total Items --}}
-        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-accent-light rounded-xl flex items-center justify-center flex-shrink-0">
+        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
                     <path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                 </svg>
@@ -25,8 +25,8 @@
         </div>
 
         {{-- Stock Value --}}
-        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-accent-light rounded-xl flex items-center justify-center flex-shrink-0">
+        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
                 </svg>
@@ -38,8 +38,8 @@
         </div>
 
         {{-- Today's Sales --}}
-        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-success-light rounded-xl flex items-center justify-center flex-shrink-0">
+        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-success-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
                 </svg>
@@ -51,8 +51,8 @@
         </div>
 
         {{-- Low Stock Items --}}
-        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-warning-light rounded-xl flex items-center justify-center flex-shrink-0">
+        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-warning-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.004ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>
                 </svg>
@@ -67,8 +67,8 @@
     {{-- Charts and Activity --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {{-- Monthly Sales Chart --}}
-        <div class="lg:col-span-2 bg-white rounded-lg border border-border p-6">
-            <h3 class="text-lg font-semibold text-heading mb-4 flex items-center gap-2">
+        <div class="lg:col-span-2 bg-white rounded-lg border border-border p-5">
+            <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
                 <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
                 </svg>
@@ -80,8 +80,8 @@
         </div>
 
         {{-- Recent Activity --}}
-        <div class="bg-white rounded-lg border border-border p-6">
-            <h3 class="text-lg font-semibold text-heading mb-4 flex items-center gap-2">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
+            <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
                 <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
@@ -124,8 +124,8 @@
     {{-- Bottom Row --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {{-- Top Selling Items --}}
-        <div class="bg-white rounded-lg border border-border p-6">
-            <h3 class="text-lg font-semibold text-heading mb-4 flex items-center gap-2">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
+            <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
                 <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
                 </svg>
@@ -174,8 +174,8 @@
         </div>
 
         {{-- Low Stock Alerts --}}
-        <div class="bg-white rounded-lg border border-border p-6">
-            <div class="flex items-center justify-between mb-4">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="flex items-center justify-between mb-3">
                 <h3 class="text-lg font-semibold text-heading flex items-center gap-2">
                     <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z"/>

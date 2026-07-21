@@ -20,18 +20,30 @@
     quantity: 1,
     notes: '',
     searching: false,
+    dropdownOpen: false,
+    async loadInitialItems() {
+        if (this.items.length > 0) return;
+        this.searching = true;
+        try {
+            const res = await fetch('{{ route('api.items.search') }}?q=');
+            const data = await res.json();
+            this.items = data.slice(0, 5);
+        } catch(e) { this.items = []; }
+        this.searching = false;
+    },
     async searchItems() {
-        if (this.search.length < 2) { this.items = []; return; }
         this.searching = true;
         try {
             const res = await fetch('{{ route('api.items.search') }}?q=' + encodeURIComponent(this.search));
-            this.items = await res.json();
+            const data = await res.json();
+            this.items = this.search.length === 0 ? data.slice(0, 5) : data;
         } catch(e) { this.items = []; }
         this.searching = false;
     },
     selectItem(item) {
         this.selectedItem = item;
         this.items = [];
+        this.dropdownOpen = false;
         this.search = item.name;
     },
     get projectedStock() {
@@ -42,23 +54,23 @@
     }
 }">
     <div class="max-w-2xl mx-auto">
-        <div class="bg-white rounded-lg border border-border">
-            <div class="px-6 py-4 border-b border-border">
+        <div class="bg-card-bg rounded-lg border border-border">
+            <div class="px-5 py-4 border-b border-border">
                 <h3 class="text-lg font-semibold text-heading">Stock Adjustment</h3>
                 <p class="text-sm text-muted mt-1">Add or remove stock for an item</p>
             </div>
 
-            <form action="{{ route('stock.adjust') }}" method="POST" class="p-6">
+            <form action="{{ route('stock.adjust') }}" method="POST" class="p-5">
                 @csrf
                 <div class="space-y-6">
                     {{-- Item Search --}}
                     <div>
                         <label class="block text-sm font-medium text-body mb-1">Item <span class="text-danger">*</span></label>
                         <div class="relative">
-                            <input type="text" x-model="search" @input="searchItems()" placeholder="Search items by name or SKU..."
+                            <input type="text" x-model="search" @input.debounce.300ms="searchItems()" @focus="dropdownOpen = true; loadInitialItems()" placeholder="Search items by name or SKU..."
                                    class="w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent" required>
                             <input type="hidden" name="item_id" :value="selectedItem?.id">
-                            <div x-show="items.length > 0" @click.away="items = []" class="absolute z-10 w-full mt-1 bg-white border border-border rounded-lg max-h-60 overflow-y-auto">
+                            <div x-show="dropdownOpen && items.length > 0" @click.away="dropdownOpen = false; items = []" class="absolute z-10 w-full mt-1 bg-control-bg border border-border rounded-lg max-h-60 overflow-y-auto">
                                 <template x-for="item in items" :key="item.id">
                                     <button type="button" @click="selectItem(item)" class="w-full text-left px-4 py-3 hover:bg-card-bg border-b border-border last:border-0">
                                         <p class="text-sm font-medium text-heading" x-text="item.name"></p>
@@ -154,7 +166,7 @@
 
                 {{-- Actions --}}
                 <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-border">
-                    <a href="{{ route('stock.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
+                    <a href="{{ route('stock.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
                         Cancel
                     </a>
                     <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">

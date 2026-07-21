@@ -3,7 +3,7 @@
 @section('title', 'Payments')
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-heading flex items-center gap-2">
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <form action="{{ route('payments.index') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Payment Method</label>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Payments Table -->
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-card-bg">

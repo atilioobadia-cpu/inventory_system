@@ -28,7 +28,7 @@
     </div>
 
     {{-- Filters --}}
-    <div class="bg-white rounded-lg border p-4">
+    <div class="bg-card-bg rounded-lg border p-4">
         <form method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Search invoice or supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent focus:border-accent">
             <select name="supplier_id" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent">
@@ -57,7 +57,7 @@
     </div>
 
     {{-- Table --}}
-    <div class="bg-white rounded-lg border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-card-bg border-b">

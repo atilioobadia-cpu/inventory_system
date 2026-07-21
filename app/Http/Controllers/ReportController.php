@@ -41,7 +41,7 @@ class ReportController extends Controller
         $summary = Sale::whereNull('voided_at')
             ->whereDate('sale_date', '>=', $from)
             ->whereDate('sale_date', '<=', $to)
-            ->selectRaw('COUNT(*) as count, SUM(subtotal) as subtotal, SUM(tax_amount) as tax, SUM(discount_amount) as discount, SUM(total_amount) as total, SUM(paid_amount) as paid, SUM(due_amount) as due')
+            ->selectRaw('COUNT(*) as count, SUM(total_before_tax) as subtotal, SUM(vat_amount) as tax, SUM(discount_amount) as discount, SUM(total_after_tax) as total, SUM(paid_amount) as paid, SUM(due_amount) as due')
             ->first();
 
         $totalSales = $summary->total ?? 0;
@@ -57,7 +57,7 @@ class ReportController extends Controller
         $chartCollection = Sale::whereNull('voided_at')
             ->whereDate('sale_date', '>=', $from)
             ->whereDate('sale_date', '<=', $to)
-            ->select(DB::raw("DATE_FORMAT(sale_date, '%Y-%m-%d') as date"), DB::raw('SUM(total_amount) as total'))
+            ->select(DB::raw("DATE_FORMAT(sale_date, '%Y-%m-%d') as date"), DB::raw('SUM(total_after_tax) as total'))
             ->groupBy('date')
             ->orderBy('date')
             ->pluck('total', 'date');
@@ -339,10 +339,10 @@ class ReportController extends Controller
                             $sale->invoice_number,
                             $sale->sale_date->format('d/m/Y'),
                             $sale->customer->name ?? 'Walk-in',
-                            $sale->subtotal,
-                            $sale->tax_amount,
+                            $sale->total_before_tax,
+                            $sale->vat_amount,
                             $sale->discount_amount,
-                            $sale->total_amount,
+                            $sale->total_after_tax,
                             $sale->paid_amount,
                             $sale->due_amount,
                             $sale->payment_status,

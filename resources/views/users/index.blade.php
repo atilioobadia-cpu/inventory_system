@@ -20,7 +20,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-card-bg">

@@ -3,7 +3,7 @@
 @section('title', 'Activity Log')
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Activity Log</h1>
@@ -12,7 +12,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <form action="{{ route('activity.index') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">User</label>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Timeline -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <div class="space-y-0">
             @forelse($activities ?? [] as $activity)
                 <div class="relative flex gap-4 pb-8 last:pb-0">

@@ -24,7 +24,7 @@
             </div>
 
             {{-- Basic Details --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-6">Expense Details</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -85,7 +85,7 @@
             </div>
 
             {{-- Reference & Description --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-6">Additional Information</h3>
                 <div class="space-y-6">
                     <div>
@@ -100,7 +100,7 @@
                     </div>
                     <div>
                         <label for="receipt" class="form-label">Receipt Upload</label>
-                        <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-accent transition-colors">
+                        <div class="relative border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-accent transition-colors">
                             <svg class="w-8 h-8 text-muted mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
                             </svg>
@@ -114,7 +114,7 @@
             </div>
 
             {{-- Recurring --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-heading">Recurring Expense</h3>
                     <label class="relative inline-flex items-center cursor-pointer">

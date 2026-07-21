@@ -23,7 +23,7 @@
     <form method="POST" action="{{ route('customers.update', $customer) }}">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
+        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="sm:col-span-2">
                     <label for="name" class="form-label flex items-center gap-1.5">

@@ -69,7 +69,13 @@ class PurchaseController extends Controller
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.unit_cost' => 'required|numeric|min:0',
             'items.*.discount' => 'nullable|numeric|min:0',
+            'action' => 'nullable|in:draft,receive',
+            'paid_amount' => 'nullable|numeric|min:0',
+            'payment_terms' => 'nullable|string',
         ]);
+
+        $action = $request->input('action', 'draft');
+        $isReceive = $action === 'receive';
 
         DB::beginTransaction();
         try {
@@ -85,19 +91,22 @@ class PurchaseController extends Controller
 
             $discountAmount = $validated['discount_amount'] ?? 0;
             $totalAmount = $subtotal + $taxAmount - $discountAmount;
+            $paidAmount = $validated['paid_amount'] ?? 0;
 
             $purchase = Purchase::create([
                 'supplier_id' => $validated['supplier_id'],
                 'purchase_date' => $validated['purchase_date'],
-                'status' => 'draft',
+                'status' => $isReceive ? 'received' : 'draft',
                 'subtotal' => $subtotal,
                 'tax_amount' => $taxAmount,
                 'discount_amount' => $discountAmount,
                 'total_amount' => $totalAmount,
-                'paid_amount' => 0,
-                'due_amount' => $totalAmount,
+                'paid_amount' => $paidAmount,
+                'due_amount' => $totalAmount - $paidAmount,
                 'notes' => $validated['notes'] ?? null,
                 'created_by' => auth()->id(),
+                'received_at' => $isReceive ? now() : null,
+                'approved_by' => $isReceive ? auth()->id() : null,
             ]);
 
             foreach ($validated['items'] as $itemData) {
@@ -109,12 +118,26 @@ class PurchaseController extends Controller
                     'purchase_id' => $purchase->id,
                     'item_id' => $itemData['item_id'],
                     'quantity' => $itemData['quantity'],
-                    'received_quantity' => 0,
+                    'received_quantity' => $isReceive ? $itemData['quantity'] : 0,
                     'unit_cost' => $itemData['unit_cost'],
                     'discount' => $itemData['discount'] ?? 0,
                     'tax_amount' => $taxAmountLine,
                     'total' => $lineTotal + $taxAmountLine,
                 ]);
+
+                if ($isReceive) {
+                    $stockService = app(StockService::class);
+                    $stockService->recordMovement(
+                        item: $item,
+                        type: 'purchase',
+                        direction: 'in',
+                        quantity: $itemData['quantity'],
+                        reference: $purchase,
+                        notes: "Received from purchase {$purchase->invoice_number}",
+                        unitCost: $itemData['unit_cost'],
+                        userId: auth()->id()
+                    );
+                }
             }
 
             $activityService = app(ActivityService::class);
@@ -129,7 +152,8 @@ class PurchaseController extends Controller
             $notificationService->sendPurchaseNotification($purchase);
 
             DB::commit();
-            return redirect()->route('purchases.show', $purchase)->with('success', 'Purchase created successfully.');
+            $message = $isReceive ? 'Purchase created and received successfully.' : 'Purchase created successfully.';
+            return redirect()->route('purchases.show', $purchase)->with('success', $message);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withInput()->with('error', 'Failed to create purchase: ' . $e->getMessage());

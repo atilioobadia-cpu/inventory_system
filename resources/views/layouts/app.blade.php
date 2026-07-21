@@ -15,24 +15,24 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#171717',
+                        'primary': '#0a0a0a',
                         'primary-hover': '#000000',
-                        'accent': '#2563EB',
-                        'accent-light': '#EBF2FF',
-                        'body': '#383838',
-                        'heading': '#171717',
-                        'muted': '#525252',
-                        'border': '#e2e2e2',
-                        'control-bg': '#f3f3f3',
-                        'link': '#0289f7',
+                        'accent': '#D4A017',
+                        'accent-light': '#2a2206',
+                        'body': '#E0E0E0',
+                        'heading': '#FFFFFF',
+                        'muted': '#999999',
+                        'border': '#2a2a2a',
+                        'control-bg': '#1a1a1a',
+                        'link': '#D4A017',
                         'success': '#46b37e',
-                        'success-light': '#e8f7ef',
+                        'success-light': '#1a2e1f',
                         'danger': '#e03636',
-                        'danger-light': '#fde8e8',
+                        'danger-light': '#2e1111',
                         'warning': '#fb8b2c',
-                        'warning-light': '#fff3e0',
-                        'card-bg': '#f8f9fa',
-                        'chart-1': '#5e64ff',
+                        'warning-light': '#2e1f0e',
+                        'card-bg': '#111111',
+                        'chart-1': '#D4A017',
                         'chart-2': '#28a745',
                         'chart-3': '#ff6b6b',
                         'chart-4': '#ffa726',
@@ -54,17 +54,17 @@
             border-left: 3px solid transparent;
         }
         .sidebar-link:hover {
-            background: #f3f3f3;
-            color: #171717;
+            background: #1a1a1a;
+            color: #D4A017;
         }
         .sidebar-link.active {
-            background: #EBF2FF;
-            color: #2563EB;
-            border-left-color: #2563EB;
+            background: #1a1a1a;
+            color: #D4A017;
+            border-left-color: #D4A017;
             font-weight: 600;
         }
-        .sidebar-link.active .sidebar-icon-pill { background: #2563EB; color: #ffffff; }
-        .sidebar-link.active svg { color: #2563EB; }
+        .sidebar-link.active .sidebar-icon-pill { background: #D4A017; color: #000000; }
+        .sidebar-link.active svg { color: #D4A017; }
         .sidebar-collapse { width: 4rem; }
         .sidebar-collapse .sidebar-text { display: none; }
         .sidebar-collapse .sidebar-logo-text { display: none; }
@@ -80,8 +80,8 @@
             width: 2rem;
             height: 2rem;
             border-radius: 0.5rem;
-            background: #EBF2FF;
-            color: #2563EB;
+            background: #1a1a1a;
+            color: #D4A017;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,8 +89,8 @@
             transition: all 0.2s ease;
         }
         .sidebar-link.active .sidebar-icon-pill {
-            background: #2563EB;
-            color: #ffffff;
+            background: #D4A017;
+            color: #000000;
         }
 
         /* Section labels */
@@ -99,19 +99,22 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #999999;
+            color: #D4A017;
             padding: 1rem 0.75rem 0.375rem;
+            background: none;
+            border: none;
+            text-align: left;
         }
 
         /* Scrollbar */
         .scrollbar-thin::-webkit-scrollbar { width: 4px; }
         .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-        .scrollbar-thin::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 4px; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: #333333; border-radius: 4px; }
 
         /* Loading Bar */
         .loading-bar {
             position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
-            background: #2563EB;
+            background: #D4A017;
             transition: width 0.3s ease;
         }
 
@@ -124,9 +127,9 @@
         .toast-container > * { pointer-events: auto; }
         .toast {
             min-width: 280px; max-width: 380px;
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
-            border: 1px solid #e2e2e2;
+            border: 1px solid #2a2a2a;
             overflow: hidden;
             animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             transform: translateX(120%);
@@ -164,23 +167,23 @@
         input[type="datetime-local"],
         textarea,
         select {
-            background-color: #f3f3f3 !important;
-            border: 1px solid #e2e2e2 !important;
+            background-color: #1a1a1a !important;
+            border: 1px solid #2a2a2a !important;
             border-radius: 0.5rem !important;
             padding: 0.625rem 0.875rem !important;
             font-size: 0.875rem !important;
             line-height: 1.25rem !important;
-            color: #383838 !important;
+            color: #E0E0E0 !important;
             width: 100% !important;
             transition: all 0.15s ease;
         }
         input:focus, textarea:focus, select:focus {
-            border-color: #2563EB !important;
+            border-color: #D4A017 !important;
             outline: none !important;
-            background-color: #ffffff !important;
+            background-color: #1a1a1a !important;
         }
         input:hover, textarea:hover, select:hover {
-            border-color: #c0c0c0 !important;
+            border-color: #333333 !important;
         }
         input::placeholder, textarea::placeholder {
             color: #999999 !important;
@@ -191,8 +194,8 @@
             background-image: none !important;
         }
         select option {
-            background: #ffffff;
-            color: #383838;
+            background: #1a1a1a;
+            color: #E0E0E0;
             padding: 0.5rem;
         }
         textarea {
@@ -205,7 +208,7 @@
             display: block;
             font-size: 0.8125rem;
             font-weight: 600;
-            color: #383838;
+            color: #E0E0E0;
             margin-bottom: 0.375rem;
             letter-spacing: 0.01em;
         }
@@ -216,8 +219,8 @@
 
         /* Form Card */
         .form-card {
-            background: #ffffff;
-            border: 1px solid #e2e2e2;
+            background: #111111;
+            border: 1px solid #2a2a2a;
             border-radius: 8px;
             padding: 1.75rem;
         }
@@ -237,8 +240,8 @@
 
         /* Button styles */
         .btn-primary {
-            background: #171717;
-            color: white;
+            background: #D4A017;
+            color: #000000;
             padding: 0.625rem 1.25rem;
             border-radius: 0.5rem;
             font-weight: 600;
@@ -247,20 +250,20 @@
             border: none;
             cursor: pointer;
         }
-        .btn-primary:hover { background: #000000; }
+        .btn-primary:hover { background: #B8860B; }
 
         .btn-secondary {
-            background: white;
-            color: #383838;
+            background: #1a1a1a;
+            color: #E0E0E0;
             padding: 0.625rem 1.25rem;
             border-radius: 0.5rem;
             font-weight: 600;
             font-size: 0.875rem;
             transition: all 0.2s ease;
-            border: 1px solid #e2e2e2;
+            border: 1px solid #2a2a2a;
             cursor: pointer;
         }
-        .btn-secondary:hover { background: #f3f3f3; }
+        .btn-secondary:hover { background: #2a2a2a; }
 
         .btn-danger {
             background: #e03636;
@@ -290,8 +293,8 @@
 
         /* Badge primary (replaces badge-gold) */
         .badge-primary {
-            background: #2563EB;
-            color: #ffffff;
+            background: #D4A017;
+            color: #000000;
             font-size: 0.7rem;
             font-weight: 700;
             padding: 0.125rem 0.5rem;
@@ -307,24 +310,30 @@
             position: absolute;
             z-index: 50;
             width: 100%;
-            background: white;
-            border: 1px solid #e2e2e2;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
             border-radius: 0.5rem;
             margin-top: 0.25rem;
             max-height: 12rem;
             overflow-y: auto;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
         }
         .autocomplete-item {
             padding: 0.5rem 0.75rem;
             font-size: 0.875rem;
             cursor: pointer;
             transition: background 0.1s;
+            color: #E0E0E0;
         }
         .autocomplete-item:hover,
         .autocomplete-item.active {
-            background: #EBF2FF;
+            background: #1a1a1a;
+            color: #D4A017;
         }
+
+        /* Accent utility classes */
+        .accent-bg { background-color: #D4A017; color: #000000; }
+        .accent-text { color: #D4A017; }
 
         /* Toast fix - remove overflow hidden */
         .toast {
@@ -333,7 +342,7 @@
     </style>
     @stack('styles')
 </head>
-<body class="bg-white font-sans antialiased text-body" x-data="{ sidebarOpen: true, mobileMenu: false }">
+<body class="bg-primary font-sans antialiased text-body" x-data="{ sidebarOpen: true, mobileMenu: false }">
 
     {{-- Loading Bar --}}
     <div id="loading-bar" class="loading-bar" style="width: 0%; display: none;"></div>
@@ -406,7 +415,7 @@
     </div>
 
     {{-- Sidebar --}}
-    <aside class="fixed left-0 top-0 h-full z-50 transition-all duration-300 flex flex-col bg-white border-r border-border
+    <aside class="fixed left-0 top-0 h-full z-50 transition-all duration-300 flex flex-col bg-primary border-r border-border
          sidebar-expanded lg:sidebar-expanded"
          :class="mobileMenu ? 'open' : ''"
          x-bind:class="sidebarOpen ? 'lg:sidebar-expanded' : 'lg:sidebar-collapse'">
@@ -415,7 +424,7 @@
         <div class="flex items-center h-16 px-4 border-b border-border flex-shrink-0">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h2m10 1l2-1V8a1 1 0 00-1-1h-2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -429,7 +438,7 @@
         </div>
 
         {{-- Navigation --}}
-        <nav class="flex-1 overflow-y-auto scrollbar-thin py-3">
+        <nav id="sidebar-nav" class="flex-1 overflow-y-auto scrollbar-thin py-3" x-data="{ open: { ops: true, inv: true, ppl: true, rpt: true, adm: true }, toggle(key) { this.open[key] = !this.open[key]; } }">
             <div class="px-3 space-y-0.5">
 
                 {{-- DASHBOARD --}}
@@ -445,7 +454,11 @@
                 </a>
 
                 {{-- OPERATIONS --}}
-                <p class="sidebar-section-label">Operations</p>
+                <button @click="toggle('ops')" class="sidebar-section-label flex items-center justify-between w-full cursor-pointer hover:text-muted/70 transition-colors">
+                    <span>Operations</span>
+                    <svg class="w-3 h-3 transition-transform duration-200" :class="open.ops ? '' : '-rotate-90'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </button>
+                <div x-show="open.ops" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('pos.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
@@ -491,8 +504,14 @@
                     <span class="sidebar-text whitespace-nowrap">Expenses</span>
                 </a>
 
+                </div>
+
                 {{-- INVENTORY --}}
-                <p class="sidebar-section-label">Inventory</p>
+                <button @click="toggle('inv')" class="sidebar-section-label flex items-center justify-between w-full cursor-pointer hover:text-muted/70 transition-colors">
+                    <span>Inventory</span>
+                    <svg class="w-3 h-3 transition-transform duration-200" :class="open.inv ? '' : '-rotate-90'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </button>
+                <div x-show="open.inv" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('items.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
@@ -539,8 +558,14 @@
                     <span class="sidebar-text whitespace-nowrap">Adjustments</span>
                 </a>
 
+                </div>
+
                 {{-- PEOPLE --}}
-                <p class="sidebar-section-label">People</p>
+                <button @click="toggle('ppl')" class="sidebar-section-label flex items-center justify-between w-full cursor-pointer hover:text-muted/70 transition-colors">
+                    <span>People</span>
+                    <svg class="w-3 h-3 transition-transform duration-200" :class="open.ppl ? '' : '-rotate-90'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </button>
+                <div x-show="open.ppl" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('customers.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
@@ -575,8 +600,14 @@
                     <span class="sidebar-text whitespace-nowrap">Reconciliations</span>
                 </a>
 
+                </div>
+
                 {{-- REPORTS --}}
-                <p class="sidebar-section-label">Reports</p>
+                <button @click="toggle('rpt')" class="sidebar-section-label flex items-center justify-between w-full cursor-pointer hover:text-muted/70 transition-colors">
+                    <span>Reports</span>
+                    <svg class="w-3 h-3 transition-transform duration-200" :class="open.rpt ? '' : '-rotate-90'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </button>
+                <div x-show="open.rpt" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('reports.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
@@ -600,8 +631,14 @@
                     <span class="sidebar-text whitespace-nowrap">Import / Export</span>
                 </a>
 
+                </div>
+
                 {{-- ADMINISTRATION --}}
-                <p class="sidebar-section-label">Administration</p>
+                <button @click="toggle('adm')" class="sidebar-section-label flex items-center justify-between w-full cursor-pointer hover:text-muted/70 transition-colors">
+                    <span>Administration</span>
+                    <svg class="w-3 h-3 transition-transform duration-200" :class="open.adm ? '' : '-rotate-90'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </button>
+                <div x-show="open.adm" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('users.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
@@ -659,7 +696,7 @@
                     <span class="sidebar-text whitespace-nowrap">Expense Categories</span>
                 </a>
 
-                <a href="{{ route('expenses.index') }}" onclick="showLoading()"
+                <a href="{{ route('payments.index') }}" onclick="showLoading()"
                    class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
                           {{ request()->routeIs('payments.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
@@ -669,6 +706,7 @@
                     </div>
                     <span class="sidebar-text whitespace-nowrap">Payments</span>
                 </a>
+            </div>
 
             </div>
         </nav>
@@ -699,7 +737,7 @@
     <div class="transition-all duration-300 lg:ml-64" x-bind:class="sidebarOpen ? 'lg:ml-64' : 'lg:ml-16'">
 
         {{-- Top Header --}}
-        <header class="bg-white border-b border-border h-16 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+        <header class="bg-primary border-b border-border h-16 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
             <div class="flex items-center gap-4">
                 <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-muted hover:text-heading">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -733,7 +771,7 @@
                 <div x-data="{ open: false }" class="relative">
                     <button @click="open = !open" class="flex items-center gap-2 hover:bg-control-bg rounded-lg px-2 py-1.5 transition-colors">
                         <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                            <span class="text-white text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
+                            <span class="text-primary text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                         </div>
                         <div class="hidden sm:block text-left">
                             <p class="text-sm font-semibold text-heading">{{ Auth::user()->name ?? 'User' }}</p>
@@ -747,7 +785,7 @@
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
-                         class="absolute right-0 mt-2 w-56 bg-white rounded-lg border border-border py-1 z-50">
+                         class="absolute right-0 mt-2 w-56 bg-primary rounded-lg border border-border py-1 z-50">
                         <div class="px-4 py-3 border-b border-border">
                             <p class="text-sm font-semibold text-heading">{{ Auth::user()->name ?? 'User' }}</p>
                             <p class="text-xs text-muted">{{ Auth::user()->email ?? '' }}</p>
@@ -777,11 +815,11 @@
         @include('components.flash-messages')
 
         {{-- Page Content --}}
-        <main class="p-4 lg:p-6">
+        <main class="p-4 lg:p-5">
             @yield('content')
         </main>
 
-        <footer class="border-t border-border bg-white px-4 lg:px-6 py-4">
+        <footer class="border-t border-border bg-primary px-4 lg:px-6 py-4">
             <p class="text-sm text-muted text-center">&copy; 2026 Mtokoma Motorcycle Parts. All rights reserved.</p>
         </footer>
     </div>
@@ -803,6 +841,22 @@
         }
         window.addEventListener('load', hideLoading);
         window.addEventListener('pageshow', hideLoading);
+    </script>
+
+    {{-- Sidebar Scroll Position Preservation --}}
+    <script>
+        (function() {
+            var KEY = 'sidebar_scroll_pos';
+            var nav = document.getElementById('sidebar-nav');
+            if (!nav) return;
+            window.addEventListener('beforeunload', function() {
+                sessionStorage.setItem(KEY, nav.scrollTop);
+            });
+            var saved = sessionStorage.getItem(KEY);
+            if (saved !== null) {
+                requestAnimationFrame(function() { nav.scrollTop = parseInt(saved, 10); });
+            }
+        })();
     </script>
 
     {{-- Toast Manager Script --}}

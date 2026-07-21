@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<div x-data="{ autoSku: false, imagePreview: null }">
+<div x-data="{ imagePreview: null }">
     <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
         @csrf
 
@@ -31,7 +31,7 @@
             {{-- Left Column --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Basic Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="sm:col-span-2">
@@ -53,10 +53,7 @@
                             <input type="text" name="sku" id="sku" value="{{ old('sku') }}"
                                    class="font-mono"
                                    placeholder="e.g. BP-FR-001">
-                            <label class="flex items-center gap-2 mt-1 cursor-pointer">
-                                <input type="checkbox" x-model="autoSku" class="w-3.5 h-3.5 text-accent border-border rounded focus:ring-accent">
-                                <span class="text-xs text-muted">Auto-generate SKU</span>
-                            </label>
+                            <p class="text-xs text-muted mt-1">Leave empty to auto-generate after save</p>
                             @error('sku')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
                         </div>
 
@@ -99,7 +96,7 @@
                 </div>
 
                 {{-- Description --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Description</h2>
                     <textarea name="description" rows="4"
                               class="resize-none"
@@ -108,7 +105,7 @@
                 </div>
 
                 {{-- Pricing --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Pricing</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -142,7 +139,7 @@
                 </div>
 
                 {{-- Stock Levels --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Stock Levels</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -173,7 +170,7 @@
             {{-- Right Column --}}
             <div class="space-y-6">
                 {{-- Image Upload --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Item Image</h2>
                     <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-accent/50 transition-colors">
                         <div x-show="!imagePreview">
@@ -198,7 +195,7 @@
                 </div>
 
                 {{-- Unit & Status --}}
-                <div class="bg-white rounded-lg border border-border p-5">
+                <div class="bg-card-bg rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Other Details</h2>
                     <div class="space-y-4">
                         <div>

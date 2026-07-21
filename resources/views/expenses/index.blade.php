@@ -39,7 +39,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <form method="GET" action="{{ route('expenses.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div>
-                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Categories</option>
                         @foreach($categories ?? [] as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -59,7 +59,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="payment_method" x-model="paymentMethod" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="payment_method" x-model="paymentMethod" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Methods</option>
                         <option value="cash">Cash</option>
                         <option value="bank_transfer">Bank Transfer</option>
@@ -69,7 +69,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white">
+                    <select name="status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
                         <option value="">All Status</option>
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
@@ -197,7 +197,7 @@
          x-transition:leave-end="opacity-0"
          class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
         <div @click.away="showDeleteModal = false"
-             class="bg-white rounded-xl w-full max-w-md p-6">
+             class="bg-card-bg rounded-lg w-full max-w-md p-5">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -211,7 +211,7 @@
             </div>
             <p class="text-sm text-body mb-4">Are you sure you want to delete this expense? This will permanently remove it.</p>
             <div class="flex items-center justify-end gap-3">
-                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
+                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
                 <form :action="'{{ url('/expenses') }}/' + deleteId" method="POST">
                     @csrf
                     @method('DELETE')

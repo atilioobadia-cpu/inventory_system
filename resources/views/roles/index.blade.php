@@ -22,7 +22,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($roles ?? [] as $role)
-            <div class="bg-white rounded-lg border border-border p-5 transition-colors">
+            <div class="bg-card-bg rounded-lg border border-border p-5 transition-colors">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-accent-light rounded-full flex items-center justify-center">

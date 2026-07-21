@@ -3,7 +3,7 @@
 @section('title', 'Sales Report')
 
 @section('content')
-<div class="space-y-6" x-data="salesReport()">
+<div class="space-y-4" x-data="salesReport()">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Sales Report</h1>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <form action="{{ route('reports.sales') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
@@ -56,7 +56,7 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-accent-light rounded-lg">
                     <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-success-light rounded-lg">
                     <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-warning-light rounded-lg">
                     <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-purple-100 rounded-lg">
                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
@@ -103,7 +103,7 @@
     </div>
 
     <!-- Chart -->
-    <div class="bg-white rounded-lg border border-border p-6">
+    <div class="bg-card-bg rounded-lg border border-border p-5">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-semibold text-heading">Sales Trend</h2>
             <div class="flex items-center gap-2">
@@ -118,7 +118,7 @@
     </div>
 
     <!-- Sales Table -->
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Sales Details</h2>
         </div>
@@ -144,10 +144,10 @@
                             <td class="px-6 py-4 font-medium text-accent">{{ $sale->invoice_number }}</td>
                             <td class="px-6 py-4 text-heading">{{ $sale->customer->name ?? 'Walk-in' }}</td>
                             <td class="px-6 py-4 text-center text-body">{{ $sale->items_count }}</td>
-                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($sale->subtotal) }}</td>
-                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($sale->tax_amount) }}</td>
+                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($sale->total_before_tax) }}</td>
+                            <td class="px-6 py-4 text-right text-body">{{ $sale->vat_enabled ? 'TZS ' . number_format($sale->vat_amount) : '—' }}</td>
                             <td class="px-6 py-4 text-right text-danger">-TZS {{ number_format($sale->discount_amount) }}</td>
-                            <td class="px-6 py-4 text-right font-semibold text-heading">TZS {{ number_format($sale->total_amount) }}</td>
+                            <td class="px-6 py-4 text-right font-semibold text-heading">TZS {{ number_format($sale->total_after_tax) }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($sale->payment_status === 'paid')
                                     <span class="px-2 py-1 bg-success-light text-success rounded-full text-xs font-medium">Completed</span>

@@ -3,7 +3,7 @@
 @section('title', 'Edit User')
 
 @section('content')
-<div class="max-w-2xl mx-auto space-y-6">
+<div class="max-w-2xl mx-auto space-y-5">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading">Edit User: {{ $user->name }}</h1>
@@ -18,7 +18,7 @@
     <form action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data" x-data="userForm()">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
             <!-- Avatar -->
             <div class="flex items-center gap-6">
                 <div class="w-20 h-20 rounded-full bg-control-bg flex items-center justify-center overflow-hidden border-2 border-dashed border-border">

@@ -27,7 +27,7 @@
             </div>
 
             {{-- Basic Details --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-6">Expense Details</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -88,7 +88,7 @@
             </div>
 
             {{-- Reference & Description --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-6">Additional Information</h3>
                 <div class="space-y-6">
                     <div>
@@ -123,7 +123,7 @@
             </div>
 
             {{-- Recurring --}}
-            <div class="bg-white rounded-lg border border-border p-5">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-heading">Recurring Expense</h3>
                     <label class="relative inline-flex items-center cursor-pointer">

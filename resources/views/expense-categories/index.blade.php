@@ -30,7 +30,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg border border-border">
+    <div class="bg-card-bg rounded-lg border border-border">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -95,7 +95,7 @@
          x-transition:leave-end="opacity-0"
          class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
         <div @click.away="showDeleteModal = false"
-             class="bg-white rounded-xl w-full max-w-md p-6">
+             class="bg-card-bg rounded-lg w-full max-w-md p-5">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@
             </div>
             <p class="text-sm text-body mb-4">Deleting this category may affect expenses assigned to it. Are you sure?</p>
             <div class="flex items-center justify-end gap-3">
-                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
+                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
                 <form :action="'{{ url('/expense-categories') }}/' + deleteId" method="POST">
                     @csrf
                     @method('DELETE')

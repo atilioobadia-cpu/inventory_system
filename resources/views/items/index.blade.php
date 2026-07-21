@@ -34,7 +34,7 @@
     </div>
 
     {{-- Filters --}}
-    <div class="bg-white rounded-lg border border-border p-4 mb-6">
+    <div class="bg-card-bg rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('items.index') }}">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {{-- Search --}}
@@ -74,7 +74,7 @@
     </div>
 
     {{-- Items Table --}}
-    <div class="bg-white rounded-lg border border-border overflow-hidden">
+    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
         @if(($items ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -195,7 +195,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-lg max-w-md w-full p-6"
+            <div class="relative bg-card-bg rounded-lg max-w-md w-full p-6"
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100">

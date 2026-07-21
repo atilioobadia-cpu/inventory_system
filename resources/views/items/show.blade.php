@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<div class="space-y-6">
+<div class="space-y-5">
     {{-- Page Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 class="text-xl font-bold text-heading">Item Details</h1>
@@ -40,14 +40,14 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {{-- Main Info --}}
-        <div class="lg:col-span-2 space-y-6">
+        <div class="lg:col-span-2 space-y-5">
             {{-- Item Card --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <div class="flex flex-col sm:flex-row gap-6">
                     {{-- Image --}}
-                    <div class="w-full sm:w-48 h-48 bg-control-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div class="w-full sm:w-48 h-48 bg-control-bg rounded-lg flex items-center justify-center flex-shrink-0">
                         @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-full h-full object-cover rounded-xl">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-full h-full object-cover rounded-lg">
                         @else
                         <svg class="w-16 h-16 text-muted" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
@@ -99,7 +99,7 @@
             </div>
 
             {{-- Stock Movements --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-4">Stock Movements</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -143,9 +143,9 @@
         </div>
 
         {{-- Sidebar --}}
-        <div class="space-y-6">
+        <div class="space-y-5">
             {{-- Current Stock --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-sm font-medium text-muted mb-2">Current Stock</h3>
                 <p class="text-4xl font-bold {{ $item->current_stock <= 0 ? 'text-danger' : ($item->current_stock <= ($item->reorder_point ?? 0) ? 'text-warning' : 'text-accent') }}">
                     {{ $item->current_stock }}
@@ -180,7 +180,7 @@
             </div>
 
             {{-- Pricing Summary --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-sm font-medium text-muted mb-3">Pricing</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between text-sm">
@@ -210,7 +210,7 @@
             </div>
 
             {{-- Purchase History --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-sm font-medium text-muted mb-3">Recent Purchases</h3>
                 <div class="space-y-3">
                     @forelse($recentPurchases as $purchase)
@@ -228,7 +228,7 @@
             </div>
 
             {{-- Sales History --}}
-            <div class="bg-white rounded-lg border border-border p-6">
+            <div class="bg-card-bg rounded-lg border border-border p-5">
                 <h3 class="text-sm font-medium text-muted mb-3">Recent Sales</h3>
                 <div class="space-y-3">
                     @forelse($recentSales as $sale)

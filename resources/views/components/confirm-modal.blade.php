@@ -13,7 +13,7 @@ $colorClasses = [
     'danger' => 'bg-danger hover:bg-danger',
     'warning' => 'bg-warning hover:bg-amber-600',
     'success' => 'bg-success hover:bg-success-hover',
-    'electric' => 'bg-primary hover:bg-primary-hover',
+    'accent' => 'bg-accent hover:bg-accent',
 ];
 $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
 @endphp
@@ -36,7 +36,7 @@ $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
                  @click="{{ $name }} = false"></div>
 
             {{-- Modal --}}
-            <div class="relative bg-white rounded-lg max-w-md w-full p-6 z-10"
+            <div class="relative bg-card-bg rounded-lg max-w-md w-full p-5 z-10"
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"

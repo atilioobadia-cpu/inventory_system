@@ -21,11 +21,12 @@
 
     <form method="POST" action="{{ route('purchases.store') }}" @submit.prevent="submitForm()">
         @csrf
+        <input type="hidden" name="action" :value="submitAction">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {{-- Left: Purchase Info --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-lg border p-5">
+                <div class="bg-card-bg rounded-lg border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -33,7 +34,7 @@
                             <div class="relative" x-data="{ open: false, query: '' }" @click.away="open = false">
                                 <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; if (query === '') searchSupplier()" :value="supplier.name || ''" placeholder="Search supplier..." required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
-                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-control-bg border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
                                         <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
                                     </template>
@@ -66,7 +67,7 @@
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-white rounded-lg border p-5">
+                <div class="bg-card-bg rounded-lg border p-5">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-lg font-semibold text-heading">Items</h2>
                         <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-accent-light hover:bg-accent-light text-accent rounded-lg text-sm font-medium">
@@ -93,7 +94,7 @@
                                         <div class="relative" x-data="{ open: false }" @click.away="open = false">
                                             <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; if (row.itemQuery === '') searchItem(index)" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-accent/20">
                                             <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
-                                            <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
+                                            <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-control-bg border rounded mt-1 max-h-40 overflow-y-auto">
                                                 <template x-for="item in row.itemResults" :key="item.id">
                                                     <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false">
                                                         <span x-text="item.name"></span>
@@ -104,7 +105,7 @@
                                         </div>
                                     </td>
                                     <td class="px-2 py-1.5">
-                                        <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-full px-2 py-1.5 text-sm text-center">
+                                        <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-24 px-2 py-1.5 text-sm text-center">
                                     </td>
                                     <td class="px-2 py-1.5">
                                         <input type="number" :name="'items[' + index + '][unit_cost]'" x-model.number="row.unit_cost" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
@@ -127,7 +128,7 @@
 
             {{-- Right: Summary --}}
             <div class="space-y-6">
-                <div class="bg-white rounded-lg border p-5 sticky top-20">
+                <div class="bg-card-bg rounded-lg border p-5 sticky top-20">
                     <h2 class="text-lg font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
@@ -165,11 +166,11 @@
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <button type="submit" name="action" value="draft" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                        <button type="submit" @click="submitAction = 'draft'" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
                             Save as Draft
                         </button>
-                        <button type="submit" name="action" value="receive" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                        <button type="submit" @click="submitAction = 'receive'" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
                             Save &amp; Receive
                         </button>
@@ -192,6 +193,7 @@ function purchaseForm() {
         dueDate: '',
         paidAmount: 0,
         loading: false,
+        submitAction: 'draft',
 
         get subtotal() { return this.rows.reduce((s, r) => s + (r.quantity * r.unit_cost), 0); },
         get totalDiscount() { return this.rows.reduce((s, r) => s + r.discount, 0); },

@@ -3,7 +3,7 @@
 @section('title', 'Settings')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6" x-data="{ activeTab: '{{ request('tab', 'business') }}' }">
+<div class="max-w-4xl mx-auto space-y-4" x-data="{ activeTab: '{{ request('tab', 'business') }}' }">
     <div>
         <h1 class="text-xl font-bold text-heading">Settings</h1>
         <p class="text-muted mt-1">Configure your system preferences</p>
@@ -41,11 +41,11 @@
 
     <!-- Business Tab -->
     <div x-show="activeTab === 'business'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-card-bg rounded-lg border border-border p-5 space-y-4">
             @csrf
             <input type="hidden" name="tab" value="business">
             <h2 class="text-lg font-semibold text-heading">Business Information</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                     <label class="form-label">Company Name</label>
                     <input type="text" name="settings[business][company_name]" value="{{ old('settings.business.company_name', $settings['company_name'] ?? '') }}">
@@ -86,11 +86,11 @@
 
     <!-- Receipt Tab -->
     <div x-show="activeTab === 'receipt'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-card-bg rounded-lg border border-border p-5 space-y-4">
             @csrf
             <input type="hidden" name="tab" value="receipt">
             <h2 class="text-lg font-semibold text-heading">Receipt Settings</h2>
-            <div class="space-y-6">
+            <div class="space-y-4">
                 <div>
                     <label class="form-label">Header Text</label>
                     <input type="text" name="settings[receipt][receipt_header]" value="{{ old('settings.receipt.receipt_header', $settings['receipt_header'] ?? '') }}" placeholder="Thank you for your purchase!">
@@ -128,11 +128,11 @@
 
     <!-- System Tab -->
     <div x-show="activeTab === 'system'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-card-bg rounded-lg border border-border p-5 space-y-4">
             @csrf
             <input type="hidden" name="tab" value="system">
             <h2 class="text-lg font-semibold text-heading">System Settings</h2>
-            <div class="space-y-6">
+            <div class="space-y-4">
                 <div>
                     <label class="form-label">Low Stock Threshold (default)</label>
                     <input type="number" name="settings[system][low_stock_threshold]" value="{{ old('settings.system.low_stock_threshold', $settings['low_stock_threshold'] ?? 10) }}" min="0">
@@ -171,12 +171,12 @@
 
     <!-- Email Tab -->
     <div x-show="activeTab === 'email'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-card-bg rounded-lg border border-border p-5 space-y-4">
             @csrf
             <input type="hidden" name="tab" value="email">
             <h2 class="text-lg font-semibold text-heading">Email Notification Recipients</h2>
             <p class="text-sm text-muted">Specify which email addresses receive each notification type (comma-separated for multiple)</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="form-label">Low Stock Alerts</label>
                     <input type="text" name="settings[email][email_low_stock]" value="{{ old('settings.email.email_low_stock', $settings['email_low_stock'] ?? '') }}" placeholder="admin@example.com">

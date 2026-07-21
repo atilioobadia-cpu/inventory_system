@@ -15,7 +15,7 @@
 <div class="max-w-2xl mx-auto">
     <form action="{{ route('expense-categories.store') }}" method="POST">
         @csrf
-        <div class="bg-white rounded-lg border border-border p-6">
+        <div class="bg-card-bg rounded-lg border border-border p-5">
             <h3 class="text-lg font-semibold text-heading mb-6">Category Details</h3>
             <div class="space-y-6">
                 <div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="flex items-center justify-end gap-3 mt-6">
-            <a href="{{ route('expense-categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
+            <a href="{{ route('expense-categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
                 Cancel
             </a>
             <button type="submit" class="px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
