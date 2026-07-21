@@ -3,13 +3,13 @@
 @section('title', 'Create Role')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-5">
+<div class="max-w-4xl mx-auto space-y-4">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-xl font-bold text-heading">Create Role</h1>
-            <p class="text-muted mt-1">Define a new role with specific permissions</p>
+            <h1 class="page-title">Create Role</h1>
+            <p class="text-gray-500 mt-1">Define a new role with specific permissions</p>
         </div>
-        <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">
+        <a href="{{ route('roles.index') }}" class="btn btn-secondary">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Back
         </a>
@@ -17,7 +17,7 @@
 
     <form action="{{ route('roles.store') }}" method="POST" x-data="roleForm()">
         @csrf
-        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
+        <div class="card card-body space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="name" class="form-label">Role Name <span class="text-danger">*</span></label>
@@ -36,12 +36,12 @@
         </div>
 
         <!-- Permissions -->
-        <div class="mt-6 bg-white rounded-lg border border-border overflow-hidden">
+        <div class="mt-6 card overflow-hidden">
             <div class="p-5 border-b border-border flex items-center justify-between">
-                <h2 class="text-lg font-semibold text-heading">Permissions</h2>
+                <h2 class="text-lg font-semibold text-gray-900">Permissions</h2>
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-border text-primary focus:ring-primary/20">
-                    <span class="text-sm font-medium text-body">Select All</span>
+                    <span class="text-sm font-medium text-gray-700">Select All</span>
                 </label>
             </div>
             <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -70,17 +70,17 @@
                 @foreach($modules as $module => $actions)
                     <div class="border border-border rounded-lg p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-medium text-body capitalize">{{ str_replace('_', ' ', $module) }}</h3>
+                            <h3 class="font-medium text-gray-700 capitalize">{{ str_replace('_', ' ', $module) }}</h3>
                             <label class="flex items-center gap-1 cursor-pointer">
                                 <input type="checkbox" @change="toggleModule('{{ $module }}', $event.target.checked)" :checked="isModuleSelected('{{ $module }}')" class="w-3.5 h-3.5 rounded border-border text-primary focus:ring-primary/20">
-                                <span class="text-xs text-muted">All</span>
+                                <span class="text-xs text-gray-500">All</span>
                             </label>
                         </div>
                         <div class="space-y-2">
                             @foreach($actions as $action)
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-border text-primary focus:ring-primary/20">
-                                    <span class="text-sm text-body capitalize">{{ $action }}</span>
+                                    <span class="text-sm text-gray-700 capitalize">{{ $action }}</span>
                                 </label>
                             @endforeach
                         </div>
@@ -90,10 +90,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-3">
-            <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">
-                Save Role
-            </button>
+            <a href="{{ route('roles.index') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save Role</button>
         </div>
     </form>
 </div>

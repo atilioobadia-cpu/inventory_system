@@ -6,13 +6,13 @@
 <style>
     body {
         font-family: 'Courier New', Courier, monospace;
-        background: #f0f0f0;
+        background: #f3f4f6;
     }
     .receipt-wrapper {
         max-width: 320px;
         margin: 20px auto;
         background: #fff;
-        border: 1px dashed #999;
+        border: 1px dashed #d1d5db;
         padding: 15px;
     }
     .receipt-header-section {
@@ -27,12 +27,12 @@
     }
     .receipt-header-section p {
         font-size: 10px;
-        color: #555;
+        color: #6b7280;
         line-height: 1.3;
     }
     .receipt-divider {
         border: none;
-        border-top: 1px dashed #999;
+        border-top: 1px dashed #d1d5db;
         margin: 8px 0;
     }
     .receipt-info p {
@@ -40,7 +40,7 @@
         margin: 2px 0;
     }
     .receipt-info .label {
-        color: #555;
+        color: #6b7280;
     }
     .receipt-items {
         margin: 8px 0;
@@ -55,7 +55,7 @@
     }
     .receipt-item-detail {
         font-size: 10px;
-        color: #555;
+        color: #6b7280;
     }
     .receipt-totals {
         margin-top: 8px;
@@ -69,7 +69,7 @@
     .receipt-totals .total-row {
         font-size: 13px;
         font-weight: bold;
-        border-top: 1px dashed #999;
+        border-top: 1px dashed #d1d5db;
         padding-top: 4px;
         margin-top: 4px;
     }
@@ -86,7 +86,7 @@
     }
     .receipt-qr p {
         font-size: 9px;
-        color: #777;
+        color: #9ca3af;
         margin-top: 4px;
     }
     .receipt-footer {
@@ -95,7 +95,7 @@
     }
     .receipt-footer p {
         font-size: 10px;
-        color: #666;
+        color: #6b7280;
     }
     .receipt-footer .efd-tag {
         font-size: 11px;
@@ -110,7 +110,7 @@
             print-color-adjust: exact;
         }
         .receipt-wrapper {
-            border: 1px dashed #999;
+            border: 1px dashed #d1d5db;
             margin: 0;
             box-shadow: none;
         }
@@ -220,8 +220,8 @@
 </div>
 
 {{-- Print Button (below receipt) --}}
-<div class="text-center mt-6 no-print">
-    <button onclick="window.print()" class="px-6 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium">Print Receipt</button>
-    <a href="{{ route('sales.show', $sale) }}" class="px-6 py-2 bg-white hover:bg-white text-body rounded-lg font-medium ml-2">Back to Sale</a>
+<div class="text-center mt-6 no-print" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <button onclick="window.print()" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1.5rem; background:#171717; color:#ffffff; border:none; border-radius:0.375rem; font-size:0.875rem; font-weight:500; cursor:pointer;">Print Receipt</button>
+    <a href="{{ route('sales.show', $sale) }}" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1.5rem; background:#ffffff; color:#374151; border:1px solid #d1d5db; border-radius:0.375rem; font-size:0.875rem; font-weight:500; cursor:pointer; text-decoration:none; margin-left:0.5rem;">Back to Sale</a>
 </div>
 @endsection

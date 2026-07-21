@@ -47,8 +47,8 @@
         {{-- Search & Filters --}}
         <div class="p-4 bg-white border-b space-y-3">
             <div class="relative">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div class="flex gap-2 overflow-x-auto pb-1">
                 <button @click="selectedCategory = ''; searchItems()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
@@ -66,8 +66,8 @@
                 </div>
             </template>
             <template x-if="!loading && products.length === 0">
-                <div class="flex flex-col items-center justify-center h-40 text-muted">
-                    <svg class="h-12 w-12 mb-3 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                <div class="flex flex-col items-center justify-center h-40 text-gray-500">
+                    <svg class="h-12 w-12 mb-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                     <p>No items found</p>
                 </div>
             </template>
@@ -79,10 +79,10 @@
                                 <img :src="'{{ asset('storage') }}/' + item.image" class="h-20 w-full object-cover rounded">
                             </template>
                             <template x-if="!item.image">
-                                <svg class="h-10 w-10 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                                <svg class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                             </template>
                         </div>
-                        <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
+                        <p class="text-xs font-medium text-gray-900 truncate" x-text="item.name"></p>
                         <p class="text-sm font-bold text-primary mt-1" x-text="formatCurrency(item.selling_price)"></p>
                         <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
@@ -96,8 +96,8 @@
         {{-- Mobile Quick Search --}}
         <div class="pos-mobile-only p-3 bg-white border-b">
             <div class="relative">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div class="flex gap-2 overflow-x-auto pb-1 mt-2">
                 <button @click="selectedCategory = ''; searchItemsMobile()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
@@ -115,8 +115,8 @@
                 </div>
             </template>
             <template x-if="!mobileLoading && mobileProducts.length === 0">
-                <div class="flex flex-col items-center justify-center h-40 text-muted">
-                    <svg class="h-12 w-12 mb-3 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                <div class="flex flex-col items-center justify-center h-40 text-gray-500">
+                    <svg class="h-12 w-12 mb-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                     <p>No items found</p>
                 </div>
             </template>
@@ -128,10 +128,10 @@
                                 <img :src="'{{ asset('storage') }}/' + item.image" class="h-16 w-full object-cover rounded">
                             </template>
                             <template x-if="!item.image">
-                                <svg class="h-8 w-8 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                                <svg class="h-8 w-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                             </template>
                         </div>
-                        <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
+                        <p class="text-xs font-medium text-gray-900 truncate" x-text="item.name"></p>
                         <p class="text-sm font-bold text-primary mt-1" x-text="formatCurrency(item.selling_price)"></p>
                         <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
@@ -144,8 +144,8 @@
             <div class="flex items-center gap-2">
                 <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
                 <div>
-                    <h2 class="text-lg font-bold text-heading">Current Order</h2>
-                    <p class="text-xs text-muted" x-text="cartItems.length + ' item(s)'"></p>
+                    <h2 class="text-lg font-bold text-gray-900">Current Order</h2>
+                    <p class="text-xs text-gray-500" x-text="cartItems.length + ' item(s)'"></p>
                 </div>
             </div>
             <button @click="clearCart()" class="text-sm text-danger hover:text-danger font-medium flex items-center gap-1" x-show="cartItems.length > 0">
@@ -157,17 +157,17 @@
         {{-- Cart Items --}}
         <div class="cart-items">
             <template x-if="cartItems.length === 0">
-                <div class="flex flex-col items-center justify-center h-full text-muted">
+                <div class="flex flex-col items-center justify-center h-full text-gray-500">
                     <svg class="h-16 w-16 mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
                     <p class="font-medium">Cart is empty</p>
                     <p class="text-sm mt-1">Click products to add</p>
                 </div>
             </template>
             <template x-for="(item, index) in cartItems" :key="item.id + '-' + index">
-                <div class="flex items-center gap-3 py-3 border-b border-border">
+                <div class="flex items-center gap-3 py-3 border-b border-gray-200">
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-heading truncate" x-text="item.name"></p>
-                        <p class="text-xs text-muted" x-text="formatCurrency(item.selling_price) + ' each'"></p>
+                        <p class="text-sm font-medium text-gray-900 truncate" x-text="item.name"></p>
+                        <p class="text-xs text-gray-500" x-text="formatCurrency(item.selling_price) + ' each'"></p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button class="qty-btn" @click="updateQuantity(index, item.quantity - 1)">
@@ -178,8 +178,8 @@
                             <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                         </button>
                     </div>
-                    <p class="text-sm font-semibold text-heading w-24 text-right" x-text="formatCurrency(item.selling_price * item.quantity)"></p>
-                    <button @click="removeFromCart(index)" class="text-muted hover:text-danger ml-1">
+                    <p class="text-sm font-semibold text-gray-900 w-24 text-right" x-text="formatCurrency(item.selling_price * item.quantity)"></p>
+                    <button @click="removeFromCart(index)" class="text-gray-500 hover:text-danger ml-1">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
@@ -190,10 +190,10 @@
         <div class="cart-summary" x-show="cartItems.length > 0">
             {{-- Customer --}}
             <div class="mb-3">
-                <label class="text-xs font-medium text-body mb-1 block">Customer</label>
+                <label class="text-xs font-medium text-gray-700 mb-1 block">Customer</label>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
                     <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-40 overflow-y-auto">
                         <template x-for="c in customerResults.slice(0, 5)" :key="c.id">
@@ -206,7 +206,7 @@
             {{-- VAT & Sale Type --}}
             <div class="flex gap-3 mb-3">
                 <div class="flex-1">
-                    <label class="text-xs font-medium text-body mb-1 block">Sale Type</label>
+                    <label class="text-xs font-medium text-gray-700 mb-1 block">Sale Type</label>
                     <select x-model="saleType" class="w-full px-3 py-2 border rounded-lg text-sm">
                         <option value="cash">Cash</option>
                         <option value="credit">Credit</option>
@@ -223,15 +223,15 @@
             {{-- Totals --}}
             <div class="space-y-2 mb-3">
                 <div class="flex justify-between text-sm">
-                    <span class="text-body">Subtotal</span>
+                    <span class="text-gray-700">Subtotal</span>
                     <span class="font-medium" x-text="formatCurrency(subtotal)"></span>
                 </div>
                 <div class="flex justify-between text-sm" x-show="!isVatExempt">
-                    <span class="text-body">VAT (18%)</span>
+                    <span class="text-gray-700">VAT (18%)</span>
                     <span class="font-medium" x-text="formatCurrency(vat)"></span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-sm text-body">Discount</span>
+                    <span class="text-sm text-gray-700">Discount</span>
                     <input type="number" x-model.number="discount" min="0" class="w-24 px-2 py-1 border rounded text-sm text-right ml-auto">
                 </div>
                 <div class="flex justify-between text-lg font-bold border-t pt-2">
@@ -242,8 +242,8 @@
 
             {{-- Cash Received (for cash sales) --}}
             <div x-show="saleType === 'cash'" class="mb-3">
-                <label class="text-xs font-medium text-body mb-1 block">Cash Received</label>
-                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="0">
+                <label class="text-xs font-medium text-gray-700 mb-1 block">Cash Received</label>
+                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="0">
                 <div class="flex gap-2 mt-2 flex-wrap">
                     <button @click="cashReceived = total" class="quick-cash">Exact</button>
                     <button @click="cashReceived = Math.ceil(total / 1000) * 1000" class="quick-cash">TZS {{ number_format(ceil(10000/1000)*1000) }}</button>
@@ -253,7 +253,7 @@
                     <button @click="cashReceived = 100000" class="quick-cash">100,000</button>
                 </div>
                 <div class="flex justify-between text-sm mt-2" x-show="change > 0">
-                    <span class="text-body">Change</span>
+                    <span class="text-gray-700">Change</span>
                     <span class="font-bold text-success" x-text="formatCurrency(change)"></span>
                 </div>
                 <div class="text-sm mt-1" x-show="cashReceived > 0 && cashReceived < total">
@@ -263,11 +263,11 @@
 
             {{-- Notes --}}
             <div class="mb-3">
-                <input type="text" x-model="notes" placeholder="Notes (optional)" class="w-full px-3 py-2 border border-border rounded-lg text-sm">
+                <input type="text" x-model="notes" placeholder="Notes (optional)" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm">
             </div>
 
             {{-- Process Button --}}
-            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="w-full py-3 bg-primary hover:bg-primary-hover disabled:bg-muted text-white font-bold rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
+            <button @click="processSale()" :disabled="processing || cartItems.length === 0 || (saleType === 'cash' && cashReceived < total)" class="btn btn-primary w-full py-3 text-lg font-bold rounded-lg">
                 <template x-if="processing">
                     <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </template>
@@ -285,15 +285,15 @@
             <div class="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="h-8 w-8 text-success" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
-            <h3 class="text-xl font-bold text-heading mb-2">Sale Completed!</h3>
-            <p class="text-body mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
-            <p class="text-body mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Sale Completed!</h3>
+            <p class="text-gray-700 mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
+            <p class="text-gray-700 mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
             <div class="flex gap-3">
-                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm flex items-center justify-center gap-2">
+                <a :href="lastSaleReceiptUrl" target="_blank" class="btn btn-primary flex-1 text-sm">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                     View Receipt
                 </a>
-                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-white hover:bg-border text-heading rounded-lg font-medium text-sm flex items-center justify-center gap-2">
+                <button @click="showSuccess = false; resetPos()" class="btn btn-secondary flex-1 text-sm">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                     New Sale
                 </button>

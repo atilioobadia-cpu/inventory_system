@@ -3,20 +3,20 @@
 @section('title', 'Create Purchase')
 
 @section('content')
-<div class="space-y-6" x-data="purchaseForm()">
+<div class="space-y-4" x-data="purchaseForm()">
     {{-- Header --}}
     <div class="flex items-center justify-between">
         <div>
-            <nav class="flex items-center text-sm text-muted mb-1">
+            <nav class="flex items-center text-sm text-gray-500 mb-1">
                 <a href="{{ route('dashboard') }}" class="hover:text-primary">Dashboard</a>
-                <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                <svg class="h-4 w-4 mx-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                 <a href="{{ route('purchases.index') }}" class="hover:text-primary">Purchases</a>
-                <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                <span class="text-heading font-medium">Create</span>
+                <svg class="h-4 w-4 mx-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                <span class="text-gray-900 font-medium">Create</span>
             </nav>
-            <h1 class="text-xl font-bold text-heading">Create Purchase</h1>
+            <h1 class="page-title">Create Purchase</h1>
         </div>
-        <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-white hover:bg-white text-body rounded-lg text-sm font-medium">Cancel</a>
+        <a href="{{ route('purchases.index') }}" class="btn btn-secondary">Cancel</a>
     </div>
 
     <form method="POST" action="{{ route('purchases.store') }}" @submit.prevent="submitForm()">
@@ -24,10 +24,10 @@
         <input type="hidden" name="action" :value="submitAction">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {{-- Left: Purchase Info --}}
-            <div class="lg:col-span-2 space-y-6">
+            <div class="lg:col-span-2 space-y-4">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-lg border p-5">
-                    <h2 class="text-lg font-semibold text-heading mb-4">Purchase Information</h2>
+                <div class="card card-body">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="form-label">Supplier *</label>
@@ -67,10 +67,10 @@
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-white rounded-lg border p-5">
+                <div class="card card-body">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-heading">Items</h2>
-                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-100 text-primary rounded-lg text-sm font-medium">
+                        <h2 class="text-lg font-semibold text-gray-900">Items</h2>
+                        <button type="button" @click="addItem()" class="btn btn-secondary">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                             Add Item
                         </button>
@@ -79,11 +79,11 @@
                     <table class="w-full text-sm">
                         <thead class="bg-white border-b">
                             <tr>
-                                <th class="px-2 py-1.5 text-left font-medium text-body w-2/5">Item</th>
-                                <th class="px-2 py-1.5 text-center font-medium text-body w-20">Qty</th>
-                                <th class="px-2 py-1.5 text-right font-medium text-body w-28">Unit Cost</th>
-                                <th class="px-2 py-1.5 text-right font-medium text-body w-24 hidden sm:table-cell">Discount</th>
-                                <th class="px-2 py-1.5 text-right font-medium text-body w-28">Total</th>
+                                <th class="px-2 py-1.5 text-left font-medium text-gray-700 w-2/5">Item</th>
+                                <th class="px-2 py-1.5 text-center font-medium text-gray-700 w-20">Qty</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-gray-700 w-28">Unit Cost</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-gray-700 w-24 hidden sm:table-cell">Discount</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-gray-700 w-28">Total</th>
                                 <th class="px-2 py-1.5 w-10"></th>
                             </tr>
                         </thead>
@@ -98,7 +98,7 @@
                                                 <template x-for="item in row.itemResults" :key="item.id">
                                                     <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="selectItem(index, item); open = false">
                                                         <span x-text="item.name"></span>
-                                                        <span class="text-muted text-xs ml-1">(Stock: <span x-text="item.current_stock"></span>)</span>
+                                                        <span class="text-gray-500 text-xs ml-1">(Stock: <span x-text="item.current_stock"></span>)</span>
                                                     </div>
                                                 </template>
                                             </div>
@@ -113,9 +113,9 @@
                                     <td class="px-2 py-1.5 hidden sm:table-cell">
                                         <input type="number" :name="'items[' + index + '][discount]'" x-model.number="row.discount" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
                                     </td>
-                                    <td class="px-2 py-1.5 text-right font-medium text-heading" x-text="formatCurrency(row.total)"></td>
+                                    <td class="px-2 py-1.5 text-right font-medium text-gray-900" x-text="formatCurrency(row.total)"></td>
                                     <td class="px-2 py-1.5 text-center">
-                                        <button type="button" @click="removeRow(index)" x-show="rows.length > 1" class="text-muted hover:text-danger">
+                                        <button type="button" @click="removeRow(index)" x-show="rows.length > 1" class="text-gray-500 hover:text-danger">
                                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                                         </button>
                                     </td>
@@ -127,20 +127,20 @@
             </div>
 
             {{-- Right: Summary --}}
-            <div class="space-y-6">
-                <div class="bg-white rounded-lg border p-5 sticky top-20">
-                    <h2 class="text-lg font-semibold text-heading mb-4">Summary</h2>
+            <div class="space-y-4">
+                <div class="card card-body sticky top-20">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
-                            <span class="text-body">Subtotal</span>
+                            <span class="text-gray-700">Subtotal</span>
                             <span class="font-medium" x-text="formatCurrency(subtotal)"></span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-body">Tax (18%)</span>
+                            <span class="text-gray-700">Tax (18%)</span>
                             <span class="font-medium" x-text="formatCurrency(taxAmount)"></span>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-body">Discount</span>
+                            <span class="text-gray-700">Discount</span>
                             <span class="font-medium text-danger" x-text="'- ' + formatCurrency(totalDiscount)"></span>
                         </div>
                         <div class="flex justify-between text-lg font-bold border-t pt-3">
@@ -155,7 +155,7 @@
                             <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01">
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span class="text-body">Due</span>
+                            <span class="text-gray-700">Due</span>
                             <span class="font-bold text-danger" x-text="formatCurrency(Math.max(0, total - paidAmount))"></span>
                         </div>
                     </div>
@@ -166,11 +166,11 @@
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <button type="submit" @click="submitAction = 'draft'" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                        <button type="submit" @click="submitAction = 'draft'" class="btn btn-primary w-full">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
                             Save as Draft
                         </button>
-                        <button type="submit" @click="submitAction = 'receive'" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                        <button type="submit" @click="submitAction = 'receive'" class="btn btn-success w-full">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
                             Save &amp; Receive
                         </button>

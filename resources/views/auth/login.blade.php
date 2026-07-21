@@ -13,13 +13,6 @@
                     colors: {
                         'primary': '#171717',
                         'primary-hover': '#000000',
-                        'accent': '#171717',
-                        'heading': '#111827',
-                        'body': '#1f2937',
-                        'muted': '#6b7280',
-                        'border': '#e5e7eb',
-                        'control-bg': '#ffffff',
-                        'body-bg': '#f9fafb',
                         'danger': '#dc2626',
                         'danger-light': '#fef2f2',
                         'success': '#059669',
@@ -31,9 +24,14 @@
                 }
             }
         }
-    </script>
+        </script>
+    <style>
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.8125rem; font-weight: 500; cursor: pointer; transition: all 0.15s ease; text-decoration: none; white-space: nowrap; border: none; }
+        .btn-primary { background: #171717; color: #ffffff; }
+        .btn-primary:hover { background: #000000; }
+    </style>
 </head>
-<body class="bg-body-bg font-sans antialiased min-h-screen flex items-center justify-center px-4">
+<body class="bg-gray-50 font-sans antialiased min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-md">
         {{-- Logo & Title --}}
         <div class="text-center mb-8">
@@ -44,13 +42,13 @@
                     <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h1 class="text-xl font-bold text-heading">Mtokoma</h1>
-            <p class="text-muted text-sm mt-1">Inventory Management System</p>
+            <h1 class="text-xl font-bold text-gray-900">Mtokoma</h1>
+            <p class="text-gray-500 text-sm mt-1">Inventory Management System</p>
         </div>
 
         {{-- Login Card --}}
-        <div class="bg-white rounded-lg border border-border p-8 shadow-sm">
-            <h2 class="text-lg font-semibold text-heading mb-6">Sign in to your account</h2>
+        <div class="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
+            <h2 class="text-lg font-semibold text-gray-900 mb-6">Sign in to your account</h2>
 
             @if($errors->any())
             <div class="bg-danger-light border border-danger rounded-lg px-4 py-3 mb-6">
@@ -77,29 +75,29 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-body mb-1">Email Address</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
                             </svg>
                         </div>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-border rounded-lg text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                                placeholder="you@example.com">
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-body mb-1">Password</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
                             </svg>
                         </div>
                         <input id="password" type="password" name="password" required
-                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-border rounded-lg text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                                placeholder="Enter your password">
                     </div>
                 </div>
@@ -107,8 +105,8 @@
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
-                               class="w-4 h-4 text-primary border-border rounded focus:ring-primary">
-                        <span class="text-sm text-body">Remember me</span>
+                               class="w-4 h-4 text-primary border-gray-200 rounded focus:ring-primary">
+                        <span class="text-sm text-gray-700">Remember me</span>
                     </label>
                     @if(Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">
@@ -118,14 +116,14 @@
                 </div>
 
                 <button type="submit"
-                        class="w-full bg-primary text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
+                        class="btn btn-primary w-full py-2.5 text-sm">
                     Sign In
                 </button>
             </form>
         </div>
 
         {{-- Footer --}}
-        <p class="text-center text-xs text-muted mt-6">&copy; 2026 Mtokoma Motorcycle Parts. All rights reserved.</p>
+        <p class="text-center text-xs text-gray-500 mt-6">&copy; 2026 Mtokoma Motorcycle Parts. All rights reserved.</p>
     </div>
 </body>
 </html>

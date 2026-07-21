@@ -3,13 +3,13 @@
 @section('title', 'Create User')
 
 @section('content')
-<div class="max-w-2xl mx-auto space-y-5">
+<div class="max-w-2xl mx-auto space-y-4">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-xl font-bold text-heading">Create User</h1>
-            <p class="text-muted mt-1">Add a new user to the system</p>
+            <h1 class="page-title">Create User</h1>
+            <p class="text-gray-500 mt-1">Add a new user to the system</p>
         </div>
-        <a href="{{ route('users.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">
+        <a href="{{ route('users.index') }}" class="btn btn-secondary">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Back
         </a>
@@ -17,16 +17,16 @@
 
     <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" x-data="userForm()">
         @csrf
-        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
+        <div class="card card-body space-y-4">
             <!-- Avatar Upload -->
             <div class="flex items-center gap-6">
                 <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-dashed border-border">
                     <img x-show="preview" :src="preview" class="w-full h-full object-cover">
-                    <svg x-show="!preview" class="w-8 h-8 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                    <svg x-show="!preview" class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                 </div>
                 <div>
                     <label class="form-label">Profile Photo</label>
-                    <input type="file" name="avatar" accept="image/*" @change="handlePreview($event)" class="text-sm text-body file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-primary hover:file:bg-gray-100">
+                    <input type="file" name="avatar" accept="image/*" @change="handlePreview($event)" class="text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-primary hover:file:bg-gray-100">
                 </div>
             </div>
 
@@ -70,8 +70,8 @@
             <!-- Active Toggle -->
             <div class="flex items-center justify-between p-4 bg-white rounded-lg">
                 <div>
-                    <p class="font-medium text-heading">Active Account</p>
-                    <p class="text-sm text-muted">User can log in when enabled</p>
+                    <p class="font-medium text-gray-900">Active Account</p>
+                    <p class="text-sm text-gray-500">User can log in when enabled</p>
                 </div>
                 <button type="button" @click="active = !active" class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors" :class="active ? 'bg-success-light0' : 'bg-white'">
                     <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform" :style="active ? 'transform: translateX(22px)' : 'transform: translateX(2px)'"></span>
@@ -81,8 +81,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-3">
-            <a href="{{ route('users.index') }}" class="px-6 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Cancel</a>
-            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Create User</button>
+            <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create User</button>
         </div>
     </form>
 </div>
