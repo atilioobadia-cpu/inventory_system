@@ -9,7 +9,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             font-size: 12px;
-            color: #1a1a1a;
+            color: #111827;
             line-height: 1.4;
         }
         .receipt {

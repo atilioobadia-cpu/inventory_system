@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2 text-muted">/</span>
-<a href="{{ route('categories.index') }}" class="hover:text-accent transition-colors">Categories</a>
+<a href="{{ route('categories.index') }}" class="hover:text-primary transition-colors">Categories</a>
 <span class="mx-2 text-muted">/</span>
 <span class="text-body font-medium">{{ $category->name }}</span>
 @endsection
@@ -24,28 +24,28 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Total Items</p>
             <p class="text-xl font-bold text-heading">{{ $itemsCount ?? $category->items()->count() }}</p>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Parent Category</p>
             <p class="text-xl font-bold text-heading">{{ $category->parent->name ?? 'None' }}</p>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Status</p>
             <p class="text-xl font-bold {{ $category->is_active ? 'text-success' : 'text-danger' }}">{{ $category->is_active ? 'Active' : 'Inactive' }}</p>
         </div>
     </div>
 
     @if(isset($category->items) && $category->items->count())
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="p-5 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Items in this Category</h3>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Name</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">SKU</th>
@@ -54,8 +54,8 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @foreach($category->items as $item)
-                    <tr class="hover:bg-card-bg">
-                        <td class="px-6 py-3"><a href="{{ route('items.show', $item) }}" class="text-accent hover:underline">{{ $item->name }}</a></td>
+                    <tr class="hover:bg-white">
+                        <td class="px-6 py-3"><a href="{{ route('items.show', $item) }}" class="text-primary hover:underline">{{ $item->name }}</a></td>
                         <td class="px-6 py-3 text-muted">{{ $item->sku }}</td>
                         <td class="px-6 py-3 text-right">TZS {{ number_format($item->selling_price, 2) }}</td>
                     </tr>

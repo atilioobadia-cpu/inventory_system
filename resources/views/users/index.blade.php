@@ -7,7 +7,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                 </svg>
                 Users
@@ -20,10 +20,10 @@
         </a>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">User</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">Email</th>
@@ -36,14 +36,14 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @forelse($users ?? [] as $user)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-accent-light rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
+                                    <div class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                                         @else
-                                            <span class="text-sm font-medium text-accent">{{ substr($user->name, 0, 1) }}</span>
+                                            <span class="text-sm font-medium text-primary">{{ substr($user->name, 0, 1) }}</span>
                                         @endif
                                     </div>
                                     <div>
@@ -53,14 +53,14 @@
                             </td>
                             <td class="px-6 py-4 text-body">{{ $user->email }}</td>
                             <td class="px-6 py-4">
-                                <span class="px-2 py-1 bg-accent-light text-accent rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
+                                <span class="px-2 py-1 bg-gray-100 text-primary rounded-full text-xs font-medium">{{ $user->role->name ?? '-' }}</span>
                             </td>
                             <td class="px-6 py-4 text-body">{{ $user->phone ?? '-' }}</td>
                             <td class="px-6 py-4 text-center">
                                 <form action="{{ route('users.toggle-status', $user) }}" method="POST" class="inline">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-success-light0' : 'bg-control-bg' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
+                                    <button type="submit" class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors {{ $user->is_active ? 'bg-success-light0' : 'bg-white' }}" title="{{ $user->is_active ? 'Deactivate' : 'Activate' }}">
                                         <span class="inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform {{ $user->is_active ? 'translate-x-4.5' : 'translate-x-0.5' }}" style="transform: translateX({{ $user->is_active ? '18px' : '2px' }})"></span>
                                     </button>
                                 </form>

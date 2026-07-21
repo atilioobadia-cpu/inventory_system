@@ -18,20 +18,20 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
             <h2 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                 </svg>
                 Stock Levels
             </h2>
             <p class="text-sm text-muted mt-1">Monitor current inventory levels across all items</p>
         </div>
-        <a href="{{ route('stock.movements') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
+        <a href="{{ route('stock.movements') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-white transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             View Movements
         </a>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('stock.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="lg:col-span-2">
@@ -39,11 +39,11 @@
                         <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search by name or SKU..." class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                        <input type="text" name="search" x-model="search" placeholder="Search by name or SKU..." class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                     </div>
                 </div>
                 <div>
-                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="category_id" x-model="category" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="">All Categories</option>
                         @foreach($categories ?? [] as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div>
-                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="stock_status" x-model="status" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="all">All Status</option>
                         <option value="out">Out of Stock</option>
                         <option value="low">Low Stock</option>
@@ -65,7 +65,7 @@
                 </button>
                 <a href="{{ route('stock.index') }}" class="text-muted hover:text-body px-3 py-1.5 text-sm">Reset</a>
                 <div class="ml-auto">
-                    <a href="{{ route('stock.export', request()->query()) }}" class="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium text-body border border-border rounded-lg hover:bg-card-bg transition-colors">
+                    <a href="{{ route('stock.export', request()->query()) }}" class="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium text-body border border-border rounded-lg hover:bg-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
                         Export
                     </a>
@@ -76,7 +76,7 @@
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-card-bg border-b border-border">
+                    <tr class="bg-white border-b border-border">
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider w-12">Image</th>
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Name</th>
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">SKU</th>
@@ -107,20 +107,20 @@
                                 $statusText2 = 'text-amber-800';
                             } elseif ($qty > $max) {
                                 $statusText = 'Overstocked';
-                                $statusBg = 'bg-accent-light';
-                                $statusText2 = 'text-accent';
+                                $statusBg = 'bg-gray-100';
+                                $statusText2 = 'text-primary';
                             } else {
                                 $statusText = 'In Stock';
                                 $statusBg = 'bg-success-light';
                                 $statusText2 = 'text-success';
                             }
                         @endphp
-                        <tr class="hover:bg-card-bg transition-colors">
+                        <tr class="hover:bg-white transition-colors">
                             <td class="px-4 py-3">
                                 @if($item->image)
                                     <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-10 h-10 rounded-lg object-cover">
                                 @else
-                                    <div class="w-10 h-10 rounded-lg bg-control-bg flex items-center justify-center">
+                                    <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
                                         <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                                         </svg>
@@ -156,7 +156,7 @@
                 </tbody>
                 @if(isset($items) && $items->count())
                 <tfoot>
-                    <tr class="bg-card-bg border-t-2 border-border">
+                    <tr class="bg-white border-t-2 border-border">
                         <td colspan="6" class="px-4 py-3 text-sm font-semibold text-heading">Summary</td>
                         <td class="px-4 py-3 text-center">
                             <span class="text-sm font-bold text-heading">{{ $items->sum('current_stock') }}</span>

@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('categories.index') }}" class="hover:text-accent transition-colors">Categories</a>
+<a href="{{ route('categories.index') }}" class="hover:text-primary transition-colors">Categories</a>
 <span class="mx-2">/</span>
 <span class="text-heading">Create Category</span>
 @endsection
@@ -14,7 +14,7 @@
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-xl font-bold text-heading">Create Category</h1>
         <div class="flex gap-3">
-            <a href="{{ route('categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
+            <a href="{{ route('categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white rounded-lg hover:bg-white transition-colors">
                 Cancel
             </a>
         </div>
@@ -23,7 +23,7 @@
     <form method="POST" action="{{ route('categories.store') }}">
         @csrf
 
-        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
+        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
             <div>
                 <label for="name" class="form-label">Category Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" required
@@ -73,7 +73,7 @@
                         <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', 1) ? 'checked' : '' }}
                                class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-control-bg peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+                        <div class="w-11 h-6 bg-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
                         <span class="ml-2 text-sm text-body">Active</span>
                     </label>
                 </div>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
-            <a href="{{ route('categories.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
+            <a href="{{ route('categories.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-white rounded-lg hover:bg-white transition-colors">
                 Cancel
             </a>
             <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">

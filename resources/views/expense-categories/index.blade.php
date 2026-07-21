@@ -14,7 +14,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
             <h2 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
                 </svg>
@@ -30,11 +30,11 @@
         </a>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-card-bg border-b border-border">
+                    <tr class="bg-white border-b border-border">
                         <th class="text-left px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Name</th>
                         <th class="text-left px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Description</th>
                         <th class="text-center px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Expenses Count</th>
@@ -44,22 +44,22 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @forelse($categories ?? [] as $cat)
-                        <tr class="hover:bg-card-bg transition-colors">
+                        <tr class="hover:bg-white transition-colors">
                             <td class="px-6 py-4 text-sm font-medium text-heading">{{ $cat->name }}</td>
                             <td class="px-6 py-4 text-sm text-muted">{{ $cat->description ?? '-' }}</td>
                             <td class="px-6 py-4 text-center">
-                                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-control-bg text-sm font-medium text-body">{{ $cat->expenses_count ?? $cat->expenses->count() ?? 0 }}</span>
+                                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-sm font-medium text-body">{{ $cat->expenses_count ?? $cat->expenses->count() ?? 0 }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 @if($cat->is_active ?? true)
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">Inactive</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-1">
-                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-muted hover:text-accent hover:bg-accent-light transition-colors" title="Edit">
+                                    <a href="{{ route('expense-categories.edit', $cat) }}" class="p-2 rounded-lg text-muted hover:text-primary hover:bg-gray-100 transition-colors" title="Edit">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                                     </a>
                                     <button @click="deleteId = {{ $cat->id }}; showDeleteModal = true" class="p-2 rounded-lg text-muted hover:text-danger hover:bg-danger-light transition-colors" title="Delete">
@@ -95,7 +95,7 @@
          x-transition:leave-end="opacity-0"
          class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
         <div @click.away="showDeleteModal = false"
-             class="bg-card-bg rounded-lg w-full max-w-md p-5">
+             class="bg-white rounded-lg w-full max-w-md p-5">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@
             </div>
             <p class="text-sm text-body mb-4">Deleting this category may affect expenses assigned to it. Are you sure?</p>
             <div class="flex items-center justify-end gap-3">
-                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">Cancel</button>
+                <button @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-white transition-colors">Cancel</button>
                 <form :action="'{{ url('/expense-categories') }}/' + deleteId" method="POST">
                     @csrf
                     @method('DELETE')

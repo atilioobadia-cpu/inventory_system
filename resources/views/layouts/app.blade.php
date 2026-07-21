@@ -13,30 +13,30 @@
     <script>
         tailwind.config = {
             theme: {
+                colors: {
+                    primary: { DEFAULT: '#171717', light: '#f5f5f5', dark: '#0d0d0d' },
+                    accent: { DEFAULT: '#171717', dark: '#000000' },
+                    success: { DEFAULT: '#46b37e', light: '#eafaf1', dark: '#22865a' },
+                    danger: { DEFAULT: '#e03636', light: '#fdf0f0', dark: '#b52020' },
+                    warning: { DEFAULT: '#fb8b2c', light: '#fff5eb', dark: '#c66900' },
+                },
                 extend: {
                     colors: {
-                        'primary': '#0a0a0a',
-                        'primary-hover': '#000000',
-                        'accent': '#D4A017',
-                        'accent-light': '#2a2206',
-                        'body': '#E0E0E0',
-                        'heading': '#FFFFFF',
-                        'muted': '#999999',
-                        'border': '#2a2a2a',
-                        'control-bg': '#1a1a1a',
-                        'link': '#D4A017',
-                        'success': '#46b37e',
-                        'success-light': '#1a2e1f',
-                        'danger': '#e03636',
-                        'danger-light': '#2e1111',
-                        'warning': '#fb8b2c',
-                        'warning-light': '#2e1f0e',
-                        'card-bg': '#111111',
-                        'chart-1': '#D4A017',
-                        'chart-2': '#28a745',
-                        'chart-3': '#ff6b6b',
-                        'chart-4': '#ffa726',
-                        'chart-5': '#42a5f5',
+                        'body': '#1f2937',
+                        'heading': '#111827',
+                        'muted': '#6b7280',
+                        'border': '#e5e7eb',
+                        'control-bg': '#ffffff',
+                        'card-bg': '#ffffff',
+                        'link': '#171717',
+                        'accent-bg': '#171717',
+                        'accent-text': '#ffffff',
+                        'accent-light': '#f5f5f5',
+                        'chart-1': '#171717',
+                        'chart-2': '#46b37e',
+                        'chart-3': '#fb8b2c',
+                        'chart-4': '#e03636',
+                        'chart-5': '#6b7280',
                     },
                     fontFamily: {
                         sans: ['Nunito', 'sans-serif'],
@@ -52,19 +52,20 @@
         .sidebar-link {
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
+            color: #4b5563;
         }
         .sidebar-link:hover {
-            background: #1a1a1a;
-            color: #D4A017;
+            background-color: #f3f4f6;
+            color: #111827;
         }
         .sidebar-link.active {
-            background: #1a1a1a;
-            color: #D4A017;
-            border-left-color: #D4A017;
+            background-color: #f3f4f6;
+            color: #111827;
+            border-left-color: #111827;
             font-weight: 600;
         }
-        .sidebar-link.active .sidebar-icon-pill { background: #D4A017; color: #000000; }
-        .sidebar-link.active svg { color: #D4A017; }
+        .sidebar-link.active .sidebar-icon-pill { background-color: #111827; color: #ffffff; }
+        .sidebar-link.active svg { color: #111827; }
         .sidebar-collapse { width: 4rem; }
         .sidebar-collapse .sidebar-text { display: none; }
         .sidebar-collapse .sidebar-logo-text { display: none; }
@@ -80,8 +81,8 @@
             width: 2rem;
             height: 2rem;
             border-radius: 0.5rem;
-            background: #1a1a1a;
-            color: #D4A017;
+            background-color: #f3f4f6;
+            color: #4b5563;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,8 +90,8 @@
             transition: all 0.2s ease;
         }
         .sidebar-link.active .sidebar-icon-pill {
-            background: #D4A017;
-            color: #000000;
+            background-color: #111827;
+            color: #ffffff;
         }
 
         /* Section labels */
@@ -99,7 +100,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #D4A017;
+            color: #9ca3af;
             padding: 1rem 0.75rem 0.375rem;
             background: none;
             border: none;
@@ -109,12 +110,12 @@
         /* Scrollbar */
         .scrollbar-thin::-webkit-scrollbar { width: 4px; }
         .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-        .scrollbar-thin::-webkit-scrollbar-thumb { background: #333333; border-radius: 4px; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
 
         /* Loading Bar */
         .loading-bar {
             position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
-            background: #D4A017;
+            background: #171717;
             transition: width 0.3s ease;
         }
 
@@ -127,9 +128,10 @@
         .toast-container > * { pointer-events: auto; }
         .toast {
             min-width: 280px; max-width: 380px;
-            background: #1a1a1a;
+            background-color: #111827;
+            color: #ffffff;
             border-radius: 8px;
-            border: 1px solid #2a2a2a;
+            border: 1px solid #374151;
             overflow: hidden;
             animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             transform: translateX(120%);
@@ -167,26 +169,27 @@
         input[type="datetime-local"],
         textarea,
         select {
-            background-color: #1a1a1a !important;
-            border: 1px solid #2a2a2a !important;
-            border-radius: 0.5rem !important;
-            padding: 0.625rem 0.875rem !important;
+            background-color: #ffffff !important;
+            border: 1px solid #d1d5db !important;
+            border-radius: 0.375rem !important;
+            padding: 0.5rem 0.75rem !important;
             font-size: 0.875rem !important;
             line-height: 1.25rem !important;
-            color: #E0E0E0 !important;
+            color: #111827 !important;
             width: 100% !important;
             transition: all 0.15s ease;
         }
         input:focus, textarea:focus, select:focus {
-            border-color: #D4A017 !important;
+            border-color: #171717 !important;
             outline: none !important;
-            background-color: #1a1a1a !important;
+            box-shadow: 0 0 0 1px #171717 !important;
+            background-color: #ffffff !important;
         }
         input:hover, textarea:hover, select:hover {
-            border-color: #333333 !important;
+            border-color: #9ca3af !important;
         }
         input::placeholder, textarea::placeholder {
-            color: #999999 !important;
+            color: #9ca3af !important;
             font-style: normal !important;
         }
         select {
@@ -194,8 +197,8 @@
             background-image: none !important;
         }
         select option {
-            background: #1a1a1a;
-            color: #E0E0E0;
+            background: #ffffff;
+            color: #111827;
             padding: 0.5rem;
         }
         textarea {
@@ -208,8 +211,8 @@
             display: block;
             font-size: 0.8125rem;
             font-weight: 600;
-            color: #E0E0E0;
-            margin-bottom: 0.375rem;
+            color: #374151;
+            margin-bottom: 0.25rem;
             letter-spacing: 0.01em;
         }
         .form-label .required { color: #e03636; margin-left: 2px; }
@@ -219,10 +222,10 @@
 
         /* Form Card */
         .form-card {
-            background: #111111;
-            border: 1px solid #2a2a2a;
-            border-radius: 8px;
-            padding: 1.75rem;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
         }
 
         /* Error messages */
@@ -240,61 +243,61 @@
 
         /* Button styles */
         .btn-primary {
-            background: #D4A017;
-            color: #000000;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.5rem;
+            background-color: #111827;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             transition: all 0.2s ease;
             border: none;
             cursor: pointer;
         }
-        .btn-primary:hover { background: #B8860B; }
+        .btn-primary:hover { background-color: #000000; }
 
         .btn-secondary {
-            background: #1a1a1a;
-            color: #E0E0E0;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.5rem;
+            background-color: #ffffff;
+            color: #374151;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             transition: all 0.2s ease;
-            border: 1px solid #2a2a2a;
+            border: 1px solid #d1d5db;
             cursor: pointer;
         }
-        .btn-secondary:hover { background: #2a2a2a; }
+        .btn-secondary:hover { background-color: #f9fafb; }
 
         .btn-danger {
-            background: #e03636;
-            color: white;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.5rem;
+            background-color: #e03636;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             transition: all 0.2s ease;
             border: none;
             cursor: pointer;
         }
-        .btn-danger:hover { background: #c62828; }
+        .btn-danger:hover { background-color: #b52020; }
 
         .btn-success {
-            background: #46b37e;
-            color: white;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.5rem;
+            background-color: #46b37e;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             transition: all 0.2s ease;
             border: none;
             cursor: pointer;
         }
-        .btn-success:hover { background: #3a9d6b; }
+        .btn-success:hover { background-color: #22865a; }
 
-        /* Badge primary (replaces badge-gold) */
+        /* Badge primary */
         .badge-primary {
-            background: #D4A017;
-            color: #000000;
+            background-color: #f3f4f6;
+            color: #111827;
             font-size: 0.7rem;
             font-weight: 700;
             padding: 0.125rem 0.5rem;
@@ -310,30 +313,29 @@
             position: absolute;
             z-index: 50;
             width: 100%;
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
             border-radius: 0.5rem;
             margin-top: 0.25rem;
             max-height: 12rem;
             overflow-y: auto;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
         .autocomplete-item {
             padding: 0.5rem 0.75rem;
             font-size: 0.875rem;
             cursor: pointer;
             transition: background 0.1s;
-            color: #E0E0E0;
+            color: #111827;
         }
         .autocomplete-item:hover,
         .autocomplete-item.active {
-            background: #1a1a1a;
-            color: #D4A017;
+            background-color: #f3f4f6;
         }
 
         /* Accent utility classes */
-        .accent-bg { background-color: #D4A017; color: #000000; }
-        .accent-text { color: #D4A017; }
+        .accent-bg { background-color: #111827; color: #ffffff; }
+        .accent-text { color: #111827; }
 
         /* Toast fix - remove overflow hidden */
         .toast {
@@ -342,7 +344,7 @@
     </style>
     @stack('styles')
 </head>
-<body class="bg-primary font-sans antialiased text-body" x-data="{ sidebarOpen: true, mobileMenu: false }">
+<body class="bg-primary-light font-sans antialiased text-body" x-data="{ sidebarOpen: true, mobileMenu: false }">
 
     {{-- Loading Bar --}}
     <div id="loading-bar" class="loading-bar" style="width: 0%; display: none;"></div>
@@ -357,7 +359,7 @@
                          'bg-success': toast.type === 'success',
                          'bg-danger': toast.type === 'error',
                          'bg-warning': toast.type === 'warning',
-                         'bg-accent': toast.type === 'info'
+                         'bg-primary': toast.type === 'info'
                      }"></div>
                 <div class="flex items-start gap-3 p-4 pl-5">
                     <div class="flex-shrink-0 mt-0.5">
@@ -377,8 +379,8 @@
                             </div>
                         </template>
                         <template x-if="toast.type === 'info'">
-                            <div class="w-8 h-8 rounded-full bg-accent-light flex items-center justify-center">
-                                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+                            <div class="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
                             </div>
                         </template>
                     </div>
@@ -386,7 +388,7 @@
                         <p class="text-sm font-semibold text-heading" x-text="toast.title"></p>
                         <p class="text-sm text-muted mt-0.5" x-text="toast.message" x-show="toast.message"></p>
                     </div>
-                    <button @click="remove(toast.id)" class="flex-shrink-0 text-muted hover:text-body transition-colors">
+                    <button @click="remove(toast.id)" class="flex-shrink-0 text-gray-400 hover:text-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
@@ -395,7 +397,7 @@
                          'bg-success/30': toast.type === 'success',
                          'bg-danger/30': toast.type === 'error',
                          'bg-warning/30': toast.type === 'warning',
-                         'bg-accent/30': toast.type === 'info'
+                         'bg-primary/30': toast.type === 'info'
                      }"
                      :style="'animation-duration: ' + (toast.duration || 4) + 's'"></div>
             </div>
@@ -415,16 +417,17 @@
     </div>
 
     {{-- Sidebar --}}
-    <aside class="fixed left-0 top-0 h-full z-50 transition-all duration-300 flex flex-col bg-primary border-r border-border
+    <aside class="fixed left-0 top-0 h-full z-50 transition-all duration-300 flex flex-col bg-white border-r border-border
          sidebar-expanded lg:sidebar-expanded"
+         style="border-right: 1px solid #e5e7eb;"
          :class="mobileMenu ? 'open' : ''"
          x-bind:class="sidebarOpen ? 'lg:sidebar-expanded' : 'lg:sidebar-collapse'">
 
         {{-- Logo --}}
         <div class="flex items-center h-16 px-4 border-b border-border flex-shrink-0">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h2m10 1l2-1V8a1 1 0 00-1-1h-2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -443,7 +446,7 @@
 
                 {{-- DASHBOARD --}}
                 <a href="{{ route('dashboard') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -461,18 +464,18 @@
                 <div x-show="open.ops" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('pos.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('pos.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25Z"/>
                         </svg>
                     </div>
-                    <span class="sidebar-text whitespace-nowrap font-bold text-accent">Point of Sale</span>
+                    <span class="sidebar-text whitespace-nowrap font-bold text-primary">Point of Sale</span>
                 </a>
 
                 <a href="{{ route('sales.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('sales.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -483,7 +486,7 @@
                 </a>
 
                 <a href="{{ route('purchases.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -494,7 +497,7 @@
                 </a>
 
                 <a href="{{ route('expenses.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -514,7 +517,7 @@
                 <div x-show="open.inv" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('items.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('items.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -525,7 +528,7 @@
                 </a>
 
                 <a href="{{ route('categories.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -537,7 +540,7 @@
                 </a>
 
                 <a href="{{ route('stock.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('stock.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -548,7 +551,7 @@
                 </a>
 
                 <a href="{{ route('stock.adjust.form') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('stock.adjust*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -568,7 +571,7 @@
                 <div x-show="open.ppl" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('customers.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('customers.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -579,7 +582,7 @@
                 </a>
 
                 <a href="{{ route('suppliers.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -590,7 +593,7 @@
                 </a>
 
                 <a href="{{ route('reconciliations.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('reconciliations.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -610,7 +613,7 @@
                 <div x-show="open.rpt" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('reports.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('reports.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -621,7 +624,7 @@
                 </a>
 
                 <a href="{{ route('import-export.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('import-export.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -641,7 +644,7 @@
                 <div x-show="open.adm" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
 
                 <a href="{{ route('users.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('users.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -652,7 +655,7 @@
                 </a>
 
                 <a href="{{ route('roles.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('roles.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -663,7 +666,7 @@
                 </a>
 
                 <a href="{{ route('settings.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('settings.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -675,7 +678,7 @@
                 </a>
 
                 <a href="{{ route('activity.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('activity*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -686,7 +689,7 @@
                 </a>
 
                 <a href="{{ route('expenses.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('expense-categories.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -697,7 +700,7 @@
                 </a>
 
                 <a href="{{ route('payments.index') }}" onclick="showLoading()"
-                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-muted rounded-lg text-sm
+                   class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
                           {{ request()->routeIs('payments.*') ? 'active' : '' }}">
                     <div class="sidebar-icon-pill">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -714,8 +717,8 @@
         {{-- User Info at Bottom --}}
         <div class="flex-shrink-0 border-t border-border p-3">
             <div class="flex items-center">
-                <div class="w-9 h-9 rounded-full bg-accent-light flex items-center justify-center flex-shrink-0">
-                    <span class="text-accent text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
+                <div class="w-9 h-9 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0">
+                    <span class="text-heading text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                 </div>
                 <div class="sidebar-text ml-3 flex-1 min-w-0">
                     <p class="text-sm font-semibold text-heading truncate">{{ Auth::user()->name ?? 'User' }}</p>
@@ -723,7 +726,7 @@
                 </div>
                 <form method="POST" action="{{ route('logout') }}" class="sidebar-text">
                     @csrf
-                    <button type="submit" class="text-muted hover:text-danger transition-colors" title="Logout">
+                    <button type="submit" class="text-danger hover:bg-danger-light rounded-lg p-1.5 transition-colors" title="Logout">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
                         </svg>
@@ -737,7 +740,7 @@
     <div class="transition-all duration-300 lg:ml-64" x-bind:class="sidebarOpen ? 'lg:ml-64' : 'lg:ml-16'">
 
         {{-- Top Header --}}
-        <header class="bg-primary border-b border-border h-16 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+        <header class="bg-white border-b border-border h-16 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
             <div class="flex items-center gap-4">
                 <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-muted hover:text-heading">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -762,16 +765,16 @@
 
             <div class="flex items-center gap-3">
                 <div class="hidden md:block relative">
-                    <input type="text" placeholder="Search..." class="w-56 pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:border-accent bg-control-bg">
+                    <input type="text" placeholder="Search..." class="w-56 pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:border-primary bg-white">
                     <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                     </svg>
                 </div>
 
                 <div x-data="{ open: false }" class="relative">
-                    <button @click="open = !open" class="flex items-center gap-2 hover:bg-control-bg rounded-lg px-2 py-1.5 transition-colors">
-                        <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                            <span class="text-primary text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
+                    <button @click="open = !open" class="flex items-center gap-2 hover:bg-primary-light rounded-lg px-2 py-1.5 transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                            <span class="text-white text-sm font-bold">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                         </div>
                         <div class="hidden sm:block text-left">
                             <p class="text-sm font-semibold text-heading">{{ Auth::user()->name ?? 'User' }}</p>
@@ -785,12 +788,12 @@
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
-                         class="absolute right-0 mt-2 w-56 bg-primary rounded-lg border border-border py-1 z-50">
+                         class="absolute right-0 mt-2 w-56 bg-white rounded-lg border border-border py-1 z-50">
                         <div class="px-4 py-3 border-b border-border">
                             <p class="text-sm font-semibold text-heading">{{ Auth::user()->name ?? 'User' }}</p>
                             <p class="text-xs text-muted">{{ Auth::user()->email ?? '' }}</p>
                         </div>
-                        <a href="{{ route('users.edit', Auth::user()->id) }}" onclick="showLoading()" class="flex items-center gap-2 px-4 py-2 text-sm text-body hover:bg-control-bg transition-colors">
+                        <a href="{{ route('users.edit', Auth::user()->id) }}" onclick="showLoading()" class="flex items-center gap-2 px-4 py-2 text-sm text-body hover:bg-primary-light transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                             </svg>
@@ -819,7 +822,7 @@
             @yield('content')
         </main>
 
-        <footer class="border-t border-border bg-primary px-4 lg:px-6 py-4">
+        <footer class="border-t border-border bg-white px-4 lg:px-6 py-4">
             <p class="text-sm text-muted text-center">&copy; 2026 Mtokoma Motorcycle Parts. All rights reserved.</p>
         </footer>
     </div>

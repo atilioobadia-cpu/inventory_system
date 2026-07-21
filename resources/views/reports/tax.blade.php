@@ -22,15 +22,15 @@
     </div>
 
     <!-- Date Range -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <form action="{{ route('reports.tax') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Generate Report</button>
         </form>
@@ -38,7 +38,7 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-success-light rounded-lg">
                     <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-danger-light rounded-lg">
                     <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
@@ -60,27 +60,27 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-accent-light rounded-lg">
-                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                <div class="p-2 bg-gray-100 rounded-lg">
+                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                 </div>
                 <div>
                     <p class="text-sm text-muted">Net VAT Payable</p>
-                    <p class="text-xl font-bold {{ ($netVat ?? 0) >= 0 ? 'text-accent' : 'text-success' }}">TZS {{ number_format($netVat ?? 0) }}</p>
+                    <p class="text-xl font-bold {{ ($netVat ?? 0) >= 0 ? 'text-primary' : 'text-success' }}">TZS {{ number_format($netVat ?? 0) }}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Monthly VAT Breakdown -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Monthly VAT Breakdown</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Month</th>
                         <th class="text-right px-6 py-3 font-medium text-muted">Sales VAT</th>
@@ -91,18 +91,18 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($monthlyVat ?? [] as $month)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4 font-medium text-heading">{{ $month['label'] }}</td>
                             <td class="px-6 py-4 text-right text-success">TZS {{ number_format($month['sales_vat']) }}</td>
                             <td class="px-6 py-4 text-right text-danger">TZS {{ number_format($month['purchase_vat']) }}</td>
-                            <td class="px-6 py-4 text-right font-semibold {{ $month['net'] >= 0 ? 'text-accent' : 'text-success' }}">TZS {{ number_format($month['net']) }}</td>
+                            <td class="px-6 py-4 text-right font-semibold {{ $month['net'] >= 0 ? 'text-primary' : 'text-success' }}">TZS {{ number_format($month['net']) }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($month['net'] > 0)
-                                    <span class="px-2 py-1 bg-accent-light text-accent rounded-full text-xs font-medium">Payable</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-primary rounded-full text-xs font-medium">Payable</span>
                                 @elseif($month['net'] < 0)
                                     <span class="px-2 py-1 bg-success-light text-success rounded-full text-xs font-medium">Refundable</span>
                                 @else
-                                    <span class="px-2 py-1 bg-control-bg text-body rounded-full text-xs font-medium">Nil</span>
+                                    <span class="px-2 py-1 bg-white text-body rounded-full text-xs font-medium">Nil</span>
                                 @endif
                             </td>
                         </tr>
@@ -113,12 +113,12 @@
                     @endforelse
                 </tbody>
                 @if(isset($monthlyVat) && count($monthlyVat) > 0)
-                    <tfoot class="bg-card-bg font-semibold">
+                    <tfoot class="bg-white font-semibold">
                         <tr>
                             <td class="px-6 py-3 text-heading">Total</td>
                             <td class="px-6 py-3 text-right text-success">TZS {{ number_format(collect($monthlyVat)->sum('sales_vat')) }}</td>
                             <td class="px-6 py-3 text-right text-danger">TZS {{ number_format(collect($monthlyVat)->sum('purchase_vat')) }}</td>
-                            <td class="px-6 py-3 text-right text-accent">TZS {{ number_format(collect($monthlyVat)->sum('net')) }}</td>
+                            <td class="px-6 py-3 text-right text-primary">TZS {{ number_format(collect($monthlyVat)->sum('net')) }}</td>
                             <td></td>
                         </tr>
                     </tfoot>
@@ -128,11 +128,11 @@
     </div>
 
     <!-- VAT by Rate -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <h2 class="text-lg font-semibold text-heading mb-4">VAT Breakdown by Rate</h2>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">VAT Rate</th>
                         <th class="text-right px-6 py-3 font-medium text-muted">Taxable Sales</th>
@@ -143,7 +143,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($vatByRate ?? [] as $rate)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4 font-medium text-heading">{{ $rate['rate'] }}%</td>
                             <td class="px-6 py-4 text-right text-body">TZS {{ number_format($rate['taxable_sales']) }}</td>
                             <td class="px-6 py-4 text-right text-success">TZS {{ number_format($rate['sales_vat']) }}</td>

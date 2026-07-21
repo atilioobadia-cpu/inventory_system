@@ -11,16 +11,19 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#0a0a0a',
-                        'accent': '#D4A017',
-                        'accent-light': '#2a2206',
-                        'heading': '#FFFFFF',
-                        'body': '#E0E0E0',
-                        'muted': '#999999',
-                        'border': '#2a2a2a',
-                        'control-bg': '#1a1a1a',
-                        'danger': '#e03636',
-                        'danger-light': '#2e1111',
+                        'primary': '#171717',
+                        'primary-hover': '#000000',
+                        'accent': '#171717',
+                        'heading': '#111827',
+                        'body': '#1f2937',
+                        'muted': '#6b7280',
+                        'border': '#e5e7eb',
+                        'control-bg': '#ffffff',
+                        'body-bg': '#f9fafb',
+                        'danger': '#dc2626',
+                        'danger-light': '#fef2f2',
+                        'success': '#059669',
+                        'success-light': '#ecfdf5',
                     },
                     fontFamily: {
                         sans: ['Nunito', 'sans-serif'],
@@ -30,12 +33,12 @@
         }
     </script>
 </head>
-<body class="bg-primary font-sans antialiased min-h-screen flex items-center justify-center px-4">
+<body class="bg-body-bg font-sans antialiased min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-md">
         {{-- Logo & Title --}}
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-2xl mb-4">
-                <svg class="w-9 h-9 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
+                <svg class="w-9 h-9 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h2m10 1l2-1V8a1 1 0 00-1-1h-2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,7 +49,7 @@
         </div>
 
         {{-- Login Card --}}
-        <div class="bg-card-bg rounded-lg border border-border p-8">
+        <div class="bg-white rounded-lg border border-border p-8 shadow-sm">
             <h2 class="text-lg font-semibold text-heading mb-6">Sign in to your account</h2>
 
             @if($errors->any())
@@ -82,7 +85,7 @@
                             </svg>
                         </div>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                               class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-border rounded-lg text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                                placeholder="you@example.com">
                     </div>
                 </div>
@@ -96,7 +99,7 @@
                             </svg>
                         </div>
                         <input id="password" type="password" name="password" required
-                               class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-colors"
+                               class="w-full pl-10 pr-4 py-2.5 bg-white border border-border rounded-lg text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                                placeholder="Enter your password">
                     </div>
                 </div>
@@ -104,18 +107,18 @@
                 <div class="flex items-center justify-between mb-6">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
-                               class="w-4 h-4 text-accent border-border rounded focus:ring-accent">
+                               class="w-4 h-4 text-primary border-border rounded focus:ring-primary">
                         <span class="text-sm text-body">Remember me</span>
                     </label>
                     @if(Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="text-sm text-accent hover:underline">
+                    <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">
                         Forgot password?
                     </a>
                     @endif
                 </div>
 
                 <button type="submit"
-                        class="w-full bg-primary text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2">
+                        class="w-full bg-primary text-white py-2.5 px-4 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
                     Sign In
                 </button>
             </form>

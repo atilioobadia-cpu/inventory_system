@@ -23,7 +23,7 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-cyan-100 rounded-lg">
                     <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-success-light rounded-lg">
                     <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -45,10 +45,10 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-accent-light rounded-lg">
-                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="p-2 bg-gray-100 rounded-lg">
+                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
                     <p class="text-sm text-muted">Total Sales</p>
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-danger-light rounded-lg">
                     <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -70,13 +70,13 @@
     </div>
 
     <!-- Customer Table -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Customer Details</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Customer</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">Phone</th>
@@ -88,7 +88,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($customers ?? [] as $customer)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 bg-cyan-100 rounded-full flex items-center justify-center">

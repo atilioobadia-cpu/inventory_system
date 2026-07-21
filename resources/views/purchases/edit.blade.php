@@ -8,15 +8,15 @@
     <div class="flex items-center justify-between">
         <div>
             <nav class="flex items-center text-sm text-muted mb-1">
-                <a href="{{ route('dashboard') }}" class="hover:text-accent">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="hover:text-primary">Dashboard</a>
                 <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                <a href="{{ route('purchases.index') }}" class="hover:text-accent">Purchases</a>
+                <a href="{{ route('purchases.index') }}" class="hover:text-primary">Purchases</a>
                 <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                 <span class="text-heading font-medium">Edit {{ $purchase->invoice_number }}</span>
             </nav>
             <h1 class="text-xl font-bold text-heading">Edit Purchase - {{ $purchase->invoice_number }}</h1>
         </div>
-        <a href="{{ route('purchases.show', $purchase) }}" class="px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium">Cancel</a>
+        <a href="{{ route('purchases.show', $purchase) }}" class="px-4 py-2 bg-white hover:bg-white text-body rounded-lg text-sm font-medium">Cancel</a>
     </div>
 
     @if($purchase->status !== 'draft')
@@ -35,17 +35,17 @@
             {{-- Left: Purchase Info --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-card-bg rounded-lg border p-5">
+                <div class="bg-white rounded-lg border p-5">
                     <h2 class="text-xl font-semibold text-heading mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Supplier *</label>
                             <div class="relative" x-data="{ open: false, query: '{{ addslashes($purchase->supplier->name ?? '') }}' }" @click.away="open = false">
-                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; searchSupplier()" placeholder="Search supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
+                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; searchSupplier()" placeholder="Search supplier..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
-                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-control-bg border rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
-                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="supplier = s; open = false; query = s.name" x-text="s.name"></div>
+                                        <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="supplier = s; open = false; query = s.name" x-text="s.name"></div>
                                     </template>
                                 </div>
                             </div>
@@ -53,11 +53,11 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Purchase Date *</label>
-                            <input type="date" name="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date->format('Y-m-d')) }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
+                            <input type="date" name="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date->format('Y-m-d')) }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }} required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Payment Terms</label>
-                            <select name="payment_terms" x-model="paymentTerms" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <select name="payment_terms" x-model="paymentTerms" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                                 <option value="cash" {{ old('payment_terms', $purchase->payment_terms) === 'cash' ? 'selected' : '' }}>Cash</option>
                                 <option value="net_7" {{ old('payment_terms', $purchase->payment_terms) === 'net_7' ? 'selected' : '' }}>Net 7 Days</option>
                                 <option value="net_15" {{ old('payment_terms', $purchase->payment_terms) === 'net_15' ? 'selected' : '' }}>Net 15 Days</option>
@@ -66,21 +66,21 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Due Date</label>
-                            <input type="date" name="due_date" x-model="dueDate" value="{{ old('due_date', isset($purchase->due_date) ? $purchase->due_date->format('Y-m-d') : '') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="date" name="due_date" x-model="dueDate" value="{{ old('due_date', isset($purchase->due_date) ? $purchase->due_date->format('Y-m-d') : '') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium text-body mb-1">Reference (Optional)</label>
-                            <input type="text" name="reference" value="{{ old('reference', $purchase->reference ?? '') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" placeholder="Supplier reference number" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="text" name="reference" value="{{ old('reference', $purchase->reference ?? '') }}" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Supplier reference number" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-card-bg rounded-lg border p-5">
+                <div class="bg-white rounded-lg border p-5">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-semibold text-heading">Items</h2>
                         @if($purchase->status === 'draft')
-                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-accent-light hover:bg-accent-light text-accent rounded-lg text-sm font-medium">
+                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-100 text-primary rounded-lg text-sm font-medium">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                             Add Item
                         </button>
@@ -89,7 +89,7 @@
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm">
-                            <thead class="bg-card-bg border-b">
+                            <thead class="bg-white border-b">
                                 <tr>
                                     <th class="px-3 py-2 text-left font-medium text-body w-2/5">Item</th>
                                     <th class="px-3 py-2 text-center font-medium text-body w-20">Qty</th>
@@ -104,11 +104,11 @@
                                     <tr>
                                         <td class="px-3 py-2">
                                             <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; searchItem(index)" placeholder="Search item..." class="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-1 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; searchItem(index)" placeholder="Search item..." class="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-1 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                                                 <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
-                                                <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-control-bg border rounded mt-1 max-h-40 overflow-y-auto">
+                                                <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
                                                     <template x-for="item in row.itemResults" :key="item.id">
-                                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
+                                                        <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
                                                     </template>
                                                 </div>
                                             </div>
@@ -140,7 +140,7 @@
 
             {{-- Right: Summary --}}
             <div class="space-y-6">
-                <div class="bg-card-bg rounded-lg border p-5 sticky top-20">
+                <div class="bg-white rounded-lg border p-5 sticky top-20">
                     <h2 class="text-xl font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
@@ -157,14 +157,14 @@
                         </div>
                         <div class="flex justify-between text-lg font-bold border-t pt-3">
                             <span>Total</span>
-                            <span class="text-accent" x-text="formatCurrency(total)"></span>
+                            <span class="text-primary" x-text="formatCurrency(total)"></span>
                         </div>
                     </div>
 
                     <div class="mt-6 space-y-3">
                         <div>
                             <label class="block text-sm font-medium text-body mb-1">Paid Amount</label>
-                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
+                            <input type="number" name="paid_amount" x-model.number="paidAmount" min="0" :max="total" step="0.01" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-body">Due</span>
@@ -174,7 +174,7 @@
 
                     <div class="mt-6">
                         <label class="block text-sm font-medium text-body mb-1">Notes</label>
-                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" placeholder="Purchase notes..." {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>{{ old('notes', $purchase->notes ?? '') }}</textarea>
+                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Purchase notes..." {{ $purchase->status !== 'draft' ? 'disabled' : '' }}>{{ old('notes', $purchase->notes ?? '') }}</textarea>
                     </div>
 
                     @if($purchase->status === 'draft')

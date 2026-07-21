@@ -6,19 +6,19 @@
 <style>
     .pos-grid { display: grid; grid-template-columns: 1fr 420px; height: calc(100vh - 64px); gap: 0; }
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px; overflow-y: auto; }
-    .product-card { border: 1px solid #2a2a2a; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; }
-    .product-card:hover { border-color: #D4A017; }
+    .product-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; background: #ffffff; }
+    .product-card:hover { border-color: #000000; }
     .product-card.out-of-stock { opacity: 0.5; pointer-events: none; }
-    .cart-panel { background: #111111; border-left: 1px solid #2a2a2a; display: flex; flex-direction: column; height: calc(100vh - 64px); }
-    .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
-    .cart-summary { border-top: 2px solid #2a2a2a; padding: 16px; background: #1a1a1a; }
-    .qty-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid #333333; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: #E0E0E0; }
-    .qty-btn:hover { background: #2a2a2a; }
-    .quick-cash { padding: 6px 12px; border: 1px solid #333333; border-radius: 6px; font-size: 13px; cursor: pointer; color: #E0E0E0; }
-    .quick-cash:hover { background: #2a2a2a; }
-    .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #333333; font-size: 13px; cursor: pointer; white-space: nowrap; color: #E0E0E0; }
-    .category-pill.active { background: #D4A017; color: #000000; border-color: #D4A017; }
-    .category-pill:hover:not(.active) { background: #2a2a2a; }
+    .cart-panel { background: #ffffff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: calc(100vh - 64px); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px; background: #ffffff; }
+    .cart-summary { border-top: 2px solid #e2e8f0; padding: 16px; background: #ffffff; }
+    .qty-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid #d1d5db; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: #1f2937; background: #ffffff; }
+    .qty-btn:hover { background: #f3f4f6; }
+    .quick-cash { padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; cursor: pointer; color: #1f2937; background: #ffffff; }
+    .quick-cash:hover { background: #f3f4f6; }
+    .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 13px; cursor: pointer; white-space: nowrap; color: #1f2937; background: #ffffff; }
+    .category-pill.active { background: #000000; color: #ffffff; border-color: #000000; }
+    .category-pill:hover:not(.active) { background: #f3f4f6; }
 
     .pos-mobile-only { display: none !important; }
     .pos-desktop-only {}
@@ -43,12 +43,12 @@
 <div x-data="posApp()" x-init="init()" class="pos-grid">
 
     {{-- LEFT: Product Grid --}}
-    <div class="flex flex-col h-full bg-card-bg pos-hide pos-desktop-only">
+    <div class="flex flex-col h-full bg-white pos-hide pos-desktop-only">
         {{-- Search & Filters --}}
-        <div class="p-4 bg-card-bg border-b space-y-3">
+        <div class="p-4 bg-white border-b space-y-3">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div class="flex gap-2 overflow-x-auto pb-1">
                 <button @click="selectedCategory = ''; searchItems()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
@@ -62,7 +62,7 @@
         <div class="flex-1 overflow-y-auto p-4">
             <template x-if="loading">
                 <div class="flex items-center justify-center h-40">
-                    <svg class="animate-spin h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                    <svg class="animate-spin h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </div>
             </template>
             <template x-if="!loading && products.length === 0">
@@ -74,7 +74,7 @@
             <div class="product-grid" x-show="!loading">
                 <template x-for="item in products" :key="item.id">
                     <div class="product-card" :class="item.current_stock <= 0 ? 'out-of-stock' : ''" @click="addToCart(item)">
-                        <div class="w-full h-20 bg-control-bg rounded mb-2 flex items-center justify-center overflow-hidden">
+                        <div class="w-full h-20 bg-white rounded mb-2 flex items-center justify-center overflow-hidden">
                             <template x-if="item.image">
                                 <img :src="'{{ asset('storage') }}/' + item.image" class="h-20 w-full object-cover rounded">
                             </template>
@@ -83,7 +83,7 @@
                             </template>
                         </div>
                         <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
-                        <p class="text-sm font-bold text-accent mt-1" x-text="formatCurrency(item.selling_price)"></p>
+                        <p class="text-sm font-bold text-primary mt-1" x-text="formatCurrency(item.selling_price)"></p>
                         <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
                 </template>
@@ -94,10 +94,10 @@
     {{-- RIGHT: Cart Panel --}}
     <div class="cart-panel">
         {{-- Mobile Quick Search --}}
-        <div class="pos-mobile-only p-3 bg-card-bg border-b">
+        <div class="pos-mobile-only p-3 bg-white border-b">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div class="flex gap-2 overflow-x-auto pb-1 mt-2">
                 <button @click="selectedCategory = ''; searchItemsMobile()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
@@ -111,7 +111,7 @@
         <div class="pos-mobile-only flex-1 overflow-y-auto p-3">
             <template x-if="mobileLoading">
                 <div class="flex items-center justify-center h-40">
-                    <svg class="animate-spin h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                    <svg class="animate-spin h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </div>
             </template>
             <template x-if="!mobileLoading && mobileProducts.length === 0">
@@ -123,7 +123,7 @@
             <div class="product-grid" x-show="!mobileLoading" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
                 <template x-for="item in mobileProducts" :key="'m_' + item.id">
                     <div class="product-card" :class="item.current_stock <= 0 ? 'out-of-stock' : ''" @click="addToCart(item)">
-                        <div class="w-full h-16 bg-control-bg rounded mb-2 flex items-center justify-center overflow-hidden">
+                        <div class="w-full h-16 bg-white rounded mb-2 flex items-center justify-center overflow-hidden">
                             <template x-if="item.image">
                                 <img :src="'{{ asset('storage') }}/' + item.image" class="h-16 w-full object-cover rounded">
                             </template>
@@ -132,7 +132,7 @@
                             </template>
                         </div>
                         <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
-                        <p class="text-sm font-bold text-accent mt-1" x-text="formatCurrency(item.selling_price)"></p>
+                        <p class="text-sm font-bold text-primary mt-1" x-text="formatCurrency(item.selling_price)"></p>
                         <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
                     </div>
                 </template>
@@ -140,9 +140,9 @@
         </div>
 
         {{-- Cart Header --}}
-        <div class="p-4 border-b bg-card-bg flex items-center justify-between">
+        <div class="p-4 border-b bg-white flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
+                <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
                 <div>
                     <h2 class="text-lg font-bold text-heading">Current Order</h2>
                     <p class="text-xs text-muted" x-text="cartItems.length + ' item(s)'"></p>
@@ -193,11 +193,11 @@
                 <label class="text-xs font-medium text-body mb-1 block">Customer</label>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false">
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20">
+                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
-                    <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-card-bg border rounded-lg mt-1 max-h-40 overflow-y-auto">
+                    <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-40 overflow-y-auto">
                         <template x-for="c in customerResults.slice(0, 5)" :key="c.id">
-                            <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = c.name" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
+                            <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = c.name" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
                         </template>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                 </div>
                 <div class="flex items-end pb-1">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" x-model="isVatExempt" class="w-4 h-4 rounded text-accent">
+                        <input type="checkbox" x-model="isVatExempt" class="w-4 h-4 rounded text-primary">
                         <span class="text-sm font-medium">VAT Exempt</span>
                     </label>
                 </div>
@@ -236,14 +236,14 @@
                 </div>
                 <div class="flex justify-between text-lg font-bold border-t pt-2">
                     <span>Total</span>
-                    <span class="text-accent" x-text="formatCurrency(total)"></span>
+                    <span class="text-primary" x-text="formatCurrency(total)"></span>
                 </div>
             </div>
 
             {{-- Cash Received (for cash sales) --}}
             <div x-show="saleType === 'cash'" class="mb-3">
                 <label class="text-xs font-medium text-body mb-1 block">Cash Received</label>
-                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20" placeholder="0">
+                <input type="number" x-model.number="cashReceived" min="0" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="0">
                 <div class="flex gap-2 mt-2 flex-wrap">
                     <button @click="cashReceived = total" class="quick-cash">Exact</button>
                     <button @click="cashReceived = Math.ceil(total / 1000) * 1000" class="quick-cash">TZS {{ number_format(ceil(10000/1000)*1000) }}</button>
@@ -281,7 +281,7 @@
 
     {{-- Success Modal --}}
     <div x-show="showSuccess" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" x-transition>
-        <div class="bg-card-bg rounded-lg p-8 max-w-sm w-full mx-4 text-center">
+        <div class="bg-white rounded-lg p-8 max-w-sm w-full mx-4 text-center">
             <div class="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="h-8 w-8 text-success" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
@@ -293,7 +293,7 @@
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                     View Receipt
                 </a>
-                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-control-bg hover:bg-border text-heading rounded-lg font-medium text-sm flex items-center justify-center gap-2">
+                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-white hover:bg-border text-heading rounded-lg font-medium text-sm flex items-center justify-center gap-2">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                     New Sale
                 </button>

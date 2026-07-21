@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2 text-muted">/</span>
-<a href="{{ route('expense-categories.index') }}" class="hover:text-accent transition-colors">Expense Categories</a>
+<a href="{{ route('expense-categories.index') }}" class="hover:text-primary transition-colors">Expense Categories</a>
 <span class="mx-2 text-muted">/</span>
 <span class="text-body font-medium">{{ $expenseCategory->name }}</span>
 @endsection
@@ -24,24 +24,24 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Total Expenses</p>
             <p class="text-xl font-bold text-heading">{{ $expenseCategory->expenses_count ?? 0 }}</p>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <p class="text-sm text-muted">Status</p>
             <p class="text-xl font-bold {{ $expenseCategory->is_active ? 'text-success' : 'text-danger' }}">{{ $expenseCategory->is_active ? 'Active' : 'Inactive' }}</p>
         </div>
     </div>
 
     @if(isset($recentExpenses) && $recentExpenses->count())
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="p-5 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Recent Expenses</h3>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Reference</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">Description</th>
@@ -51,7 +51,7 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @foreach($recentExpenses as $expense)
-                    <tr class="hover:bg-card-bg">
+                    <tr class="hover:bg-white">
                         <td class="px-6 py-3 text-muted">{{ $expense->reference_number }}</td>
                         <td class="px-6 py-3 text-heading">{{ $expense->description ?? '-' }}</td>
                         <td class="px-6 py-3 text-right font-medium">TZS {{ number_format($expense->amount, 2) }}</td>

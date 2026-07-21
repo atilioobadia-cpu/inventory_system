@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('suppliers.index') }}" class="hover:text-accent transition-colors">Suppliers</a>
+<a href="{{ route('suppliers.index') }}" class="hover:text-primary transition-colors">Suppliers</a>
 <span class="mx-2">/</span>
 <span class="text-heading">All Suppliers</span>
 @endsection
@@ -14,7 +14,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h1 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
                 </svg>
                 Suppliers
@@ -33,7 +33,7 @@
     </div>
 
     {{-- Search --}}
-    <div class="bg-card-bg rounded-lg border border-border p-4 mb-6">
+    <div class="bg-white rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('suppliers.index') }}">
             <div class="flex gap-4">
                 <div class="relative flex-1">
@@ -41,18 +41,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                     </svg>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search suppliers..."
-                           class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                           class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 </div>
-                <button type="submit" class="bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent-light transition-colors">Search</button>
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">Search</button>
             </div>
         </form>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($suppliers ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg border-b border-border">
+                <thead class="bg-white border-b border-border">
                     <tr>
                         <th class="text-left px-4 py-3 font-medium text-muted">Name</th>
                         <th class="text-left px-4 py-3 font-medium text-muted">Contact Person</th>
@@ -65,9 +65,9 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @foreach($suppliers as $supplier)
-                    <tr class="hover:bg-card-bg transition-colors">
+                    <tr class="hover:bg-white transition-colors">
                         <td class="px-4 py-3">
-                            <a href="{{ route('suppliers.show', $supplier) }}" class="font-medium text-heading hover:text-accent">{{ $supplier->name }}</a>
+                            <a href="{{ route('suppliers.show', $supplier) }}" class="font-medium text-heading hover:text-primary">{{ $supplier->name }}</a>
                         </td>
                         <td class="px-4 py-3 text-body">{{ $supplier->contact_person ?? '-' }}</td>
                         <td class="px-4 py-3 text-body">{{ $supplier->phone ?? '-' }}</td>
@@ -79,19 +79,19 @@
                             @if($supplier->is_active)
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                             @else
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">Inactive</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
-                                <a href="{{ route('suppliers.show', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light transition-colors" title="View">
+                                <a href="{{ route('suppliers.show', $supplier) }}" class="p-1.5 text-muted hover:text-primary rounded-lg hover:bg-gray-100 transition-colors" title="View">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                     </svg>
                                 </a>
                                 @can('edit_suppliers')
-                                <a href="{{ route('suppliers.edit', $supplier) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light transition-colors" title="Edit">
+                                <a href="{{ route('suppliers.edit', $supplier) }}" class="p-1.5 text-muted hover:text-primary rounded-lg hover:bg-gray-100 transition-colors" title="Edit">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                                     </svg>
@@ -145,11 +145,11 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-card-bg rounded-lg max-w-md w-full p-5">
+            <div class="relative bg-white rounded-lg max-w-md w-full p-5">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Supplier</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This may affect purchase records.</p>
                 <div class="flex justify-end gap-3">
-                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg">Cancel</button>
+                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white rounded-lg hover:bg-white">Cancel</button>
                     <form :action="deleteUrl" method="POST">
                         @csrf
                         @method('DELETE')

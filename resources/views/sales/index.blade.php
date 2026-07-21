@@ -26,7 +26,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
             <h2 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/>
                 </svg>
                 Sales
@@ -41,7 +41,7 @@
         </a>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('sales.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
@@ -49,17 +49,17 @@
                         <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
-                        <input type="text" name="search" x-model="search" placeholder="Search by invoice, customer..." class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                        <input type="text" name="search" x-model="search" placeholder="Search by invoice, customer..." class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                     </div>
                 </div>
                 <div>
-                    <input type="date" name="date_from" x-model="dateFrom" placeholder="From" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                    <input type="date" name="date_from" x-model="dateFrom" placeholder="From" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 </div>
                 <div>
-                    <input type="date" name="date_to" x-model="dateTo" placeholder="To" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                    <input type="date" name="date_to" x-model="dateTo" placeholder="To" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 </div>
                 <div>
-                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="customer_id" x-model="customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="">All Customers</option>
                         @foreach($customers ?? [] as $cust)
                             <option value="{{ $cust->id }}">{{ $cust->name }}</option>
@@ -70,7 +70,7 @@
             <div class="p-4 border-b border-border flex flex-wrap items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-body">Payment Status:</label>
-                    <select name="status" x-model="status" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="status" x-model="status" class="px-3 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="all">All</option>
                         <option value="paid">Paid</option>
                         <option value="partial">Partial</option>
@@ -89,7 +89,7 @@
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-card-bg border-b border-border">
+                    <tr class="bg-white border-b border-border">
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Invoice #</th>
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Customer</th>
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Date</th>
@@ -104,9 +104,9 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @forelse($sales ?? [] as $sale)
-                        <tr class="{{ $sale->is_voided ? 'bg-card-bg opacity-60' : 'hover:bg-card-bg' }} transition-colors">
+                        <tr class="{{ $sale->is_voided ? 'bg-white opacity-60' : 'hover:bg-white' }} transition-colors">
                             <td class="px-4 py-3">
-                                <a href="{{ route('sales.show', $sale) }}" class="text-accent font-medium text-sm hover:underline">{{ $sale->invoice_number }}</a>
+                                <a href="{{ route('sales.show', $sale) }}" class="text-primary font-medium text-sm hover:underline">{{ $sale->invoice_number }}</a>
                             </td>
                             <td class="px-4 py-3 text-sm text-body">{{ $sale->customer->name ?? 'Walk-in Customer' }}</td>
                             <td class="px-4 py-3 text-sm text-muted">{{ $sale->created_at->format('d M Y') }}</td>
@@ -134,7 +134,7 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if($sale->is_voided)
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">
                                         Voided
                                     </span>
                                 @else
@@ -145,7 +145,7 @@
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-1" x-data="{ open: false }">
-                                    <button @click="open = !open" class="p-1.5 rounded-lg text-muted hover:text-body hover:bg-control-bg transition-colors">
+                                    <button @click="open = !open" class="p-1.5 rounded-lg text-muted hover:text-body hover:bg-white transition-colors">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
                                         </svg>
@@ -154,13 +154,13 @@
                                          x-transition:enter="transition ease-out duration-100"
                                          x-transition:enter-start="opacity-0 scale-95"
                                          x-transition:enter-end="opacity-100 scale-100"
-                                         class="absolute right-0 mt-2 w-48 bg-control-bg rounded-lg border border-border py-1 z-20">
-                                        <a href="{{ route('sales.show', $sale) }}" class="flex items-center gap-2 px-4 py-2 text-sm text-body hover:bg-card-bg">
+                                         class="absolute right-0 mt-2 w-48 bg-white rounded-lg border border-border py-1 z-20">
+                                        <a href="{{ route('sales.show', $sale) }}" class="flex items-center gap-2 px-4 py-2 text-sm text-body hover:bg-white">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                             View Details
                                         </a>
                                         <button @click="$dispatch('view-receipt', { id: {{ $sale->id }} }); open = false"
-                                                class="flex items-center gap-2 w-full px-4 py-2 text-sm text-body hover:bg-card-bg text-left">
+                                                class="flex items-center gap-2 w-full px-4 py-2 text-sm text-body hover:bg-white text-left">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                                             View Receipt
                                         </button>
@@ -211,7 +211,7 @@
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 scale-95"
              x-transition:enter-end="opacity-100 scale-100"
-             class="bg-card-bg rounded-lg w-full max-w-md">
+             class="bg-white rounded-lg w-full max-w-md">
             <div class="p-6">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-full bg-danger-light flex items-center justify-center flex-shrink-0">
@@ -233,11 +233,11 @@
                     </div>
                 </form>
             </div>
-            <div class="flex items-center justify-end gap-3 px-6 py-4 bg-card-bg rounded-b-lg">
-                <button @click="showVoidModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
+            <div class="flex items-center justify-end gap-3 px-6 py-4 bg-white rounded-b-lg">
+                <button @click="showVoidModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-white transition-colors">
                     Cancel
                 </button>
-                <button @click="$refs.voidForm.submit()" :disabled="!voidReason.trim()" x-bind:class="voidReason.trim() ? 'bg-danger hover:bg-danger text-white' : 'bg-control-bg text-muted cursor-not-allowed'"
+                <button @click="$refs.voidForm.submit()" :disabled="!voidReason.trim()" x-bind:class="voidReason.trim() ? 'bg-danger hover:bg-danger text-white' : 'bg-white text-muted cursor-not-allowed'"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors">
                     Void Sale
                 </button>

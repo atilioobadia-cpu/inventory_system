@@ -22,19 +22,19 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <form action="{{ route('reports.purchases') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Supplier</label>
-                <select name="supplier_id" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm min-w-[200px]">
+                <select name="supplier_id" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm min-w-[200px]">
                     <option value="">All Suppliers</option>
                     @foreach($suppliers ?? [] as $supplier)
                         <option value="{{ $supplier->id }}" {{ request('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
@@ -42,13 +42,13 @@
                 </select>
             </div>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('reports.purchases') }}" class="px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Reset</a>
+            <a href="{{ route('reports.purchases') }}" class="px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-indigo-100 rounded-lg">
                     <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-success-light rounded-lg">
                     <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-warning-light rounded-lg">
                     <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-purple-100 rounded-lg">
                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
@@ -95,13 +95,13 @@
     </div>
 
     <!-- Chart -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-semibold text-heading">Purchase Trend</h2>
             <div class="flex items-center gap-2">
-                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
-                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
-                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-primary text-white' : 'bg-control-bg text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
+                <button @click="chartPeriod = 'daily'" :class="chartPeriod === 'daily' ? 'bg-primary text-white' : 'bg-white text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Daily</button>
+                <button @click="chartPeriod = 'weekly'" :class="chartPeriod === 'weekly' ? 'bg-primary text-white' : 'bg-white text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Weekly</button>
+                <button @click="chartPeriod = 'monthly'" :class="chartPeriod === 'monthly' ? 'bg-primary text-white' : 'bg-white text-body'" class="px-3 py-1 rounded-lg text-sm font-medium transition-colors">Monthly</button>
             </div>
         </div>
         <div class="h-80">
@@ -110,13 +110,13 @@
     </div>
 
     <!-- Purchases Table -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Purchase Details</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Date</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">PO Number</th>
@@ -130,9 +130,9 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($purchases ?? [] as $purchase)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4 text-body">{{ $purchase->date->format('d M Y') }}</td>
-                            <td class="px-6 py-4 font-medium text-accent">{{ $purchase->po_number }}</td>
+                            <td class="px-6 py-4 font-medium text-primary">{{ $purchase->po_number }}</td>
                             <td class="px-6 py-4 text-heading">{{ $purchase->supplier->name ?? '-' }}</td>
                             <td class="px-6 py-4 text-center text-body">{{ $purchase->items_count }}</td>
                             <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->subtotal) }}</td>

@@ -7,7 +7,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
                 </svg>
                 Roles & Permissions
@@ -22,11 +22,11 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($roles ?? [] as $role)
-            <div class="bg-card-bg rounded-lg border border-border p-5 transition-colors">
+            <div class="bg-white rounded-lg border border-border p-5 transition-colors">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-accent-light rounded-full flex items-center justify-center">
-                            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
                         </div>
                         <div>
                             <h3 class="font-semibold text-heading">{{ $role->name }}</h3>
@@ -43,11 +43,11 @@
                     @endif
                 </div>
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="px-2 py-1 bg-accent-light text-accent rounded-full text-xs font-medium">{{ $role->permissions_count ?? $role->permissions->count() }} permissions</span>
-                    <span class="px-2 py-1 bg-control-bg text-body rounded-full text-xs font-medium">{{ $role->users_count ?? $role->users->count() }} users</span>
+                    <span class="px-2 py-1 bg-gray-100 text-primary rounded-full text-xs font-medium">{{ $role->permissions_count ?? $role->permissions->count() }} permissions</span>
+                    <span class="px-2 py-1 bg-white text-body rounded-full text-xs font-medium">{{ $role->users_count ?? $role->users->count() }} users</span>
                 </div>
                 <div class="flex items-center gap-2 pt-3 border-t border-border">
-                    <a href="{{ route('roles.show', $role) }}" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm text-muted hover:text-accent hover:bg-accent-light rounded-lg transition-colors" title="View">
+                    <a href="{{ route('roles.show', $role) }}" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm text-muted hover:text-primary hover:bg-gray-100 rounded-lg transition-colors" title="View">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         View
                     </a>

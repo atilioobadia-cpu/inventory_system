@@ -5,7 +5,7 @@ $styles = [
     'success' => ['bg' => 'bg-success-light', 'border' => 'border-success', 'text' => 'text-success', 'iconColor' => 'text-success'],
     'error' => ['bg' => 'bg-danger-light', 'border' => 'border-danger', 'text' => 'text-danger', 'iconColor' => 'text-danger'],
     'warning' => ['bg' => 'bg-warning-light', 'border' => 'border-amber-200', 'text' => 'text-amber-800', 'iconColor' => 'text-amber-500'],
-    'info' => ['bg' => 'bg-accent-light', 'border' => 'border-accent', 'text' => 'text-accent', 'iconColor' => 'text-accent'],
+    'info' => ['bg' => 'bg-gray-100', 'border' => 'border-primary', 'text' => 'text-primary', 'iconColor' => 'text-primary'],
 ];
 $style = $styles[$type] ?? $styles['success'];
 
@@ -48,7 +48,7 @@ $messages = [
                  'bg-success-light border-success': alert.type === 'success',
                  'bg-danger-light border-danger': alert.type === 'error',
                  'bg-warning-light border-amber-200': alert.type === 'warning',
-                 'bg-accent-light border-accent': alert.type === 'info'
+                 'bg-gray-100 border-primary': alert.type === 'info'
              }">
 
             {{-- Icon --}}
@@ -73,7 +73,7 @@ $messages = [
                 </template>
                 {{-- Info --}}
                 <template x-if="alert.type === 'info'">
-                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
                     </svg>
                 </template>
@@ -86,7 +86,7 @@ $messages = [
                        'text-success': alert.type === 'success',
                        'text-danger': alert.type === 'error',
                        'text-amber-800': alert.type === 'warning',
-                       'text-accent': alert.type === 'info'
+                       'text-primary': alert.type === 'info'
                    }"></p>
             </div>
 
@@ -96,7 +96,7 @@ $messages = [
                         'text-success hover:text-success': alert.type === 'success',
                         'text-danger hover:text-danger': alert.type === 'error',
                         'text-amber-500 hover:text-warning': alert.type === 'warning',
-                        'text-accent hover:text-accent': alert.type === 'info'
+                        'text-primary hover:text-primary': alert.type === 'info'
                     }">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>

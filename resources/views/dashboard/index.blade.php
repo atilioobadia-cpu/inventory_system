@@ -12,9 +12,9 @@
     {{-- Stat Cards --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {{-- Total Items --}}
-        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                 </svg>
             </div>
@@ -25,9 +25,9 @@
         </div>
 
         {{-- Stock Value --}}
-        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
-            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
                 </svg>
             </div>
@@ -38,7 +38,7 @@
         </div>
 
         {{-- Today's Sales --}}
-        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
             <div class="w-10 h-10 bg-success-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
@@ -51,7 +51,7 @@
         </div>
 
         {{-- Low Stock Items --}}
-        <div class="bg-card-bg rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
+        <div class="bg-white rounded-lg border border-border p-4 flex items-center gap-4 card-hover">
             <div class="w-10 h-10 bg-warning-light rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.004ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>
@@ -69,7 +69,7 @@
         {{-- Monthly Sales Chart --}}
         <div class="lg:col-span-2 bg-white rounded-lg border border-border p-5">
             <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
                 </svg>
                 Monthly Sales
@@ -80,9 +80,9 @@
         </div>
 
         {{-- Recent Activity --}}
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 Recent Activity
@@ -90,13 +90,13 @@
             <div class="space-y-4 max-h-[300px] overflow-y-auto">
                 @forelse($recentActivities ?? [] as $activity)
                 <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-control-bg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 mt-0.5">
                         @if(str_contains($activity->action ?? '', 'sale'))
-                        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
                         </svg>
                         @elseif(str_contains($activity->action ?? '', 'purchase'))
-                        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.183A1.125 1.125 0 0 0 18.056 3H5.106"/>
                         </svg>
                         @elseif(str_contains($activity->action ?? '', 'stock'))
@@ -124,9 +124,9 @@
     {{-- Bottom Row --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {{-- Top Selling Items --}}
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <h3 class="text-lg font-semibold text-heading mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
                 </svg>
                 Top Selling Items
@@ -145,7 +145,7 @@
                         <tr>
                             <td class="py-2">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-control-bg rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
                                         @if($item->image)
                                         <img src="{{ asset('storage/' . $item->image) }}" alt="" class="w-8 h-8 rounded-lg object-cover">
                                         @else
@@ -174,7 +174,7 @@
         </div>
 
         {{-- Low Stock Alerts --}}
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-lg font-semibold text-heading flex items-center gap-2">
                     <svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -183,7 +183,7 @@
                     </svg>
                     Low Stock Alerts
                 </h3>
-                <a href="{{ route('items.index', ['status' => 'low_stock']) }}" class="text-sm text-accent hover:underline">View all</a>
+                <a href="{{ route('items.index', ['status' => 'low_stock']) }}" class="text-sm text-primary hover:underline">View all</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
@@ -199,7 +199,7 @@
                         @forelse($lowStockItems ?? [] as $item)
                         <tr>
                             <td class="py-2">
-                                <a href="{{ route('items.show', $item) }}" class="font-medium text-heading hover:text-accent">{{ $item->name }}</a>
+                                <a href="{{ route('items.show', $item) }}" class="font-medium text-heading hover:text-primary">{{ $item->name }}</a>
                             </td>
                             <td class="py-2 text-right text-body">{{ $item->current_stock }}</td>
                             <td class="py-2 text-right text-body">{{ $item->reorder_point }}</td>

@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('customers.index') }}" class="hover:text-accent transition-colors">Customers</a>
+<a href="{{ route('customers.index') }}" class="hover:text-primary transition-colors">Customers</a>
 <span class="mx-2">/</span>
 <span class="text-heading">{{ $customer->name ?? 'Details' }}</span>
 @endsection
@@ -15,7 +15,7 @@
         <h1 class="text-xl font-bold text-heading">Customer Details</h1>
         <div class="flex gap-3">
             @can('edit_customers')
-            <a href="{{ route('customers.edit', $customer) }}" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
+            <a href="{{ route('customers.edit', $customer) }}" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-body bg-white rounded-lg hover:bg-white transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                 </svg>
@@ -28,7 +28,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-1 space-y-5">
             {{-- Customer Info Card --}}
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
                         <span class="text-white text-xl font-bold">{{ substr($customer->name, 0, 1) }}</span>
@@ -37,14 +37,14 @@
                     <div class="flex items-center justify-center gap-2 mt-1">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                             @if(($customer->customer_type ?? 'individual') === 'wholesale') bg-purple-50 text-purple-700
-                            @elseif(($customer->customer_type ?? 'individual') === 'business') bg-accent-light text-accent
-                            @else bg-control-bg text-body @endif">
+                            @elseif(($customer->customer_type ?? 'individual') === 'business') bg-gray-100 text-primary
+                            @else bg-white text-body @endif">
                             {{ ucfirst($customer->customer_type ?? 'individual') }}
                         </span>
                         @if($customer->is_active)
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                         @else
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">Inactive</span>
                         @endif
                     </div>
                 </div>
@@ -86,12 +86,12 @@
             </div>
 
             {{-- Financial Summary --}}
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <h3 class="text-sm font-medium text-muted mb-3">Financial Summary</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between text-sm">
                         <span class="text-muted">Outstanding Balance</span>
-                        <span class="font-medium {{ ($customer->current_balance ?? 0) > 0 ? 'text-danger' : 'text-accent' }}">TZS {{ number_format($customer->current_balance ?? 0) }}</span>
+                        <span class="font-medium {{ ($customer->current_balance ?? 0) > 0 ? 'text-danger' : 'text-primary' }}">TZS {{ number_format($customer->current_balance ?? 0) }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
                         <span class="text-muted">Credit Limit</span>
@@ -107,7 +107,7 @@
 
         {{-- Sales History --}}
         <div class="lg:col-span-2">
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-4">Sales History</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -123,7 +123,7 @@
                         </thead>
                         <tbody class="divide-y divide-border">
                             @forelse($sales ?? [] as $sale)
-                            <tr class="hover:bg-card-bg">
+                            <tr class="hover:bg-white">
                                 <td class="py-3 font-medium text-heading">{{ $sale->invoice_number }}</td>
                                 <td class="py-3 text-body">{{ $sale->created_at->format('d M Y') }}</td>
                                 <td class="py-3 text-right text-body">{{ $sale->items_count ?? $sale->items->count() }}</td>
@@ -137,7 +137,7 @@
                                     @elseif($sale->payment_status === 'unpaid')
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-danger-light text-danger">Unpaid</span>
                                     @else
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">{{ $sale->payment_status }}</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white text-body">{{ $sale->payment_status }}</span>
                                     @endif
                                 </td>
                             </tr>

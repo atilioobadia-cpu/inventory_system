@@ -22,15 +22,15 @@
     </div>
 
     <!-- Date Range -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <form action="{{ route('reports.profit-loss') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date', now()->startOfMonth()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-accent focus:ring-accent/20 text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date', now()->format('Y-m-d')) }}" class="rounded-lg border-border focus:border-primary focus:ring-primary/20 text-sm">
             </div>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Generate Report</button>
         </form>
@@ -38,7 +38,7 @@
 
     <!-- Profit & Loss Statement -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-card-bg rounded-lg border border-border overflow-hidden">
+        <div class="lg:col-span-2 bg-white rounded-lg border border-border overflow-hidden">
             <div class="p-6 border-b border-border">
                 <h2 class="text-lg font-semibold text-heading">Profit & Loss Statement</h2>
                 <p class="text-sm text-muted">{{ request('from_date', now()->startOfMonth()->format('d M Y')) }} - {{ request('to_date', now()->format('d M Y')) }}</p>
@@ -128,7 +128,7 @@
         </div>
 
         <!-- Monthly Comparison Chart -->
-        <div class="bg-card-bg rounded-lg border border-border p-5">
+        <div class="bg-white rounded-lg border border-border p-5">
             <h2 class="text-lg font-semibold text-heading mb-4">Monthly Comparison</h2>
             <div class="h-96">
                 <canvas id="monthlyComparisonChart"></canvas>

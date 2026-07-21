@@ -19,7 +19,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
             <h2 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
                 </svg>
                 Reconciliations
@@ -34,20 +34,20 @@
         </a>
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('reconciliations.index') }}">
             <div class="p-4 border-b border-border flex flex-wrap items-end gap-4">
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Date From</label>
-                    <input type="date" name="date_from" x-model="dateFrom" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                    <input type="date" name="date_from" x-model="dateFrom" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Date To</label>
-                    <input type="date" name="date_to" x-model="dateTo" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
+                    <input type="date" name="date_to" x-model="dateTo" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Type</label>
-                    <select name="type" x-model="type" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="type" x-model="type" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="">All Types</option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-muted mb-1">Status</label>
-                    <select name="status" x-model="status" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-control-bg">
+                    <select name="status" x-model="status" class="px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white">
                         <option value="">All Status</option>
                         <option value="pending">Pending</option>
                         <option value="completed">Completed</option>
@@ -73,7 +73,7 @@
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-card-bg border-b border-border">
+                    <tr class="bg-white border-b border-border">
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Date</th>
                         <th class="text-left px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Type</th>
                         <th class="text-center px-4 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Status</th>
@@ -91,10 +91,10 @@
                         @php
                             $diff = ($rec->actual_cash ?? 0) - ($rec->expected_cash ?? 0);
                         @endphp
-                        <tr class="hover:bg-card-bg transition-colors">
+                        <tr class="hover:bg-white transition-colors">
                             <td class="px-4 py-3 text-sm text-heading">{{ $rec->reconciliation_date ? $rec->reconciliation_date->format('d M Y') : $rec->created_at->format('d M Y') }}</td>
                             <td class="px-4 py-3">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-heading">{{ ucfirst($rec->type) }}</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-heading">{{ ucfirst($rec->type) }}</span>
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if($rec->status === 'completed')
@@ -108,7 +108,7 @@
                                         Discrepancy
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">
                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
                                         Pending
                                     </span>
@@ -123,7 +123,7 @@
                             <td class="px-4 py-3 text-sm text-body text-right">TZS {{ number_format($rec->total_expenses ?? 0, 2) }}</td>
                             <td class="px-4 py-3 text-sm text-muted">{{ $rec->reconciledBy->name ?? '-' }}</td>
                             <td class="px-4 py-3 text-center">
-                                <a href="{{ route('reconciliations.show', $rec) }}" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-accent hover:bg-accent-light rounded-lg transition-colors">
+                                <a href="{{ route('reconciliations.show', $rec) }}" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-primary hover:bg-gray-100 rounded-lg transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                     View
                                 </a>

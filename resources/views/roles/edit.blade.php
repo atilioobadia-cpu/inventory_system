@@ -9,7 +9,7 @@
             <h1 class="text-xl font-bold text-heading">Edit Role: {{ $role->name }}</h1>
             <p class="text-muted mt-1">Update role name, description, and permissions</p>
         </div>
-        <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
+        <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Back
         </a>
@@ -18,7 +18,7 @@
     <form action="{{ route('roles.update', $role) }}" method="POST" x-data="roleForm()">
         @csrf
         @method('PUT')
-        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
+        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="name" class="form-label">Role Name <span class="text-danger">*</span></label>
@@ -36,11 +36,11 @@
             </div>
         </div>
 
-        <div class="mt-6 bg-card-bg rounded-lg border border-border overflow-hidden">
+        <div class="mt-6 bg-white rounded-lg border border-border overflow-hidden">
             <div class="p-5 border-b border-border flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-heading">Permissions</h2>
                 <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-border text-accent focus:ring-accent/20">
+                    <input type="checkbox" @change="toggleAll($event.target.checked)" :checked="allSelected" class="w-4 h-4 rounded border-border text-primary focus:ring-primary/20">
                     <span class="text-sm font-medium text-body">Select All</span>
                 </label>
             </div>
@@ -72,14 +72,14 @@
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="font-medium text-body capitalize">{{ str_replace('_', ' ', $module) }}</h3>
                             <label class="flex items-center gap-1 cursor-pointer">
-                                <input type="checkbox" @change="toggleModule('{{ $module }}', $event.target.checked)" :checked="isModuleSelected('{{ $module }}')" class="w-3.5 h-3.5 rounded border-border text-accent focus:ring-accent/20">
+                                <input type="checkbox" @change="toggleModule('{{ $module }}', $event.target.checked)" :checked="isModuleSelected('{{ $module }}')" class="w-3.5 h-3.5 rounded border-border text-primary focus:ring-primary/20">
                                 <span class="text-xs text-muted">All</span>
                             </label>
                         </div>
                         <div class="space-y-2">
                             @foreach($actions as $action)
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-border text-accent focus:ring-accent/20">
+                                    <input type="checkbox" name="permissions[]" value="{{ $module }}.{{ $action }}" x-model="permissions" class="w-3.5 h-3.5 rounded border-border text-primary focus:ring-primary/20">
                                     <span class="text-sm text-body capitalize">{{ $action }}</span>
                                 </label>
                             @endforeach
@@ -90,7 +90,7 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-3">
-            <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Cancel</a>
+            <a href="{{ route('roles.index') }}" class="px-6 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Cancel</a>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Update Role</button>
         </div>
     </form>

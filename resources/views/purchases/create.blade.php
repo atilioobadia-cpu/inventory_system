@@ -8,15 +8,15 @@
     <div class="flex items-center justify-between">
         <div>
             <nav class="flex items-center text-sm text-muted mb-1">
-                <a href="{{ route('dashboard') }}" class="hover:text-accent">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="hover:text-primary">Dashboard</a>
                 <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                <a href="{{ route('purchases.index') }}" class="hover:text-accent">Purchases</a>
+                <a href="{{ route('purchases.index') }}" class="hover:text-primary">Purchases</a>
                 <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                 <span class="text-heading font-medium">Create</span>
             </nav>
             <h1 class="text-xl font-bold text-heading">Create Purchase</h1>
         </div>
-        <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium">Cancel</a>
+        <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-white hover:bg-white text-body rounded-lg text-sm font-medium">Cancel</a>
     </div>
 
     <form method="POST" action="{{ route('purchases.store') }}" @submit.prevent="submitForm()">
@@ -26,7 +26,7 @@
             {{-- Left: Purchase Info --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-card-bg rounded-lg border p-5">
+                <div class="bg-white rounded-lg border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -34,9 +34,9 @@
                             <div class="relative" x-data="{ open: false, query: '' }" @click.away="open = false">
                                 <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; if (query === '') searchSupplier()" :value="supplier.name || ''" placeholder="Search supplier..." required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
-                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-control-bg border rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
-                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
+                                        <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
                                     </template>
                                 </div>
                             </div>
@@ -67,17 +67,17 @@
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-card-bg rounded-lg border p-5">
+                <div class="bg-white rounded-lg border p-5">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-lg font-semibold text-heading">Items</h2>
-                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-accent-light hover:bg-accent-light text-accent rounded-lg text-sm font-medium">
+                        <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-100 text-primary rounded-lg text-sm font-medium">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                             Add Item
                         </button>
                     </div>
 
                     <table class="w-full text-sm">
-                        <thead class="bg-card-bg border-b">
+                        <thead class="bg-white border-b">
                             <tr>
                                 <th class="px-2 py-1.5 text-left font-medium text-body w-2/5">Item</th>
                                 <th class="px-2 py-1.5 text-center font-medium text-body w-20">Qty</th>
@@ -92,11 +92,11 @@
                                 <tr>
                                     <td class="px-2 py-1.5">
                                         <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                            <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; if (row.itemQuery === '') searchItem(index)" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-accent/20">
+                                            <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; if (row.itemQuery === '') searchItem(index)" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-primary/20">
                                             <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
-                                            <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-control-bg border rounded mt-1 max-h-40 overflow-y-auto">
+                                            <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
                                                 <template x-for="item in row.itemResults" :key="item.id">
-                                                    <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false">
+                                                    <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="selectItem(index, item); open = false">
                                                         <span x-text="item.name"></span>
                                                         <span class="text-muted text-xs ml-1">(Stock: <span x-text="item.current_stock"></span>)</span>
                                                     </div>
@@ -128,7 +128,7 @@
 
             {{-- Right: Summary --}}
             <div class="space-y-6">
-                <div class="bg-card-bg rounded-lg border p-5 sticky top-20">
+                <div class="bg-white rounded-lg border p-5 sticky top-20">
                     <h2 class="text-lg font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
@@ -145,7 +145,7 @@
                         </div>
                         <div class="flex justify-between text-lg font-bold border-t pt-3">
                             <span>Total</span>
-                            <span class="text-accent" x-text="formatCurrency(total)"></span>
+                            <span class="text-primary" x-text="formatCurrency(total)"></span>
                         </div>
                     </div>
 

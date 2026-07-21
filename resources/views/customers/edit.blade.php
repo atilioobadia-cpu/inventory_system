@@ -4,9 +4,9 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('customers.index') }}" class="hover:text-accent transition-colors">Customers</a>
+<a href="{{ route('customers.index') }}" class="hover:text-primary transition-colors">Customers</a>
 <span class="mx-2">/</span>
-<a href="{{ route('customers.show', $customer) }}" class="hover:text-accent transition-colors">{{ $customer->name }}</a>
+<a href="{{ route('customers.show', $customer) }}" class="hover:text-primary transition-colors">{{ $customer->name }}</a>
 <span class="mx-2">/</span>
 <span class="text-heading">Edit</span>
 @endsection
@@ -16,14 +16,14 @@
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-xl font-bold text-heading">Edit Customer</h1>
         <div class="flex gap-3">
-            <a href="{{ route('customers.show', $customer) }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">Cancel</a>
+            <a href="{{ route('customers.show', $customer) }}" class="px-4 py-2.5 text-sm font-medium text-body bg-white rounded-lg hover:bg-white transition-colors">Cancel</a>
         </div>
     </div>
 
     <form method="POST" action="{{ route('customers.update', $customer) }}">
         @csrf
         @method('PUT')
-        <div class="bg-card-bg rounded-lg border border-border p-5 space-y-5">
+        <div class="bg-white rounded-lg border border-border p-5 space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="sm:col-span-2">
                     <label for="name" class="form-label flex items-center gap-1.5">
@@ -84,17 +84,17 @@
                 <div class="flex gap-4">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="individual" {{ old('type', $customer->type ?? 'individual') == 'individual' ? 'checked' : '' }}
-                               class="w-4 h-4 text-accent border-border focus:ring-accent">
+                               class="w-4 h-4 text-primary border-border focus:ring-primary">
                         <span class="text-sm text-body">Individual</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="business" {{ old('type', $customer->type) == 'business' ? 'checked' : '' }}
-                               class="w-4 h-4 text-accent border-border focus:ring-accent">
+                               class="w-4 h-4 text-primary border-border focus:ring-primary">
                         <span class="text-sm text-body">Business</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="radio" name="type" value="wholesale" {{ old('type', $customer->type) == 'wholesale' ? 'checked' : '' }}
-                               class="w-4 h-4 text-accent border-border focus:ring-accent">
+                               class="w-4 h-4 text-primary border-border focus:ring-primary">
                         <span class="text-sm text-body">Wholesale</span>
                     </label>
                 </div>
@@ -117,7 +117,7 @@
                         <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', $customer->is_active) ? 'checked' : '' }}
                                class="sr-only peer">
-                        <div class="w-11 h-6 bg-control-bg peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+                        <div class="w-11 h-6 bg-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
                         <span class="ml-2 text-sm text-body">Active</span>
                     </label>
                 </div>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
-            <a href="{{ route('customers.show', $customer) }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">Cancel</a>
+            <a href="{{ route('customers.show', $customer) }}" class="px-6 py-2.5 text-sm font-medium text-body bg-white rounded-lg hover:bg-white transition-colors">Cancel</a>
             <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Update Customer

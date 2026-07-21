@@ -12,11 +12,11 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <form action="{{ route('activity.index') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">User</label>
-                <select name="user_id" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm min-w-[180px]">
+                <select name="user_id" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm min-w-[180px]">
                     <option value="">All Users</option>
                     @foreach($users ?? [] as $user)
                         <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
@@ -25,7 +25,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Action</label>
-                <select name="action" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm min-w-[160px]">
+                <select name="action" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm min-w-[160px]">
                     <option value="">All Actions</option>
                     <option value="create" {{ request('action') === 'create' ? 'selected' : '' }}>Create</option>
                     <option value="update" {{ request('action') === 'update' ? 'selected' : '' }}>Update</option>
@@ -39,30 +39,30 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
-                <input type="date" name="from" value="{{ request('from') }}" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="date" name="from" value="{{ request('from') }}" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
-                <input type="date" name="to" value="{{ request('to') }}" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="date" name="to" value="{{ request('to') }}" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Reset</a>
+            <a href="{{ route('activity.index') }}" class="px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
     <!-- Timeline -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <div class="space-y-0">
             @forelse($activities ?? [] as $activity)
                 <div class="relative flex gap-4 pb-8 last:pb-0">
                     <!-- Timeline line -->
                     @if(!$loop->last)
-                        <div class="absolute left-4 top-10 w-0.5 h-full bg-control-bg -ml-0.5"></div>
+                        <div class="absolute left-4 top-10 w-0.5 h-full bg-white -ml-0.5"></div>
                     @endif
 
                     <!-- Avatar -->
                     <div class="relative z-10 flex-shrink-0">
-                        <div class="w-8 h-8 bg-control-bg rounded-full flex items-center justify-center border-2 border-white">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-white">
                             @if($activity->user && $activity->user->avatar)
                                 <img src="{{ asset('storage/' . $activity->user->avatar) }}" alt="" class="w-full h-full rounded-full object-cover">
                             @else
@@ -80,16 +80,16 @@
                                     @php
                                         $actionColors = [
                                             'create' => 'bg-success-light text-success',
-                                            'update' => 'bg-accent-light text-accent',
+                                            'update' => 'bg-gray-100 text-primary',
                                             'delete' => 'bg-danger-light text-danger',
-                                            'login' => 'bg-control-bg text-body',
-                                            'logout' => 'bg-control-bg text-body',
+                                            'login' => 'bg-white text-body',
+                                            'logout' => 'bg-white text-body',
                                             'view' => 'bg-cyan-100 text-cyan-700',
                                             'export' => 'bg-purple-100 text-purple-700',
                                             'import' => 'bg-warning-light text-warning',
                                         ];
                                     @endphp
-                                    <span class="px-2 py-0.5 rounded-full text-xs font-medium {{ $actionColors[$activity->action] ?? 'bg-control-bg text-body' }}">
+                                    <span class="px-2 py-0.5 rounded-full text-xs font-medium {{ $actionColors[$activity->action] ?? 'bg-white text-body' }}">
                                         {{ ucfirst($activity->action) }}
                                     </span>
                                 </div>
@@ -98,7 +98,7 @@
                                     <div class="mt-1">
                                         <span class="text-xs text-muted">{{ class_basename($activity->subject_type) }}</span>
                                         @if(method_exists($activity->subject, 'getTable'))
-                                            <a href="#" class="text-xs text-accent hover:underline ml-1">#{{ $activity->subject_id }}</a>
+                                            <a href="#" class="text-xs text-primary hover:underline ml-1">#{{ $activity->subject_id }}</a>
                                         @endif
                                     </div>
                                 @endif

@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <span class="mx-2 text-muted">/</span>
-    <a href="{{ route('sales.index') }}" class="hover:text-accent transition-colors">Sales</a>
+    <a href="{{ route('sales.index') }}" class="hover:text-primary transition-colors">Sales</a>
     <span class="mx-2 text-muted">/</span>
     <span class="text-body font-medium">{{ $sale->invoice_number ?? 'Sale' }}</span>
 @endsection
@@ -19,7 +19,7 @@
 <div x-data="{ showReceiptModal: false }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div class="flex items-center gap-4">
-            <a href="{{ route('sales.index') }}" class="p-2 rounded-lg text-muted hover:text-body hover:bg-control-bg transition-colors">
+            <a href="{{ route('sales.index') }}" class="p-2 rounded-lg text-muted hover:text-body hover:bg-white transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
                 </svg>
@@ -28,18 +28,18 @@
                 <div class="flex items-center gap-3">
                     <h2 class="text-xl font-bold text-heading">{{ $s->invoice_number }}</h2>
                     @if($s->is_voided)
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Voided</span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">Voided</span>
                     @endif
                 </div>
                 <p class="text-sm text-muted mt-1">Created {{ $s->created_at->format('d M Y, h:i A') }}</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <button @click="showReceiptModal = true" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
+            <button @click="showReceiptModal = true" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-white transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                 View Receipt
             </button>
-            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-control-bg border border-border rounded-lg hover:bg-card-bg transition-colors">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-white transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
                 Print
             </button>
@@ -60,7 +60,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div class="lg:col-span-2 space-y-5">
             {{-- Sale Info --}}
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-4">Sale Information</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
@@ -83,14 +83,14 @@
             </div>
 
             {{-- Items Table --}}
-            <div class="bg-card-bg rounded-lg border border-border">
+            <div class="bg-white rounded-lg border border-border">
                 <div class="px-5 py-4 border-b border-border">
                     <h3 class="text-lg font-semibold text-heading">Sale Items</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="bg-card-bg border-b border-border">
+                            <tr class="bg-white border-b border-border">
                                 <th class="text-left px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Item</th>
                                 <th class="text-left px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">SKU</th>
                                 <th class="text-center px-6 py-3 text-xs font-semibold text-muted uppercase tracking-wider">Qty</th>
@@ -104,7 +104,7 @@
                         </thead>
                         <tbody class="divide-y divide-border">
                             @foreach($s->items ?? [] as $item)
-                                <tr class="hover:bg-card-bg">
+                                <tr class="hover:bg-white">
                                     <td class="px-6 py-3 text-sm font-medium text-heading">{{ $item->item->name ?? $item->name ?? '-' }}</td>
                                     <td class="px-6 py-3 text-sm text-muted font-mono">{{ $item->item->sku ?? $item->sku ?? '-' }}</td>
                                     <td class="px-6 py-3 text-sm text-body text-center">{{ $item->quantity }}</td>
@@ -127,12 +127,12 @@
             </div>
 
             {{-- Payment History --}}
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <h3 class="text-lg font-semibold text-heading mb-4">Payment History</h3>
                 @if(isset($s->payments) && $s->payments->count())
                     <div class="space-y-3">
                         @foreach($s->payments as $payment)
-                            <div class="flex items-center justify-between p-3 bg-card-bg rounded-lg">
+                            <div class="flex items-center justify-between p-3 bg-white rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full bg-success-light flex items-center justify-center">
                                         <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -184,7 +184,7 @@
 
         {{-- Sidebar: Financial Summary --}}
         <div class="space-y-5">
-            <div class="bg-card-bg rounded-lg border border-border p-5 sticky top-20">
+            <div class="bg-white rounded-lg border border-border p-5 sticky top-20">
                 <h3 class="text-lg font-semibold text-heading mb-4">Financial Summary</h3>
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
@@ -221,7 +221,7 @@
 
             {{-- Notes --}}
             @if($s->notes)
-            <div class="bg-card-bg rounded-lg border border-border p-5">
+            <div class="bg-white rounded-lg border border-border p-5">
                 <h3 class="text-sm font-semibold text-heading mb-2">Notes</h3>
                 <p class="text-sm text-body whitespace-pre-line">{{ $s->notes }}</p>
             </div>

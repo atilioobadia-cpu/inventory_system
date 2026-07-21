@@ -4,7 +4,7 @@
 
 @section('breadcrumbs')
 <span class="mx-2">/</span>
-<a href="{{ route('categories.index') }}" class="hover:text-accent transition-colors">Categories</a>
+<a href="{{ route('categories.index') }}" class="hover:text-primary transition-colors">Categories</a>
 <span class="mx-2">/</span>
 <span class="text-heading">All Categories</span>
 @endsection
@@ -13,8 +13,8 @@
 <div x-data="{ deleteModal: false, deleteUrl: '', deleteName: '' }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
                 </svg>
@@ -35,11 +35,11 @@
         @endcan
     </div>
 
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($categories ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg border-b border-border">
+                <thead class="bg-white border-b border-border">
                     <tr>
                         <th class="text-left px-4 py-3 font-medium text-muted">Name</th>
                         <th class="text-left px-4 py-3 font-medium text-muted">Parent</th>
@@ -51,7 +51,7 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @foreach($categories as $category)
-                    <tr class="hover:bg-card-bg transition-colors">
+                    <tr class="hover:bg-white transition-colors">
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-2">
                                 @if($category->parent)
@@ -62,7 +62,7 @@
                         </td>
                         <td class="px-4 py-3 text-body">{{ $category->parent->name ?? '-' }}</td>
                         <td class="px-4 py-3 text-center">
-                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-control-bg text-sm font-medium text-body">
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-sm font-medium text-body">
                                 {{ $category->items_count ?? 0 }}
                             </span>
                         </td>
@@ -70,14 +70,14 @@
                             @if($category->is_active)
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Active</span>
                             @else
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Inactive</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-body">Inactive</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-center text-body">{{ $category->sort_order ?? 0 }}</td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-1">
                                 @can('edit_categories')
-                                <a href="{{ route('categories.edit', $category) }}" class="p-1.5 text-muted hover:text-accent rounded-lg hover:bg-accent-light transition-colors" title="Edit">
+                                <a href="{{ route('categories.edit', $category) }}" class="p-1.5 text-muted hover:text-primary rounded-lg hover:bg-gray-100 transition-colors" title="Edit">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
                                     </svg>
@@ -128,11 +128,11 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-card-bg rounded-lg max-w-md w-full p-5">
+            <div class="relative bg-white rounded-lg max-w-md w-full p-5">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Category</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>?</p>
                 <div class="flex justify-end gap-3">
-                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg">Cancel</button>
+                    <button @click="deleteModal = false" class="px-4 py-2 text-sm font-medium text-body bg-white rounded-lg hover:bg-white">Cancel</button>
                     <form :action="deleteUrl" method="POST">
                         @csrf
                         @method('DELETE')

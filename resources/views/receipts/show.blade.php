@@ -222,6 +222,6 @@
 {{-- Print Button (below receipt) --}}
 <div class="text-center mt-6 no-print">
     <button onclick="window.print()" class="px-6 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium">Print Receipt</button>
-    <a href="{{ route('sales.show', $sale) }}" class="px-6 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg font-medium ml-2">Back to Sale</a>
+    <a href="{{ route('sales.show', $sale) }}" class="px-6 py-2 bg-white hover:bg-white text-body rounded-lg font-medium ml-2">Back to Sale</a>
 </div>
 @endsection

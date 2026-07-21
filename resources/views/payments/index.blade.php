@@ -7,7 +7,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-heading flex items-center gap-2">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/>
                 </svg>
                 Payments
@@ -17,11 +17,11 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <form action="{{ route('payments.index') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Payment Method</label>
-                <select name="payment_method" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm min-w-[160px]">
+                <select name="payment_method" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm min-w-[160px]">
                     <option value="">All Methods</option>
                     <option value="cash" {{ request('payment_method') === 'cash' ? 'selected' : '' }}>Cash</option>
                     <option value="bank_transfer" {{ request('payment_method') === 'bank_transfer' ? 'selected' : '' }}>Bank Transfer</option>
@@ -32,7 +32,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">Type</label>
-                <select name="payable_type" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm min-w-[160px]">
+                <select name="payable_type" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm min-w-[160px]">
                     <option value="">All Types</option>
                     <option value="sale" {{ request('payable_type') === 'sale' ? 'selected' : '' }}>Sale Payment</option>
                     <option value="purchase" {{ request('payable_type') === 'purchase' ? 'selected' : '' }}>Purchase Payment</option>
@@ -40,22 +40,22 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
-                <input type="date" name="from_date" value="{{ request('from_date') }}" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="date" name="from_date" value="{{ request('from_date') }}" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <div>
                 <label class="block text-sm font-medium text-body mb-1">To Date</label>
-                <input type="date" name="to_date" value="{{ request('to_date') }}" class="rounded-lg focus:ring-accent/20 focus:border-accent text-sm">
+                <input type="date" name="to_date" value="{{ request('to_date') }}" class="rounded-lg focus:ring-primary/20 focus:border-primary text-sm">
             </div>
             <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors text-sm font-medium">Filter</button>
-            <a href="{{ route('payments.index') }}" class="px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">Reset</a>
+            <a href="{{ route('payments.index') }}" class="px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">Reset</a>
         </form>
     </div>
 
     <!-- Payments Table -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">Ref #</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">Date</th>
@@ -68,12 +68,12 @@
                 </thead>
                 <tbody class="divide-y divide-border">
                     @forelse($payments ?? [] as $payment)
-                        <tr class="hover:bg-card-bg">
-                            <td class="px-6 py-4 font-medium text-accent">{{ $payment->reference_number }}</td>
+                        <tr class="hover:bg-white">
+                            <td class="px-6 py-4 font-medium text-primary">{{ $payment->reference_number }}</td>
                             <td class="px-6 py-4 text-body">{{ $payment->payment_date->format('d M Y') }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($payment->payable_type === 'App\\Models\\Sale' || (isset($payment->type) && $payment->type === 'sale'))
-                                    <span class="px-2 py-1 bg-accent-light text-accent rounded-full text-xs font-medium">Sale</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-primary rounded-full text-xs font-medium">Sale</span>
                                 @else
                                     <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">Purchase</span>
                                 @endif
@@ -84,7 +84,7 @@
                                 @php
                                     $methodColors = [
                                         'cash' => 'bg-success-light text-success',
-                                        'bank_transfer' => 'bg-accent-light text-accent',
+                                        'bank_transfer' => 'bg-gray-100 text-primary',
                                         'mobile_money' => 'bg-purple-100 text-purple-700',
                                         'card' => 'bg-cyan-100 text-cyan-700',
                                         'cheque' => 'bg-warning-light text-warning',
@@ -97,7 +97,7 @@
                                         'cheque' => 'Cheque',
                                     ];
                                 @endphp
-                                <span class="px-2 py-1 {{ $methodColors[$payment->payment_method] ?? 'bg-control-bg text-body' }} rounded-full text-xs font-medium">
+                                <span class="px-2 py-1 {{ $methodColors[$payment->payment_method] ?? 'bg-white text-body' }} rounded-full text-xs font-medium">
                                     {{ $methodLabels[$payment->payment_method] ?? ucfirst(str_replace('_', ' ', $payment->payment_method)) }}
                                 </span>
                             </td>

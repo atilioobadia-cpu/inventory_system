@@ -16,7 +16,7 @@
                     Edit
                 </a>
             @endif
-            <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
+            <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-body rounded-lg hover:bg-white transition-colors text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
                 Back
             </a>
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Role Info -->
-    <div class="bg-card-bg rounded-lg border border-border p-5">
+    <div class="bg-white rounded-lg border border-border p-5">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <p class="text-sm text-muted">Name</p>
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Permissions by Module -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-5 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Permissions ({{ $role->permissions->count() }})</h2>
         </div>
@@ -76,13 +76,13 @@
     </div>
 
     <!-- Users with this Role -->
-    <div class="bg-card-bg rounded-lg border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-5 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Users with this Role ({{ $role->users->count() }})</h2>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-card-bg">
+                <thead class="bg-white">
                     <tr>
                         <th class="text-left px-6 py-3 font-medium text-muted">User</th>
                         <th class="text-left px-6 py-3 font-medium text-muted">Email</th>
@@ -91,10 +91,10 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse($role->users as $user)
-                        <tr class="hover:bg-card-bg">
+                        <tr class="hover:bg-white">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-control-bg rounded-full flex items-center justify-center overflow-hidden">
+                                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden">
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                                         @else
