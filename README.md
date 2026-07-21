@@ -3,15 +3,14 @@
 <h1 align="center">Mtokoma Motorcycle Parts</h1>
 
 <p align="center">
-  <strong>Professional Inventory Management System</strong><br>
-  Built for motorcycle parts shops in Tanzania
+  <strong>Inventory Management System</strong><br>
+  Built for motorcycle parts retail & wholesale businesses in Tanzania
 </p>
 
 <p align="center">
   <a href="#features">Features</a> &bull;
   <a href="#tech-stack">Tech Stack</a> &bull;
   <a href="#installation">Installation</a> &bull;
-  <a href="#usage">Usage</a> &bull;
   <a href="#deployment">Deployment</a>
 </p>
 
@@ -19,67 +18,62 @@
 
 ## About
 
-**Mtokoma Motorcycle Parts** is a comprehensive inventory management system designed for motorcycle parts retail and wholesale businesses. It handles the complete business cycle from purchasing stock, managing inventory, point-of-sale transactions, expense tracking, and financial reporting — all with full tax compliance (EFD receipts with QR codes).
+**Mtokoma Motorcycle Parts** is a comprehensive inventory management system designed for motorcycle parts retail and wholesale businesses. It handles the complete business cycle — from purchasing stock, managing inventory, point-of-sale transactions, expense tracking, and financial reporting — all with full tax compliance including EFD receipts with QR codes.
 
 ## Features
 
 ### Inventory Management
-- **Items** — Full CRUD with images, auto-generated SKUs, barcode support
-- **Categories** — Hierarchical categories (parent/child)
-- **Stock Tracking** — Real-time stock levels from `stock_movements` table
-- **Stock Adjustments** — Manual adjustments with audit trail
-- **Low Stock Alerts** — Automatic daily email alerts when items fall below reorder point
+- Full item catalog with images, auto-generated SKUs, and barcode support
+- Hierarchical categories (parent/child)
+- Real-time stock levels with complete movement history
+- Manual stock adjustments with audit trail
+- Automatic low-stock email alerts
 
-### Point of Sale (POS)
-- **Touch-friendly POS Interface** — Product grid with search, category filters
-- **Shopping Cart** — Add/remove items, quantity controls, quick cash buttons
-- **VAT Support** — Toggle VAT (18%) per transaction, VAT exempt option
-- **Payment Methods** — Cash and credit sales
-- **Customer Selection** — Searchable dropdown, Walk-In default customer
-- **Instant Receipts** — EFD thermal receipt with QR code for tax verification
+### Point of Sale
+- Touch-friendly interface with product grid, search, and category filters
+- Shopping cart with quantity controls and quick cash buttons
+- Per-transaction VAT toggle (18%)
+- Walk-In customer default with searchable customer selection
+- Instant EFD thermal receipts with QR code for tax verification
 
 ### Purchasing
-- **Purchase Orders** — Dynamic item rows, supplier selection, cost tracking
-- **Receive Stock** — Auto stock-in on purchase receipt
-- **Payment Tracking** — Partial payments, due amounts, payment status
+- Purchase orders with dynamic item rows and supplier selection
+- Auto stock-in on purchase receipt
+- Partial payment tracking with due amounts
 
 ### Sales
-- **Sales History** — Full list with filters (date, customer, status)
-- **Void Sales** — With reason, automatic stock restoration
-- **Receipt Generation** — EFD format with QR code
+- Full sales history with date, customer, and status filters
+- Void sales with reason and automatic stock restoration
+- EFD receipt generation with QR code
 
 ### Expenses
-- **Expense Tracking** — Categories, payment methods, receipt upload
-- **Recurring Expenses** — Daily, weekly, monthly, yearly schedules
-- **Approval Workflow** — Pending, approved, rejected status
+- Category-based expense tracking with receipt upload
+- Recurring expenses (daily, weekly, monthly, yearly)
+- Approval workflow (pending, approved, rejected)
 
 ### Financial Reports
-- **Sales Report** — Daily/weekly/monthly trends, Chart.js visualizations
-- **Purchase Report** — Supplier analysis, cost tracking
-- **Inventory Report** — Stock value, category breakdown (pie chart)
-- **Expense Report** — By category, monthly trends
-- **Profit & Loss** — Revenue, COGS, gross profit, net profit
-- **Tax Report** — VAT collected vs paid, net payable
-- **Customer & Supplier Reports** — Balances, transaction history
+- Sales, purchase, inventory, and expense reports with Chart.js visualizations
+- Profit & Loss statement (revenue, COGS, gross/net profit)
+- Tax report (VAT collected vs paid, net payable)
+- Customer and supplier balance reports
 
 ### Reconciliation
-- **Daily/Weekly/Monthly** — Auto-calculated expected cash
-- **Variance Detection** — Discrepancy alerts when actual ≠ expected
+- Daily, weekly, and monthly cash reconciliation
+- Auto-calculated expected cash with variance detection
 
-### Multi-Role Access Control
-- **6 Pre-built Roles** — Super Admin, Manager, Cashier, Warehouse, Accountant, Viewer
-- **56 Granular Permissions** — Across 17 modules
-- **Unlimited Custom Roles** — Create roles with custom permission combinations
+### Access Control
+- 6 pre-built roles: Super Admin, Manager, Cashier, Warehouse, Accountant, Viewer
+- 56 granular permissions across 17 modules
+- Unlimited custom roles with configurable permission sets
+- Permission-based UI — buttons, links, and menus hidden automatically
 
 ### Import & Export
-- **CSV/Excel Import** — Items, categories, customers, suppliers, opening stock
-- **CSV Export** — All major data types
+- CSV/Excel import for items, categories, customers, suppliers, and opening stock
+- CSV export for all major data types
 
-### Email Notifications
-- Low stock alerts, sale confirmations, purchase notifications, expense alerts, void notifications, stock adjustment alerts
-
-### Activity Logging
-- Complete audit trail — who did what, when, with old/new values
+### Notifications & Logging
+- Email alerts for low stock, sales, purchases, expenses, voids, and adjustments
+- Complete audit trail with old/new value tracking
 
 ---
 
@@ -91,9 +85,7 @@
 | **Database** | MySQL 8 |
 | **Frontend** | Blade Templates, Tailwind CSS 3, Alpine.js 3 |
 | **Charts** | Chart.js |
-| **QR Code** | SimpleSoftwareIO Simple QR Code |
-| **PDF** | DomPDF |
-| **Excel** | Maatwebsite Excel |
+| **PDF / Excel** | DomPDF, Maatwebsite Excel |
 | **Icons** | Heroicons v2 (inline SVG) |
 
 ---
@@ -104,137 +96,57 @@
 - PHP 8.2+ with extensions: `gd`, `zip`, `mbstring`, `openssl`, `pdo`, `tokenizer`, `curl`, `xml`
 - MySQL 8.0+
 - Composer 2.x
-- Node.js & NPM (for asset compilation, optional)
+- Node.js & NPM (optional, for asset compilation)
 
 ### Setup
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/atilioobadia-cpu/inventory_system.git
 cd inventory_system
 
-# 2. Install PHP dependencies
+# Install PHP dependencies
 composer install
 
-# 3. Create environment file
+# Create environment file and generate app key
 cp .env.example .env
-
-# 4. Generate application key
 php artisan key:generate
 
-# 5. Configure database in .env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=mtokoma_db
-DB_USERNAME=root
-DB_PASSWORD=
-
-# 6. Create database and run migrations
+# Configure your database in .env, then run:
 php artisan migrate --force
-
-# 7. Seed default data (roles, permissions, users, categories, settings)
 php artisan db:seed --force
 
-# 8. Create storage symlink
+# Create storage symlink and clear caches
 php artisan storage:link
-
-# 9. Clear caches
 php artisan config:clear && php artisan cache:clear && php artisan view:clear
 ```
 
-### Local Development Server
+Start the local development server:
 
 ```bash
 php artisan serve
 ```
 
-Visit: **http://localhost:8000**
-
----
-
-## Default Login Credentials
-
-| Role | Email | Password |
-|------|-------|----------|
-| Super Admin | admin@mtokoma.co.tz | password |
-| Manager | manager@mtokoma.co.tz | password |
-| Cashier | cashier@mtokoma.co.tz | password |
-
----
-
-## Project Structure
-
-```
-inventory_system/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/       # 23 controllers (Auth, CRUD, POS, Reports...)
-│   │   └── Middleware/         # Role, Permission, Activity Tracking
-│   ├── Models/                 # 18 Eloquent models
-│   ├── Services/               # Stock, Invoice, Notification, Activity, Reconciliation
-│   └── Providers/
-├── database/
-│   ├── migrations/             # 23 migrations (25 tables)
-│   └── seeders/                # 8 seeders
-├── resources/
-│   └── views/                  # 67 Blade templates
-│       ├── layouts/            # Main app layout + print layout
-│       ├── pos/                # Point of Sale interface
-│       ├── receipts/           # EFD receipts with QR code
-│       ├── reports/            # 9 report views
-│       ├── emails/             # 6 email notification templates
-│       └── ...                 # CRUD views for all modules
-├── routes/
-│   └── web.php                 # 112 routes
-├── config/                     # 13 config files
-└── vendor/                     # Composer dependencies
-```
-
----
-
-## Database Schema
-
-25 tables covering:
-
-| Tables | Purpose |
-|--------|---------|
-| `roles`, `permissions`, `role_permissions` | RBAC system |
-| `users` | Application users |
-| `categories`, `items` | Product catalog |
-| `suppliers`, `customers` | Business partners |
-| `stock_movements` | Stock ledger (source of truth) |
-| `purchases`, `purchase_items` | Purchase orders |
-| `sales`, `sale_items` | Sales transactions |
-| `expenses`, `expense_categories` | Expense tracking |
-| `payments` | Polymorphic payments |
-| `reconciliations` | Cash reconciliation |
-| `settings` | Grouped system settings |
-| `activity_logs` | Audit trail |
-| `notifications` | System notifications |
+Visit **http://localhost:8000** to access the application.
 
 ---
 
 ## Deployment (cPanel / Namecheap)
 
 ```bash
-# 1. Run composer with --no-dev for production
+# 1. Install production dependencies
 composer install --no-dev --optimize-autoloader
 
-# 2. Upload entire project folder via File Manager or FTP
+# 2. Upload the entire project folder via File Manager or FTP
 
-# 3. Set .env with production database credentials
+# 3. Set .env with your production database credentials
 
-# 4. Run migrations on production server
+# 4. Run migrations and seed default data
 php artisan migrate --force
-
-# 5. Seed production database
 php artisan db:seed --force
 
-# 6. Create storage symlink
+# 5. Create storage symlink and set permissions
 php artisan storage:link
-
-# 7. Set folder permissions
 chmod -R 755 storage bootstrap/cache
 chmod -R 775 storage/framework
 chmod -R 775 storage/logs
@@ -246,11 +158,10 @@ chmod -R 775 storage/logs
 
 ## Key Design Decisions
 
-- **Stock as Source of Truth** — Stock levels are always calculated from `stock_movements`, never stored on the items table
-- **Invoice Auto-Generation** — Format: `PUR-2026-00001`, `SAL-2026-00001` (yearly reset)
+- **Stock as Source of Truth** — Stock levels are always calculated from movement history, never stored directly on items
+- **Invoice Auto-Generation** — Yearly-reset invoice numbers (e.g., `PUR-2026-00001`, `SAL-2026-00001`)
 - **EFD Compliance** — Receipts include TIN, VAT breakdown, and QR code for tax verification
-- **Permission-Based UI** — Buttons, links, and menus are hidden via `@can()` Blade directives
-- **TZS Currency** — All monetary values formatted as `TZS 1,500,000`
+- **TZS Currency** — All monetary values formatted as TZS (Tanzanian Shillings)
 
 ---
 
