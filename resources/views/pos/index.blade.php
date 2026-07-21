@@ -19,6 +19,22 @@
     .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 13px; cursor: pointer; white-space: nowrap; }
     .category-pill.active { background: #2563EB; color: white; border-color: #2563EB; }
     .category-pill:hover:not(.active) { background: #f3f4f6; }
+
+    .pos-mobile-only { display: none !important; }
+    .pos-desktop-only {}
+
+    @media (max-width: 767px) {
+        .pos-grid { grid-template-columns: 1fr; }
+        .pos-desktop-only { display: none !important; }
+        .pos-mobile-only { display: block !important; }
+        .cart-panel { border-left: none; height: auto; min-height: calc(100vh - 64px); }
+        .product-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; padding: 12px; }
+    }
+
+    @media (min-width: 768px) {
+        .pos-mobile-only { display: none !important; }
+    }
+
     @media print { .pos-hide { display: none !important; } }
 </style>
 @endpush
@@ -27,7 +43,7 @@
 <div x-data="posApp()" x-init="init()" class="pos-grid">
 
     {{-- LEFT: Product Grid --}}
-    <div class="flex flex-col h-full bg-card-bg pos-hide">
+    <div class="flex flex-col h-full bg-card-bg pos-hide pos-desktop-only">
         {{-- Search & Filters --}}
         <div class="p-4 bg-white border-b space-y-3">
             <div class="relative">
@@ -77,13 +93,65 @@
 
     {{-- RIGHT: Cart Panel --}}
     <div class="cart-panel">
+        {{-- Mobile Quick Search --}}
+        <div class="pos-mobile-only p-3 bg-white border-b">
+            <div class="relative">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input type="text" x-model="mobileSearchQuery" @input.debounce.300ms="searchItemsMobile()" placeholder="Search items..." class="w-full pl-10 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-accent/20 focus:border-accent text-sm">
+            </div>
+            <div class="flex gap-2 overflow-x-auto pb-1 mt-2">
+                <button @click="selectedCategory = ''; searchItemsMobile()" :class="selectedCategory === '' ? 'active' : ''" class="category-pill">All</button>
+                @foreach($categories as $category)
+                    <button @click="selectedCategory = '{{ $category->id }}'; searchItemsMobile()" :class="selectedCategory == '{{ $category->id }}' ? 'active' : ''" class="category-pill">{{ $category->name }}</button>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Mobile Products --}}
+        <div class="pos-mobile-only flex-1 overflow-y-auto p-3">
+            <template x-if="mobileLoading">
+                <div class="flex items-center justify-center h-40">
+                    <svg class="animate-spin h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                </div>
+            </template>
+            <template x-if="!mobileLoading && mobileProducts.length === 0">
+                <div class="flex flex-col items-center justify-center h-40 text-muted">
+                    <svg class="h-12 w-12 mb-3 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                    <p>No items found</p>
+                </div>
+            </template>
+            <div class="product-grid" x-show="!mobileLoading" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+                <template x-for="item in mobileProducts" :key="'m_' + item.id">
+                    <div class="product-card" :class="item.current_stock <= 0 ? 'out-of-stock' : ''" @click="addToCart(item)">
+                        <div class="w-full h-16 bg-control-bg rounded mb-2 flex items-center justify-center overflow-hidden">
+                            <template x-if="item.image">
+                                <img :src="'{{ asset('storage') }}/' + item.image" class="h-16 w-full object-cover rounded">
+                            </template>
+                            <template x-if="!item.image">
+                                <svg class="h-8 w-8 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                            </template>
+                        </div>
+                        <p class="text-xs font-medium text-heading truncate" x-text="item.name"></p>
+                        <p class="text-sm font-bold text-accent mt-1" x-text="formatCurrency(item.selling_price)"></p>
+                        <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded-full" :class="item.current_stock > 0 ? 'bg-success-light text-success' : 'bg-danger-light text-danger'" x-text="'Stock: ' + item.current_stock"></span>
+                    </div>
+                </template>
+            </div>
+        </div>
+
         {{-- Cart Header --}}
         <div class="p-4 border-b bg-white flex items-center justify-between">
-            <div>
-                <h2 class="text-lg font-bold text-heading">Current Order</h2>
-                <p class="text-xs text-muted" x-text="cartItems.length + ' item(s)'"></p>
+            <div class="flex items-center gap-2">
+                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
+                <div>
+                    <h2 class="text-lg font-bold text-heading">Current Order</h2>
+                    <p class="text-xs text-muted" x-text="cartItems.length + ' item(s)'"></p>
+                </div>
             </div>
-            <button @click="clearCart()" class="text-sm text-danger hover:text-danger font-medium" x-show="cartItems.length > 0">Clear All</button>
+            <button @click="clearCart()" class="text-sm text-danger hover:text-danger font-medium flex items-center gap-1" x-show="cartItems.length > 0">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+                Clear All
+            </button>
         </div>
 
         {{-- Cart Items --}}
@@ -102,9 +170,13 @@
                         <p class="text-xs text-muted" x-text="formatCurrency(item.selling_price) + ' each'"></p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button class="qty-btn" @click="updateQuantity(index, item.quantity - 1)">-</button>
+                        <button class="qty-btn" @click="updateQuantity(index, item.quantity - 1)">
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"/></svg>
+                        </button>
                         <input type="number" :value="item.quantity" @change="updateQuantity(index, parseInt($event.target.value))" min="1" class="w-12 text-center border rounded text-sm py-1">
-                        <button class="qty-btn" @click="updateQuantity(index, item.quantity + 1)">+</button>
+                        <button class="qty-btn" @click="updateQuantity(index, item.quantity + 1)">
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                        </button>
                     </div>
                     <p class="text-sm font-semibold text-heading w-24 text-right" x-text="formatCurrency(item.selling_price * item.quantity)"></p>
                     <button @click="removeFromCart(index)" class="text-muted hover:text-danger ml-1">
@@ -120,11 +192,12 @@
             <div class="mb-3">
                 <label class="text-xs font-medium text-body mb-1 block">Customer</label>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true" placeholder="Walk-In Customer" class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                    <input type="text" x-model="customerQuery" @input.debounce.300ms="searchCustomers()" @focus="open = true; loadInitialCustomers()" placeholder="Walk-In Customer" class="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-accent/20">
                     <input type="hidden" x-model="customer.id" name="customer_id">
                     <div x-show="open && customerResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-40 overflow-y-auto">
-                        <template x-for="c in customerResults" :key="c.id">
-                            <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = ''" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
+                        <template x-for="c in customerResults.slice(0, 5)" :key="c.id">
+                            <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="customer = c; open = false; customerQuery = c.name" x-text="c.name + (c.phone ? ' (' + c.phone + ')' : '')"></div>
                         </template>
                     </div>
                 </div>
@@ -198,6 +271,9 @@
                 <template x-if="processing">
                     <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                 </template>
+                <template x-if="!processing">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                </template>
                 <span x-text="processing ? 'Processing...' : 'Complete Sale - ' + formatCurrency(total)"></span>
             </button>
         </div>
@@ -205,7 +281,7 @@
 
     {{-- Success Modal --}}
     <div x-show="showSuccess" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" x-transition>
-        <div class="bg-white rounded-xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
+        <div class="bg-white rounded-lg p-8 max-w-sm w-full mx-4 text-center">
             <div class="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="h-8 w-8 text-success" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
@@ -213,8 +289,14 @@
             <p class="text-body mb-1" x-text="'Invoice: ' + lastSaleInvoice"></p>
             <p class="text-body mb-4" x-text="'Total: ' + formatCurrency(lastSaleTotal)"></p>
             <div class="flex gap-3">
-                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm">View Receipt</a>
-                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-control-bg hover:bg-control-bg text-heading rounded-lg font-medium text-sm">New Sale</button>
+                <a :href="lastSaleReceiptUrl" target="_blank" class="flex-1 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm flex items-center justify-center gap-2">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+                    View Receipt
+                </a>
+                <button @click="showSuccess = false; resetPos()" class="flex-1 py-2 bg-control-bg hover:bg-border text-heading rounded-lg font-medium text-sm flex items-center justify-center gap-2">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                    New Sale
+                </button>
             </div>
         </div>
     </div>
@@ -226,11 +308,14 @@
 function posApp() {
     return {
         products: [],
+        mobileProducts: [],
         categories: @json($categories),
         cartItems: [],
         searchQuery: '',
+        mobileSearchQuery: '',
         selectedCategory: '',
         loading: false,
+        mobileLoading: false,
         processing: false,
         customer: { id: null, name: 'Walk-In' },
         customerQuery: '',
@@ -244,9 +329,11 @@ function posApp() {
         lastSaleInvoice: '',
         lastSaleTotal: 0,
         lastSaleReceiptUrl: '',
+        initialCustomerLoaded: false,
 
         init() {
             this.searchItems();
+            this.searchItemsMobile();
         },
 
         get subtotal() {
@@ -282,11 +369,36 @@ function posApp() {
             this.loading = false;
         },
 
+        async searchItemsMobile() {
+            this.mobileLoading = true;
+            try {
+                const params = new URLSearchParams();
+                if (this.mobileSearchQuery) params.append('q', this.mobileSearchQuery);
+                if (this.selectedCategory) params.append('category', this.selectedCategory);
+                const res = await fetch('{{ route("api.items.search") }}?' + params.toString());
+                const data = await res.json();
+                this.mobileProducts = data;
+            } catch(e) { console.error(e); }
+            this.mobileLoading = false;
+        },
+
         async searchCustomers() {
             try {
                 const res = await fetch('{{ route("api.customers.search") }}?q=' + encodeURIComponent(this.customerQuery || ''));
-                this.customerResults = await res.json();
-            } catch(e) {}
+                const data = await res.json();
+                this.customerResults = data.slice(0, 5);
+            } catch(e) { this.customerResults = []; }
+        },
+
+        async loadInitialCustomers() {
+            if (this.initialCustomerLoaded) return;
+            if (this.customerQuery) { this.searchCustomers(); return; }
+            try {
+                const res = await fetch('{{ route("api.customers.search") }}?q=');
+                const data = await res.json();
+                this.customerResults = data.slice(0, 5);
+                this.initialCustomerLoaded = true;
+            } catch(e) { this.customerResults = []; }
         },
 
         addToCart(item) {
@@ -338,8 +450,11 @@ function posApp() {
             this.saleType = 'cash';
             this.isVatExempt = false;
             this.searchQuery = '';
+            this.mobileSearchQuery = '';
             this.selectedCategory = '';
+            this.initialCustomerLoaded = false;
             this.searchItems();
+            this.searchItemsMobile();
         },
 
         async processSale() {

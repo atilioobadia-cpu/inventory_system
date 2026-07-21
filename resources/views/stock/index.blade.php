@@ -17,7 +17,12 @@
 }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-heading">Stock Levels</h2>
+            <h2 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+                </svg>
+                Stock Levels
+            </h2>
             <p class="text-sm text-muted mt-1">Monitor current inventory levels across all items</p>
         </div>
         <a href="{{ route('stock.movements') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-body bg-white border border-border rounded-lg hover:bg-card-bg transition-colors">
@@ -26,7 +31,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('stock.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="lg:col-span-2">
@@ -140,7 +145,7 @@
                     @empty
                         <tr>
                             <td colspan="11" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
                                 </svg>
                                 <p class="text-muted font-medium">No items found</p>

@@ -6,7 +6,7 @@
 <div class="max-w-4xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Edit Role: {{ $role->name }}</h1>
+            <h1 class="text-xl font-bold text-heading">Edit Role: {{ $role->name }}</h1>
             <p class="text-muted mt-1">Update role name, description, and permissions</p>
         </div>
         <a href="{{ route('roles.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
@@ -18,7 +18,7 @@
     <form action="{{ route('roles.update', $role) }}" method="POST" x-data="roleForm()">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <div class="bg-white rounded-lg border border-border p-6 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="name" class="form-label">Role Name <span class="text-danger">*</span></label>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="mt-6 bg-white rounded-xl border border-border overflow-hidden">
+        <div class="mt-6 bg-white rounded-lg border border-border overflow-hidden">
             <div class="p-6 border-b border-border flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-heading">Permissions</h2>
                 <label class="flex items-center gap-2 cursor-pointer">

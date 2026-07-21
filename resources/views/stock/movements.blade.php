@@ -23,7 +23,7 @@
 }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-heading">Stock Movements</h2>
+            <h2 class="text-xl font-bold text-heading">Stock Movements</h2>
             <p class="text-sm text-muted mt-1">Track all inventory movements and adjustments</p>
         </div>
         <button @click="showAdjustModal = true" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
@@ -34,7 +34,7 @@
         </button>
     </div>
 
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('stock.movements') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">

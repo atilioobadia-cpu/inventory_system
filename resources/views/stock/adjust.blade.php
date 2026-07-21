@@ -42,7 +42,7 @@
     }
 }">
     <div class="max-w-2xl mx-auto">
-        <div class="bg-white rounded-xl border border-border">
+        <div class="bg-white rounded-lg border border-border">
             <div class="px-6 py-4 border-b border-border">
                 <h3 class="text-lg font-semibold text-heading">Stock Adjustment</h3>
                 <p class="text-sm text-muted mt-1">Add or remove stock for an item</p>

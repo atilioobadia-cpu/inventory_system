@@ -6,7 +6,7 @@
 <div class="space-y-6" x-data="profitLossReport()">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Profit & Loss Report</h1>
+            <h1 class="text-xl font-bold text-heading">Profit & Loss Report</h1>
             <p class="text-muted mt-1">Revenue, costs and profitability analysis</p>
         </div>
         <div class="flex items-center gap-3">
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Date Range -->
-    <div class="bg-white rounded-xl border border-border p-6">
+    <div class="bg-white rounded-lg border border-border p-6">
         <form action="{{ route('reports.profit-loss') }}" method="GET" class="flex flex-wrap items-end gap-4">
             <div>
                 <label class="block text-sm font-medium text-body mb-1">From Date</label>
@@ -38,7 +38,7 @@
 
     <!-- Profit & Loss Statement -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-xl border border-border overflow-hidden">
+        <div class="lg:col-span-2 bg-white rounded-lg border border-border overflow-hidden">
             <div class="p-6 border-b border-border">
                 <h2 class="text-lg font-semibold text-heading">Profit & Loss Statement</h2>
                 <p class="text-sm text-muted">{{ request('from_date', now()->startOfMonth()->format('d M Y')) }} - {{ request('to_date', now()->format('d M Y')) }}</p>
@@ -128,7 +128,7 @@
         </div>
 
         <!-- Monthly Comparison Chart -->
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <h2 class="text-lg font-semibold text-heading mb-4">Monthly Comparison</h2>
             <div class="h-96">
                 <canvas id="monthlyComparisonChart"></canvas>

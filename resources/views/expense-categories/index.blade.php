@@ -13,7 +13,13 @@
 <div x-data="{ showDeleteModal: false, deleteId: null }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-heading">Expense Categories</h2>
+            <h2 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
+                </svg>
+                Expense Categories
+            </h2>
             <p class="text-sm text-muted mt-1">Manage expense categories</p>
         </div>
         <a href="{{ route('expense-categories.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
@@ -24,7 +30,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -65,7 +71,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-16 text-center">
-                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3Z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
                                 </svg>

@@ -123,7 +123,7 @@
         }
         .toast-container > * { pointer-events: auto; }
         .toast {
-            min-width: 340px; max-width: 420px;
+            min-width: 280px; max-width: 380px;
             background: white;
             border-radius: 8px;
             border: 1px solid #e2e2e2;
@@ -301,6 +301,35 @@
 
         /* Smooth link transitions */
         a[href] { transition: color 0.15s ease; }
+
+        /* Autocomplete dropdown */
+        .autocomplete-dropdown {
+            position: absolute;
+            z-index: 50;
+            width: 100%;
+            background: white;
+            border: 1px solid #e2e2e2;
+            border-radius: 0.5rem;
+            margin-top: 0.25rem;
+            max-height: 12rem;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .autocomplete-item {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .autocomplete-item:hover,
+        .autocomplete-item.active {
+            background: #EBF2FF;
+        }
+
+        /* Toast fix - remove overflow hidden */
+        .toast {
+            overflow: visible;
+        }
     </style>
     @stack('styles')
 </head>

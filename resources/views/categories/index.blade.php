@@ -11,10 +11,18 @@
 
 @section('content')
 <div x-data="{ deleteModal: false, deleteUrl: '', deleteName: '' }">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h1 class="text-2xl font-bold text-heading">Categories</h1>
-            <p class="text-sm text-muted mt-1">{{ $categories->total() }} categories</p>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-accent-light rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-heading">Categories</h1>
+                <p class="text-sm text-muted mt-1">{{ $categories->total() }} categories</p>
+            </div>
         </div>
         @can('create_categories')
         <a href="{{ route('categories.create') }}"
@@ -27,7 +35,7 @@
         @endcan
     </div>
 
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($categories ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -92,7 +100,7 @@
         </div>
         @else
         <div class="py-16 text-center">
-            <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
             </svg>
             <h3 class="text-lg font-medium text-muted mb-1">No categories found</h3>
@@ -106,7 +114,7 @@
         @endif
 
         @if($categories->hasPages())
-        <div class="px-4 py-3 border-t border-border">
+        <div class="px-4 py-3 border-t border-border overflow-x-auto">
             {{ $categories->withQueryString()->links() }}
         </div>
         @endif
@@ -120,7 +128,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6">
+            <div class="relative bg-white rounded-lg max-w-md w-full p-6">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Category</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>?</p>
                 <div class="flex justify-end gap-3">

@@ -15,7 +15,7 @@
                 <span class="text-heading font-medium">{{ $purchase->invoice_number }}</span>
             </nav>
             <div class="flex items-center gap-3">
-                <h1 class="text-2xl font-bold text-heading">{{ $purchase->invoice_number }}</h1>
+                <h1 class="text-xl font-bold text-heading">{{ $purchase->invoice_number }}</h1>
                 @if($purchase->status === 'received')
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-light text-success">Received</span>
                 @elseif($purchase->status === 'cancelled')
@@ -70,7 +70,7 @@
     </div>
 
     {{-- Info Card --}}
-    <div class="bg-white rounded-xl border p-6">
+    <div class="bg-white rounded-lg border p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-4">
                 <div>
@@ -134,7 +134,7 @@
     </div>
 
     {{-- Items Table --}}
-    <div class="bg-white rounded-xl border overflow-hidden">
+    <div class="bg-white rounded-lg border overflow-hidden">
         <div class="px-6 py-4 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Purchase Items</h2>
         </div>
@@ -205,7 +205,7 @@
     </div>
 
     {{-- Financial Summary Card --}}
-    <div class="bg-white rounded-xl border p-6 max-w-md">
+    <div class="bg-white rounded-lg border p-6 max-w-md">
         <h2 class="text-lg font-semibold text-heading mb-4">Financial Summary</h2>
         <div class="space-y-3">
             <div class="flex justify-between text-sm">

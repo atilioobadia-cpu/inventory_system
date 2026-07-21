@@ -12,7 +12,7 @@
 @section('content')
 <div class="max-w-2xl">
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-bold text-heading">Create Category</h1>
+        <h1 class="text-xl font-bold text-heading">Create Category</h1>
         <div class="flex gap-3">
             <a href="{{ route('categories.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                 Cancel
@@ -23,7 +23,7 @@
     <form method="POST" action="{{ route('categories.store') }}">
         @csrf
 
-        <div class="bg-white rounded-xl border border-border p-6 space-y-5">
+        <div class="bg-white rounded-lg border border-border p-6 space-y-5">
             <div>
                 <label for="name" class="form-label">Category Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" required

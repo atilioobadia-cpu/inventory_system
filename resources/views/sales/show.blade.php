@@ -26,7 +26,7 @@
             </a>
             <div>
                 <div class="flex items-center gap-3">
-                    <h2 class="text-2xl font-bold text-heading">{{ $s->invoice_number }}</h2>
+                    <h2 class="text-xl font-bold text-heading">{{ $s->invoice_number }}</h2>
                     @if($s->is_voided)
                         <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-control-bg text-body">Voided</span>
                     @endif
@@ -60,7 +60,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div class="lg:col-span-2 space-y-6">
             {{-- Sale Info --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-lg font-semibold text-heading mb-4">Sale Information</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
@@ -83,7 +83,7 @@
             </div>
 
             {{-- Items Table --}}
-            <div class="bg-white rounded-xl border border-border">
+            <div class="bg-white rounded-lg border border-border">
                 <div class="px-6 py-4 border-b border-border">
                     <h3 class="text-lg font-semibold text-heading">Sale Items</h3>
                 </div>
@@ -127,7 +127,7 @@
             </div>
 
             {{-- Payment History --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-lg font-semibold text-heading mb-4">Payment History</h3>
                 @if(isset($s->payments) && $s->payments->count())
                     <div class="space-y-3">
@@ -155,7 +155,7 @@
 
             {{-- Void Info --}}
             @if($s->is_voided && isset($s->void_reason))
-            <div class="bg-danger-light rounded-xl border border-danger p-6">
+            <div class="bg-danger-light rounded-lg border border-danger p-6">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-8 h-8 rounded-full bg-danger-light flex items-center justify-center">
                         <svg class="w-5 h-5 text-danger" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -184,7 +184,7 @@
 
         {{-- Sidebar: Financial Summary --}}
         <div class="space-y-6">
-            <div class="bg-white rounded-xl border border-border p-6 sticky top-20">
+            <div class="bg-white rounded-lg border border-border p-6 sticky top-20">
                 <h3 class="text-lg font-semibold text-heading mb-4">Financial Summary</h3>
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
@@ -221,7 +221,7 @@
 
             {{-- Notes --}}
             @if($s->notes)
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-semibold text-heading mb-2">Notes</h3>
                 <p class="text-sm text-body whitespace-pre-line">{{ $s->notes }}</p>
             </div>

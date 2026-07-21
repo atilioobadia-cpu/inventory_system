@@ -25,7 +25,12 @@
 }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-heading">Sales</h2>
+            <h2 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/>
+                </svg>
+                Sales
+            </h2>
             <p class="text-sm text-muted mt-1">Manage all sales transactions</p>
         </div>
         <a href="{{ route('pos.index') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
@@ -36,7 +41,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('sales.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-2">
@@ -174,7 +179,7 @@
                     @empty
                         <tr>
                             <td colspan="10" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12h4.5m-4.5 0a2 2 0 0 1-1.732-1M12 18h4.5m-4.5 0a2 2 0 0 0 1.732-1M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
                                 <p class="text-muted font-medium">No sales found</p>

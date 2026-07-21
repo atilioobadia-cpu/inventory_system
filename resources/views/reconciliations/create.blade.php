@@ -65,7 +65,7 @@
 
             <div class="space-y-6">
                 {{-- Reconciliation Type --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-6">
                     <h3 class="text-lg font-semibold text-heading mb-4">Reconciliation Period</h3>
                     <div class="grid grid-cols-3 gap-4">
                         <label class="relative cursor-pointer">
@@ -103,7 +103,7 @@
                 </div>
 
                 {{-- Expected Cash Breakdown --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-6">
                     <h3 class="text-lg font-semibold text-heading mb-4">Expected Cash (Auto-calculated)</h3>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between py-2">
@@ -142,7 +142,7 @@
                 </div>
 
                 {{-- Actual Cash & Difference --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-6">
                     <h3 class="text-lg font-semibold text-heading mb-4">Cash Count</h3>
                     <div class="space-y-4">
                         <div>
@@ -180,7 +180,7 @@
                 </div>
 
                 {{-- Notes --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-6">
                     <h3 class="text-lg font-semibold text-heading mb-4">Notes</h3>
                     <textarea name="notes" rows="3" placeholder="Optional notes about this reconciliation..."></textarea>
                 </div>

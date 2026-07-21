@@ -11,9 +11,14 @@
 
 @section('content')
 <div x-data="{ deleteModal: false, deleteUrl: '', deleteName: '' }">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Customers</h1>
+            <h1 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/>
+                </svg>
+                Customers
+            </h1>
             <p class="text-sm text-muted mt-1">{{ $customers->total() ?? 0 }} customers</p>
         </div>
         @can('create_customers')
@@ -28,9 +33,9 @@
     </div>
 
     {{-- Filters --}}
-    <div class="bg-white rounded-xl border border-border p-4 mb-6">
+    <div class="bg-white rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('customers.index') }}">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div class="relative sm:col-span-2">
                     <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
@@ -38,20 +43,21 @@
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search customers..."
                            class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent">
                 </div>
+                <select name="customer_type" class="border border-border rounded-lg text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent text-body">
+                    <option value="">All Types</option>
+                    <option value="individual" {{ request('customer_type') == 'individual' ? 'selected' : '' }}>Individual</option>
+                    <option value="business" {{ request('customer_type') == 'business' ? 'selected' : '' }}>Business</option>
+                    <option value="wholesale" {{ request('customer_type') == 'wholesale' ? 'selected' : '' }}>Wholesale</option>
+                </select>
                 <div class="flex gap-2">
-                    <select name="customer_type" class="flex-1 border border-border rounded-lg text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent text-body">
-                        <option value="">All Types</option>
-                        <option value="individual" {{ request('customer_type') == 'individual' ? 'selected' : '' }}>Individual</option>
-                        <option value="business" {{ request('customer_type') == 'business' ? 'selected' : '' }}>Business</option>
-                        <option value="wholesale" {{ request('customer_type') == 'wholesale' ? 'selected' : '' }}>Wholesale</option>
-                    </select>
                     <button type="submit" class="bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent-light transition-colors">Filter</button>
+                    <a href="{{ route('customers.index') }}" class="bg-control-bg text-body px-4 py-2 rounded-lg text-sm font-medium hover:bg-control-bg transition-colors">Clear</a>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($customers ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -119,13 +125,16 @@
         @endif
         @else
         <div class="py-16 text-center">
-            <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/>
             </svg>
             <h3 class="text-lg font-medium text-muted mb-1">No customers found</h3>
             <p class="text-sm text-muted mb-4">Add your first customer to get started.</p>
             @can('create_customers')
             <a href="{{ route('customers.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                </svg>
                 Add Customer
             </a>
             @endcan
@@ -141,7 +150,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6">
+            <div class="relative bg-white rounded-lg max-w-md w-full p-6">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Customer</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This will affect sales records.</p>
                 <div class="flex justify-end gap-3">

@@ -14,7 +14,12 @@
     {{-- Page Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Items</h1>
+            <h1 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+                </svg>
+                Items
+            </h1>
             <p class="text-sm text-muted mt-1">{{ $items->total() ?? 0 }} items found</p>
         </div>
         @can('create_items')
@@ -29,9 +34,9 @@
     </div>
 
     {{-- Filters --}}
-    <div class="bg-white rounded-xl border border-border p-4 mb-6">
+    <div class="bg-white rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('items.index') }}">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {{-- Search --}}
                 <div class="relative">
                     <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -69,7 +74,7 @@
     </div>
 
     {{-- Items Table --}}
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($items ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -162,7 +167,7 @@
         @else
         {{-- Empty State --}}
         <div class="py-16 text-center">
-            <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
             </svg>
             <h3 class="text-lg font-medium text-muted mb-1">No items found</h3>
@@ -190,7 +195,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6"
+            <div class="relative bg-white rounded-lg max-w-md w-full p-6"
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100">

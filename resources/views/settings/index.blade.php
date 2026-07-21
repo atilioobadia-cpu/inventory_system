@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6" x-data="{ activeTab: '{{ request('tab', 'business') }}' }">
     <div>
-        <h1 class="text-2xl font-bold text-heading">Settings</h1>
+        <h1 class="text-xl font-bold text-heading">Settings</h1>
         <p class="text-muted mt-1">Configure your system preferences</p>
     </div>
 
@@ -41,7 +41,7 @@
 
     <!-- Business Tab -->
     <div x-show="activeTab === 'business'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
             @csrf
             <input type="hidden" name="tab" value="business">
             <h2 class="text-lg font-semibold text-heading">Business Information</h2>
@@ -86,7 +86,7 @@
 
     <!-- Receipt Tab -->
     <div x-show="activeTab === 'receipt'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
             @csrf
             <input type="hidden" name="tab" value="receipt">
             <h2 class="text-lg font-semibold text-heading">Receipt Settings</h2>
@@ -128,7 +128,7 @@
 
     <!-- System Tab -->
     <div x-show="activeTab === 'system'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
             @csrf
             <input type="hidden" name="tab" value="system">
             <h2 class="text-lg font-semibold text-heading">System Settings</h2>
@@ -171,7 +171,7 @@
 
     <!-- Email Tab -->
     <div x-show="activeTab === 'email'" x-transition>
-        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <form action="{{ route('settings.update') }}" method="POST" class="bg-white rounded-lg border border-border p-6 space-y-6">
             @csrf
             <input type="hidden" name="tab" value="email">
             <h2 class="text-lg font-semibold text-heading">Email Notification Recipients</h2>

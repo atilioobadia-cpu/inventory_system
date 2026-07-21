@@ -15,12 +15,13 @@
         @csrf
 
         <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl font-bold text-heading">Create New Item</h1>
+            <h1 class="text-xl font-bold text-heading">Create New Item</h1>
             <div class="flex gap-3">
                 <a href="{{ route('items.index') }}" class="px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                     Cancel
                 </a>
-                <button type="submit" class="px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
+                <button type="submit" class="px-4 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Save Item
                 </button>
             </div>
@@ -30,11 +31,14 @@
             {{-- Left Column --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Basic Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="sm:col-span-2">
-                            <label for="name" class="form-label">Item Name <span class="text-danger">*</span></label>
+                            <label for="name" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+                                Item Name <span class="text-danger">*</span>
+                            </label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}" required
                                    class=""
                                    placeholder="e.g. Brake Pads - Front">
@@ -42,7 +46,10 @@
                         </div>
 
                         <div>
-                            <label for="sku" class="form-label">SKU</label>
+                            <label for="sku" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z M13.5 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z"/></svg>
+                                SKU
+                            </label>
                             <input type="text" name="sku" id="sku" value="{{ old('sku') }}"
                                    class="font-mono"
                                    placeholder="e.g. BP-FR-001">
@@ -54,7 +61,10 @@
                         </div>
 
                         <div>
-                            <label for="barcode" class="form-label">Barcode</label>
+                            <label for="barcode" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z M13.5 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z"/></svg>
+                                Barcode
+                            </label>
                             <input type="text" name="barcode" id="barcode" value="{{ old('barcode') }}"
                                    class="font-mono"
                                    placeholder="Scan or enter barcode">
@@ -62,7 +72,10 @@
                         </div>
 
                         <div>
-                            <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
+                            <label for="category_id" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z M6 6h.008v.008H6V6z"/></svg>
+                                Category <span class="text-danger">*</span>
+                            </label>
                             <select name="category_id" id="category_id" required class="">
                                 <option value="">Select Category</option>
                                 @foreach($categories ?? [] as $category)
@@ -86,7 +99,7 @@
                 </div>
 
                 {{-- Description --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Description</h2>
                     <textarea name="description" rows="4"
                               class="resize-none"
@@ -95,18 +108,24 @@
                 </div>
 
                 {{-- Pricing --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Pricing</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label for="cost_price" class="form-label">Cost Price (TZS) <span class="text-danger">*</span></label>
+                            <label for="cost_price" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Cost Price (TZS) <span class="text-danger">*</span>
+                            </label>
                             <input type="number" name="cost_price" id="cost_price" value="{{ old('cost_price') }}" required min="0" step="0.01"
                                    class=""
                                    placeholder="0">
                             @error('cost_price')<p class="text-xs text-danger mt-1">{{ $message }}</p>@enderror
                         </div>
                         <div>
-                            <label for="selling_price" class="form-label">Selling Price (TZS) <span class="text-danger">*</span></label>
+                            <label for="selling_price" class="form-label flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Selling Price (TZS) <span class="text-danger">*</span>
+                            </label>
                             <input type="number" name="selling_price" id="selling_price" value="{{ old('selling_price') }}" required min="0" step="0.01"
                                    class=""
                                    placeholder="0">
@@ -123,7 +142,7 @@
                 </div>
 
                 {{-- Stock Levels --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Stock Levels</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -154,9 +173,9 @@
             {{-- Right Column --}}
             <div class="space-y-6">
                 {{-- Image Upload --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Item Image</h2>
-                    <div class="border-2 border-dashed border-border rounded-xl p-6 text-center hover:border-accent/50 transition-colors">
+                    <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-accent/50 transition-colors">
                         <div x-show="!imagePreview">
                             <svg class="w-12 h-12 text-muted mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"/>
@@ -179,7 +198,7 @@
                 </div>
 
                 {{-- Unit & Status --}}
-                <div class="bg-white rounded-xl border border-border p-6">
+                <div class="bg-white rounded-lg border border-border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Other Details</h2>
                     <div class="space-y-4">
                         <div>
@@ -215,7 +234,8 @@
             <a href="{{ route('items.index') }}" class="px-6 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
                 Cancel
             </a>
-            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors">
+            <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Save Item
             </button>
         </div>

@@ -19,11 +19,11 @@
                 @if($user->avatar)
                 <img src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="w-16 h-16 rounded-full object-cover">
                 @else
-                <span class="text-2xl font-bold text-accent">{{ substr($user->name, 0, 1) }}</span>
+                <span class="text-xl font-bold text-accent">{{ substr($user->name, 0, 1) }}</span>
                 @endif
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-heading">{{ $user->name }}</h2>
+                <h2 class="text-xl font-bold text-heading">{{ $user->name }}</h2>
                 <p class="text-sm text-muted">{{ $user->email }}</p>
             </div>
         </div>
@@ -36,22 +36,22 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <p class="text-sm text-muted">Role</p>
             <p class="text-lg font-bold text-heading">{{ $user->role->name ?? 'No Role' }}</p>
         </div>
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <p class="text-sm text-muted">Phone</p>
             <p class="text-lg font-bold text-heading">{{ $user->phone ?? 'Not set' }}</p>
         </div>
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <p class="text-sm text-muted">Last Login</p>
             <p class="text-lg font-bold text-heading">{{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}</p>
         </div>
     </div>
 
     @if(isset($recentActivities) && $recentActivities->count())
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="p-6 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Recent Activity</h3>
         </div>

@@ -41,12 +41,12 @@
                     <path d="M16 6h2a2 2 0 012 2v4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h1 class="text-2xl font-bold text-heading">Mtokoma</h1>
+            <h1 class="text-xl font-bold text-heading">Mtokoma</h1>
             <p class="text-muted text-sm mt-1">Inventory Management System</p>
         </div>
 
         {{-- Login Card --}}
-        <div class="bg-white rounded-xl border border-border p-8">
+        <div class="bg-white rounded-lg border border-border p-8">
             <h2 class="text-lg font-semibold text-heading mb-6">Sign in to your account</h2>
 
             @if($errors->any())

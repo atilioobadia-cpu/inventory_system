@@ -11,9 +11,14 @@
 
 @section('content')
 <div x-data="{ deleteModal: false, deleteUrl: '', deleteName: '' }">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Suppliers</h1>
+            <h1 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
+                </svg>
+                Suppliers
+            </h1>
             <p class="text-sm text-muted mt-1">{{ $suppliers->total() ?? 0 }} suppliers</p>
         </div>
         @can('create_suppliers')
@@ -28,7 +33,7 @@
     </div>
 
     {{-- Search --}}
-    <div class="bg-white rounded-xl border border-border p-4 mb-6">
+    <div class="bg-white rounded-lg border border-border p-4 mb-6">
         <form method="GET" action="{{ route('suppliers.index') }}">
             <div class="flex gap-4">
                 <div class="relative flex-1">
@@ -43,7 +48,7 @@
         </form>
     </div>
 
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         @if(($suppliers ?? collect())->count() > 0)
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -115,13 +120,16 @@
         @endif
         @else
         <div class="py-16 text-center">
-            <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H18.75m-7.5-2.25h7.5m-7.5 0H6.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125H9"/>
             </svg>
             <h3 class="text-lg font-medium text-muted mb-1">No suppliers found</h3>
             <p class="text-sm text-muted mb-4">Add your first supplier to get started.</p>
             @can('create_suppliers')
             <a href="{{ route('suppliers.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                </svg>
                 Add Supplier
             </a>
             @endcan
@@ -137,7 +145,7 @@
          class="fixed inset-0 z-50 overflow-y-auto" style="display:none;">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div class="fixed inset-0 bg-black bg-opacity-50" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6">
+            <div class="relative bg-white rounded-lg max-w-md w-full p-6">
                 <h3 class="text-lg font-semibold text-heading mb-2">Delete Supplier</h3>
                 <p class="text-sm text-body mb-6">Are you sure you want to delete <span class="font-semibold" x-text="deleteName"></span>? This may affect purchase records.</p>
                 <div class="flex justify-end gap-3">

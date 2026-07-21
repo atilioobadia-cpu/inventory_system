@@ -14,7 +14,7 @@
                 <svg class="h-4 w-4 mx-1 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                 <span class="text-heading font-medium">Create</span>
             </nav>
-            <h1 class="text-2xl font-bold text-heading">Create Purchase</h1>
+            <h1 class="text-xl font-bold text-heading">Create Purchase</h1>
         </div>
         <a href="{{ route('purchases.index') }}" class="px-4 py-2 bg-control-bg hover:bg-control-bg text-body rounded-lg text-sm font-medium">Cancel</a>
     </div>
@@ -25,13 +25,13 @@
             {{-- Left: Purchase Info --}}
             <div class="lg:col-span-2 space-y-6">
                 {{-- Basic Info --}}
-                <div class="bg-white rounded-xl border p-6">
+                <div class="bg-white rounded-lg border p-5">
                     <h2 class="text-lg font-semibold text-heading mb-4">Purchase Information</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="form-label">Supplier *</label>
                             <div class="relative" x-data="{ open: false, query: '' }" @click.away="open = false">
-                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true" :value="supplier.name || ''" placeholder="Search supplier..." required>
+                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; if (query === '') searchSupplier()" :value="supplier.name || ''" placeholder="Search supplier..." required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
                                 <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
@@ -66,7 +66,7 @@
                 </div>
 
                 {{-- Items --}}
-                <div class="bg-white rounded-xl border p-6">
+                <div class="bg-white rounded-lg border p-5">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-lg font-semibold text-heading">Items</h2>
                         <button type="button" @click="addItem()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-accent-light hover:bg-accent-light text-accent rounded-lg text-sm font-medium">
@@ -75,58 +75,59 @@
                         </button>
                     </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead class="bg-card-bg border-b">
+                    <table class="w-full text-sm">
+                        <thead class="bg-card-bg border-b">
+                            <tr>
+                                <th class="px-2 py-1.5 text-left font-medium text-body w-2/5">Item</th>
+                                <th class="px-2 py-1.5 text-center font-medium text-body w-20">Qty</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-body w-28">Unit Cost</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-body w-24 hidden sm:table-cell">Discount</th>
+                                <th class="px-2 py-1.5 text-right font-medium text-body w-28">Total</th>
+                                <th class="px-2 py-1.5 w-10"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border">
+                            <template x-for="(row, index) in rows" :key="index">
                                 <tr>
-                                    <th class="px-3 py-2 text-left font-medium text-body w-2/5">Item</th>
-                                    <th class="px-3 py-2 text-center font-medium text-body w-20">Qty</th>
-                                    <th class="px-3 py-2 text-right font-medium text-body w-28">Unit Cost</th>
-                                    <th class="px-3 py-2 text-right font-medium text-body w-24">Discount</th>
-                                    <th class="px-3 py-2 text-right font-medium text-body w-28">Total</th>
-                                    <th class="px-3 py-2 w-10"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-border">
-                                <template x-for="(row, index) in rows" :key="index">
-                                    <tr>
-                                        <td class="px-3 py-2">
-                                            <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                                <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-accent/20">
-                                                <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
-                                                <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
-                                                    <template x-for="item in row.itemResults" :key="item.id">
-                                                        <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false" x-text="item.name + ' (Stock: ' + item.stock + ')'"></div>
-                                                    </template>
-                                                </div>
+                                    <td class="px-2 py-1.5">
+                                        <div class="relative" x-data="{ open: false }" @click.away="open = false">
+                                            <input type="text" x-model="row.itemQuery" @input.debounce.300ms="searchItem(index)" @focus="open = true; if (row.itemQuery === '') searchItem(index)" :placeholder="row.item_name || 'Search item...'" class="w-full px-2 py-1.5 text-sm focus:ring-1 focus:ring-accent/20">
+                                            <input type="hidden" :name="'items[' + index + '][item_id]'" :value="row.item_id">
+                                            <div x-show="open && row.itemResults.length > 0" class="absolute z-30 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
+                                                <template x-for="item in row.itemResults" :key="item.id">
+                                                    <div class="px-3 py-2 hover:bg-accent-light cursor-pointer text-sm" @click="selectItem(index, item); open = false">
+                                                        <span x-text="item.name"></span>
+                                                        <span class="text-muted text-xs ml-1">(Stock: <span x-text="item.current_stock"></span>)</span>
+                                                    </div>
+                                                </template>
                                             </div>
-                                        </td>
-                                        <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-full px-2 py-1.5 text-sm text-center">
-                                        </td>
-                                        <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][unit_cost]'" x-model.number="row.unit_cost" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
-                                        </td>
-                                        <td class="px-3 py-2">
-                                            <input type="number" :name="'items[' + index + '][discount]'" x-model.number="row.discount" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
-                                        </td>
-                                        <td class="px-3 py-2 text-right font-medium text-heading" x-text="formatCurrency(row.total)"></td>
-                                        <td class="px-3 py-2 text-center">
-                                            <button type="button" @click="removeRow(index)" x-show="rows.length > 1" class="text-muted hover:text-danger">
-                                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-2 py-1.5">
+                                        <input type="number" :name="'items[' + index + '][quantity]'" x-model.number="row.quantity" @input="calcRow(index)" min="1" class="w-full px-2 py-1.5 text-sm text-center">
+                                    </td>
+                                    <td class="px-2 py-1.5">
+                                        <input type="number" :name="'items[' + index + '][unit_cost]'" x-model.number="row.unit_cost" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
+                                    </td>
+                                    <td class="px-2 py-1.5 hidden sm:table-cell">
+                                        <input type="number" :name="'items[' + index + '][discount]'" x-model.number="row.discount" @input="calcRow(index)" min="0" step="0.01" class="w-full px-2 py-1.5 text-sm text-right">
+                                    </td>
+                                    <td class="px-2 py-1.5 text-right font-medium text-heading" x-text="formatCurrency(row.total)"></td>
+                                    <td class="px-2 py-1.5 text-center">
+                                        <button type="button" @click="removeRow(index)" x-show="rows.length > 1" class="text-muted hover:text-danger">
+                                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             {{-- Right: Summary --}}
             <div class="space-y-6">
-                <div class="bg-white rounded-xl border p-6 sticky top-20">
+                <div class="bg-white rounded-lg border p-5 sticky top-20">
                     <h2 class="text-lg font-semibold text-heading mb-4">Summary</h2>
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
@@ -164,8 +165,14 @@
                     </div>
 
                     <div class="mt-6 space-y-3">
-                        <button type="submit" name="action" value="draft" class="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">Save as Draft</button>
-                        <button type="submit" name="action" value="receive" class="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">Save & Receive</button>
+                        <button type="submit" name="action" value="draft" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                            Save as Draft
+                        </button>
+                        <button type="submit" name="action" value="receive" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                            Save &amp; Receive
+                        </button>
                     </div>
                 </div>
             </div>
@@ -184,6 +191,7 @@ function purchaseForm() {
         paymentTerms: 'cash',
         dueDate: '',
         paidAmount: 0,
+        loading: false,
 
         get subtotal() { return this.rows.reduce((s, r) => s + (r.quantity * r.unit_cost), 0); },
         get totalDiscount() { return this.rows.reduce((s, r) => s + r.discount, 0); },

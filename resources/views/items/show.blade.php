@@ -13,7 +13,7 @@
 <div class="space-y-6">
     {{-- Page Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 class="text-2xl font-bold text-heading">Item Details</h1>
+        <h1 class="text-xl font-bold text-heading">Item Details</h1>
         <div class="flex gap-3">
             @can('edit_items')
             <a href="{{ route('items.edit', $item) }}" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
@@ -42,7 +42,7 @@
         {{-- Main Info --}}
         <div class="lg:col-span-2 space-y-6">
             {{-- Item Card --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <div class="flex flex-col sm:flex-row gap-6">
                     {{-- Image --}}
                     <div class="w-full sm:w-48 h-48 bg-control-bg rounded-xl flex items-center justify-center flex-shrink-0">
@@ -99,7 +99,7 @@
             </div>
 
             {{-- Stock Movements --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-lg font-semibold text-heading mb-4">Stock Movements</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -145,7 +145,7 @@
         {{-- Sidebar --}}
         <div class="space-y-6">
             {{-- Current Stock --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-medium text-muted mb-2">Current Stock</h3>
                 <p class="text-4xl font-bold {{ $item->current_stock <= 0 ? 'text-danger' : ($item->current_stock <= ($item->reorder_point ?? 0) ? 'text-warning' : 'text-accent') }}">
                     {{ $item->current_stock }}
@@ -180,7 +180,7 @@
             </div>
 
             {{-- Pricing Summary --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-medium text-muted mb-3">Pricing</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between text-sm">
@@ -210,7 +210,7 @@
             </div>
 
             {{-- Purchase History --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-medium text-muted mb-3">Recent Purchases</h3>
                 <div class="space-y-3">
                     @forelse($recentPurchases as $purchase)
@@ -228,7 +228,7 @@
             </div>
 
             {{-- Sales History --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-medium text-muted mb-3">Recent Sales</h3>
                 <div class="space-y-3">
                     @forelse($recentSales as $sale)

@@ -6,7 +6,7 @@
 <div class="max-w-4xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Role: {{ $role->name }}</h1>
+            <h1 class="text-xl font-bold text-heading">Role: {{ $role->name }}</h1>
             <p class="text-muted mt-1">{{ $role->description ?? 'No description provided' }}</p>
         </div>
         <div class="flex items-center gap-3">
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Role Info -->
-    <div class="bg-white rounded-xl border border-border p-6">
+    <div class="bg-white rounded-lg border border-border p-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <p class="text-sm text-muted">Name</p>
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Permissions by Module -->
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Permissions ({{ $role->permissions->count() }})</h2>
         </div>
@@ -76,7 +76,7 @@
     </div>
 
     <!-- Users with this Role -->
-    <div class="bg-white rounded-xl border border-border overflow-hidden">
+    <div class="bg-white rounded-lg border border-border overflow-hidden">
         <div class="p-6 border-b border-border">
             <h2 class="text-lg font-semibold text-heading">Users with this Role ({{ $role->users->count() }})</h2>
         </div>

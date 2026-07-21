@@ -15,7 +15,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h2 class="text-2xl font-bold text-heading">{{ $expenseCategory->name }}</h2>
+            <h2 class="text-xl font-bold text-heading">{{ $expenseCategory->name }}</h2>
             <p class="text-sm text-muted mt-1">{{ $expenseCategory->description ?? 'No description' }}</p>
         </div>
         <div class="flex items-center gap-3">
@@ -24,18 +24,18 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <p class="text-sm text-muted">Total Expenses</p>
-            <p class="text-2xl font-bold text-heading">{{ $expenseCategory->expenses_count ?? 0 }}</p>
+            <p class="text-xl font-bold text-heading">{{ $expenseCategory->expenses_count ?? 0 }}</p>
         </div>
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <p class="text-sm text-muted">Status</p>
-            <p class="text-2xl font-bold {{ $expenseCategory->is_active ? 'text-success' : 'text-danger' }}">{{ $expenseCategory->is_active ? 'Active' : 'Inactive' }}</p>
+            <p class="text-xl font-bold {{ $expenseCategory->is_active ? 'text-success' : 'text-danger' }}">{{ $expenseCategory->is_active ? 'Active' : 'Inactive' }}</p>
         </div>
     </div>
 
     @if(isset($recentExpenses) && $recentExpenses->count())
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <div class="p-6 border-b border-border">
             <h3 class="text-lg font-semibold text-heading">Recent Expenses</h3>
         </div>

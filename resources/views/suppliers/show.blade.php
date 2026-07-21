@@ -12,7 +12,7 @@
 @section('content')
 <div class="space-y-6">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 class="text-2xl font-bold text-heading">Supplier Details</h1>
+        <h1 class="text-xl font-bold text-heading">Supplier Details</h1>
         <div class="flex gap-3">
             @can('edit_suppliers')
             <a href="{{ route('suppliers.edit', $supplier) }}" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-body bg-control-bg rounded-lg hover:bg-control-bg transition-colors">
@@ -28,7 +28,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-1 space-y-6">
             {{-- Supplier Info Card --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-3">
                         <span class="text-white text-xl font-bold">{{ substr($supplier->name, 0, 1) }}</span>
@@ -78,7 +78,7 @@
             </div>
 
             {{-- Financial Summary --}}
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-sm font-medium text-muted mb-3">Financial Summary</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between text-sm">
@@ -105,7 +105,7 @@
 
         {{-- Purchase History --}}
         <div class="lg:col-span-2">
-            <div class="bg-white rounded-xl border border-border p-6">
+            <div class="bg-white rounded-lg border border-border p-6">
                 <h3 class="text-lg font-semibold text-heading mb-4">Purchase History</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">

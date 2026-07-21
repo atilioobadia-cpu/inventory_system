@@ -6,7 +6,7 @@
 <div class="max-w-2xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-heading">Edit User: {{ $user->name }}</h1>
+            <h1 class="text-xl font-bold text-heading">Edit User: {{ $user->name }}</h1>
             <p class="text-muted mt-1">Update user information and role</p>
         </div>
         <a href="{{ route('users.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-control-bg text-body rounded-lg hover:bg-control-bg transition-colors text-sm font-medium">
@@ -18,7 +18,7 @@
     <form action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data" x-data="userForm()">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-xl border border-border p-6 space-y-6">
+        <div class="bg-white rounded-lg border border-border p-6 space-y-6">
             <!-- Avatar -->
             <div class="flex items-center gap-6">
                 <div class="w-20 h-20 rounded-full bg-control-bg flex items-center justify-center overflow-hidden border-2 border-dashed border-border">

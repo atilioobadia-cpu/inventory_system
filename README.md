@@ -31,13 +31,17 @@
 
 ### Point of Sale
 - Touch-friendly interface with product grid, search, and category filters
+- **Smart autocomplete**: shows first 5 customers on focus, filters as you type
 - Shopping cart with quantity controls and quick cash buttons
 - Per-transaction VAT toggle (18%)
 - Walk-In customer default with searchable customer selection
 - Instant EFD thermal receipts with QR code for tax verification
+- **Fully responsive** — mobile layout with in-cart item search
 
 ### Purchasing
-- Purchase orders with dynamic item rows and supplier selection
+- Purchase orders with dynamic item rows and **smart supplier/item autocomplete**
+- **Auto-fill cost price** when selecting items from dropdown
+- Shows first 5 suppliers and items on focus, filters as you type
 - Auto stock-in on purchase receipt
 - Partial payment tracking with due amounts
 
@@ -62,9 +66,9 @@
 - Auto-calculated expected cash with variance detection
 
 ### Access Control
-- 6 pre-built roles: Super Admin, Manager, Cashier, Warehouse, Accountant, Viewer
+- 2 pre-built roles: **Admin** (full access) and **User** (limited access)
 - 56 granular permissions across 17 modules
-- Unlimited custom roles with configurable permission sets
+- Custom roles with configurable permission sets
 - Permission-based UI — buttons, links, and menus hidden automatically
 
 ### Import & Export
@@ -77,15 +81,34 @@
 
 ---
 
+## Design System
+
+The UI follows a **Frappe ERPNext-inspired** design system:
+
+- **Font**: Nunito (Google Fonts)
+- **Colors**: Solid colors — no shadows, no gradients
+  - Primary: `#171717` (buttons, headings)
+  - Accent: `#2563EB` (links, active states, focus rings)
+  - Success: `#46b37e` / Danger: `#e03636` / Warning: `#fb8b2c`
+- **Compact sizing**: Tighter padding, smaller text, professional density
+- **Icons**: Heroicons v2 inline SVGs throughout all forms and navigation
+- **Responsive**: All pages work on mobile without horizontal scrolling
+  - Tables use `overflow-x-auto` with hidden columns on small screens
+  - Grids collapse to single column on mobile
+  - POS has dedicated mobile layout with in-cart search
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
 | **Backend** | Laravel 11, PHP 8.2+ |
 | **Database** | MySQL 8 |
-| **Frontend** | Blade Templates, Tailwind CSS 3, Alpine.js 3 |
+| **Frontend** | Blade Templates, Tailwind CSS 3 (CDN), Alpine.js 3 |
 | **Charts** | Chart.js |
 | **PDF / Excel** | DomPDF, Maatwebsite Excel |
+| **QR Codes** | simplesoftwareio/simple-qrcode |
 | **Icons** | Heroicons v2 (inline SVG) |
 
 ---
@@ -96,7 +119,6 @@
 - PHP 8.2+ with extensions: `gd`, `zip`, `mbstring`, `openssl`, `pdo`, `tokenizer`, `curl`, `xml`
 - MySQL 8.0+
 - Composer 2.x
-- Node.js & NPM (optional, for asset compilation)
 
 ### Setup
 
@@ -128,6 +150,13 @@ php artisan serve
 ```
 
 Visit **http://localhost:8000** to access the application.
+
+### Default Login
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@mtokoma.co.tz | password |
+| User | user@mtokoma.co.tz | password |
 
 ---
 
@@ -162,6 +191,9 @@ chmod -R 775 storage/logs
 - **Invoice Auto-Generation** — Yearly-reset invoice numbers (e.g., `PUR-2026-00001`, `SAL-2026-00001`)
 - **EFD Compliance** — Receipts include TIN, VAT breakdown, and QR code for tax verification
 - **TZS Currency** — All monetary values formatted as TZS (Tanzanian Shillings)
+- **Smart Autocomplete** — All selection dropdowns (customers, suppliers, items) show first 5 results on focus with debounced search
+- **Auto-fill Pricing** — Selecting an item in POS auto-fills selling price; in purchases, auto-fills cost price
+- **Frappe Design** — Clean, professional UI inspired by ERPNext with solid colors, no shadows, and compact layout
 
 ---
 

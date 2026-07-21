@@ -36,7 +36,7 @@ $buttonClass = $colorClasses[$color] ?? $colorClasses['danger'];
                  @click="{{ $name }} = false"></div>
 
             {{-- Modal --}}
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6 z-10"
+            <div class="relative bg-white rounded-lg max-w-md w-full p-6 z-10"
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"

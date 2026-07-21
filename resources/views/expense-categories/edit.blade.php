@@ -18,7 +18,7 @@
     <form action="{{ route('expense-categories.update', $category) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="bg-white rounded-xl border border-border p-6">
+        <div class="bg-white rounded-lg border border-border p-6">
             <h3 class="text-lg font-semibold text-heading mb-6">Category Details</h3>
             <div class="space-y-6">
                 <div>

@@ -23,7 +23,12 @@
 }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-heading">Expenses</h2>
+            <h2 class="text-xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 0 1 2.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
+                </svg>
+                Expenses
+            </h2>
             <p class="text-sm text-muted mt-1">Track and manage all business expenses</p>
         </div>
         <a href="{{ route('expenses.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors">
@@ -34,7 +39,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl border border-border">
+    <div class="bg-white rounded-lg border border-border">
         <form method="GET" action="{{ route('expenses.index') }}">
             <div class="p-4 border-b border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
@@ -152,10 +157,10 @@
                     @empty
                         <tr>
                             <td colspan="9" class="px-4 py-16 text-center">
-                                <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                                <svg class="w-16 h-16 text-muted/50 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659 1.414-1.42a2 2 0 012.828 0l1.414 1.42.879-.659M12 18V6m0 12H7.5m4.5 0h4.5"/>
                                 </svg>
-                                <p class="text-muted font-medium">No expenses found</p>
+                                <p class="text-muted font-medium text-center">No expenses found</p>
                                 <p class="text-sm text-muted mt-1">Start by adding your first expense.</p>
                             </td>
                         </tr>
