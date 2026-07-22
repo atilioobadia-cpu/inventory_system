@@ -71,6 +71,8 @@ class PosController extends Controller
             $stockService = app(StockService::class);
             $subtotal = 0;
             $totalTax = 0;
+            $isVatExempt = $validated['is_vat_exempt'] ?? false;
+            $globalVatRate = 18;
 
             foreach ($validated['items'] as $itemData) {
                 $item = Item::find($itemData['item_id']);
@@ -85,8 +87,8 @@ class PosController extends Controller
                 }
 
                 $lineTotal = $itemData['unit_price'] * $itemData['quantity'];
-                if (!($validated['is_vat_exempt'] ?? false)) {
-                    $totalTax += $lineTotal * ($item->tax_rate / 100);
+                if (!$isVatExempt) {
+                    $totalTax += $lineTotal * ($globalVatRate / 100);
                 }
                 $subtotal += $lineTotal;
             }
@@ -131,8 +133,8 @@ class PosController extends Controller
                 $item = Item::find($itemData['item_id']);
                 $lineTotal = $itemData['unit_price'] * $itemData['quantity'];
                 $taxAmount = 0;
-                if (!($validated['is_vat_exempt'] ?? false)) {
-                    $taxAmount = $lineTotal * ($item->tax_rate / 100);
+                if (!$isVatExempt) {
+                    $taxAmount = $lineTotal * ($globalVatRate / 100);
                 }
 
                 SaleItem::create([

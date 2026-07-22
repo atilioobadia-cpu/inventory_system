@@ -4,20 +4,21 @@
 
 @push('styles')
 <style>
-    .pos-grid { display: grid; grid-template-columns: 1fr 420px; height: calc(100vh - 64px); gap: 0; }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px; overflow-y: auto; }
-    .product-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; background: #ffffff; }
-    .product-card:hover { border-color: #000000; }
+    .pos-wrapper { overflow: hidden; margin: -1.25rem; width: calc(100% + 2.5rem); }
+    .pos-grid { display: grid; grid-template-columns: 1fr 380px; height: calc(100vh - 56px); gap: 0; overflow: hidden; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; padding: 12px; overflow-y: auto; }
+    .product-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; cursor: pointer; transition: all 0.15s; text-align: center; background: #ffffff; }
+    .product-card:hover { border-color: #2490ef; box-shadow: 0 0 0 1px #2490ef; }
     .product-card.out-of-stock { opacity: 0.5; pointer-events: none; }
-    .cart-panel { background: #ffffff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: calc(100vh - 64px); }
-    .cart-items { flex: 1; overflow-y: auto; padding: 16px; background: #ffffff; }
-    .cart-summary { border-top: 2px solid #e2e8f0; padding: 16px; background: #ffffff; }
-    .qty-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid #d1d5db; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: #1f2937; background: #ffffff; }
+    .cart-panel { background: #ffffff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; height: calc(100vh - 56px); overflow: hidden; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 12px; background: #ffffff; }
+    .cart-summary { border-top: 2px solid #e2e8f0; padding: 12px; background: #ffffff; overflow-y: auto; max-height: 45vh; }
+    .qty-btn { width: 24px; height: 24px; border-radius: 4px; border: 1px solid #d1d5db; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: #1f2937; background: #ffffff; font-size: 11px; }
     .qty-btn:hover { background: #f3f4f6; }
-    .quick-cash { padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; cursor: pointer; color: #1f2937; background: #ffffff; }
+    .quick-cash { padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 11px; cursor: pointer; color: #1f2937; background: #ffffff; }
     .quick-cash:hover { background: #f3f4f6; }
-    .category-pill { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 13px; cursor: pointer; white-space: nowrap; color: #1f2937; background: #ffffff; }
-    .category-pill.active { background: #000000; color: #ffffff; border-color: #000000; }
+    .category-pill { padding: 4px 12px; border-radius: 16px; border: 1px solid #d1d5db; font-size: 12px; cursor: pointer; white-space: nowrap; color: #1f2937; background: #ffffff; }
+    .category-pill.active { background: #2490ef; color: #ffffff; border-color: #2490ef; }
     .category-pill:hover:not(.active) { background: #f3f4f6; }
 
     .pos-mobile-only { display: none !important; }
@@ -27,8 +28,8 @@
         .pos-grid { grid-template-columns: 1fr; }
         .pos-desktop-only { display: none !important; }
         .pos-mobile-only { display: block !important; }
-        .cart-panel { border-left: none; height: auto; min-height: calc(100vh - 64px); }
-        .product-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; padding: 12px; }
+        .cart-panel { border-left: none; height: auto; min-height: calc(100vh - 56px); }
+        .product-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; padding: 8px; }
     }
 
     @media (min-width: 768px) {
@@ -40,12 +41,13 @@
 @endpush
 
 @section('content')
+<div class="pos-wrapper">
 <div x-data="posApp()" x-init="init()" class="pos-grid">
 
     {{-- LEFT: Product Grid --}}
     <div class="flex flex-col h-full bg-white pos-hide pos-desktop-only">
         {{-- Search & Filters --}}
-        <div class="p-4 bg-white border-b space-y-3">
+        <div class="p-3 bg-white border-b space-y-2">
             <div class="relative">
                 <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
                 <input type="text" x-model="searchQuery" @input.debounce.300ms="searchItems()" placeholder="Search by name, SKU, or barcode..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
@@ -59,7 +61,7 @@
         </div>
 
         {{-- Products --}}
-        <div class="flex-1 overflow-y-auto p-4">
+        <div class="flex-1 overflow-y-auto p-3">
             <template x-if="loading">
                 <div class="flex items-center justify-center h-40">
                     <svg class="animate-spin h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
@@ -74,9 +76,9 @@
             <div class="product-grid" x-show="!loading">
                 <template x-for="item in products" :key="item.id">
                     <div class="product-card" :class="item.current_stock <= 0 ? 'out-of-stock' : ''" @click="addToCart(item)">
-                        <div class="w-full h-20 bg-white rounded mb-2 flex items-center justify-center overflow-hidden">
+                        <div class="w-full h-16 bg-white rounded mb-1 flex items-center justify-center overflow-hidden">
                             <template x-if="item.image">
-                                <img :src="'{{ asset('storage') }}/' + item.image" class="h-20 w-full object-cover rounded">
+                                <img :src="'{{ asset('storage') }}/' + item.image" class="h-16 w-full object-cover rounded">
                             </template>
                             <template x-if="!item.image">
                                 <svg class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
@@ -140,7 +142,7 @@
         </div>
 
         {{-- Cart Header --}}
-        <div class="p-4 border-b bg-white flex items-center justify-between">
+        <div class="p-3 border-b bg-white flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.773 2.34-1.872l1.836-8.328A1.125 1.125 0 0018.054 2.25H5.106m2.394 5.266L7.5 14.25m0 0l-1.5 6.75M7.5 14.25L3.75 3M20.25 21h-15"/></svg>
                 <div>
@@ -164,7 +166,7 @@
                 </div>
             </template>
             <template x-for="(item, index) in cartItems" :key="item.id + '-' + index">
-                <div class="flex items-center gap-3 py-3 border-b border-gray-200">
+                <div class="flex items-center gap-2 py-2 border-b border-gray-200">
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate" x-text="item.name"></p>
                         <p class="text-xs text-gray-500" x-text="formatCurrency(item.selling_price) + ' each'"></p>
@@ -300,6 +302,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 

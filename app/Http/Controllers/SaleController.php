@@ -37,11 +37,11 @@ class SaleController extends Controller
             $query->where('customer_id', $customerId);
         }
 
-        if ($from = $request->input('from')) {
+        if ($from = $request->input('date_from', $request->input('from'))) {
             $query->whereDate('sale_date', '>=', $from);
         }
 
-        if ($to = $request->input('to')) {
+        if ($to = $request->input('date_to', $request->input('to'))) {
             $query->whereDate('sale_date', '<=', $to);
         }
 
