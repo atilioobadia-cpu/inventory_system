@@ -117,7 +117,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($expenses ?? [] as $expense)
                         <tr class="hover:bg-white">
-                            <td class="px-6 py-4 text-body">{{ $expense->date->format('d M Y') }}</td>
+                            <td class="px-6 py-4 text-body">{{ \Carbon\Carbon::parse($expense->expense_date)->format('d M Y') }}</td>
                             <td class="px-6 py-4">
                                 <span class="px-2 py-1 bg-white text-body rounded-full text-xs font-medium">{{ $expense->category->name ?? '-' }}</span>
                             </td>

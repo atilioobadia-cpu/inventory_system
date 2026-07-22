@@ -72,14 +72,20 @@ class ReportController extends Controller
 
     public function purchases(Request $request)
     {
-        $from = $request->input('from', now()->startOfMonth()->format('Y-m-d'));
-        $to = $request->input('to', now()->format('Y-m-d'));
+        $from = $request->input('from_date', now()->startOfMonth()->format('Y-m-d'));
+        $to = $request->input('to_date', now()->format('Y-m-d'));
 
-        $purchases = Purchase::with(['supplier', 'createdBy'])
+        $query = Purchase::with(['supplier', 'createdBy'])
+            ->withCount('items')
             ->where('status', '!=', 'cancelled')
             ->whereDate('purchase_date', '>=', $from)
-            ->whereDate('purchase_date', '<=', $to)
-            ->latest('purchase_date')
+            ->whereDate('purchase_date', '<=', $to);
+
+        if ($supplierId = $request->input('supplier_id')) {
+            $query->where('supplier_id', $supplierId);
+        }
+
+        $purchases = $query->latest('purchase_date')
             ->paginate(50)
             ->withQueryString();
 
@@ -89,7 +95,30 @@ class ReportController extends Controller
             ->selectRaw('COUNT(*) as count, SUM(subtotal) as subtotal, SUM(tax_amount) as tax, SUM(discount_amount) as discount, SUM(total_amount) as total, SUM(paid_amount) as paid, SUM(due_amount) as due')
             ->first();
 
-        return view('reports.purchases', compact('purchases', 'summary', 'from', 'to'));
+        $totalPurchases = $summary->total ?? 0;
+        $itemsReceived = DB::table('purchase_items')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->where('purchases.status', '!=', 'cancelled')
+            ->whereDate('purchases.purchase_date', '>=', $from)
+            ->whereDate('purchases.purchase_date', '<=', $to)
+            ->sum('purchase_items.received_quantity');
+        $averagePurchase = $summary->count > 0 ? $totalPurchases / $summary->count : 0;
+        $vatPaid = $summary->tax ?? 0;
+
+        $chartCollection = Purchase::where('status', '!=', 'cancelled')
+            ->whereDate('purchase_date', '>=', $from)
+            ->whereDate('purchase_date', '<=', $to)
+            ->select(DB::raw("DATE_FORMAT(purchase_date, '%Y-%m-%d') as date"), DB::raw('SUM(total_amount) as total'))
+            ->groupBy('date')
+            ->orderBy('date')
+            ->pluck('total', 'date');
+
+        $chartLabels = $chartCollection->keys()->toArray();
+        $chartData = $chartCollection->values()->toArray();
+
+        $suppliers = Supplier::orderBy('name')->get();
+
+        return view('reports.purchases', compact('purchases', 'summary', 'from', 'to', 'suppliers', 'totalPurchases', 'itemsReceived', 'averagePurchase', 'vatPaid', 'chartLabels', 'chartData'));
     }
 
     public function inventory(Request $request)
@@ -112,16 +141,28 @@ class ReportController extends Controller
         });
 
         $totalValue = $items->getCollection()->sum('stock_value');
+        $totalRetailValue = $items->getCollection()->sum(function ($item) {
+            return $item->current_stock * $item->selling_price;
+        });
         $totalItems = $items->total();
-        $lowStockCount = $items->getCollection()->filter(fn($item) => $item->current_stock <= $item->reorder_point)->count();
+        $lowStockCount = $items->getCollection()->filter(fn($item) => $item->current_stock <= $item->reorder_point && $item->current_stock > 0)->count();
+        $outOfStockCount = $items->getCollection()->filter(fn($item) => $item->current_stock <= 0)->count();
 
-        return view('reports.inventory', compact('items', 'totalValue', 'totalItems', 'lowStockCount'));
+        $categories = \App\Models\Category::orderBy('name')->get();
+
+        $categoryBreakdown = $items->getCollection()
+            ->groupBy(fn($item) => $item->category->name ?? 'Uncategorized')
+            ->map(fn($group) => ['name' => $group->first()->category->name ?? 'Uncategorized', 'count' => $group->count()])
+            ->values()
+            ->toArray();
+
+        return view('reports.inventory', compact('items', 'totalValue', 'totalItems', 'lowStockCount', 'outOfStockCount', 'totalRetailValue', 'categories', 'categoryBreakdown'));
     }
 
     public function expenses(Request $request)
     {
-        $from = $request->input('from', now()->startOfMonth()->format('Y-m-d'));
-        $to = $request->input('to', now()->format('Y-m-d'));
+        $from = $request->input('from_date', now()->startOfMonth()->format('Y-m-d'));
+        $to = $request->input('to_date', now()->format('Y-m-d'));
 
         $expenses = Expense::with(['category', 'createdBy'])
             ->whereDate('expense_date', '>=', $from)
@@ -143,7 +184,29 @@ class ReportController extends Controller
             ->orderByDesc('total')
             ->get();
 
-        return view('reports.expenses', compact('expenses', 'summary', 'byCategory', 'from', 'to'));
+        $totalExpenses = $summary->total ?? 0;
+        $averageExpense = $summary->count > 0 ? $totalExpenses / $summary->count : 0;
+        $topCategory = $byCategory->first()->name ?? '-';
+
+        $categoryLabels = $byCategory->pluck('name')->toArray();
+        $categoryAmounts = $byCategory->pluck('total')->toArray();
+
+        $monthlyData = Expense::select(
+                DB::raw("DATE_FORMAT(expense_date, '%Y-%m') as month"),
+                DB::raw('SUM(amount) as total')
+            )
+            ->whereDate('expense_date', '>=', $from)
+            ->whereDate('expense_date', '<=', $to)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
+        $monthlyLabels = $monthlyData->keys()->map(fn($m) => \Carbon\Carbon::parse($m . '-01')->format('M Y'))->toArray();
+        $monthlyAmounts = $monthlyData->values()->toArray();
+
+        $expenseCategories = \App\Models\ExpenseCategory::orderBy('name')->get();
+
+        return view('reports.expenses', compact('expenses', 'summary', 'byCategory', 'from', 'to', 'totalExpenses', 'averageExpense', 'topCategory', 'categoryLabels', 'categoryAmounts', 'monthlyLabels', 'monthlyAmounts', 'expenseCategories'));
     }
 
     public function profitLoss(Request $request)
@@ -218,8 +281,8 @@ class ReportController extends Controller
 
     public function tax(Request $request)
     {
-        $from = $request->input('from', now()->startOfMonth()->format('Y-m-d'));
-        $to = $request->input('to', now()->format('Y-m-d'));
+        $from = $request->input('from_date', now()->startOfMonth()->format('Y-m-d'));
+        $to = $request->input('to_date', now()->format('Y-m-d'));
 
         $salesTax = Sale::whereNull('voided_at')
             ->whereDate('sale_date', '>=', $from)
@@ -237,21 +300,17 @@ class ReportController extends Controller
         $purchaseVat = $purchaseTax;
         $netVat = $netTax;
 
-        $monthlyVat = Sale::whereNull('voided_at')
+        $salesByMonth = Sale::whereNull('voided_at')
             ->whereDate('sale_date', '>=', $from)
             ->whereDate('sale_date', '<=', $to)
             ->select(
                 DB::raw("DATE_FORMAT(sale_date, '%Y-%m') as month"),
-                DB::raw('SUM(tax_amount) as sales_vat'),
-                DB::raw('0 as purchase_vat'),
-                DB::raw('SUM(tax_amount) as net')
+                DB::raw('SUM(tax_amount) as sales_vat')
             )
             ->groupBy('month')
-            ->orderBy('month')
-            ->get()
-            ->toArray();
+            ->pluck('sales_vat', 'month');
 
-        foreach (Purchase::where('status', '!=', 'cancelled')
+        $purchasesByMonth = Purchase::where('status', '!=', 'cancelled')
             ->whereDate('purchase_date', '>=', $from)
             ->whereDate('purchase_date', '<=', $to)
             ->select(
@@ -259,21 +318,21 @@ class ReportController extends Controller
                 DB::raw('SUM(tax_amount) as purchase_vat')
             )
             ->groupBy('month')
-            ->get() as $pMonth) {
-            foreach ($monthlyVat as &$m) {
-                if ($m['month'] === $pMonth->month) {
-                    $m['purchase_vat'] = $pMonth->purchase_vat;
-                    $m['net'] = $m['sales_vat'] - $m['purchase_vat'];
-                    break;
-                }
-            }
-            unset($m);
-        }
+            ->pluck('purchase_vat', 'month');
 
-        foreach ($monthlyVat as &$m) {
-            $m['label'] = \Carbon\Carbon::parse($m['month'] . '-01')->format('M Y');
-        }
-        unset($m);
+        $allMonths = $salesByMonth->keys()->merge($purchasesByMonth->keys())->unique()->sort()->values();
+
+        $monthlyVat = $allMonths->map(function ($month) use ($salesByMonth, $purchasesByMonth) {
+            $salesVat = $salesByMonth->get($month, 0);
+            $purchaseVat = $purchasesByMonth->get($month, 0);
+            return [
+                'month' => $month,
+                'label' => \Carbon\Carbon::parse($month . '-01')->format('M Y'),
+                'sales_vat' => $salesVat,
+                'purchase_vat' => $purchaseVat,
+                'net' => $salesVat - $purchaseVat,
+            ];
+        })->toArray();
 
         $vatByRate = [];
 
@@ -288,8 +347,19 @@ class ReportController extends Controller
         ->withSum(['sales' => function ($q) {
             $q->whereNull('voided_at');
         }], 'total_amount')
+        ->withSum(['sales' => function ($q) {
+            $q->whereNull('voided_at');
+        }], 'paid_amount')
         ->orderByDesc('sales_sum_total_amount')
         ->paginate(25);
+
+        $customers->getCollection()->transform(function ($customer) {
+            $customer->total_sales = $customer->sales_sum_total_amount ?? 0;
+            $customer->total_paid = $customer->sales_sum_paid_amount ?? 0;
+            $customer->balance = $customer->total_sales - $customer->total_paid;
+            $customer->last_purchase = $customer->sales()->whereNull('voided_at')->latest('sale_date')->value('sale_date');
+            return $customer;
+        });
 
         $totalCustomers = Customer::count();
         $activeCustomers = Customer::where('is_active', true)->count();
@@ -303,8 +373,17 @@ class ReportController extends Controller
     {
         $suppliers = Supplier::withCount('purchases')
             ->withSum('purchases', 'total_amount')
+            ->withSum('purchases', 'paid_amount')
             ->orderByDesc('purchases_sum_total_amount')
             ->paginate(25);
+
+        $suppliers->getCollection()->transform(function ($supplier) {
+            $supplier->total_purchases = $supplier->purchases_sum_total_amount ?? 0;
+            $supplier->total_paid = $supplier->purchases_sum_paid_amount ?? 0;
+            $supplier->balance = $supplier->total_purchases - $supplier->total_paid;
+            $supplier->last_purchase = $supplier->purchases()->where('status', '!=', 'cancelled')->latest('purchase_date')->value('purchase_date');
+            return $supplier;
+        });
 
         $totalSuppliers = Supplier::count();
         $activeSuppliers = Supplier::where('is_active', true)->count();

@@ -19,7 +19,7 @@
         <a href="{{ route('purchases.index') }}" class="btn btn-secondary">Cancel</a>
     </div>
 
-    <form method="POST" action="{{ route('purchases.store') }}" @submit.prevent="submitForm()">
+    <form method="POST" action="{{ route('purchases.store') }}">
         @csrf
         <input type="hidden" name="action" :value="submitAction">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -31,12 +31,12 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="form-label">Supplier *</label>
-                            <div class="relative" x-data="{ open: false, query: '' }" @click.away="open = false">
-                                <input type="text" x-model="query" @input.debounce.300ms="searchSupplier()" @focus="open = true; if (query === '') searchSupplier()" :value="supplier.name || ''" placeholder="Search supplier..." required>
+                            <div class="relative" x-data="{ supplierOpen: false }" @click.away="supplierOpen = false">
+                                <input type="text" x-model="supplierQuery" @input.debounce.300ms="searchSupplier(supplierQuery)" @focus="supplierOpen = true; if (supplierQuery === '') searchSupplier(supplierQuery)" placeholder="Search supplier..." required>
                                 <input type="hidden" name="supplier_id" x-model="supplier.id" required>
-                                <div x-show="open && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                <div x-show="supplierOpen && supplierResults.length > 0" class="absolute z-20 w-full bg-white border rounded-lg mt-1 max-h-48 overflow-y-auto">
                                     <template x-for="s in supplierResults" :key="s.id">
-                                        <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="supplier = s; open = false; query = ''" x-text="s.name"></div>
+                                        <div class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" @click="supplier = s; supplierOpen = false; supplierQuery = s.name" x-text="s.name"></div>
                                     </template>
                                 </div>
                             </div>
@@ -188,6 +188,7 @@ function purchaseForm() {
     return {
         rows: [{ item_id: '', item_name: '', itemQuery: '', quantity: 1, unit_cost: 0, discount: 0, total: 0, itemResults: [] }],
         supplier: { id: '', name: '' },
+        supplierQuery: '',
         supplierResults: [],
         paymentTerms: 'cash',
         dueDate: '',
@@ -206,8 +207,8 @@ function purchaseForm() {
         removeRow(i) { this.rows.splice(i, 1); },
         calcRow(i) { this.rows[i].total = (this.rows[i].quantity * this.rows[i].unit_cost) - this.rows[i].discount; },
 
-        async searchSupplier() {
-            try { const r = await fetch('{{ route("api.suppliers.search") }}?q=' + encodeURIComponent(this.supplier.name || '')); this.supplierResults = await r.json(); } catch(e) {}
+        async searchSupplier(query) {
+            try { const r = await fetch('{{ route("api.suppliers.search") }}?q=' + encodeURIComponent(query || '')); this.supplierResults = await r.json(); } catch(e) {}
         },
         async searchItem(index) {
             try { const r = await fetch('{{ route("api.items.search") }}?q=' + encodeURIComponent(this.rows[index].itemQuery || '')); this.rows[index].itemResults = await r.json(); } catch(e) {}
@@ -219,7 +220,6 @@ function purchaseForm() {
             this.rows[index].itemQuery = item.name;
             this.calcRow(index);
         },
-        submitForm() { this.$el.querySelector('form').submit(); }
     };
 }
 </script>

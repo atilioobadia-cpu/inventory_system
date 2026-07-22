@@ -76,6 +76,7 @@ class PurchaseController extends Controller
 
         $action = $request->input('action', 'draft');
         $isReceive = $action === 'receive';
+        $globalVatRate = 18;
 
         DB::beginTransaction();
         try {
@@ -83,9 +84,8 @@ class PurchaseController extends Controller
             $taxAmount = 0;
 
             foreach ($validated['items'] as $itemData) {
-                $item = Item::find($itemData['item_id']);
                 $lineTotal = ($itemData['unit_cost'] * $itemData['quantity']) - ($itemData['discount'] ?? 0);
-                $taxAmount += $lineTotal * ($item->tax_rate / 100);
+                $taxAmount += $lineTotal * ($globalVatRate / 100);
                 $subtotal += $lineTotal;
             }
 
@@ -112,7 +112,7 @@ class PurchaseController extends Controller
             foreach ($validated['items'] as $itemData) {
                 $item = Item::find($itemData['item_id']);
                 $lineTotal = ($itemData['unit_cost'] * $itemData['quantity']) - ($itemData['discount'] ?? 0);
-                $taxAmountLine = $lineTotal * ($item->tax_rate / 100);
+                $taxAmountLine = $lineTotal * ($globalVatRate / 100);
 
                 PurchaseItem::create([
                     'purchase_id' => $purchase->id,
@@ -198,6 +198,8 @@ class PurchaseController extends Controller
             'items.*.discount' => 'nullable|numeric|min:0',
         ]);
 
+        $globalVatRate = 18;
+
         DB::beginTransaction();
         try {
             $subtotal = 0;
@@ -206,7 +208,7 @@ class PurchaseController extends Controller
             foreach ($validated['items'] as $itemData) {
                 $item = Item::find($itemData['item_id']);
                 $lineTotal = ($itemData['unit_cost'] * $itemData['quantity']) - ($itemData['discount'] ?? 0);
-                $taxAmount += $lineTotal * ($item->tax_rate / 100);
+                $taxAmount += $lineTotal * ($globalVatRate / 100);
                 $subtotal += $lineTotal;
             }
 
@@ -229,7 +231,7 @@ class PurchaseController extends Controller
             foreach ($validated['items'] as $itemData) {
                 $item = Item::find($itemData['item_id']);
                 $lineTotal = ($itemData['unit_cost'] * $itemData['quantity']) - ($itemData['discount'] ?? 0);
-                $taxAmountLine = $lineTotal * ($item->tax_rate / 100);
+                $taxAmountLine = $lineTotal * ($globalVatRate / 100);
 
                 PurchaseItem::create([
                     'purchase_id' => $purchase->id,

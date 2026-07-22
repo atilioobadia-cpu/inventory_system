@@ -131,13 +131,13 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($purchases ?? [] as $purchase)
                         <tr class="hover:bg-white">
-                            <td class="px-6 py-4 text-body">{{ $purchase->date->format('d M Y') }}</td>
-                            <td class="px-6 py-4 font-medium text-primary">{{ $purchase->po_number }}</td>
+                            <td class="px-6 py-4 text-body">{{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d M Y') }}</td>
+                            <td class="px-6 py-4 font-medium text-primary">{{ $purchase->invoice_number }}</td>
                             <td class="px-6 py-4 text-heading">{{ $purchase->supplier->name ?? '-' }}</td>
                             <td class="px-6 py-4 text-center text-body">{{ $purchase->items_count }}</td>
                             <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->subtotal) }}</td>
-                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->vat_amount) }}</td>
-                            <td class="px-6 py-4 text-right font-semibold text-heading">TZS {{ number_format($purchase->total) }}</td>
+                            <td class="px-6 py-4 text-right text-body">TZS {{ number_format($purchase->tax_amount) }}</td>
+                            <td class="px-6 py-4 text-right font-semibold text-heading">TZS {{ number_format($purchase->total_amount) }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($purchase->status === 'received')
                                     <span class="px-2 py-1 bg-success-light text-success rounded-full text-xs font-medium">Received</span>
